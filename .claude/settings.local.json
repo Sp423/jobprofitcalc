@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Initial site launch *)",
+      "Bash(git config *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(gh repo *)",
+      "PowerShell(gh repo view sp423/jobprofitcalc 2>&1)",
+      "Bash(git ls-remote *)",
+      "Bash(git commit -m 'Add Google AdSense verification snippet to all pages *)",
+      "Bash(git pull *)"
+    ]
+  }
+}

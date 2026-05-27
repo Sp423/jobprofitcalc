@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -792,6 +792,7 @@
     .tip-item:hover { border-color: var(--border-hi); }
     .tip-item.open { border-color: var(--accent); }
 
+    .tip-heading { margin: 0; padding: 0; line-height: 1; }
     .tip-btn {
       width: 100%; background: none; border: none;
       padding: 15px 20px;
@@ -843,6 +844,7 @@
     .faq-item:hover { border-color: var(--border-hi); }
     .faq-item.open { border-color: var(--accent); }
 
+    .faq-heading { margin: 0; padding: 0; line-height: 1; }
     .faq-q {
       width: 100%; background: none; border: none;
       padding: 18px 20px;
@@ -1286,7 +1288,7 @@
         <div class="tips-grid" role="list">
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-plumber">🔧 Plumber <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-plumber">🔧 Plumber <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-plumber">
               <ul class="tip-list">
                 <li>Always charge for diagnostic time — your expertise in finding the problem is worth money, not just fixing it. Diagnostic time is often where you earn your real hourly rate.</li>
@@ -1298,7 +1300,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-elec">⚡ Electrician <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-elec">⚡ Electrician <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-elec">
               <ul class="tip-list">
                 <li>Permit pulls and inspection scheduling can add 2–4 billable hours to any panel job. Price this in upfront, not as an afterthought when you're already underway.</li>
@@ -1310,7 +1312,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-hvac">❄️ HVAC Technician <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-hvac">❄️ HVAC Technician <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-hvac">
               <ul class="tip-list">
                 <li>Refrigerant costs have spiked significantly — always reprice refrigerant at current market rates with markup before each job. Last year's number can kill a quote.</li>
@@ -1322,7 +1324,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-roofer">🏠 Roofer <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-roofer">🏠 Roofer <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-roofer">
               <ul class="tip-list">
                 <li>Tear-off labor, debris hauling, and dumpster rental costs vary wildly by job — always line-item these separately, never bury them in square-footage pricing.</li>
@@ -1334,7 +1336,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-painter">🖌️ Painter — Interior &amp; Exterior <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-painter">🖌️ Painter — Interior &amp; Exterior <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-painter">
               <ul class="tip-list">
                 <li>Prep time — patching, caulking, taping, masking — is where most painters lose margin. Estimate it separately from paint application and charge accordingly.</li>
@@ -1346,7 +1348,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-land">🌿 Landscaper <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-land">🌿 Landscaper <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-land">
               <ul class="tip-list">
                 <li>Plant material has a real loss rate — some die before installation, some get damaged, some need replacements. Mark up plants 25–35% to cover sourcing time and inevitable losses.</li>
@@ -1358,7 +1360,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-gc">🏗️ General Contractor <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-gc">🏗️ General Contractor <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-gc">
               <ul class="tip-list">
                 <li>Your GC fee (typically 10–20% of project cost) covers coordination, scheduling, warranty management, and liability — it's a legitimate business service. Don't negotiate it away under pressure.</li>
@@ -1370,7 +1372,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-carp">🪚 Carpenter <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-carp">🪚 Carpenter <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-carp">
               <ul class="tip-list">
                 <li>Lumber prices are volatile — get fresh material quotes within 7 days of submitting any bid and build in a 5–8% buffer for fluctuation on longer jobs.</li>
@@ -1382,7 +1384,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-floor">🏡 Flooring Installer <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-floor">🏡 Flooring Installer <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-floor">
               <ul class="tip-list">
                 <li>Subfloor prep is where flooring jobs go sideways. Always price a leveling and patching allowance — discovering a 1-inch low spot mid-job without budget is a margin killer.</li>
@@ -1394,7 +1396,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-conc">🧱 Concrete / Masonry <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-conc">🧱 Concrete / Masonry <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-conc">
               <ul class="tip-list">
                 <li>Concrete is temperature and weather dependent. Include explicit curing-condition language in every contract — temperature limits, curing time, and who absorbs costs if conditions aren't met.</li>
@@ -1406,7 +1408,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-dry">🏢 Drywall Installer <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-dry">🏢 Drywall Installer <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-dry">
               <ul class="tip-list">
                 <li>Level 5 finish is a specialty skill that deserves a significant premium — it requires more time, more mud, more sanding, and better technique. Price it distinctly from standard smooth or texture finishes.</li>
@@ -1418,7 +1420,7 @@
           </div>
 
           <div class="tip-item" role="listitem">
-            <button class="tip-btn" aria-expanded="false" aria-controls="t-hman">🛠️ Handyman <span class="tip-arrow" aria-hidden="true">▼</span></button>
+            <h3 class="tip-heading"><button class="tip-btn" aria-expanded="false" aria-controls="t-hman">🛠️ Handyman <span class="tip-arrow" aria-hidden="true">▼</span></button></h3>
             <div class="tip-panel" id="t-hman">
               <ul class="tip-list">
                 <li>A one-hour minimum service fee is non-negotiable. Quick calls with long drive times are pure margin destruction if you don't enforce a floor on what a visit costs the customer.</li>
@@ -1444,60 +1446,60 @@
         <div class="faq-list" role="list">
 
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a1">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="faq-a1">
               How do I calculate my labor rate as a contractor?
               <span class="faq-ico" aria-hidden="true">+</span>
-            </button>
+            </button></h3>
             <div class="faq-a" id="faq-a1">
               Start with your desired annual take-home income, then add all the costs of being self-employed — health insurance, retirement contributions, and the taxes you'll owe as a sole proprietor. Divide that total by your actual billable hours per year. Most tradespeople bill between 1,200 and 1,800 hours annually after accounting for vacation, sick days, marketing time, and non-billable administrative work.<br><br>Example: $80,000 desired income + $20,000 in taxes and benefits = $100,000 needed ÷ 1,500 billable hours = <strong>$67/hr minimum labor rate.</strong> Add 15–25% above your minimum to create a buffer for estimating errors, slow periods, and reinvestment into the business. Most experienced tradespeople in skilled trades price their direct labor rate in the $65–$100+/hr range.
             </div>
           </div>
 
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a2">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="faq-a2">
               What profit margin should a contractor charge?
               <span class="faq-ico" aria-hidden="true">+</span>
-            </button>
+            </button></h3>
             <div class="faq-a" id="faq-a2">
               Most experienced contractors target a <strong>net profit margin of 15–25%</strong> after all costs and taxes. Twenty percent is the widely-cited industry benchmark across most trades. Below 10% is a genuine danger zone — a single change order, one bad material delivery, or one callback can eliminate your profit for that job entirely.<br><br>Higher-complexity, licensed trades like HVAC, electrical, and specialty mechanical work often command 25–30% margins because of licensing requirements, technical expertise, and liability exposure. General contracting margins vary widely based on project size and complexity. The most important thing is to know your real number — not a guess — and price every job to hit it.
             </div>
           </div>
 
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a3">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="faq-a3">
               How much overhead should a contractor include in a bid?
               <span class="faq-ico" aria-hidden="true">+</span>
-            </button>
+            </button></h3>
             <div class="faq-a" id="faq-a3">
               Overhead for most trade contractors runs <strong>15–25% of direct job costs</strong> (labor plus materials). What counts as overhead: tools and equipment depreciation and replacement, vehicle costs (loan/lease payments, insurance, registration, maintenance, fuel not charged directly), general liability insurance, workers' comp if applicable, business software and subscriptions, marketing and advertising spend, and the administrative time you spend on scheduling, invoicing, estimates, and follow-up.<br><br>To find your real overhead rate: add up every business expense that isn't direct labor or job materials for the past quarter. Divide by your revenue for the same period. That percentage is your overhead rate. Most contractors who calculate this for the first time discover they're underestimating it by 5–8 points — which silently kills profitability job after job.
             </div>
           </div>
 
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a4">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="faq-a4">
               Should contractors charge for drive time?
               <span class="faq-ico" aria-hidden="true">+</span>
-            </button>
+            </button></h3>
             <div class="faq-a" id="faq-a4">
               <strong>Yes — drive time is real time.</strong> While you're in the truck, you're not on another job earning money. There are three common approaches: (1) charge your full hourly labor rate for drive time, (2) charge a flat trip or service call fee that covers travel and mobilization costs, or (3) charge a reduced drive rate — half to two-thirds of your labor rate — as a middle ground.<br><br>At absolute minimum, fuel and vehicle wear should always be covered directly. If you're spending 45 minutes each way on a job and not charging for it, that's 90 minutes of your workday disappearing. On a typical $75/hr rate, that's over $112 you're giving away per job. Use the Drive Time and Fuel/Travel Cost fields in this calculator to see exactly how travel affects your real hourly rate on any specific job.
             </div>
           </div>
 
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a5">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="faq-a5">
               What is a fair markup on materials for contractors?
               <span class="faq-ico" aria-hidden="true">+</span>
-            </button>
+            </button></h3>
             <div class="faq-a" id="faq-a5">
               A <strong>15–30% markup on materials</strong> is standard and fair across most trades. This isn't price gouging — it compensates you for sourcing and vetting suppliers, making the purchase, driving to pick up or coordinating delivery, carrying the material on your truck or in storage, managing returns and defects, and floating the capital cost between purchase and payment.<br><br>Specialty materials, custom orders, or items with long lead times often justify markups of 25–40% because they carry more risk (damage, delays, non-refundable orders). Never pass materials through at your cost. Customers who want to supply their own materials should receive a clearly lower labor rate that reflects your reduced risk and involvement — and that policy should be in writing.
             </div>
           </div>
 
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a6">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="faq-a6">
               How do self-employment taxes affect contractor pricing?
               <span class="faq-ico" aria-hidden="true">+</span>
-            </button>
+            </button></h3>
             <div class="faq-a" id="faq-a6">
               Self-employment (SE) tax is <strong>15.3% of your net self-employment income</strong> — covering the full Social Security (12.4%) and Medicare (2.9%) contributions. When you're a W-2 employee, your employer pays half (7.65%) and you pay the other half through payroll withholding. As a sole proprietor or single-member LLC, you pay both halves yourself, on top of federal and state income taxes.<br><br>Here's the math that shocks most new contractors: on $50,000 of net profit, you owe $7,650 in SE tax before a dollar of income tax. In a state with a 5% rate and at the 22% federal bracket, your total tax on that $50K could be $18,000–$20,000. Every dollar of that must be built into your pricing — not taken out of your personal savings. Use the SE Tax and State Tax fields in this calculator to see your true take-home on any job, so you're never surprised at tax time.
             </div>

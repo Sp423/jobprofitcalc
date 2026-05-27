@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Use | JobProfitCalc.com</title>
+  <meta name="description" content="Terms of Use for JobProfitCalc.com — the rules and conditions governing use of this free contractor pricing calculator.">
+  <link rel="canonical" href="https://www.jobprofitcalc.com/terms.html">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <!-- GA4 TAG GOES HERE -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0D1B2A;
+      --surface:  #142232;
+      --elevated: #1B2F44;
+      --accent:   #F59E0B;
+      --text:     #F1F5F9;
+      --sec:      #94A3B8;
+      --muted:    #5A7A99;
+      --border:   #1E3A54;
+      --border-hi:#2B5070;
+      --fd: 'Barlow Condensed', sans-serif;
+      --fb: 'DM Sans', sans-serif;
+      --r: 8px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--fb);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(rgba(245,158,11,0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none; z-index: 0;
+    }
+    .wrap { position: relative; z-index: 1; }
+
+    /* Header */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--accent);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.5);
+    }
+    .header-inner {
+      max-width: 1000px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--accent); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fd); font-weight: 800; font-size: 14px;
+      color: var(--bg); letter-spacing: -0.5px;
+    }
+    .logo-name {
+      font-family: var(--fd); font-weight: 800; font-size: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px; color: var(--text);
+    }
+    .logo-name em { color: var(--accent); font-style: normal; }
+    .back-link {
+      color: var(--sec); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 5px;
+      padding: 7px 12px; border-radius: var(--r);
+      border: 1px solid var(--border-hi);
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .back-link:hover { color: var(--accent); border-color: var(--accent); background: rgba(245,158,11,0.08); }
+
+    /* Page content */
+    .page-container {
+      max-width: 780px; margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    .page-eyebrow {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .page-title {
+      font-family: var(--fd); font-weight: 800;
+      font-size: clamp(30px, 5vw, 46px);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text); line-height: 1.08; margin-bottom: 6px;
+    }
+    .page-meta {
+      font-size: 13px; color: var(--muted);
+      margin-bottom: 44px; padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-section { margin-bottom: 40px; }
+    .doc-section h2 {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text); margin-bottom: 14px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+    .doc-section p {
+      font-size: 15px; color: var(--sec);
+      line-height: 1.78; margin-bottom: 14px;
+    }
+    .doc-section p:last-child { margin-bottom: 0; }
+    .doc-section ul {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .doc-section ul li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 15px; color: var(--sec); line-height: 1.65;
+    }
+    .doc-section ul li::before {
+      content: '▸'; color: var(--accent);
+      font-size: 11px; margin-top: 4px; flex-shrink: 0;
+    }
+    .doc-section a { color: var(--accent); text-decoration: none; }
+    .doc-section a:hover { text-decoration: underline; }
+    strong { color: var(--text); font-weight: 600; }
+
+    .notice-box {
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--r);
+      padding: 16px 20px;
+      margin-bottom: 32px;
+    }
+    .notice-box p {
+      font-size: 14px; color: var(--sec);
+      line-height: 1.65; margin-bottom: 0;
+    }
+    .notice-box strong { color: var(--accent); }
+
+    /* Footer */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { color: var(--muted); font-size: 13px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      color: var(--sec); text-decoration: none; font-size: 13px;
+      transition: color 0.18s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="JobProfitCalc home">
+        <div class="logo-mark" aria-hidden="true">JPC</div>
+        <span class="logo-name">Job<em>Profit</em>Calc</span>
+      </a>
+      <a href="/" class="back-link" aria-label="Back to calculator">← Back to Calculator</a>
+    </div>
+  </header>
+
+  <main role="main">
+    <div class="page-container">
+      <p class="page-eyebrow">Legal</p>
+      <h1 class="page-title">Terms of Use</h1>
+      <p class="page-meta">Last updated: January 1, 2025 &nbsp;·&nbsp; Effective: January 1, 2025</p>
+
+      <div class="notice-box" role="note">
+        <p><strong>Important:</strong> This calculator provides estimates for educational and informational purposes only. It is not a substitute for professional financial, tax, or legal advice. Always consult qualified professionals for advice specific to your business situation.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using the website located at <strong>www.jobprofitcalc.com</strong> (the "Site"), you agree to be bound by these Terms of Use ("Terms"). If you do not agree to these Terms, do not use the Site.</p>
+        <p>We reserve the right to update these Terms at any time. Your continued use of the Site after any changes constitutes your acceptance of the revised Terms. We will update the "Last updated" date at the top of this page when changes are made.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>2. Description of Service</h2>
+        <p>JobProfitCalc.com provides a free, browser-based calculator tool designed to help contractors and tradespeople estimate job pricing and profit margins. The Site also provides general educational content about contractor pricing, overhead, taxes, and related topics.</p>
+        <p>The calculator performs mathematical computations based on inputs you provide. All calculations occur entirely within your browser — no data you enter is transmitted to or stored on our servers.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>3. No Professional Advice</h2>
+        <p><strong>This Site does not provide financial, tax, accounting, legal, or business advice.</strong> The calculator outputs and all written content on this Site are for <strong>educational and informational purposes only</strong> and should not be relied upon as professional advice.</p>
+        <p>Specifically:</p>
+        <ul>
+          <li>Calculator results are estimates based solely on the numbers you input. They do not account for your complete financial situation, local market conditions, jurisdiction-specific tax rules, industry-specific regulations, or other factors that a qualified professional would consider.</li>
+          <li>Tax rates, overhead benchmarks, and pricing suggestions referenced on this Site are generalizations. Your actual obligations may differ significantly.</li>
+          <li>You should consult a licensed CPA, tax professional, business attorney, or financial advisor before making pricing decisions, tax filings, or business planning decisions.</li>
+        </ul>
+        <p>Use of this Site does not create a professional-client relationship of any kind between you and JobProfitCalc.com.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>4. Accuracy of Information</h2>
+        <p>We make reasonable efforts to ensure that the calculator logic and written content on this Site are accurate and up to date. However, we make no warranty, express or implied, regarding the accuracy, completeness, timeliness, or reliability of any information on this Site.</p>
+        <p>Tax rates, labor benchmarks, overhead percentages, and other figures referenced on this Site may change over time and may not reflect current law or market conditions. Always verify important figures with authoritative sources or qualified professionals.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>5. Disclaimer of Warranties</h2>
+        <p>THE SITE AND ALL CONTENT AND TOOLS ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, OR NON-INFRINGEMENT.</p>
+        <p>We do not warrant that the Site will be uninterrupted, error-free, or free of viruses or other harmful components. We do not warrant that defects will be corrected or that the Site or the server that makes it available are free of viruses or other harmful components.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>6. Limitation of Liability</h2>
+        <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, JOBPROFITCALC.COM AND ITS OWNERS, OPERATORS, EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM OR RELATED TO YOUR USE OF THIS SITE OR RELIANCE ON ANY INFORMATION OR CALCULATOR OUTPUT PROVIDED HEREIN.</p>
+        <p>This includes, without limitation, any losses resulting from pricing decisions made using this calculator, tax underpayment or overpayment, lost profits, or business decisions made in reliance on Site content.</p>
+        <p>In no event shall our total liability to you for all claims exceed one hundred dollars ($100.00).</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>7. Permitted Use</h2>
+        <p>You may use this Site for your own personal, non-commercial purposes, including to estimate pricing for your own contracting business. You may not:</p>
+        <ul>
+          <li>Use the Site for any unlawful purpose or in violation of any applicable laws or regulations</li>
+          <li>Attempt to reverse-engineer, decompile, or extract source code from the Site beyond what is inherently provided in a standard HTML/JavaScript delivery</li>
+          <li>Use automated tools (bots, scrapers, crawlers) to systematically download content from the Site without our express written permission</li>
+          <li>Reproduce, republish, or redistribute substantial portions of Site content without attribution and a link back to the original page</li>
+          <li>Represent Site content or calculator outputs as your own original professional work product</li>
+          <li>Interfere with or disrupt the Site's infrastructure or other users' access to the Site</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h2>8. Intellectual Property</h2>
+        <p>All content on this Site — including text, design, code, graphics, logos, and the "JobProfitCalc" name and brand — is owned by or licensed to JobProfitCalc.com and is protected by applicable intellectual property laws.</p>
+        <p>You may share links to this Site and quote brief excerpts of content (with attribution and a link to the source) for non-commercial commentary, education, or criticism purposes. All other reproduction or distribution requires our prior written consent.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>9. Third-Party Content and Links</h2>
+        <p>This Site may display third-party advertisements through Google AdSense and may contain links to third-party websites. We do not endorse, control, or take responsibility for third-party content, products, services, or websites. Your interactions with third parties are solely between you and those parties.</p>
+        <p>Third-party advertisers may use cookies and similar technologies as described in our <a href="/privacy.html">Privacy Policy</a>.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>10. Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless JobProfitCalc.com and its owners, officers, employees, and agents from and against any claims, liabilities, damages, losses, costs, or expenses (including reasonable attorneys' fees) arising out of or related to your use of the Site, your violation of these Terms, or your violation of any rights of another party.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>11. Governing Law and Dispute Resolution</h2>
+        <p>These Terms are governed by the laws of the United States and the state in which JobProfitCalc.com operates, without regard to conflict of law principles. Any dispute arising from these Terms or your use of the Site shall be resolved through binding arbitration under the rules of the American Arbitration Association, rather than in court, except that either party may bring claims in small claims court for disputes within that court's jurisdiction.</p>
+        <p>You waive any right to participate in a class action lawsuit or class-wide arbitration related to the Site or these Terms.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>12. Severability</h2>
+        <p>If any provision of these Terms is found to be unlawful, void, or unenforceable, that provision shall be deemed severable from the remaining Terms and shall not affect the validity or enforceability of the remaining provisions.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>13. Entire Agreement</h2>
+        <p>These Terms of Use, together with our <a href="/privacy.html">Privacy Policy</a>, constitute the entire agreement between you and JobProfitCalc.com regarding your use of the Site and supersede all prior agreements, understandings, and representations.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>14. Contact Us</h2>
+        <p>If you have questions about these Terms of Use, please contact us at:</p>
+        <p><strong>JobProfitCalc.com</strong><br>
+        Email: <a href="mailto:legal@jobprofitcalc.com">legal@jobprofitcalc.com</a></p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2025 JobProfitCalc.com. All rights reserved.</p>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="/">Calculator</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+      </nav>
+    </div>
+    <!-- GA4 TAG GOES HERE -->
+  </footer>
+
+</div>
+</body>
+</html>

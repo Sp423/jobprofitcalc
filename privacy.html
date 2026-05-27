@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | JobProfitCalc.com</title>
+  <meta name="description" content="Privacy Policy for JobProfitCalc.com — learn how we collect, use, and protect your information.">
+  <link rel="canonical" href="https://www.jobprofitcalc.com/privacy.html">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <!-- GA4 TAG GOES HERE -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0D1B2A;
+      --surface:  #142232;
+      --elevated: #1B2F44;
+      --accent:   #F59E0B;
+      --text:     #F1F5F9;
+      --sec:      #94A3B8;
+      --muted:    #5A7A99;
+      --border:   #1E3A54;
+      --border-hi:#2B5070;
+      --fd: 'Barlow Condensed', sans-serif;
+      --fb: 'DM Sans', sans-serif;
+      --r: 8px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--fb);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(rgba(245,158,11,0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none; z-index: 0;
+    }
+    .wrap { position: relative; z-index: 1; }
+
+    /* Header */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--accent);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.5);
+    }
+    .header-inner {
+      max-width: 1000px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--accent); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fd); font-weight: 800; font-size: 14px;
+      color: var(--bg); letter-spacing: -0.5px;
+    }
+    .logo-name {
+      font-family: var(--fd); font-weight: 800; font-size: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px; color: var(--text);
+    }
+    .logo-name em { color: var(--accent); font-style: normal; }
+    .back-link {
+      color: var(--sec); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 5px;
+      padding: 7px 12px; border-radius: var(--r);
+      border: 1px solid var(--border-hi);
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .back-link:hover { color: var(--accent); border-color: var(--accent); background: rgba(245,158,11,0.08); }
+
+    /* Page content */
+    .page-container {
+      max-width: 780px; margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    .page-eyebrow {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .page-title {
+      font-family: var(--fd); font-weight: 800;
+      font-size: clamp(30px, 5vw, 46px);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text); line-height: 1.08; margin-bottom: 6px;
+    }
+    .page-meta {
+      font-size: 13px; color: var(--muted);
+      margin-bottom: 44px; padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-section { margin-bottom: 40px; }
+    .doc-section h2 {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text); margin-bottom: 14px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+    .doc-section p {
+      font-size: 15px; color: var(--sec);
+      line-height: 1.78; margin-bottom: 14px;
+    }
+    .doc-section p:last-child { margin-bottom: 0; }
+    .doc-section ul {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .doc-section ul li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 15px; color: var(--sec); line-height: 1.65;
+    }
+    .doc-section ul li::before {
+      content: '▸'; color: var(--accent);
+      font-size: 11px; margin-top: 4px; flex-shrink: 0;
+    }
+    .doc-section a { color: var(--accent); text-decoration: none; }
+    .doc-section a:hover { text-decoration: underline; }
+    strong { color: var(--text); font-weight: 600; }
+
+    /* Footer */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { color: var(--muted); font-size: 13px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      color: var(--sec); text-decoration: none; font-size: 13px;
+      transition: color 0.18s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="JobProfitCalc home">
+        <div class="logo-mark" aria-hidden="true">JPC</div>
+        <span class="logo-name">Job<em>Profit</em>Calc</span>
+      </a>
+      <a href="/" class="back-link" aria-label="Back to calculator">← Back to Calculator</a>
+    </div>
+  </header>
+
+  <main role="main">
+    <div class="page-container">
+      <p class="page-eyebrow">Legal</p>
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="page-meta">Last updated: January 1, 2025 &nbsp;·&nbsp; Effective: January 1, 2025</p>
+
+      <div class="doc-section">
+        <h2>Overview</h2>
+        <p>JobProfitCalc.com ("we," "our," or "us") operates the website located at <strong>www.jobprofitcalc.com</strong> (the "Site"). We are committed to protecting your privacy. This Privacy Policy explains what information we collect, how we use it, and what rights you have regarding your information.</p>
+        <p>By using this Site, you agree to the practices described in this Privacy Policy. If you do not agree, please discontinue use of the Site.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Information We Collect</h2>
+        <p><strong>Calculator Inputs:</strong> All calculator inputs you enter (labor rates, hours, material costs, etc.) are processed entirely in your browser using JavaScript. We do not transmit, collect, or store any of your job or financial data on our servers. Your numbers never leave your device.</p>
+        <p><strong>Automatically Collected Information:</strong> When you visit the Site, we and our third-party service providers may automatically collect certain information, including:</p>
+        <ul>
+          <li>Browser type and version</li>
+          <li>Operating system and device type</li>
+          <li>IP address (anonymized where possible)</li>
+          <li>Pages visited, time spent on pages, and referring URLs</li>
+          <li>General geographic location (country/region level)</li>
+        </ul>
+        <p>This data is collected via cookies and similar tracking technologies, primarily through Google Analytics and Google AdSense (see below).</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Cookies and Tracking Technologies</h2>
+        <p>We use cookies and similar technologies to operate the Site and understand how it is used. Specifically:</p>
+        <ul>
+          <li><strong>Google Analytics:</strong> We use Google Analytics to understand aggregate traffic patterns and improve the Site. Google Analytics may set cookies on your browser. You can opt out of Google Analytics tracking by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</li>
+          <li><strong>Google AdSense:</strong> We display advertisements through Google AdSense. Google and its partners may use cookies to serve ads based on your prior visits to this Site and other websites. You can manage your Google ad settings at <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>.</li>
+          <li><strong>Session Cookies:</strong> We may use session-level cookies to maintain basic Site functionality. These expire when you close your browser.</li>
+        </ul>
+        <p>Most web browsers allow you to control cookies through your browser settings. Disabling cookies may affect your experience on this and other websites.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>How We Use Collected Information</h2>
+        <p>We use the automatically collected information to:</p>
+        <ul>
+          <li>Analyze Site traffic and usage patterns to improve content and functionality</li>
+          <li>Serve relevant advertisements through Google AdSense</li>
+          <li>Diagnose technical problems and ensure Site reliability</li>
+          <li>Comply with legal obligations</li>
+        </ul>
+        <p>We do not sell, rent, or trade your personal information to third parties for their marketing purposes.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Google AdSense and Third-Party Advertising</h2>
+        <p>This Site participates in the Google AdSense program. Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to this site and/or other sites on the Internet.</p>
+        <p>You may opt out of personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info/choices/</a> or by adjusting your browser settings. Note that opting out of personalized ads does not mean you will stop seeing ads — it means the ads shown will not be based on your interests.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Data Retention</h2>
+        <p>Because your calculator inputs are never transmitted to or stored on our servers, we retain no personally identifiable financial data from calculator use. Aggregate analytics data collected via Google Analytics is retained per Google's standard data retention policies, which you can review at <a href="https://support.google.com/analytics/answer/7667196" target="_blank" rel="noopener">support.google.com/analytics</a>.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Children's Privacy</h2>
+        <p>This Site is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided personal information to us, please contact us and we will take steps to delete such information.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Your Rights (California Residents — CCPA)</h2>
+        <p>If you are a California resident, you have the right to:</p>
+        <ul>
+          <li>Know what personal information we collect, use, disclose, or sell</li>
+          <li>Request deletion of your personal information</li>
+          <li>Opt out of the sale of personal information (we do not sell personal information)</li>
+          <li>Non-discrimination for exercising your rights</li>
+        </ul>
+        <p>To exercise these rights or for any privacy inquiries, please contact us at the email address listed in the Contact section below.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Your Rights (EEA/UK Residents — GDPR)</h2>
+        <p>If you are located in the European Economic Area or United Kingdom, you may have additional rights under the General Data Protection Regulation, including the right to access, correct, or delete data we hold about you. Because we collect only anonymized analytics data and do not retain personally identifiable information, most GDPR rights are satisfied by design. For inquiries, contact us using the details below.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Links to Third-Party Sites</h2>
+        <p>This Site may contain links to external websites. We are not responsible for the privacy practices or content of those sites. We encourage you to read the privacy policies of any third-party sites you visit.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date at the top of this page. We encourage you to review this Privacy Policy periodically to stay informed about how we protect your information. Continued use of the Site after changes constitutes acceptance of the updated policy.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Contact Us</h2>
+        <p>If you have questions or concerns about this Privacy Policy, or wish to exercise any privacy rights, please contact us at:</p>
+        <p><strong>JobProfitCalc.com</strong><br>
+        Email: <a href="mailto:privacy@jobprofitcalc.com">privacy@jobprofitcalc.com</a></p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2025 JobProfitCalc.com. All rights reserved.</p>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="/">Calculator</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+      </nav>
+    </div>
+    <!-- GA4 TAG GOES HERE -->
+  </footer>
+
+</div>
+</body>
+</html>

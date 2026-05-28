@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contractor Pricing Blog | JobProfitCalc.com</title>
+  <meta name="description" content="Pricing guides, tax tips, and business advice for contractors and tradespeople. Learn how to price jobs correctly, calculate overhead, and keep more of what you earn.">
+  <link rel="canonical" href="https://www.jobprofitcalc.com/blog/">
+  <meta property="og:title" content="Contractor Pricing Blog | JobProfitCalc.com">
+  <meta property="og:description" content="Pricing guides, tax tips, and business advice for contractors and tradespeople.">
+  <meta property="og:url" content="https://www.jobprofitcalc.com/blog/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD: Blog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "JobProfitCalc Contractor Pricing Blog",
+    "url": "https://www.jobprofitcalc.com/blog/",
+    "description": "Pricing guides, overhead calculators, and business advice for contractors and tradespeople.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "JobProfitCalc.com",
+      "url": "https://www.jobprofitcalc.com"
+    }
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYWHVVF5J0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VYWHVVF5J0');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7735208952918665"
+       crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-base:    #0D1B2A;
+      --bg-surface: #142232;
+      --bg-elevated:#1B2F44;
+      --accent:     #F59E0B;
+      --accent-hover:#FBB924;
+      --text-pri:   #F1F5F9;
+      --text-sec:   #94A3B8;
+      --text-muted: #5A7A99;
+      --border:     #1E3A54;
+      --border-hi:  #2B5070;
+      --font-disp:  'Barlow Condensed', sans-serif;
+      --font-body:  'DM Sans', sans-serif;
+      --r:          8px;
+      --r-lg:       12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-base);
+      color: var(--text-pri);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(rgba(245,158,11,0.035) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none; z-index: 0;
+    }
+    .page-wrap { position: relative; z-index: 1; }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--accent);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.5);
+    }
+    .header-inner {
+      max-width: 1240px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--accent); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-disp); font-weight: 800; font-size: 15px;
+      color: var(--bg-base); letter-spacing: -0.5px; line-height: 1; flex-shrink: 0;
+    }
+    .logo-name { font-family: var(--font-disp); font-weight: 800; font-size: 21px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-pri); }
+    .logo-name em { color: var(--accent); font-style: normal; }
+    .site-nav { display: flex; gap: 6px; align-items: center; }
+    .site-nav a {
+      color: var(--text-sec); text-decoration: none; font-size: 13px; font-weight: 500;
+      padding: 6px 10px; border-radius: var(--r);
+      transition: color 0.18s, background 0.18s; letter-spacing: 0.2px;
+    }
+    .site-nav a:hover { color: var(--text-pri); background: rgba(255,255,255,0.05); }
+    .site-nav a.active { color: var(--accent); }
+    .nav-btn {
+      background: var(--accent) !important; color: var(--bg-base) !important;
+      font-weight: 700 !important; padding: 7px 16px !important;
+      border-radius: var(--r) !important; margin-left: 6px;
+    }
+    .nav-btn:hover { background: var(--accent-hover) !important; }
+    @media (max-width: 700px) { .site-nav .hide-mobile { display: none; } .logo-name { font-size: 17px; } }
+    @media (max-width: 480px) { .site-nav { display: none; } }
+
+    /* ── Container ── */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Blog Hero ── */
+    .blog-hero {
+      padding: 64px 0 52px;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-eyebrow {
+      font-family: var(--font-disp); font-weight: 700;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .blog-hero h1 {
+      font-family: var(--font-disp); font-weight: 800;
+      font-size: clamp(34px, 5vw, 56px);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text-pri); line-height: 1.05; margin-bottom: 16px;
+    }
+    .blog-hero p {
+      font-size: 16px; color: var(--text-sec); line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── Post Grid ── */
+    .posts-section { padding: 56px 0 80px; }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+    .post-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .post-tag {
+      display: inline-block;
+      font-family: var(--font-disp); font-weight: 700;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--accent);
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 4px;
+      padding: 3px 8px;
+      width: fit-content;
+    }
+    .post-title {
+      font-family: var(--font-disp); font-weight: 800;
+      font-size: 22px; text-transform: uppercase; letter-spacing: 0.3px;
+      color: var(--text-pri); line-height: 1.15;
+    }
+    .post-card:hover .post-title { color: var(--accent); }
+    .post-excerpt {
+      font-size: 14px; color: var(--text-sec); line-height: 1.7;
+      flex: 1;
+    }
+    .post-meta {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 12px; color: var(--text-muted);
+    }
+    .post-meta-sep { opacity: 0.4; }
+    .post-cta {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      margin-top: 4px;
+    }
+    .post-cta::after { content: '→'; transition: transform 0.18s; }
+    .post-card:hover .post-cta::after { transform: translateX(4px); }
+
+    /* ── Featured post (first card, full width) ── */
+    .post-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: row; gap: 40px; align-items: flex-start;
+      padding: 36px;
+    }
+    .featured-badge {
+      font-family: var(--font-disp); font-weight: 700;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--bg-base); background: var(--accent);
+      border-radius: 4px; padding: 3px 8px; width: fit-content;
+      margin-bottom: 2px;
+    }
+    .post-card.featured .post-title { font-size: 30px; }
+    .post-card.featured .post-excerpt { font-size: 15px; }
+    .featured-left { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+    .featured-right {
+      flex-shrink: 0; width: 240px;
+      background: var(--bg-elevated); border-radius: var(--r);
+      padding: 20px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .featured-right-label {
+      font-family: var(--font-disp); font-weight: 700;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+    .featured-toc { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .featured-toc li { font-size: 13px; color: var(--text-sec); display: flex; align-items: flex-start; gap: 8px; }
+    .featured-toc li::before { content: '▸'; color: var(--accent); font-size: 10px; margin-top: 3px; flex-shrink: 0; }
+    @media (max-width: 860px) {
+      .post-card.featured { flex-direction: column; }
+      .featured-right { width: 100%; }
+    }
+    @media (max-width: 520px) {
+      .posts-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: var(--r-lg);
+      padding: 36px 40px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      margin: 0 0 80px;
+      flex-wrap: wrap;
+    }
+    .cta-banner-text h2 {
+      font-family: var(--font-disp); font-weight: 800; font-size: 24px;
+      text-transform: uppercase; color: var(--text-pri); margin-bottom: 6px;
+    }
+    .cta-banner-text p { font-size: 14px; color: var(--text-sec); }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: var(--bg-base);
+      font-family: var(--font-disp); font-weight: 800;
+      font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 13px 28px; border-radius: var(--r);
+      text-decoration: none; white-space: nowrap;
+      transition: background 0.18s;
+    }
+    .cta-btn:hover { background: var(--accent-hover); }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 48px 24px 32px;
+      position: relative; z-index: 1;
+    }
+    .footer-grid {
+      max-width: 1240px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto auto; gap: 40px;
+      padding-bottom: 32px; border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 12px; max-width: 280px; }
+    .footer-col-title { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: var(--text-sec); text-decoration: none; font-size: 13px; transition: color 0.18s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .footer-copy { color: var(--text-muted); font-size: 12px; }
+    .footer-disc { font-size: 11px; color: var(--text-muted); max-width: 500px; }
+    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="JobProfitCalc home">
+        <div class="logo-mark" aria-hidden="true">JPC</div>
+        <span class="logo-name">Job<em>Profit</em>Calc</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/" class="hide-mobile">Calculator</a>
+        <a href="/blog/" class="active hide-mobile">Blog</a>
+        <a href="/#faq" class="hide-mobile">FAQ</a>
+        <a href="/#calculator" class="nav-btn">Use Calculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main role="main">
+    <div class="container">
+
+      <!-- Blog Hero -->
+      <section class="blog-hero">
+        <p class="blog-eyebrow">Contractor Knowledge Base</p>
+        <h1>Pricing Guides for<br>Trade Professionals</h1>
+        <p>Straight-talk articles on job pricing, overhead, taxes, and business math — written for contractors who want to understand exactly what they're earning on every job.</p>
+      </section>
+
+      <!-- Posts -->
+      <section class="posts-section" aria-label="Blog posts">
+        <div class="posts-grid">
+
+          <!-- Featured post -->
+          <a href="/blog/how-to-price-a-contractor-job.html" class="post-card featured">
+            <div class="featured-left">
+              <div>
+                <p class="featured-badge">Featured</p>
+              </div>
+              <div class="post-tag">Pricing Strategy</div>
+              <h2 class="post-title">How to Price a Contractor Job: The Complete Guide</h2>
+              <p class="post-excerpt">Most contractors underprice their work because they only think about the obvious costs. This guide walks through all 6 components of a correct job price — labor, materials, overhead, drive time, taxes, and profit margin — with a step-by-step example calculation you can apply to any trade job today.</p>
+              <div class="post-meta">
+                <span>May 20, 2026</span>
+                <span class="post-meta-sep">·</span>
+                <span>8 min read</span>
+              </div>
+              <p class="post-cta">Read the full guide</p>
+            </div>
+            <div class="featured-right" aria-hidden="true">
+              <p class="featured-right-label">In this article</p>
+              <ul class="featured-toc">
+                <li>Why contractors underprice their work</li>
+                <li>The 6 components of a complete job price</li>
+                <li>Step-by-step example calculation</li>
+                <li>The most common pricing mistakes</li>
+                <li>Using a calculator to stay consistent</li>
+              </ul>
+            </div>
+          </a>
+
+          <!-- Post 2 -->
+          <a href="/blog/contractor-overhead-percentage.html" class="post-card">
+            <div class="post-tag">Overhead &amp; Costs</div>
+            <h2 class="post-title">What Overhead Percentage Should a Contractor Use?</h2>
+            <p class="post-excerpt">Industry benchmarks say 15–25%, but your real number could be higher. Learn what counts as overhead, how to calculate your actual rate, and why most contractors underestimate it by 5–8 percentage points.</p>
+            <div class="post-meta">
+              <span>May 13, 2026</span>
+              <span class="post-meta-sep">·</span>
+              <span>6 min read</span>
+            </div>
+            <p class="post-cta">Read article</p>
+          </a>
+
+          <!-- Post 3 -->
+          <a href="/blog/how-to-mark-up-materials-as-a-contractor.html" class="post-card">
+            <div class="post-tag">Materials &amp; Markup</div>
+            <h2 class="post-title">How Much to Mark Up Materials as a Contractor</h2>
+            <p class="post-excerpt">A 15–30% material markup is standard across most trades — and it's not price gouging. This guide explains exactly what markup covers, how to apply it by trade, and how to handle customers who want to supply their own materials.</p>
+            <div class="post-meta">
+              <span>May 6, 2026</span>
+              <span class="post-meta-sep">·</span>
+              <span>5 min read</span>
+            </div>
+            <p class="post-cta">Read article</p>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- CTA Banner -->
+      <div class="cta-banner" role="complementary">
+        <div class="cta-banner-text">
+          <h2>Put the numbers to work</h2>
+          <p>Use the free calculator to price your next job in under 2 minutes.</p>
+        </div>
+        <a href="/#calculator" class="cta-btn">Open the Calculator →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="JobProfitCalc home">
+          <div class="logo-mark" aria-hidden="true">JPC</div>
+          <span class="logo-name">Job<em>Profit</em>Calc</span>
+        </a>
+        <p>A free pricing tool and knowledge base for trade professionals who want to know exactly what they're earning on every job.</p>
+      </div>
+      <nav aria-label="Footer legal links">
+        <p class="footer-col-title">Legal</p>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+        </div>
+      </nav>
+      <nav aria-label="Footer site links">
+        <p class="footer-col-title">Site</p>
+        <div class="footer-links">
+          <a href="/">Calculator</a>
+          <a href="/blog/">Blog</a>
+          <a href="/#faq">FAQ</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 JobProfitCalc.com. All rights reserved.</p>
+      <p class="footer-disc">Results are estimates for educational purposes only. Consult a licensed tax professional for advice specific to your situation.</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

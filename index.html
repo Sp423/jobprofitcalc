@@ -739,20 +739,48 @@
 
     @media print {
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .no-print { display: none !important; }
+
+      /* ── Hide all page chrome — physically removes from flow ── */
+      .no-print,
+      .site-header,
+      .ad-zone1-wrap,
+      .hero,
+      .sidebar-col,
+      .ad-zone3-wrap,
+      .content-sec,
+      .site-footer,
+      #toast,
+      .calc-top,
+      .calc-body,
+      .calc-actions { display: none !important; }
+
+      /* ── Show print-only elements ── */
       .print-header { display: block !important; }
-      .bk-body { display: block !important; }
-      .bk-toggle { display: none !important; }
-      body { visibility: hidden; }
+      .bk-body      { display: block !important; }
+
+      /* ── Strip layout wrappers to plain blocks ── */
+      body, .page-wrap, main,
+      .container, .main-grid,
+      .calc-col, .calc-card {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+      }
+
+      /* ── Results panel: full width, flush to page ── */
       .results {
-        visibility: visible;
-        position: absolute; top: 0; left: 0;
-        width: 100%;
+        width: 100% !important;
         border: none !important;
         border-radius: 0 !important;
         overflow: visible !important;
       }
-      .results * { visibility: visible; }
     }
 
     /* Toast */

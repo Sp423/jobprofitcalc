@@ -744,7 +744,6 @@
       .no-print,
       .site-header,
       .ad-zone1-wrap,
-      .hero,
       .sidebar-col,
       .ad-zone3-wrap,
       .content-sec,
@@ -781,6 +780,12 @@
         border-radius: 0 !important;
         overflow: visible !important;
       }
+
+      /* ── Hero: dark blue text in print only ── */
+      body::before { display: none !important; }
+      .hero-title   { color: #0D1B2A !important; }
+      .hero-badge   { color: #0D1B2A !important; background: transparent !important; border-color: #0D1B2A !important; }
+      .hero-sub     { color: #4A5568 !important; }
     }
 
     /* Toast */

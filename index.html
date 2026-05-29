@@ -496,7 +496,7 @@
       line-height: 1.5; letter-spacing: 0; text-transform: none;
       padding: 9px 12px;
       border-radius: var(--r);
-      white-space: normal; width: 230px;
+      white-space: pre-line; width: 230px;
       text-align: left;
       opacity: 0; pointer-events: none;
       transition: opacity 0.18s;
@@ -513,7 +513,9 @@
       opacity: 0; pointer-events: none;
       transition: opacity 0.18s;
     }
-    .tip:hover::before, .tip:hover::after { opacity: 1; }
+    .tip:hover::before, .tip:hover::after,
+    .tip.active::before, .tip.active::after { opacity: 1; }
+    .tip-lg::before { width: 260px; }
 
     /* Input wrapper */
     .ifield { position: relative; display: flex; align-items: center; }
@@ -1114,7 +1116,10 @@
               <p class="field-section">Profit &amp; Taxes</p>
               <div class="igrid cols-3" style="margin-bottom:8px">
                 <div class="igroup">
-                  <label class="ilabel" for="profitMargin">Desired Profit Margin</label>
+                  <label class="ilabel" for="profitMargin">
+                    Desired Profit Margin
+                    <span class="tip tip-lg" data-tip="Markup vs margin&#10;&#10;Markup is added on top of your costs. Margin is what you keep as a percent of what you charge. They're not the same number.&#10;&#10;A 25% markup → 20% margin&#10;A 33% markup → 25% margin&#10;&#10;This field uses margin. Enter the percent of your final charge you want to keep as profit." aria-label="Markup vs margin explained">?</span>
+                  </label>
                   <div class="ifield has-suf">
                     <input type="number" id="profitMargin" min="1" max="89" step="1" value="20" aria-label="Desired profit margin percentage">
                     <span class="isuf" aria-hidden="true">%</span>
@@ -1859,6 +1864,21 @@ $.bkToggle.addEventListener('click', function() {
   this.classList.toggle('open', open);
   this.setAttribute('aria-expanded', open);
   $.bkLabel.textContent = open ? 'Hide Cost Breakdown' : 'View Full Cost Breakdown';
+});
+
+/* ============================================================
+   TOOLTIP TAP TOGGLE (mobile)
+============================================================ */
+document.querySelectorAll('.tip').forEach(function(t) {
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const isOpen = t.classList.contains('active');
+    document.querySelectorAll('.tip').forEach(function(o) { o.classList.remove('active'); });
+    if (!isOpen) t.classList.add('active');
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.tip').forEach(function(t) { t.classList.remove('active'); });
 });
 
 /* ============================================================

@@ -1315,7 +1315,7 @@
                   Include in quote
                 </label>
               </div>
-              <div class="igrid cols-2">
+              <div class="igrid cols-2" style="margin-bottom:12px">
                 <div class="igroup">
                   <label class="ilabel" for="quoteValid">Quote Valid (days)</label>
                   <div class="ifield">
@@ -1325,6 +1325,19 @@
                 <label class="qs-inline-check" for="includeValid">
                   <input type="checkbox" id="includeValid">
                   Include in quote
+                </label>
+              </div>
+              <div class="igrid cols-2">
+                <div class="igroup">
+                  <label class="ilabel" for="salesTaxRate">Sales Tax on Materials (%)</label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="salesTaxRate" min="0" max="20" step="0.1" value="0" aria-label="Sales tax rate applied to materials">
+                    <span class="isuf" aria-hidden="true">%</span>
+                  </div>
+                </div>
+                <label class="qs-inline-check" for="includeSalesTax">
+                  <input type="checkbox" id="includeSalesTax">
+                  Charge sales tax
                 </label>
               </div>
 
@@ -1835,6 +1848,8 @@ const $ = {
   inclTerms:G('includeTerms'),
   qvDays:   G('quoteValid'),
   inclValid:G('includeValid'),
+  staxRate: G('salesTaxRate'),
+  inclStax: G('includeSalesTax'),
 };
 
 /* ============================================================
@@ -2086,7 +2101,7 @@ $.pdf.addEventListener('click', function() {
    QUOTE SETTINGS — localStorage persistence + toggle
 ============================================================ */
 // Persist text fields
-['bizName','bizPhone','bizEmail','paymentTerms','quoteValid'].forEach(function(id) {
+['bizName','bizPhone','bizEmail','paymentTerms','quoteValid','salesTaxRate'].forEach(function(id) {
   const el = G(id);
   const key = 'jpc_qs_' + id;
   const stored = localStorage.getItem(key);
@@ -2094,7 +2109,7 @@ $.pdf.addEventListener('click', function() {
   el.addEventListener('input', function() { localStorage.setItem(key, el.value); });
 });
 // Persist checkboxes
-['includeBizInfo','includeTerms','includeValid'].forEach(function(id) {
+['includeBizInfo','includeTerms','includeValid','includeSalesTax'].forEach(function(id) {
   const el = G(id);
   const key = 'jpc_qs_' + id;
   const stored = localStorage.getItem(key);
@@ -2155,11 +2170,17 @@ $.cust.addEventListener('click', function() {
   if (validLine) lines.push(validLine);
   lines.push('═══════════════════════════════════');
   lines.push('');
+  // Sales tax on materials (collected from customer, not contractor income)
+  const staxPct = $.inclStax.checked ? (parseFloat($.staxRate.value) || 0) : 0;
+  const staxAmt = r.matTotal * (staxPct / 100);
+  const grandTotal = r.suggested + staxAmt;
+
   lines.push(col('Labor:',     fmtD(laborCharge, 2)));
   lines.push(col('Materials:', fmtD(r.matTotal,  2)));
-  if (travel > 0) lines.push(col('Travel:', fmtD(travel, 2)));
+  if (staxAmt > 0) lines.push(col('Sales Tax (' + staxPct + '%):',  fmtD(staxAmt, 2)));
+  if (travel > 0)  lines.push(col('Travel:',     fmtD(travel,       2)));
   lines.push('  ─────────────────────────────────');
-  lines.push(col('TOTAL DUE:', fmtD(r.suggested, 2)));
+  lines.push(col('TOTAL DUE:', fmtD(grandTotal,  2)));
   lines.push('');
   if ($.inclTerms.checked && $.payTerms.value.trim()) {
     lines.push('  Payment Terms:');

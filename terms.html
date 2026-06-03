@@ -179,6 +179,14 @@
       transition: color 0.18s;
     }
     .footer-links a:hover { color: var(--accent); }
+
+    .site-nav { display: flex; gap: 6px; align-items: center; }
+    .site-nav a { color: var(--sec); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: var(--r); transition: color 0.18s, background 0.18s; letter-spacing: 0.2px; }
+    .site-nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .nav-btn { background: var(--accent) !important; color: var(--bg) !important; font-weight: 700 !important; padding: 7px 16px !important; border-radius: var(--r) !important; margin-left: 6px; }
+    .nav-btn:hover { background: #FBB924 !important; }
+    @media (max-width: 700px) { .site-nav .hide-mobile { display: none; } }
+    @media (max-width: 480px) { .site-nav { display: none; } }
   </style>
 </head>
 <body>
@@ -190,7 +198,13 @@
         <div class="logo-mark" aria-hidden="true">JPC</div>
         <span class="logo-name">Job<em>Profit</em>Calc</span>
       </a>
-      <a href="/" class="back-link" aria-label="Back to calculator">← Back to Calculator</a>
+            <nav class="site-nav" aria-label="Site navigation">
+        <a href="/#how-to-price" class="hide-mobile">Pricing Guide</a>
+        <a href="/#tips" class="hide-mobile">Trade Tips</a>
+        <a href="/#faq" class="hide-mobile">FAQ</a>
+        <a href="/blog/" class="hide-mobile">Blog</a>
+        <a href="/#calculator" class="nav-btn">Calculate Now</a>
+      </nav>
     </div>
   </header>
 

@@ -379,13 +379,17 @@
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       box-shadow: var(--shadow);
-      overflow: hidden;
+      /* overflow moved to .calc-top so button tooltips can escape the card */
+      overflow: visible;
     }
     .calc-top {
       display: flex; align-items: center; gap: 14px;
       padding: 20px 24px;
       background: var(--bg-elevated);
       border-bottom: 1px solid var(--border);
+      /* clips the darker bg at the top rounded corners */
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      overflow: hidden;
     }
     .calc-icon {
       width: 42px; height: 42px; flex-shrink: 0;
@@ -718,6 +722,41 @@
       width: 15px; height: 15px;
       accent-color: var(--accent); cursor: pointer; flex-shrink: 0;
     }
+
+    /* ── Button tooltips ── */
+    .btn { position: relative; }
+    .btn[data-tip]::before {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 9px);
+      left: 50%; transform: translateX(-50%);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-hi);
+      color: var(--text-sec);
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 400;
+      line-height: 1.55; letter-spacing: 0; text-transform: none;
+      padding: 10px 13px;
+      border-radius: var(--r);
+      white-space: pre-line; width: 240px;
+      text-align: left;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.18s;
+      z-index: 300;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.55);
+    }
+    .btn[data-tip]::after {
+      content: '';
+      position: absolute;
+      bottom: calc(100% + 3px);
+      left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--border-hi);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.18s;
+    }
+    .btn[data-tip]:hover::before,
+    .btn[data-tip]:hover::after { opacity: 1; }
 
     /* Buttons */
     .calc-actions {
@@ -1448,11 +1487,21 @@
             <!-- End Customer PDF Panel -->
 
             <div class="calc-actions">
-              <button class="btn btn-ghost no-print" id="resetBtn" aria-label="Reset calculator to trade defaults">↺ Reset</button>
-              <button class="btn btn-ghost no-print" id="pdfBtn" title="Opens print dialog — choose Save as PDF" aria-label="Save internal results as PDF">🖨 Internal PDF</button>
-              <button class="btn btn-ghost no-print" id="custPdfBtn" title="Opens print dialog — choose Save as PDF" aria-label="Save customer quote as PDF">📄 Customer PDF</button>
-              <button class="btn btn-ghost no-print" id="custBtn" aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
-              <button class="btn btn-primary no-print" id="copyBtn" aria-label="Copy internal job quote to clipboard">📋 Copy Internal Quote</button>
+              <button class="btn btn-ghost no-print" id="resetBtn"
+                data-tip="Resets all fields to the defaults for your selected trade. Pick a trade first for best results."
+                aria-label="Reset calculator to trade defaults">↺ Reset</button>
+              <button class="btn btn-ghost no-print" id="pdfBtn"
+                data-tip="Saves a full internal job summary as a PDF — labor rate, overhead, markup, taxes, and profit margin included. For your records only, not for customers."
+                aria-label="Save internal results as PDF">🖨 Internal PDF</button>
+              <button class="btn btn-ghost no-print" id="custPdfBtn"
+                data-tip="Saves a printable customer quote as a PDF. Shows Labor, Materials, Travel, and Total Due — no internal pricing details. Includes your business info and any options set in Quote Settings."
+                aria-label="Save customer quote as PDF">📄 Customer PDF</button>
+              <button class="btn btn-ghost no-print" id="custBtn"
+                data-tip="Copies a clean customer quote to your clipboard. Paste it directly into a text, email, or invoice app. No internal pricing details included."
+                aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
+              <button class="btn btn-primary no-print" id="copyBtn"
+                data-tip="Copies your full internal job breakdown to your clipboard — labor rate, overhead, markup, taxes, and profit margin. For your records, not for customers."
+                aria-label="Copy internal job quote to clipboard">📋 Copy Internal Quote</button>
             </div>
 
           </article>

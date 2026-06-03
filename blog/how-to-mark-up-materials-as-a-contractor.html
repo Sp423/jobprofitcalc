@@ -165,7 +165,40 @@
     .article-ad-rect img { display: block; width: 300px; height: 250px; border-radius: var(--r); }
     .sidebar-ad-zone { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .sidebar-ad-zone img { display: block; width: 100%; height: auto; max-width: 252px; border-radius: var(--r); }
-    .ad-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); text-align: center; }  </style>
+    .ad-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); text-align: center; }
+    /* ── Hamburger mobile menu ── */
+    .menu-btn {
+      display: none; background: none; border: none; cursor: pointer;
+      color: #94A3B8; padding: 6px 8px; border-radius: 8px;
+      font-size: 22px; line-height: 1;
+      align-items: center; justify-content: center;
+      transition: color 0.18s, background 0.18s;
+    }
+    .menu-btn:hover { color: #F59E0B; background: rgba(255,255,255,0.05); }
+    @media (max-width: 700px) { .menu-btn { display: flex; } }
+
+    .mobile-menu {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: #142232;
+      border-top: 1px solid #1E3A54;
+      border-bottom: 2px solid #F59E0B;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      flex-direction: column;
+      z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      display: block; color: #94A3B8; text-decoration: none;
+      padding: 15px 24px; font-size: 15px; font-weight: 500;
+      border-bottom: 1px solid #1E3A54;
+      font-family: 'DM Sans', sans-serif;
+      transition: color 0.18s, background 0.18s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #F59E0B; background: rgba(255,255,255,0.03); }
+    .mobile-menu .mob-cta { color: #F59E0B !important; font-weight: 700 !important; background: rgba(245,158,11,0.06); }
+  </style>
 </head>
 <body>
 <div class="page-wrap">
@@ -182,8 +215,16 @@
         <a href="/#faq" class="hide-mobile">FAQ</a>
         <a href="/blog/" class="hide-mobile">Blog</a>
         <a href="/#calculator" class="nav-btn">Calculate Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-icon">☰</span></button>
       </nav>
     </div>
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="/#how-to-price">Pricing Guide</a>
+    <a href="/#tips">Trade Tips</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/blog/">Blog</a>
+    <a href="/#calculator" class="mob-cta">Calculate Now</a>
+  </div>
   </header>
 
   <main role="main">
@@ -415,5 +456,30 @@
   </footer>
 
 </div>
+<script>
+(function(){
+  var btn = document.getElementById("menuBtn");
+  var menu = document.getElementById("mobileMenu");
+  if (!btn || !menu) return;
+  btn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var open = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.querySelector(".menu-icon").textContent = open ? "✕" : "☰";
+  });
+  document.addEventListener("click", function() {
+    menu.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");
+    btn.querySelector(".menu-icon").textContent = "☰";
+  });
+  menu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      menu.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+      btn.querySelector(".menu-icon").textContent = "☰";
+    });
+  });
+})();
+</script>
 </body>
 </html>

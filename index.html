@@ -765,6 +765,19 @@
       font-size: 12px; color: var(--text-sec); line-height: 1.5;
     }
 
+    /* ── Customer PDF Panel ── */
+    .cust-print-panel { display: none; } /* hidden on screen */
+    .cust-biz-block {
+      padding: 14px 20px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cust-biz-name {
+      font-family: var(--font-disp); font-weight: 800; font-size: 20px;
+      text-transform: uppercase; letter-spacing: 0.4px;
+      color: var(--text-pri); margin-bottom: 3px;
+    }
+    .cust-biz-contact { font-size: 13px; color: var(--text-sec); }
+
     @media print {
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
@@ -814,6 +827,19 @@
       .hero-title   { color: #0D1B2A !important; }
       .hero-badge   { color: #0D1B2A !important; background: transparent !important; border-color: #0D1B2A !important; }
       .hero-sub     { color: #4A5568 !important; }
+
+      /* ── Customer PDF mode ── */
+      body.print-customer .results { display: none !important; }
+      body.print-customer .cust-print-panel {
+        display: block !important;
+        visibility: visible !important;
+        position: absolute; top: 0; left: 0;
+        width: 100%;
+        border: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+      }
+      body.print-customer .cust-print-panel * { visibility: visible !important; }
     }
 
     /* Toast */
@@ -1395,9 +1421,36 @@
 
             </div><!-- /results -->
 
+            <!-- Customer PDF Panel — hidden on screen, shown via body.print-customer in @media print -->
+            <div class="results cust-print-panel" id="custPrintPanel" aria-hidden="true">
+              <div class="print-header">
+                <p class="print-header-title" id="custPrintTitle"></p>
+                <p class="print-header-meta" id="custPrintMeta"></p>
+              </div>
+              <div class="cust-biz-block" id="custBizBlock">
+                <p class="cust-biz-name" id="custBizName"></p>
+                <p class="cust-biz-contact" id="custBizContact"></p>
+              </div>
+              <div class="results-hdr">
+                <span class="results-hdr-label">Customer Quote</span>
+                <div class="money-badge yes" aria-label="Customer quote ready">
+                  <span>✓ QUOTED</span>
+                </div>
+              </div>
+              <div class="price-block">
+                <p class="price-lbl">Total Due</p>
+                <div class="price-num" id="custTotalDisplay">$0.00</div>
+                <p class="price-note" id="custValidNote"></p>
+              </div>
+              <div id="custLineItems"></div>
+              <div id="custFooterRows"></div>
+            </div>
+            <!-- End Customer PDF Panel -->
+
             <div class="calc-actions">
               <button class="btn btn-ghost no-print" id="resetBtn" aria-label="Reset calculator to trade defaults">↺ Reset</button>
               <button class="btn btn-ghost no-print" id="pdfBtn" title="Opens print dialog — choose Save as PDF" aria-label="Save results as PDF">🖨 Save as PDF</button>
+              <button class="btn btn-ghost no-print" id="custPdfBtn" title="Opens print dialog — choose Save as PDF" aria-label="Save customer quote as PDF">📄 Customer PDF</button>
               <button class="btn btn-ghost no-print" id="custBtn" aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
               <button class="btn btn-primary no-print" id="copyBtn" aria-label="Copy internal job quote to clipboard">📋 Copy Internal Quote</button>
             </div>
@@ -1808,6 +1861,7 @@ const $ = {
   // UI
   reset:    G('resetBtn'),
   pdf:      G('pdfBtn'),
+  custPdf:  G('custPdfBtn'),
   cust:     G('custBtn'),
   copy:     G('copyBtn'),
   bkToggle: G('bkToggle'),
@@ -2090,6 +2144,82 @@ $.pdf.addEventListener('click', function() {
   const stored = localStorage.getItem(key);
   if (stored !== null) el.checked = (stored === 'true');
   el.addEventListener('change', function() { localStorage.setItem(key, el.checked); });
+});
+
+/* ============================================================
+   CUSTOMER PDF
+============================================================ */
+$.custPdf.addEventListener('click', function() {
+  const r   = calc();
+  const lbl = $.jobLabel.value.trim() || 'Job';
+  const trd = $.trade.options[$.trade.selectedIndex]?.text.replace(/^\W+/, '').trim() || 'Contractor';
+  const now = new Date();
+  const mon = now.toLocaleDateString('en-US', { month: 'short' });
+  const dateShort = mon + ' ' + now.getDate() + ' ' + now.getFullYear();
+  const dateLong  = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  // Customer-facing math
+  const travel      = r.travel > 0 ? r.travel : 0;
+  const laborCharge = r.suggested - r.matTotal - travel;
+  const staxPct     = $.inclStax.checked ? (parseFloat($.staxRate.value) || 0) : 0;
+  const staxAmt     = r.matTotal * (staxPct / 100);
+  const grandTotal  = r.suggested + staxAmt;
+
+  // Populate print header
+  G('custPrintTitle').textContent = lbl || trd;
+  G('custPrintMeta').textContent  = (lbl ? trd + ' · ' + lbl + ' · ' : trd + ' · ') + dateLong + ' · Generated by JobProfitCalc.com';
+
+  // Business info block
+  const bizBlock = G('custBizBlock');
+  if ($.inclBiz.checked && ($.bizName.value || $.bizPhone.value || $.bizEmail.value)) {
+    G('custBizName').textContent    = $.bizName.value.trim();
+    G('custBizContact').textContent = [$.bizPhone.value.trim(), $.bizEmail.value.trim()].filter(Boolean).join('  ·  ');
+    bizBlock.style.display = '';
+  } else {
+    bizBlock.style.display = 'none';
+  }
+
+  // Big price + valid-until note
+  G('custTotalDisplay').textContent = fmtD(grandTotal, 2);
+  if ($.inclValid.checked && $.qvDays.value) {
+    const exp = new Date(now);
+    exp.setDate(exp.getDate() + parseInt($.qvDays.value, 10));
+    G('custValidNote').textContent = 'Quote valid until ' + exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  } else {
+    G('custValidNote').textContent = dateLong;
+  }
+
+  // Line items (bk-row elements built dynamically)
+  function mkRow(label, val) {
+    return '<div class="bk-row"><span class="bk-rowlbl">' + label + '</span><span class="bk-rowval">' + fmtD(val, 2) + '</span></div>';
+  }
+  let itemsHtml = mkRow('Labor', laborCharge);
+  itemsHtml += mkRow('Materials', r.matTotal);
+  if (staxAmt > 0) itemsHtml += mkRow('Sales Tax (' + staxPct + '%)', staxAmt);
+  if (travel  > 0) itemsHtml += mkRow('Travel', travel);
+  G('custLineItems').innerHTML = itemsHtml;
+
+  // Footer: total row + optional payment terms
+  let footerHtml = '<div class="bk-total"><span class="bk-totallbl">Total Due</span><span class="bk-totalval">' + fmtD(grandTotal, 2) + '</span></div>';
+  if ($.inclTerms.checked && $.payTerms.value.trim()) {
+    footerHtml += '<div class="bk-row" style="border-top:1px solid var(--border);padding:12px 20px"><span class="bk-rowlbl">Payment Terms</span><span class="bk-rowval" style="font-size:13px;text-align:right">' + $.payTerms.value.trim() + '</span></div>';
+  }
+  G('custFooterRows').innerHTML = footerHtml;
+
+  // Set filename for Save dialog
+  const origTitle = document.title;
+  const safeName  = (lbl || trd).replace(/[<>:"/\\|?*]+/g, '').trim();
+  document.title  = safeName + ' · Customer Quote · ' + dateShort + ' · JobProfitCalc';
+
+  // Switch to customer print mode, print, then restore
+  document.body.classList.add('print-customer');
+  window.print();
+  const restore = function() {
+    document.body.classList.remove('print-customer');
+    document.title = origTitle;
+  };
+  window.addEventListener('afterprint', restore, { once: true });
+  setTimeout(restore, 2000);
 });
 
 /* ============================================================

@@ -691,14 +691,60 @@
       color: var(--text-pri);
     }
 
+    /* ── Quote Settings accordion ── */
+    .qs-toggle {
+      width: 100%; background: none; border: none;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 13px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; color: var(--text-sec);
+      font-family: var(--font-body); font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .qs-toggle:hover { background: rgba(255,255,255,0.03); color: var(--text-pri); }
+    .qs-arrow { font-size: 12px; transition: transform 0.22s; flex-shrink: 0; }
+    .qs-toggle.open .qs-arrow { transform: rotate(180deg); }
+    .qs-toggle.open { border-bottom-color: transparent; }
+
+    .qs-body { display: none; padding: 16px 20px 22px; background: var(--bg-input); border-bottom: 1px solid var(--border); }
+    .qs-body.open { display: block; }
+
+    .qs-section-lbl {
+      font-family: var(--font-disp); font-weight: 700;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .qs-divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .qs-check-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-sec);
+      cursor: pointer; user-select: none; margin-top: 10px;
+    }
+    .qs-check-label input[type="checkbox"] {
+      width: 15px; height: 15px;
+      accent-color: var(--accent); cursor: pointer; flex-shrink: 0;
+    }
+    .qs-inline-check {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-sec);
+      cursor: pointer; user-select: none;
+      padding-top: 22px;
+    }
+    .qs-inline-check input[type="checkbox"] {
+      width: 15px; height: 15px;
+      accent-color: var(--accent); cursor: pointer; flex-shrink: 0;
+    }
+
     /* Buttons */
     .calc-actions {
-      display: flex; gap: 12px;
+      display: flex; gap: 10px; flex-wrap: wrap;
       padding: 20px 24px;
       border-top: 1px solid var(--border);
     }
     .btn {
-      flex: 1;
+      flex: 1; min-width: 120px;
       display: inline-flex; align-items: center; justify-content: center; gap: 7px;
       padding: 12px 18px;
       border-radius: var(--r);
@@ -1219,6 +1265,72 @@
 
             </div><!-- /calc-body -->
 
+            <!-- ── Quote Settings ── -->
+            <button class="qs-toggle" id="qsToggle" aria-expanded="false" aria-controls="qsBody">
+              ⚙ Quote Settings
+              <span class="qs-arrow" aria-hidden="true">▼</span>
+            </button>
+            <div class="qs-body" id="qsBody" role="region" aria-label="Customer quote settings">
+
+              <p class="qs-section-lbl">Business Info</p>
+              <div class="igrid cols-1" style="margin-bottom:10px">
+                <div class="igroup">
+                  <label class="ilabel" for="bizName">Business Name</label>
+                  <div class="ifield">
+                    <input type="text" id="bizName" placeholder="e.g. Smith Plumbing LLC" aria-label="Business name for customer quote">
+                  </div>
+                </div>
+              </div>
+              <div class="igrid cols-2" style="margin-bottom:4px">
+                <div class="igroup">
+                  <label class="ilabel" for="bizPhone">Phone</label>
+                  <div class="ifield">
+                    <input type="text" id="bizPhone" placeholder="(555) 555-5555" aria-label="Business phone">
+                  </div>
+                </div>
+                <div class="igroup">
+                  <label class="ilabel" for="bizEmail">Email</label>
+                  <div class="ifield">
+                    <input type="text" id="bizEmail" placeholder="you@example.com" aria-label="Business email">
+                  </div>
+                </div>
+              </div>
+              <label class="qs-check-label">
+                <input type="checkbox" id="includeBizInfo" checked>
+                Include business info in customer quote
+              </label>
+
+              <div class="qs-divider"></div>
+
+              <p class="qs-section-lbl">Quote Options</p>
+              <div class="igrid cols-2" style="margin-bottom:12px">
+                <div class="igroup">
+                  <label class="ilabel" for="paymentTerms">Payment Terms</label>
+                  <div class="ifield">
+                    <input type="text" id="paymentTerms" placeholder="e.g. 50% deposit due at start" aria-label="Payment terms">
+                  </div>
+                </div>
+                <label class="qs-inline-check" for="includeTerms">
+                  <input type="checkbox" id="includeTerms">
+                  Include in quote
+                </label>
+              </div>
+              <div class="igrid cols-2">
+                <div class="igroup">
+                  <label class="ilabel" for="quoteValid">Quote Valid (days)</label>
+                  <div class="ifield">
+                    <input type="number" id="quoteValid" min="1" max="365" step="1" value="30" aria-label="Days the quote remains valid">
+                  </div>
+                </div>
+                <label class="qs-inline-check" for="includeValid">
+                  <input type="checkbox" id="includeValid">
+                  Include in quote
+                </label>
+              </div>
+
+            </div>
+            <!-- End Quote Settings -->
+
             <!-- Results Panel -->
             <div class="results" aria-live="polite" aria-label="Live calculation results" role="region">
 
@@ -1296,7 +1408,8 @@
             <div class="calc-actions">
               <button class="btn btn-ghost no-print" id="resetBtn" aria-label="Reset calculator to trade defaults">↺ Reset</button>
               <button class="btn btn-ghost no-print" id="pdfBtn" title="Opens print dialog — choose Save as PDF" aria-label="Save results as PDF">🖨 Save as PDF</button>
-              <button class="btn btn-primary no-print" id="copyBtn" aria-label="Copy formatted job quote to clipboard">📋 Copy Quote</button>
+              <button class="btn btn-ghost no-print" id="custBtn" aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
+              <button class="btn btn-primary no-print" id="copyBtn" aria-label="Copy internal job quote to clipboard">📋 Copy Quote</button>
             </div>
 
           </article>
@@ -1705,11 +1818,23 @@ const $ = {
   // UI
   reset:    G('resetBtn'),
   pdf:      G('pdfBtn'),
+  cust:     G('custBtn'),
   copy:     G('copyBtn'),
   bkToggle: G('bkToggle'),
   bkBody:   G('bkBody'),
   bkLabel:  G('bkToggleLabel'),
   toast:    G('toast'),
+  // Quote Settings
+  qsTog:    G('qsToggle'),
+  qsBody:   G('qsBody'),
+  bizName:  G('bizName'),
+  bizPhone: G('bizPhone'),
+  bizEmail: G('bizEmail'),
+  inclBiz:  G('includeBizInfo'),
+  payTerms: G('paymentTerms'),
+  inclTerms:G('includeTerms'),
+  qvDays:   G('quoteValid'),
+  inclValid:G('includeValid'),
 };
 
 /* ============================================================
@@ -1955,6 +2080,106 @@ $.pdf.addEventListener('click', function() {
   const restore = function() { document.title = origTitle; };
   window.addEventListener('afterprint', restore, { once: true });
   setTimeout(restore, 2000);
+});
+
+/* ============================================================
+   QUOTE SETTINGS — localStorage persistence + toggle
+============================================================ */
+// Persist text fields
+['bizName','bizPhone','bizEmail','paymentTerms','quoteValid'].forEach(function(id) {
+  const el = G(id);
+  const key = 'jpc_qs_' + id;
+  const stored = localStorage.getItem(key);
+  if (stored !== null) el.value = stored;
+  el.addEventListener('input', function() { localStorage.setItem(key, el.value); });
+});
+// Persist checkboxes
+['includeBizInfo','includeTerms','includeValid'].forEach(function(id) {
+  const el = G(id);
+  const key = 'jpc_qs_' + id;
+  const stored = localStorage.getItem(key);
+  if (stored !== null) el.checked = (stored === 'true');
+  el.addEventListener('change', function() { localStorage.setItem(key, el.checked); });
+});
+
+// QS accordion toggle
+$.qsTog.addEventListener('click', function() {
+  const open = !$.qsBody.classList.contains('open');
+  $.qsBody.classList.toggle('open', open);
+  $.qsTog.classList.toggle('open', open);
+  $.qsTog.setAttribute('aria-expanded', open);
+});
+
+/* ============================================================
+   CUSTOMER QUOTE
+============================================================ */
+$.cust.addEventListener('click', function() {
+  const r   = calc();
+  const lbl = $.jobLabel.value.trim() || 'Job';
+  const trd = $.trade.options[$.trade.selectedIndex]?.text || 'Contractor';
+  const now = new Date();
+  const date = now.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+
+  // Customer-facing line items: overhead/taxes/profit silently folded into labor
+  const travel      = r.travel > 0 ? r.travel : 0;
+  const laborCharge = r.suggested - r.matTotal - travel;
+
+  // Column alignment helper
+  function col(label, val) {
+    const spaces = Math.max(1, 22 - label.length);
+    return '  ' + label + ' '.repeat(spaces) + val;
+  }
+
+  // Valid-until date
+  let validLine = '';
+  if ($.inclValid.checked && $.qvDays.value) {
+    const exp = new Date(now);
+    exp.setDate(exp.getDate() + parseInt($.qvDays.value, 10));
+    const expStr = exp.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+    validLine = '  Valid Until:         ' + expStr;
+  }
+
+  const lines = ['═══════════════════════════════════'];
+
+  // Business header block
+  if ($.inclBiz.checked && ($.bizName.value || $.bizPhone.value || $.bizEmail.value)) {
+    if ($.bizName.value) lines.push('  ' + $.bizName.value.trim());
+    const contact = [$.bizPhone.value.trim(), $.bizEmail.value.trim()].filter(Boolean).join('  |  ');
+    if (contact) lines.push('  ' + contact);
+    lines.push('  ─────────────────────────────────');
+  }
+
+  lines.push('  QUOTE — ' + lbl.toUpperCase());
+  lines.push('  Trade:  ' + trd);
+  lines.push('  Date:   ' + date);
+  if (validLine) lines.push(validLine);
+  lines.push('═══════════════════════════════════');
+  lines.push('');
+  lines.push(col('Labor:',     fmtD(laborCharge, 2)));
+  lines.push(col('Materials:', fmtD(r.matTotal,  2)));
+  if (travel > 0) lines.push(col('Travel:', fmtD(travel, 2)));
+  lines.push('  ─────────────────────────────────');
+  lines.push(col('TOTAL DUE:', fmtD(r.suggested, 2)));
+  lines.push('');
+  if ($.inclTerms.checked && $.payTerms.value.trim()) {
+    lines.push('  Payment Terms:');
+    lines.push('  ' + $.payTerms.value.trim());
+    lines.push('');
+  }
+  lines.push('  Generated by JobProfitCalc.com');
+  lines.push('═══════════════════════════════════');
+
+  const text = lines.join('\n');
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() { toast('✓ Customer quote copied!'); });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    toast('✓ Customer quote copied!');
+  }
 });
 
 /* ============================================================

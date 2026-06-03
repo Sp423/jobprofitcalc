@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
-Sitemap: https://www.jobprofitcalc.com/sitemap.xml
+Sitemap: https://jobprofitcalc.com/sitemap.xml

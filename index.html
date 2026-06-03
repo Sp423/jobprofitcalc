@@ -266,8 +266,8 @@
       padding: 14px 0 18px;
       border-bottom: 1px solid var(--border);
     }
-    .ad-header { width: 728px; height: 90px; }
-    @media (max-width: 760px) { .ad-header { width: 320px; height: 50px; } }
+    .ad-header { display: block; width: 728px; height: 90px; }
+    @media (max-width: 760px) { .ad-header { width: 100%; max-width: 728px; height: auto; } }
 
     /* ── AD ZONE 2 — Sidebar ── */
     .sidebar-ad-wrap {
@@ -1039,7 +1039,9 @@
     <!-- AD ZONE 1: Header Leaderboard -->
     <div class="container">
       <div class="ad-zone1-wrap">
-        <div class="ad-placeholder ad-header" role="img" aria-label="Advertisement space — 728×90 leaderboard">728×90 Leaderboard &nbsp;/&nbsp; 320×50 Mobile — AD ZONE 1</div>
+        <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+          <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" class="ad-header" width="728" height="90">
+        </a>
         <p class="ad-label">Advertisement</p>
       </div>
     </div>
@@ -1307,7 +1309,9 @@
             <!-- AD ZONE 2: Sidebar Medium Rectangle -->
             <div class="sidebar-ad-wrap">
               <p class="ad-label">Advertisement</p>
-              <div class="ad-placeholder ad-sidebar" role="img" aria-label="Advertisement space — 300×250 medium rectangle">300×250 &mdash; AD ZONE 2</div>
+              <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+                <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" class="ad-sidebar" width="300" height="250">
+              </a>
             </div>
             <!-- END AD ZONE 2 -->
 

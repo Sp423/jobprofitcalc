@@ -146,6 +146,20 @@
       max-width: 560px;
     }
 
+    /* ── Ad Zone — Leaderboard ── */
+    .blog-ad-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; padding: 14px 0 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-ad-header { display: block; width: 728px; height: 90px; }
+    @media (max-width: 760px) { .blog-ad-header { width: 100%; max-width: 728px; height: auto; } }
+    .ad-label {
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--text-muted); text-align: center;
+    }
+
     /* ── Post Grid ── */
     .posts-section { padding: 56px 0 80px; }
     .posts-grid {
@@ -305,6 +319,15 @@
 
   <main role="main">
     <div class="container">
+
+      <!-- Ad Zone: Leaderboard -->
+      <div class="blog-ad-wrap">
+        <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+          <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" class="blog-ad-header" width="728" height="90">
+        </a>
+        <p class="ad-label">Advertisement</p>
+      </div>
+      <!-- End Ad Zone -->
 
       <!-- Blog Hero -->
       <section class="blog-hero">

@@ -162,7 +162,16 @@
     .footer-copy { color: var(--text-muted); font-size: 12px; }
     .footer-disc { font-size: 11px; color: var(--text-muted); max-width: 500px; }
     @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
-  </style>
+
+    /* ── Article ad zones ── */
+    .article-ad-leader { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 28px 0; }
+    .article-ad-leader img { display: block; width: 728px; height: 90px; }
+    @media (max-width: 760px) { .article-ad-leader img { width: 100%; max-width: 728px; height: auto; } }
+    .article-ad-rect { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 32px 0 0; border-top: 1px solid var(--border); margin-top: 4px; }
+    .article-ad-rect img { display: block; width: 300px; height: 250px; border-radius: var(--r); }
+    .sidebar-ad-zone { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .sidebar-ad-zone img { display: block; width: 100%; height: auto; max-width: 252px; border-radius: var(--r); }
+    .ad-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); text-align: center; }  </style>
 </head>
 <body>
 <div class="page-wrap">
@@ -207,6 +216,15 @@
             </div>
           </header>
 
+
+          <!-- Ad Zone A: Leaderboard -->
+          <div class="article-ad-leader">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" width="728" height="90">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+          <!-- End Ad Zone A -->
           <div class="article-body">
 
             <p>Ask ten contractors what overhead percentage they use and you'll get ten different answers — mostly guesses. The correct answer isn't a number you find online. It's a number you calculate from your own business expenses. But knowing the industry benchmarks and understanding what overhead actually includes is the starting point.</p>
@@ -331,6 +349,14 @@
 
           </div>
 
+                    <!-- Ad Zone D: Rectangle -->
+          <div class="article-ad-rect">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
           <nav class="related-section" aria-label="Related articles">
             <p class="related-label">Continue Reading</p>
             <div class="related-grid">
@@ -350,6 +376,13 @@
         </article>
 
         <aside class="article-sidebar" aria-label="Article navigation">
+          <div class="sidebar-ad-zone">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
           <div class="sidebar-card">
             <p class="sidebar-card-title">In This Article</p>
             <ul class="toc-list">

@@ -19,7 +19,13 @@
       "mcp__Claude_in_Chrome__browser_batch",
       "mcp__Claude_in_Chrome__read_page",
       "WebSearch",
-      "WebFetch(domain:www.jobprofitcalc.com)"
+      "WebFetch(domain:www.jobprofitcalc.com)",
+      "Bash(cat CNAME)",
+      "Bash(cat _redirects)",
+      "Bash(ls -la *.txt *.xml CNAME _redirects _config.yml netlify.toml)",
+      "WebFetch(domain:jobprofitcalc.com)",
+      "Bash(git commit -m ' *)",
+      "Bash(powershell -Command ' *)"
     ]
   }
 }

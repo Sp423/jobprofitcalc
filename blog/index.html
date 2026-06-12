@@ -60,7 +60,7 @@
       --accent-hover:#FBB924;
       --text-pri:   #F1F5F9;
       --text-sec:   #94A3B8;
-      --text-muted: #5A7A99;
+      --text-muted: #7A95B0;
       --border:     #1E3A54;
       --border-hi:  #2B5070;
       --font-disp:  'Barlow Condensed', sans-serif;
@@ -178,6 +178,17 @@
       text-decoration: none;
     }
     .post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .post-thumb {
+      width: calc(100% + 56px);
+      height: auto;
+      margin: -28px -28px 0;
+      max-width: none;
+      display: block;
+      aspect-ratio: 2 / 1;
+      object-fit: cover;
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      border-bottom: 1px solid var(--border);
+    }
     .post-tag {
       display: inline-block;
       font-family: var(--font-disp); font-weight: 700;
@@ -363,7 +374,14 @@
   <main role="main">
     <div class="container">
 
-      <!-- Ad Zone: Leaderboard -->
+      <!-- Blog Hero -->
+      <section class="blog-hero">
+        <p class="blog-eyebrow">Contractor Knowledge Base</p>
+        <h1>Pricing Guides for<br>Trade Professionals</h1>
+        <p>Straight-talk articles on job pricing, overhead, taxes, and business math — written for contractors who want to understand exactly what they're earning on every job.</p>
+      </section>
+
+      <!-- Ad Zone: Leaderboard (below hero) -->
       <div class="blog-ad-wrap">
         <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
           <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" class="blog-ad-header" width="728" height="90">
@@ -371,13 +389,6 @@
         <p class="ad-label">Advertisement</p>
       </div>
       <!-- End Ad Zone -->
-
-      <!-- Blog Hero -->
-      <section class="blog-hero">
-        <p class="blog-eyebrow">Contractor Knowledge Base</p>
-        <h1>Pricing Guides for<br>Trade Professionals</h1>
-        <p>Straight-talk articles on job pricing, overhead, taxes, and business math — written for contractors who want to understand exactly what they're earning on every job.</p>
-      </section>
 
       <!-- Posts -->
       <section class="posts-section" aria-label="Blog posts">
@@ -413,6 +424,7 @@
 
           <!-- Post 2 — newest -->
           <a href="/blog/contractor-change-order-scope-creep.html" class="post-card">
+            <img class="post-thumb" src="/images/contractor-change-order-customer-signature.jpg" alt="" width="800" height="450" loading="lazy">
             <div class="post-tag">Estimating &amp; Proposals</div>
             <h2 class="post-title">Change Orders for Contractors: How to Stop Scope Creep From Killing Your Margin</h2>
             <p class="post-excerpt">Scope creep is the silent margin killer. A customer adds one small thing, then another — and you've worked four unpaid hours by the end of the job. Here's what a change order is, an 8-element checklist, a word-for-word template, and the scripts to have the conversation mid-job without losing the customer.</p>
@@ -426,6 +438,7 @@
 
           <!-- Post 3 -->
           <a href="/blog/contractor-profit-margins-by-trade.html" class="post-card">
+            <img class="post-thumb" src="/images/contractor-profit-margin-breakdown.jpg" alt="" width="1280" height="640" loading="lazy">
             <div class="post-tag">Pricing Strategy</div>
             <h2 class="post-title">Contractor Profit Margins by Trade: What's Normal in 2026?</h2>
             <p class="post-excerpt">Revenue tells you how busy you were. Margin tells you how well you ran the business. Trade-by-trade net margin benchmarks for 2026, why service work pays more than new construction, and the warning signs your margins have slipped below sustainable levels.</p>
@@ -439,6 +452,7 @@
 
           <!-- Post 3 -->
           <a href="/blog/should-contractors-charge-for-drive-time.html" class="post-card">
+            <img class="post-thumb" src="/images/contractor-drive-time-billing.jpg" alt="" width="1280" height="640" loading="lazy">
             <div class="post-tag">Pricing Strategy</div>
             <h2 class="post-title">Should Contractors Charge for Drive Time? (Yes — Here's How)</h2>
             <p class="post-excerpt">At $85/hour with 150 jobs a year, not charging for drive time costs you $12,750 annually. Here's the math, three billing methods, trade-by-trade rate benchmarks, and exactly how to explain a service call fee to customers without losing the job.</p>
@@ -452,6 +466,7 @@
 
           <!-- Post 3 -->
           <a href="/blog/how-to-write-contractor-estimate.html" class="post-card">
+            <img class="post-thumb" src="/images/contractor-writing-estimate-job-site.jpg" alt="" width="1280" height="640" loading="lazy">
             <div class="post-tag">Estimating &amp; Proposals</div>
             <h2 class="post-title">How to Write a Contractor Estimate That Actually Wins Jobs</h2>
             <p class="post-excerpt">Most contractors lose jobs before the customer ever gets to the price — because the estimate didn't inspire confidence. Here are the 9 elements every estimate must include, a word-for-word template you can adapt for any trade, and the 5 mistakes that cost you work before you swing a hammer.</p>
@@ -569,7 +584,7 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 JobProfitCalc.com. All rights reserved.</p>
+      <p class="footer-copy">© 2026 JobProfitCalc.com. All rights reserved.</p>
       <p class="footer-disc">Results are estimates for educational purposes only. Consult a licensed tax professional for advice specific to your situation.</p>
     </div>
   </footer>

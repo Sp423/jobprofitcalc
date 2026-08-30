@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Profitability for Contractors | How to Calculate Job Profit</title>
+  <meta name="description" content="What is job profitability for a contractor? Calculate job profit after labor, materials, overhead, drive, and tax, then compare jobs with one worked example.">
+  <link rel="canonical" href="https://jobprofitcalc.com/blog/contractor-job-profitability.html">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:site_name" content="JobProfitCalc">
+  <meta property="og:title" content="Job Profitability for Contractors | How to Calculate Job Profit">
+  <meta property="og:description" content="What is job profitability for a contractor? Calculate job profit after labor, materials, overhead, drive, and tax, then compare jobs with one worked example.">
+  <meta property="og:url" content="https://jobprofitcalc.com/blog/contractor-job-profitability.html">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-08-29T00:00:00Z">
+  <meta property="article:modified_time"  content="2026-08-29T00:00:00Z">
+  <meta property="article:author"          content="JobProfitCalc.com">
+  <meta property="article:section"         content="Contractor Pricing">
+  <meta property="og:image" content="https://jobprofitcalc.com/images/contractor-job-profitability.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jobprofitcalc.com/images/contractor-job-profitability.jpg">
+  <meta name="twitter:title" content="Job Profitability for Contractors | How to Calculate Job Profit">
+  <meta name="twitter:description" content="What is job profitability for a contractor? Calculate job profit after labor, materials, overhead, drive, and tax, then compare jobs with one worked example.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Is Job Profitability for a Contractor?",
+    "description": "What is job profitability for a contractor? Calculate job profit after labor, materials, overhead, drive, and tax, then compare jobs with one worked example.",
+    "url": "https://jobprofitcalc.com/blog/contractor-job-profitability.html",
+    "image": "https://jobprofitcalc.com/images/contractor-job-profitability.jpg",
+    "datePublished": "2026-08-29",
+    "dateModified": "2026-08-29",
+    "author": { "@type": "Organization", "name": "JobProfitCalc.com" },
+    "publisher": { "@type": "Organization", "name": "JobProfitCalc.com", "url": "https://jobprofitcalc.com", "logo": { "@type": "ImageObject", "url": "https://jobprofitcalc.com/og-image.png" } },
+    "mainEntityOfPage": "https://jobprofitcalc.com/blog/contractor-job-profitability.html"
+  }
+  </script>
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobprofitcalc.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jobprofitcalc.com/blog/"},
+      {"@type": "ListItem", "position": 3, "name": "Job Profitability for Contractors", "item": "https://jobprofitcalc.com/blog/contractor-job-profitability.html"}
+    ]
+  }
+  </script>
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is job profit for a contractor?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The dollars left on one job after labor, materials, overhead, drive, and tax. Not revenue, and not your labor pay." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is job profitability?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Job profit as a percent of revenue (job profit ÷ revenue × 100). Use it to compare jobs of different sizes." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate job profitability on one job?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Take the price the customer paid. Subtract labor, materials, overhead allocated to the job, drive, and tax. Divide what remains by the price. That percent is job profitability on that job. Run the same stack in the calculator if you do not want to do it by hand." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can job profit look fine when job profitability is weak?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because dollars do not scale with job size. $500 left on a $1,500 job is a different result than $500 left on a $5,000 job. The first is about 33%. The second is 10%. Track both, or the big jobs will look like winners until you divide." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I include my own labor in the cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your hours on the job are a cost. If you leave them out, you will count wages as profit and underprice the next one. Pay yourself in the labor line, then measure job profit on top of that." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYWHVVF5J0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VYWHVVF5J0');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7735208952918665"
+       crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-base:    #0D1B2A;
+      --bg-surface: #142232;
+      --bg-elevated:#1B2F44;
+      --accent:     #F59E0B;
+      --accent-hover:#FBB924;
+      --text-pri:   #F1F5F9;
+      --text-sec:   #94A3B8;
+      --text-muted: #7A95B0;
+      --border:     #1E3A54;
+      --border-hi:  #2B5070;
+      --font-disp:  'Barlow Condensed', sans-serif;
+      --font-body:  'DM Sans', sans-serif;
+      --r:          8px;
+      --r-lg:       12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg-base); color: var(--text-pri); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(rgba(245,158,11,0.035) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; z-index: 0; }
+    .page-wrap { position: relative; z-index: 1; }
+    .site-header { background: var(--bg-surface); border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 24px rgba(0,0,0,0.5); }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 62px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .logo-mark { width: 38px; height: 38px; background: var(--accent); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-family: var(--font-disp); font-weight: 800; font-size: 15px; color: var(--bg-base); letter-spacing: -0.5px; line-height: 1; flex-shrink: 0; }
+    .logo-name { font-family: var(--font-disp); font-weight: 800; font-size: 21px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-pri); }
+    .logo-name em { color: var(--accent); font-style: normal; }
+    .site-nav { display: flex; gap: 6px; align-items: center; }
+    .site-nav a { color: var(--text-sec); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: var(--r); transition: color 0.18s, background 0.18s; }
+    .site-nav a:hover { color: var(--text-pri); background: rgba(255,255,255,0.05); }
+    .nav-btn { background: var(--accent) !important; color: var(--bg-base) !important; font-weight: 700 !important; padding: 7px 16px !important; border-radius: var(--r) !important; margin-left: 6px; }
+    .nav-btn:hover { background: var(--accent-hover) !important; }
+    @media (max-width: 700px) { .site-nav .hide-mobile { display: none; } .logo-name { font-size: 17px; } }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 280px; gap: 56px; padding: 56px 0 80px; align-items: start; }
+    @media (max-width: 960px) { .article-layout { grid-template-columns: 1fr; } .article-sidebar { display: none; } }
+    .breadcrumb { padding: 20px 0 0; font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.18s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { opacity: 0.5; }
+    .article-header { margin-bottom: 40px; }
+    .article-tag { display: inline-block; font-family: var(--font-disp); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); border-radius: 4px; padding: 3px 8px; margin-bottom: 16px; }
+    .article-header h1 { font-family: var(--font-disp); font-weight: 800; font-size: clamp(30px, 4vw, 48px); text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pri); line-height: 1.07; margin-bottom: 20px; }
+    .article-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .article-meta-sep { opacity: 0.4; }
+    .article-body { font-size: 15px; color: var(--text-sec); line-height: 1.8; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-body h2 { font-family: var(--font-disp); font-weight: 800; font-size: 26px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pri); line-height: 1.1; margin: 44px 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .article-body h3 { font-family: var(--font-disp); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-pri); line-height: 1.15; margin: 28px 0 12px; }
+    .article-body strong { color: var(--text-pri); font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body a { color: var(--accent); text-decoration: none; }
+    .article-body a:hover { text-decoration: underline; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .article-body ul li, .article-body ol li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-sec); line-height: 1.7; }
+    .article-body ul li::before { content: '▸'; color: var(--accent); font-size: 11px; margin-top: 4px; flex-shrink: 0; }
+    .article-body ol { counter-reset: ol-counter; }
+    .article-body ol li { counter-increment: ol-counter; }
+    .article-body ol li::before { content: counter(ol-counter) '.'; color: var(--accent); font-family: var(--font-disp); font-weight: 700; font-size: 13px; margin-top: 2px; flex-shrink: 0; min-width: 18px; }
+    .callout { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25); border-left: 4px solid var(--accent); border-radius: var(--r); padding: 18px 22px; margin: 24px 0; }
+    .callout p { margin-bottom: 0; color: var(--text-sec); }
+    .callout strong { color: var(--accent); }
+    .formula-block { background: var(--bg-elevated); border: 1px solid var(--border-hi); border-radius: var(--r); padding: 16px 20px; margin: 20px 0; font-family: 'DM Sans', monospace; font-size: 14px; color: var(--text-pri); text-align: center; letter-spacing: 0.3px; }
+    .article-body .disclaimer { font-size: 13px; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 32px; }
+    .calc-example { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin: 24px 0; }
+    .calc-example-header { background: var(--bg-elevated); padding: 14px 20px; font-family: var(--font-disp); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 20px; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text-sec); }
+    .calc-row:last-child { border-bottom: none; }
+    .calc-row.total { background: rgba(245,158,11,0.06); color: var(--text-pri); font-weight: 600; }
+    .calc-row.total .calc-val { color: var(--accent); font-size: 16px; }
+    .calc-row.profit { background: rgba(34,197,94,0.06); }
+    .calc-row.profit .calc-val { color: #22C55E; }
+    .calc-val { font-weight: 600; color: var(--text-pri); }
+    .article-sidebar { position: sticky; top: 82px; display: flex; flex-direction: column; gap: 20px; }
+    .sidebar-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; }
+    .sidebar-card-title { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list a { display: block; padding: 7px 10px; border-radius: var(--r); font-size: 13px; color: var(--text-sec); text-decoration: none; transition: color 0.18s, background 0.18s; line-height: 1.4; }
+    .toc-list a:hover { color: var(--accent); background: rgba(245,158,11,0.07); }
+    .cta-card { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: var(--r-lg); padding: 20px; }
+    .cta-card h3 { font-family: var(--font-disp); font-weight: 800; font-size: 18px; text-transform: uppercase; color: var(--text-pri); margin-bottom: 8px; }
+    .cta-card p { font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 16px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: var(--bg-base); font-family: var(--font-disp); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: var(--r); text-decoration: none; width: 100%; justify-content: center; transition: background 0.18s; }
+    .cta-btn:hover { background: var(--accent-hover); }
+    .related-section { border-top: 1px solid var(--border); padding-top: 40px; margin-top: 52px; }
+    .related-label { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 20px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .related-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: border-color 0.2s; }
+    .related-card:hover { border-color: var(--accent); }
+    .related-card-tag { font-family: var(--font-disp); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); }
+    .related-card-title { font-family: var(--font-disp); font-weight: 700; font-size: 17px; text-transform: uppercase; color: var(--text-pri); line-height: 1.2; }
+    .related-card:hover .related-card-title { color: var(--accent); }
+    .related-card-meta { font-size: 12px; color: var(--text-muted); }
+    .site-footer { background: var(--bg-surface); border-top: 1px solid var(--border); padding: 48px 24px 32px; position: relative; z-index: 1; }
+    .footer-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto auto; gap: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 12px; max-width: 280px; }
+    .footer-col-title { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: var(--text-sec); text-decoration: none; font-size: 13px; transition: color 0.18s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .footer-copy { color: var(--text-muted); font-size: 12px; }
+    .footer-disc { font-size: 11px; color: var(--text-muted); max-width: 500px; }
+    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+    .article-body figure { margin: 0 0 32px; }
+    .article-body figure img { width: 100%; height: auto; border-radius: var(--r-lg); display: block; }
+    .article-body figcaption { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 8px; font-style: italic; line-height: 1.5; }
+    .article-ad-leader { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 28px 0; }
+    .article-ad-leader img { display: block; width: 728px; height: 90px; }
+    @media (max-width: 760px) { .article-ad-leader img { width: 100%; max-width: 728px; height: auto; } }
+    .article-ad-rect { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 32px 0 0; border-top: 1px solid var(--border); margin-top: 4px; }
+    .article-ad-rect img { display: block; width: 300px; height: 250px; border-radius: var(--r); }
+    .sidebar-ad-zone { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .sidebar-ad-zone img { display: block; width: 100%; height: auto; max-width: 252px; border-radius: var(--r); }
+    .ad-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); text-align: center; }
+    .menu-btn { display: none; background: none; border: none; cursor: pointer; color: #94A3B8; padding: 6px 8px; border-radius: 8px; font-size: 22px; line-height: 1; align-items: center; justify-content: center; transition: color 0.18s, background 0.18s; }
+    .menu-btn:hover { color: #F59E0B; background: rgba(255,255,255,0.05); }
+    @media (max-width: 700px) { .menu-btn { display: flex; } }
+    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #142232; border-top: 1px solid #1E3A54; border-bottom: 2px solid #F59E0B; box-shadow: 0 8px 32px rgba(0,0,0,0.5); flex-direction: column; z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { display: block; color: #94A3B8; text-decoration: none; padding: 15px 24px; font-size: 15px; font-weight: 500; border-bottom: 1px solid #1E3A54; font-family: 'DM Sans', sans-serif; transition: color 0.18s, background 0.18s; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #F59E0B; background: rgba(255,255,255,0.03); }
+    .mobile-menu .mob-cta { color: #F59E0B !important; font-weight: 700 !important; background: rgba(245,158,11,0.06); }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="JobProfitCalc home">
+        <div class="logo-mark" aria-hidden="true">JPC</div>
+        <span class="logo-name">Job<em>Profit</em>Calc</span>
+      </a>
+      <nav class="site-nav" aria-label="Site navigation">
+        <a href="/#how-to-price" class="hide-mobile">Pricing Guide</a>
+        <a href="/#tips" class="hide-mobile">Trade Tips</a>
+        <a href="/#faq" class="hide-mobile">FAQ</a>
+        <a href="/blog/" class="hide-mobile">Blog</a>
+        <a href="/calculator" class="nav-btn">Calculate Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-icon">☰</span></button>
+      </nav>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+      <a href="/#how-to-price">Pricing Guide</a>
+      <a href="/#tips">Trade Tips</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
+      <a href="/calculator" class="mob-cta">Calculate Now</a>
+    </div>
+  </header>
+
+  <main role="main">
+    <div class="container">
+
+      <!-- Ad Zone A: Leaderboard -->
+      <div class="article-ad-leader">
+        <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+          <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" width="728" height="90">
+        </a>
+        <p class="ad-label">Advertisement</p>
+      </div>
+      <!-- End Ad Zone A -->
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="/blog/">Blog</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">Job Profitability for Contractors</span>
+      </nav>
+
+      <div class="article-layout">
+
+        <article>
+          <header class="article-header">
+            <div class="article-tag">Pricing Strategy</div>
+            <h1>What Is Job Profitability for a Contractor?</h1>
+            <div class="article-meta">
+              <span>August 29, 2026</span>
+              <span class="article-meta-sep">·</span>
+              <span>7 min read</span>
+              <span class="article-meta-sep">·</span>
+              <span>JobProfitCalc.com</span>
+            </div>
+          </header>
+
+          <div class="article-body">
+
+            <p>What is job profitability for a contractor? It is job profit shown as a rate. Job profit is the dollars left on one job after costs. Job profitability is that same leftover as a percent of what the customer paid, so you can compare a small job to a large one without guessing which one actually paid.</p>
+
+            <p>Revenue tells you how busy you were. Job profit tells you whether that job paid. Job profitability tells you whether it paid enough for its size. A $400 leftover on a $1,000 job is not the same result as a $400 leftover on a $4,000 job, even though the dollar profit matches.</p>
+
+            <p>This guide defines both terms, walks the formula (revenue minus labor, materials, overhead, drive, and tax), and works one labeled example. It does not replace the full bid method. For that, use <a href="/blog/how-to-price-a-contractor-job.html">how to price a contractor job</a>. To run a live job, use the <a href="/calculator">Job Profit Calculator</a>.</p>
+
+            <h2 id="job-profit-vs-job-profitability">Job Profit vs Job Profitability</h2>
+
+            <p><strong>Job profit</strong> is a dollar amount on a single job: what remains after labor, materials, overhead, drive, and tax. It is not your labor pay. Labor is a cost. Profit is the leftover after those costs are covered.</p>
+
+            <div class="formula-block">Job profit = Revenue − Labor − Materials − Overhead − Drive − Tax</div>
+
+            <p><strong>Job profitability</strong> is that leftover as a percent of revenue. The percent lets you compare jobs of different sizes on the same scale.</p>
+
+            <div class="formula-block">Job profitability = Job profit ÷ Revenue × 100</div>
+
+            <p>A $600 leftover on a $2,000 job is 30%. A $600 leftover on a $6,000 job is 10%. Same dollars, different businesses. If you only track dollars, the bigger jobs feel more profitable. The rate is how you catch that.</p>
+
+            <h2 id="how-to-calculate">How to Calculate Job Profit</h2>
+
+            <p>Start from the price the customer paid (revenue). Subtract every cost that belongs to that job. What remains is job profit. Divide that by revenue to get job profitability.</p>
+
+            <h3 id="revenue">1. Revenue</h3>
+            <p>The quoted price, plus billed change orders. Not the number you wish you had charged, and not the number a competitor quoted. If you did not bill it, it is not revenue.</p>
+
+            <h3 id="labor">2. Labor</h3>
+            <p>Your time and any crew time on the job, at your loaded labor rate. That includes paying yourself. Do not treat your own hours as free and then call the leftover "profit."</p>
+
+            <h3 id="materials">3. Materials</h3>
+            <p>What you paid for parts and supplies used on this job. If you marked materials up in the quote, that markup sits in revenue. Subtract what left your pocket. Markup in the bid is covered in the <a href="/blog/how-to-price-a-contractor-job.html">contractor job pricing guide</a>.</p>
+
+            <h3 id="overhead">4. Overhead</h3>
+            <p>The share of business costs that exist whether this job runs or not: truck, insurance, tools, software, admin time. Allocate a portion so the job carries its share. Skipping this line because it is not on the invoice is how a "profitable" job still leaves you short. Calculate the rate from your own books: <a href="/blog/contractor-overhead-percentage.html">what overhead percentage a contractor should use</a>.</p>
+
+            <h3 id="drive">5. Drive</h3>
+            <p>Time in the truck and fuel (or a trip fee you treat as a job cost). Drive time is time you cannot spend on another job. If you leave it off this job, you ate it. Put the hours and the fuel on the job you drove to.</p>
+
+            <h3 id="tax">6. Tax</h3>
+            <p>Self-employment tax and income tax on the profit this job produces. If you skip this line, the "profit" you write down is not what you keep. Treat the tax set-aside as a cost of that job.</p>
+
+            <p>Then close the math:</p>
+
+            <div class="formula-block">Job profit = Revenue − (Labor + Materials + Overhead + Drive + Tax)</div>
+            <div class="formula-block">Job profitability = Job profit ÷ Revenue × 100</div>
+
+            <p>If job profit is negative, that job lost money. If job profitability is weak next to other jobs you run, that job worked you harder than it paid. For reference ranges by trade (not a number to copy from a forum), see <a href="/blog/contractor-profit-margins-by-trade.html">contractor profit margins by trade</a>.</p>
+
+            <h2 id="example">A Worked Example (Made-Up Numbers)</h2>
+
+            <p>The figures below are an example only. They are round numbers invented to show the math. They are not a claim about what contractors earn, charge, or keep, and they are not a recommended price.</p>
+
+            <p><strong>Example job:</strong> a one-day service job quoted at $2,000.</p>
+
+            <div class="calc-example" role="table" aria-label="Example job profit calculation">
+              <div class="calc-example-header">Example job: quoted price $2,000</div>
+              <div class="calc-row"><span>Revenue (quoted price)</span><span class="calc-val">$2,000</span></div>
+              <div class="calc-row"><span>Labor</span><span class="calc-val">$700</span></div>
+              <div class="calc-row"><span>Materials (what you paid)</span><span class="calc-val">$500</span></div>
+              <div class="calc-row"><span>Overhead allocated to this job</span><span class="calc-val">$250</span></div>
+              <div class="calc-row"><span>Drive time and fuel</span><span class="calc-val">$70</span></div>
+              <div class="calc-row"><span>Taxes set aside on this job</span><span class="calc-val">$180</span></div>
+              <div class="calc-row total"><span>Total costs</span><span class="calc-val">$1,700</span></div>
+              <div class="calc-row profit"><span>Job profit ($2,000 − $1,700)</span><span class="calc-val">$300</span></div>
+              <div class="calc-row profit"><span>Job profitability ($300 ÷ $2,000)</span><span class="calc-val">15%</span></div>
+            </div>
+
+            <p>Add the costs: $700 + $500 + $250 + $70 + $180 = $1,700. Subtract from revenue: $2,000 − $1,700 = $300 job profit. Divide: $300 ÷ $2,000 = 0.15, or 15% job profitability.</p>
+
+            <div class="callout">
+              <p><strong>The usual mistake:</strong> skip overhead, drive, and tax, then call it $800 profit ($2,000 − $700 − $500) and 40% profitable. Those three lines are real costs. Until they are on the job, the leftover is not job profit. It is a number that will not survive the month.</p>
+            </div>
+
+            <h2 id="calculator">Run Your Own Numbers</h2>
+
+            <p>The example is one job with round numbers. Your jobs are not. Open the <a href="/calculator">Job Profit Calculator</a>, enter labor, materials, overhead, drive time, and tax, and read net profit and profit margin on that job before you send the estimate.</p>
+
+            <p>Use it as a check, not as a second quoting system. The method behind the fields is the <a href="/blog/how-to-price-a-contractor-job.html">6-step pricing guide</a>. Overhead is the rate from <a href="/blog/contractor-overhead-percentage.html">your overhead percentage</a>. The margin on the job is the job-level version of <a href="/blog/contractor-profit-margins-by-trade.html">profit margins by trade</a>.</p>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <h3>What is job profit for a contractor?</h3>
+            <p>The dollars left on one job after labor, materials, overhead, drive, and tax. Not revenue, and not your labor pay.</p>
+
+            <h3>What is job profitability?</h3>
+            <p>Job profit as a percent of revenue (job profit ÷ revenue × 100). Use it to compare jobs of different sizes.</p>
+
+            <h3>How do I calculate job profitability on one job?</h3>
+            <p>Take the price the customer paid. Subtract labor, materials, overhead allocated to the job, drive, and tax. Divide what remains by the price. That percent is job profitability on that job. Run the same stack in the <a href="/calculator">calculator</a> if you do not want to do it by hand.</p>
+
+            <h3>Why can job profit look fine when job profitability is weak?</h3>
+            <p>Because dollars do not scale with job size. $500 left on a $1,500 job is a different result than $500 left on a $5,000 job. The first is about 33%. The second is 10%. Track both, or the big jobs will look like winners until you divide.</p>
+
+            <h3>Do I include my own labor in the cost?</h3>
+            <p>Yes. Your hours on the job are a cost. If you leave them out, you will count wages as profit and underprice the next one. Pay yourself in the labor line, then measure job profit on top of that.</p>
+
+            <h2 id="bottom-line">The Bottom Line</h2>
+
+            <p>Job profit is the leftover dollars on one job. Job profitability is that leftover as a percent, so you can compare jobs. Calculate it the same way every time: revenue minus labor, materials, overhead, drive, and tax, then divide. Skip a line and you will quote as if the leftover is bigger than it is.</p>
+
+            <p>Work the example once with a real job from last month. Then put the next estimate through the <a href="/calculator">Job Profit Calculator</a> before the customer sees a number you cannot change.</p>
+
+            <p class="disclaimer">Results are estimates for educational purposes only. Consult a licensed tax professional for advice specific to your situation.</p>
+
+          </div><!-- /article-body -->
+
+          <!-- Ad Zone D: Rectangle -->
+          <div class="article-ad-rect">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250" loading="lazy">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
+          <nav class="related-section" aria-label="Related articles">
+            <p class="related-label">Continue Reading</p>
+            <div class="related-grid">
+              <a href="/blog/how-to-price-a-contractor-job.html" class="related-card">
+                <span class="related-card-tag">Pricing Strategy</span>
+                <span class="related-card-title">How to Price a Contractor Job: The Complete Guide</span>
+                <span class="related-card-meta">8 min read</span>
+              </a>
+              <a href="/blog/contractor-overhead-percentage.html" class="related-card">
+                <span class="related-card-tag">Overhead &amp; Costs</span>
+                <span class="related-card-title">What Overhead Percentage Should a Contractor Use?</span>
+                <span class="related-card-meta">6 min read</span>
+              </a>
+              <a href="/blog/contractor-profit-margins-by-trade.html" class="related-card">
+                <span class="related-card-tag">Pricing Strategy</span>
+                <span class="related-card-title">Contractor Profit Margins by Trade: What's Normal in 2026?</span>
+                <span class="related-card-meta">9 min read</span>
+              </a>
+            </div>
+          </nav>
+
+        </article>
+
+        <aside class="article-sidebar" aria-label="Article navigation">
+          <div class="sidebar-ad-zone">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250" loading="lazy">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
+          <div class="sidebar-card">
+            <p class="sidebar-card-title">In This Article</p>
+            <ul class="toc-list">
+              <li><a href="#job-profit-vs-job-profitability">Job profit vs job profitability</a></li>
+              <li><a href="#how-to-calculate">How to calculate job profit</a></li>
+              <li><a href="#example">A worked example</a></li>
+              <li><a href="#calculator">Run your own numbers</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#bottom-line">The bottom line</a></li>
+            </ul>
+          </div>
+          <div class="cta-card">
+            <h3>Check Profit Per Job</h3>
+            <p>Enter labor, materials, overhead, drive, and tax to see net profit and margin on the job before you quote.</p>
+            <a href="/calculator" class="cta-btn">Open Calculator →</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="JobProfitCalc home">
+          <div class="logo-mark" aria-hidden="true">JPC</div>
+          <span class="logo-name">Job<em>Profit</em>Calc</span>
+        </a>
+        <p>A free pricing tool and knowledge base for trade professionals who want to know exactly what they're earning on every job.</p>
+      </div>
+      <nav aria-label="Footer legal links">
+        <p class="footer-col-title">Legal</p>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+        </div>
+      </nav>
+      <nav aria-label="Footer site links">
+        <p class="footer-col-title">Site</p>
+        <div class="footer-links">
+          <a href="/calculator">Calculator</a>
+          <a href="/blog/">Blog</a>
+          <a href="/#faq">FAQ</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 JobProfitCalc.com. All rights reserved.</p>
+      <p class="footer-disc">Results are estimates for educational purposes only. Consult a licensed tax professional for advice specific to your situation.</p>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var btn = document.getElementById("menuBtn");
+  var menu = document.getElementById("mobileMenu");
+  if (!btn || !menu) return;
+  btn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var open = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.querySelector(".menu-icon").textContent = open ? "✕" : "☰";
+  });
+  document.addEventListener("click", function() {
+    menu.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");
+    btn.querySelector(".menu-icon").textContent = "☰";
+  });
+  menu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      menu.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+      btn.querySelector(".menu-icon").textContent = "☰";
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1155,3 +1155,81 @@
       font-weight: 400;
       color: var(--text-sec);
     }
+    .tip-list a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .tip-list a:hover { text-decoration: underline; }
+
+    /* Reused trade-guide article (landing pages) */
+    .guide-body { font-size: 16px; color: var(--text-sec); line-height: 1.78; max-width: 800px; }
+    .guide-body p { margin-bottom: 16px; }
+    .guide-body p:last-child { margin-bottom: 0; }
+    .guide-body h2 {
+      font-family: var(--font-disp); font-weight: 800;
+      font-size: clamp(22px, 3vw, 32px);
+      text-transform: uppercase; letter-spacing: 0.4px;
+      color: var(--text-pri); line-height: 1.1;
+      margin: 40px 0 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .guide-body h2:first-child { margin-top: 0; }
+    .guide-body h3 {
+      font-family: var(--font-disp); font-weight: 700;
+      font-size: 20px; text-transform: uppercase; letter-spacing: 0.3px;
+      color: var(--text-pri); line-height: 1.15; margin: 26px 0 10px;
+    }
+    .guide-body strong { color: var(--text-pri); font-weight: 600; }
+    .guide-body a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .guide-body a:hover { text-decoration: underline; }
+    .guide-body ul, .guide-body ol {
+      margin: 0 0 18px 0; padding: 0; list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .guide-body ul li, .guide-body ol li {
+      display: flex; align-items: flex-start; gap: 10px;
+      color: var(--text-sec); line-height: 1.7;
+    }
+    .guide-body ul li::before { content: '▸'; color: var(--accent); font-size: 11px; margin-top: 4px; flex-shrink: 0; }
+    .guide-body ol { counter-reset: ol-counter; }
+    .guide-body ol li { counter-increment: ol-counter; }
+    .guide-body ol li::before {
+      content: counter(ol-counter) '.'; color: var(--accent);
+      font-family: var(--font-disp); font-weight: 700; font-size: 13px;
+      margin-top: 2px; flex-shrink: 0; min-width: 18px;
+    }
+    .guide-body figure { margin: 0 0 24px; }
+    .guide-body figure img { width: 100%; height: auto; border-radius: var(--r-lg); display: block; }
+    .guide-body figcaption {
+      font-size: 12px; color: var(--text-muted); text-align: center;
+      margin-top: 8px; font-style: italic; line-height: 1.5;
+    }
+    .guide-body .disclaimer {
+      font-size: 13px; color: var(--text-muted); font-style: italic;
+      border-top: 1px solid var(--border); padding-top: 20px; margin-top: 28px;
+    }
+    .callout {
+      background: rgba(245,158,11,0.07);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--r);
+      padding: 18px 22px; margin: 24px 0;
+    }
+    .callout p { margin-bottom: 0; color: var(--text-sec); }
+    .callout strong { color: var(--accent); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    .data-table th {
+      background: var(--bg-elevated); color: var(--text-muted);
+      font-family: var(--font-disp); font-weight: 700; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 11px 14px; border-bottom: 1px solid var(--border);
+      color: var(--text-sec); vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .data-table .row-label { font-weight: 600; color: var(--text-pri); }
+    .data-table .row-total td {
+      background: rgba(245,158,11,0.06); font-weight: 700;
+      color: var(--text-pri); border-top: 1px solid var(--border-hi);
+    }
+    .data-table .row-total .row-label { color: var(--accent); }

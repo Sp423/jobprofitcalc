@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HVAC Job Pricing Calculator | JobProfitCalc.com</title>
+  <meta name="description" content="Free HVAC job pricing calculator. Price service calls, installs, and refrigerant with labor, parts, overhead, and taxes — then see your real profit margin before you quote.">
+  <link rel="canonical" href="https://jobprofitcalc.com/hvac-job-pricing">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:site_name" content="JobProfitCalc">
+  <meta property="og:title" content="HVAC Job Pricing Calculator">
+  <meta property="og:description" content="Price HVAC service calls, installs, and refrigerant with the same job profit calculator — labor, parts, overhead, and taxes included.">
+  <meta property="og:url" content="https://jobprofitcalc.com/hvac-job-pricing">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://jobprofitcalc.com/images/hvac-technician-refrigerant-gauges.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HVAC Job Pricing Calculator">
+  <meta name="twitter:image" content="https://jobprofitcalc.com/images/hvac-technician-refrigerant-gauges.jpg">
+  <meta name="twitter:description" content="Free HVAC job pricing calculator — service calls, installs, and refrigerant, with your real profit margin.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HVAC Job Pricing Calculator",
+    "url": "https://jobprofitcalc.com/hvac-job-pricing",
+    "description": "Free HVAC job pricing calculator. Price service calls, installations, and refrigerant with labor, parts, overhead, drive time, and taxes.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "HVAC Technicians, HVAC Contractors"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobprofitcalc.com/"},
+      {"@type": "ListItem", "position": 2, "name": "HVAC Job Pricing", "item": "https://jobprofitcalc.com/hvac-job-pricing"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I price an HVAC job with this calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HVAC is preselected so labor, materials, overhead, and drive time start from typical HVAC defaults. Replace every field with the actual service call or install — parts, refrigerant, crew hours — and the tool returns a suggested charge, net profit, and margin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should an HVAC technician charge per hour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In most U.S. markets in 2026, experienced residential HVAC technicians should charge $95–$150 per hour for service labor. Commercial and specialty work supports the top of that range and above. Most HVAC service work is better priced on a flat-rate basis."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I price refrigerant after the R-410A phaseout?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Price refrigerant at a minimum of 2× your current wholesale cost per pound, with many contractors charging 2.5–3× given price volatility. Never pass refrigerant at cost. Enter the marked-up refrigerant total in the materials field so it is in the suggested charge."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this the same calculator as /calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This page embeds the same JobProfitCalc job profit calculator. The difference is HVAC-specific framing, HVAC defaults preselected, and the HVAC pricing guide on the same page."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYWHVVF5J0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VYWHVVF5J0');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7735208952918665"
+       crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+
+<body>
+<div class="page-wrap">
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="JobProfitCalc — home">
+        <div class="logo-mark" aria-hidden="true">JPC</div>
+        <span class="logo-name">Job<em>Profit</em>Calc</span>
+      </a>
+      <nav class="site-nav" aria-label="Site navigation">
+        <a href="/#how-to-price" class="hide-mobile">Pricing Guide</a>
+        <a href="/#tips" class="hide-mobile">Trade Tips</a>
+        <a href="/#faq" class="hide-mobile">FAQ</a>
+        <a href="/blog/" class="hide-mobile">Blog</a>
+        <a href="/calculator" class="nav-btn">Calculate Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-icon">☰</span></button>
+      </nav>
+    </div>
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="/#how-to-price">Pricing Guide</a>
+    <a href="/#tips">Trade Tips</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/blog/">Blog</a>
+    <a href="/calculator" class="mob-cta">Calculate Now</a>
+  </div>
+  </header>
+
+  <main role="main">
+
+    <section class="hero container no-print" aria-labelledby="page-h1">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="crumbs-sep" aria-hidden="true">/</span><span>HVAC Job Pricing</span>
+      </nav>
+      <div class="hero-badge" aria-label="Free HVAC tool">❄️ HVAC trade landing</div>
+      <h1 class="hero-title" id="page-h1">
+        HVAC Job <span class="hi">Pricing</span>
+      </h1>
+      <p class="hero-sub">
+        Price the HVAC job in front of you — service call, install, or recharge — with labor, parts, refrigerant, overhead, and taxes already in the number you quote.
+      </p>
+    </section>
+
+    <div class="container no-print">
+      <div class="ad-zone1-wrap">
+        <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+          <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" class="ad-header" width="728" height="90">
+        </a>
+        <p class="ad-label">Advertisement</p>
+      </div>
+    </div>
+
+    <!-- Calculator + Sidebar -->
+    <div class="container" id="calculator">
+      <div class="main-grid">
+
+        <!-- ── CALCULATOR COLUMN ── -->
+        <div class="calc-col">
+          <article class="calc-card" aria-label="Job profit calculator tool">
+
+            <div class="calc-top">
+              <div class="calc-icon" aria-hidden="true">🔧</div>
+              <div>
+                <h2>Job Profit Calculator</h2>
+                <p>Select your trade, fill in the job — results update instantly</p>
+              </div>
+            </div>
+
+            <div class="calc-body">
+
+              <!-- Trade Selector -->
+              <div class="trade-wrap">
+                <label for="tradeSelect">Select Your Trade</label>
+                <select id="tradeSelect" class="trade-select" aria-label="Select your trade to pre-populate default values">
+                  <option value="">— Choose a Trade —</option>
+                  <option value="plumber">🔧 Plumber</option>
+                  <option value="electrician">⚡ Electrician</option>
+                  <option value="hvac" selected>❄️ HVAC Technician</option>
+                  <option value="roofer">🏠 Roofer</option>
+                  <option value="painter_int">🖌️ Painter (Interior)</option>
+                  <option value="painter_ext">🖌️ Painter (Exterior)</option>
+                  <option value="landscaper">🌿 Landscaper</option>
+                  <option value="gc">🏗️ General Contractor</option>
+                  <option value="carpenter">🪚 Carpenter</option>
+                  <option value="flooring">🏡 Flooring Installer</option>
+                  <option value="concrete">🧱 Concrete / Masonry</option>
+                  <option value="drywall">🏢 Drywall Installer</option>
+                  <option value="handyman">🛠️ Handyman</option>
+                </select>
+              </div>
+
+              <!-- Job Info -->
+              <p class="field-section">Job Information</p>
+              <div class="igrid cols-1" style="margin-bottom:26px">
+                <div class="igroup">
+                  <label class="ilabel" for="jobLabel">Job Description / Label</label>
+                  <div class="ifield">
+                    <input type="text" id="jobLabel" value="HVAC Job" placeholder="e.g. Bathroom remodel, Panel upgrade…" aria-label="Job description label for your quote">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Labor -->
+              <p class="field-section">Labor</p>
+              <div class="igrid" style="margin-bottom:26px">
+                <div class="igroup">
+                  <label class="ilabel" for="hours">Estimated Hours</label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="hours" min="0" step="0.5" value="4" aria-label="Estimated hours to complete the job">
+                    <span class="isuf" aria-hidden="true">hrs</span>
+                  </div>
+                </div>
+                <div class="igroup">
+                  <label class="ilabel" for="workers">Number of Workers</label>
+                  <div class="ifield">
+                    <input type="number" id="workers" min="1" step="1" value="1" aria-label="Number of workers on this job">
+                  </div>
+                </div>
+                <div class="igroup ig-full">
+                  <label class="ilabel" for="laborRate">Hourly Labor Rate</label>
+                  <div class="ifield has-pre has-suf">
+                    <span class="ipre" aria-hidden="true">$</span>
+                    <input type="number" id="laborRate" min="0" step="1" value="75" aria-label="Hourly labor rate in dollars per hour">
+                    <span class="isuf" aria-hidden="true">/hr</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Materials -->
+              <p class="field-section">Materials</p>
+              <div class="igrid" style="margin-bottom:26px">
+                <div class="igroup">
+                  <label class="ilabel" for="materialCost">Material Cost</label>
+                  <div class="ifield has-pre">
+                    <span class="ipre" aria-hidden="true">$</span>
+                    <input type="number" id="materialCost" min="0" step="10" value="200" aria-label="Total material cost in dollars">
+                  </div>
+                </div>
+                <div class="igroup">
+                  <label class="ilabel" for="materialMarkup">Material Markup</label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="materialMarkup" min="0" max="200" step="1" value="20" aria-label="Material markup percentage">
+                    <span class="isuf" aria-hidden="true">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Overhead & Travel -->
+              <p class="field-section">Overhead &amp; Travel</p>
+              <div class="igrid" style="margin-bottom:26px">
+                <div class="igroup">
+                  <label class="ilabel" for="overhead">
+                    Overhead &amp; Burden
+                    <span class="tip" data-tip="Covers insurance, tools, truck depreciation, software, marketing, and admin time. Applied as a % of total labor + materials." aria-label="What is overhead and burden">?</span>
+                  </label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="overhead" min="0" max="100" step="1" value="15" aria-label="Overhead and burden percentage">
+                    <span class="isuf" aria-hidden="true">%</span>
+                  </div>
+                </div>
+                <div class="igroup">
+                  <label class="ilabel" for="driveTime">Drive Time</label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="driveTime" min="0" step="0.25" value="0.5" aria-label="Drive time in hours">
+                    <span class="isuf" aria-hidden="true">hrs</span>
+                  </div>
+                </div>
+                <div class="igroup ig-full">
+                  <label class="ilabel" for="fuelCost">Fuel / Travel Cost</label>
+                  <div class="ifield has-pre">
+                    <span class="ipre" aria-hidden="true">$</span>
+                    <input type="number" id="fuelCost" min="0" step="1" value="10" aria-label="Fuel and travel cost in dollars">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Profit & Taxes -->
+              <p class="field-section">Profit &amp; Taxes</p>
+              <div class="igrid cols-3" style="margin-bottom:8px">
+                <div class="igroup">
+                  <label class="ilabel" for="profitMargin">
+                    Desired Profit Margin
+                    <span class="tip tip-lg" data-tip="Markup vs margin&#10;&#10;Markup is added on top of your costs. Margin is what you keep as a percent of what you charge. They're not the same number.&#10;&#10;A 25% markup → 20% margin&#10;A 33% markup → 25% margin&#10;&#10;This field uses margin. Enter the percent of your final charge you want to keep as profit." aria-label="Markup vs margin explained">?</span>
+                  </label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="profitMargin" min="1" max="89" step="1" value="20" aria-label="Desired profit margin percentage">
+                    <span class="isuf" aria-hidden="true">%</span>
+                  </div>
+                </div>
+                <div class="igroup">
+                  <label class="ilabel" for="seTax">
+                    SE Tax Rate
+                    <span class="tip" data-tip="Self-employment tax is 15.3%: the full employer + employee share of Social Security (12.4%) and Medicare (2.9%). Sole proprietors pay both halves." aria-label="About self-employment tax">?</span>
+                  </label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="seTax" min="0" max="50" step="0.1" value="15.3" aria-label="Self-employment tax rate percentage">
+                    <span class="isuf" aria-hidden="true">%</span>
+                  </div>
+                </div>
+                <div class="igroup">
+                  <label class="ilabel" for="stateTax">
+                    State Income Tax
+                    <span class="tip" data-tip="Adjust for your state. TX, FL, WA = 0%. CA = 9.3%+. Enter your effective marginal state rate." aria-label="About state income tax rate">?</span>
+                  </label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="stateTax" min="0" max="20" step="0.1" value="5" aria-label="State income tax rate percentage">
+                    <span class="isuf" aria-hidden="true">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quote Settings (collapsed — used by Customer Quote / Customer PDF) -->
+              <div class="qs-accordion">
+                <button type="button" class="qs-acc-toggle" id="qsToggle" aria-expanded="false" aria-controls="qsPanel">
+                  <span>Quote Settings <span class="qs-acc-hint">— business info, payment terms, sales tax</span></span>
+                  <span class="bk-arrow" aria-hidden="true">▼</span>
+                </button>
+                <div class="qs-acc-panel" id="qsPanel">
+
+                  <p class="qs-section-lbl">Business Info</p>
+                  <div class="igrid cols-1" style="margin-bottom:10px">
+                    <div class="igroup">
+                      <label class="ilabel" for="bizName">Business Name</label>
+                      <div class="ifield">
+                        <input type="text" id="bizName" placeholder="e.g. Smith Plumbing LLC" aria-label="Business name for customer quote">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="igrid cols-2" style="margin-bottom:4px">
+                    <div class="igroup">
+                      <label class="ilabel" for="bizPhone">Phone</label>
+                      <div class="ifield">
+                        <input type="text" id="bizPhone" placeholder="(555) 555-5555" aria-label="Business phone">
+                      </div>
+                    </div>
+                    <div class="igroup">
+                      <label class="ilabel" for="bizEmail">Email</label>
+                      <div class="ifield">
+                        <input type="text" id="bizEmail" placeholder="you@example.com" aria-label="Business email">
+                      </div>
+                    </div>
+                  </div>
+                  <label class="qs-check-label" style="margin-bottom:16px">
+                    <input type="checkbox" id="includeBizInfo" checked>
+                    Include business info in customer quote
+                  </label>
+
+                  <div class="qs-divider"></div>
+
+                  <p class="qs-section-lbl">Quote Options</p>
+                  <div class="igrid cols-2" style="margin-bottom:12px">
+                    <div class="igroup">
+                      <label class="ilabel" for="paymentTerms">Payment Terms</label>
+                      <div class="ifield">
+                        <input type="text" id="paymentTerms" placeholder="e.g. 50% deposit due at start" aria-label="Payment terms">
+                      </div>
+                    </div>
+                    <label class="qs-inline-check" for="includeTerms">
+                      <input type="checkbox" id="includeTerms">
+                      Include in quote
+                    </label>
+                  </div>
+                  <div class="igrid cols-2" style="margin-bottom:12px">
+                    <div class="igroup">
+                      <label class="ilabel" for="quoteValid">Quote Valid (days)</label>
+                      <div class="ifield">
+                        <input type="number" id="quoteValid" min="1" max="365" step="1" value="30" aria-label="Days the quote remains valid">
+                      </div>
+                    </div>
+                    <label class="qs-inline-check" for="includeValid">
+                      <input type="checkbox" id="includeValid">
+                      Include in quote
+                    </label>
+                  </div>
+                  <div class="igrid cols-2" style="margin-bottom:4px">
+                    <div class="igroup">
+                      <label class="ilabel" for="salesTaxRate">Sales Tax on Materials (%)</label>
+                      <div class="ifield has-suf">
+                        <input type="number" id="salesTaxRate" min="0" max="20" step="0.1" value="0" aria-label="Sales tax rate applied to materials">
+                        <span class="isuf" aria-hidden="true">%</span>
+                      </div>
+                    </div>
+                    <label class="qs-inline-check" for="includeSalesTax">
+                      <input type="checkbox" id="includeSalesTax">
+                      Charge sales tax
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div><!-- /calc-body -->
+
+            <!-- Results Panel -->
+            <div class="results" id="resultsPanel" aria-live="polite" aria-label="Live calculation results" role="region">
+
+              <!-- Print-only header — hidden on screen, shown in @media print -->
+              <div class="print-header" aria-hidden="true">
+                <p class="print-header-title" id="printHeaderTitle"></p>
+                <p class="print-header-meta" id="printHeaderMeta"></p>
+              </div>
+
+              <div class="results-hdr">
+                <span class="results-hdr-label">Live Results</span>
+                <div class="money-badge warn" id="moneyBadge" aria-label="Profitability status">
+                  <span id="moneyText">⚡ CALCULATING</span>
+                </div>
+              </div>
+
+              <div class="price-block">
+                <p class="price-lbl">Suggested Charge to Customer</p>
+                <div class="price-num" id="suggestedPrice" aria-label="Suggested price to charge">$0.00</div>
+                <p class="price-note" id="priceNote">Enter your job details above</p>
+              </div>
+
+              <div class="metrics" role="region" aria-label="Key performance metrics">
+                <div class="metric">
+                  <div class="metric-lbl">Net Profit</div>
+                  <div class="metric-val c-white" id="netProfit" aria-label="Net profit">$0</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-lbl">Profit Margin</div>
+                  <div class="metric-val c-white" id="marginDisplay" aria-label="Profit margin percentage">0%</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-lbl">Effective $/hr</div>
+                  <div class="metric-val c-white" id="effRate" aria-label="Effective hourly rate after taxes">$0/hr</div>
+                </div>
+              </div>
+
+              <button class="bk-toggle no-print" id="bkToggle" aria-expanded="false" aria-controls="bkBody">
+                <span id="bkToggleLabel">View Full Cost Breakdown</span>
+                <span class="bk-arrow" aria-hidden="true">▼</span>
+              </button>
+              <div class="bk-body" id="bkBody" role="region" aria-label="Cost breakdown">
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Total Labor Cost</span>
+                  <span class="bk-rowval" id="bd-labor">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Materials (incl. markup)</span>
+                  <span class="bk-rowval" id="bd-mat">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Overhead &amp; Burden</span>
+                  <span class="bk-rowval" id="bd-oh">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Travel Cost</span>
+                  <span class="bk-rowval" id="bd-travel">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Self-Employment Tax</span>
+                  <span class="bk-rowval" id="bd-se">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">State Income Tax</span>
+                  <span class="bk-rowval" id="bd-state">$0.00</span>
+                </div>
+                <div class="bk-total">
+                  <span class="bk-totallbl">Total Cost (before profit)</span>
+                  <span class="bk-totalval" id="bd-total">$0.00</span>
+                </div>
+              </div>
+
+            </div><!-- /results -->
+
+            <!-- Customer PDF Panel — hidden on screen, shown via body.print-customer in @media print -->
+            <div class="results cust-print-panel" id="custPrintPanel" aria-hidden="true">
+              <div class="print-header">
+                <p class="print-header-title" id="custPrintTitle"></p>
+                <p class="print-header-meta" id="custPrintMeta"></p>
+              </div>
+              <div class="cust-biz-block" id="custBizBlock">
+                <p class="cust-biz-name" id="custBizName"></p>
+                <p class="cust-biz-contact" id="custBizContact"></p>
+              </div>
+              <div class="results-hdr">
+                <span class="results-hdr-label">Customer Quote</span>
+                <div class="money-badge yes" aria-label="Customer quote ready">
+                  <span>✓ QUOTED</span>
+                </div>
+              </div>
+              <div class="price-block">
+                <p class="price-lbl">Total Due</p>
+                <div class="price-num" id="custTotalDisplay">$0.00</div>
+                <p class="price-note" id="custValidNote"></p>
+              </div>
+              <div id="custLineItems"></div>
+              <div id="custFooterRows"></div>
+            </div>
+            <!-- End Customer PDF Panel -->
+
+            <div class="calc-actions no-print">
+              <div class="action-group">
+                <p class="action-group-lbl">For You</p>
+                <div class="action-btns">
+                  <button class="btn btn-primary" id="copyBtn"
+                    data-tip="Copies your full internal job breakdown to your clipboard — labor rate, overhead, markup, taxes, and profit margin. For your records, not for customers."
+                    aria-label="Copy internal job quote to clipboard">📋 Copy Internal Quote</button>
+                  <button class="btn btn-ghost" id="pdfBtn"
+                    data-tip="Saves a full internal job summary as a PDF — labor rate, overhead, markup, taxes, and profit margin included. For your records only, not for customers."
+                    aria-label="Save internal results as PDF">🖨 Internal PDF</button>
+                </div>
+              </div>
+              <div class="action-group">
+                <p class="action-group-lbl">For Your Customer</p>
+                <div class="action-btns">
+                  <button class="btn btn-ghost" id="custBtn"
+                    data-tip="Copies a clean customer quote to your clipboard. Paste it directly into a text, email, or invoice app. No internal pricing details included."
+                    aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
+                  <button class="btn btn-ghost" id="custPdfBtn"
+                    data-tip="Saves a printable customer quote as a PDF. Shows Labor, Materials, Travel, and Total Due — no internal pricing details. Includes your business info and any options set in Quote Settings."
+                    aria-label="Save customer quote as PDF">📄 Customer PDF</button>
+                </div>
+              </div>
+              <div class="action-group action-group-reset">
+                <p class="action-group-lbl">Start Over</p>
+                <div class="action-btns">
+                  <button class="btn btn-ghost" id="resetBtn"
+                    data-tip="Resets all fields to the defaults for your selected trade. Pick a trade first for best results."
+                    aria-label="Reset calculator to trade defaults">↺ Reset</button>
+                </div>
+              </div>
+            </div>
+
+          </article>
+        </div><!-- /calc-col -->
+
+        <!-- ── SIDEBAR COLUMN ── -->
+        <aside class="sidebar-col" aria-label="Sidebar information">
+          <div class="sidebar-sticky">
+
+            <!-- AD ZONE 2: Sidebar Medium Rectangle -->
+            <div class="sidebar-ad-wrap">
+              <p class="ad-label">Advertisement</p>
+              <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+                <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" class="ad-sidebar" width="300" height="250" loading="lazy">
+              </a>
+            </div>
+            <!-- END AD ZONE 2 -->
+
+            <div class="sidebar-card">
+              <h3>HVAC Pricing Tips</h3>
+              <ul>
+                <li>Reprice refrigerant at current market rates — last year's number can kill a quote</li>
+                <li>Mark up equipment 30–50%; warranty handling is not free</li>
+                <li>Flat-rate service work rewards speed; T&amp;M punishes it</li>
+                <li>Warranty callbacks are unpaid labor unless your written policy says otherwise</li>
+                <li>SE tax is 15.3% — price it in or you're giving it away</li>
+                <li>Use Copy Quote to paste a customer total into a text or invoice</li>
+              </ul>
+            </div>
+
+          </div>
+        </aside>
+
+      </div><!-- /main-grid -->
+    </div><!-- /container -->
+
+    <section class="content-sec no-print" id="hvac-intro" aria-labelledby="intro-h2">
+      <div class="container">
+        <p class="sec-eyebrow">For HVAC Techs</p>
+        <h2 class="sec-h2" id="intro-h2">A Calculator Built Around the HVAC Bid</h2>
+        <div class="prose">
+          <p>HVAC is already selected so you are not starting from a generic trade default. Swap the hours, crew, parts, and refrigerant for this call or this install. The math is the same <a href="/calculator">job profit calculator</a> used across JobProfitCalc — suggested charge, net profit, margin, and effective hourly rate after overhead and taxes.</p>
+          <p>Use it to build a flat rate, check an install margin, or see what a recharge actually leaves you after SE tax. The HVAC pricing guide below is the same material as our written article, <a href="/blog/how-to-price-hvac-job.html">How to Price an HVAC Job</a>, kept here so you can price and read on one page.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-sec no-print" id="hvac-guide" aria-labelledby="guide-h2">
+      <div class="container">
+        <p class="sec-eyebrow">HVAC Pricing Guide</p>
+        <h2 class="sec-h2" id="guide-h2">Service Calls, Installs, and Refrigerant</h2>
+        <div class="guide-body">
+<figure>
+              <img src="/images/hvac-technician-refrigerant-gauges.jpg" alt="HVAC technician checking refrigerant pressure gauges on outdoor condensing units" width="1280" height="640" fetchpriority="high">
+              <figcaption>Checking refrigerant pressures — a routine service call that should always be priced to cover your time, expertise, and materials.</figcaption>
+            </figure>
+
+            <p>HVAC is one of the highest-margin trades in the country. Emergency service calls, skilled diagnostic work, high-ticket equipment, and refrigerant handling all support premium pricing that most other trades can't command. Yet a surprising number of HVAC technicians and small HVAC businesses leave significant money on the table — not because the market won't support better pricing, but because their pricing structure was built on habit and guesswork rather than actual job cost math.</p>
+
+            <p>This guide covers the full HVAC pricing picture: how to structure service calls, how to price common repairs using flat rate or time and materials, what's happening with refrigerant costs in 2026 and how to charge for it correctly, how to price equipment installations profitably, and what your warranty callback obligations actually are.</p>
+
+            <h2 id="three-types">The Three Types of HVAC Work — And Why They Price Differently</h2>
+
+            <p>Before getting into specific numbers, the pricing structure for HVAC work breaks cleanly into three categories that each carry different cost profiles, risk levels, and margin opportunities.</p>
+
+            <p><strong>Service and repair calls:</strong> Diagnostic work, component replacements, minor repairs. Typically short-duration jobs with high labor-to-material ratios. Service calls reward technical expertise and speed. This is where HVAC businesses generate the highest <a href="/blog/contractor-profit-margins-by-trade.html">margins</a> — often 25–40% net on well-priced service work — because urgency pricing applies and customers are not shopping around when their system is down.</p>
+
+            <p><strong>System installations and replacements:</strong> New equipment installs, full system replacements, mini-splits. Higher ticket values but more material-intensive and more competitive. Equipment costs represent a large percentage of the job total, which compresses margin percentage even on correctly priced jobs. Net margins of 15–22% are typical on installation work.</p>
+
+            <p><strong>Maintenance and preventive contracts:</strong> Seasonal tune-ups, filter replacements, inspections. Lower per-visit revenue but predictable, recurring income that smooths out the seasonal swings that plague HVAC businesses.</p>
+
+            <p>Most HVAC businesses run all three simultaneously. Pricing each correctly requires understanding what it actually costs to deliver each type of work — which is a job cost calculation, not an industry average lookup.</p>
+
+            <h2 id="service-call">How to Price an HVAC Service Call</h2>
+
+            <p>A service call has two components that must be priced separately even if they're presented to the customer as a single visit:</p>
+
+            <p><strong>The diagnostic/trip charge:</strong> The fee for showing up, diagnosing the problem, and providing a repair recommendation. This covers your travel time, fuel, truck cost, and the skilled diagnostic labor before any repair work begins.</p>
+
+            <p>Standard residential HVAC service call fees in 2026 range from <strong>$85 to $175.</strong> Commercial service calls typically run <strong>$125 to $250.</strong> Emergency or after-hours calls — nights, weekends, holidays — typically carry a premium of 25–50% above standard rates, often presented as a flat surcharge: <em>"After-hours service call fee: $225."</em></p>
+
+            <p>If the customer proceeds with the repair, many HVAC businesses credit some or all of the diagnostic fee toward the repair total. This is a customer-friendly policy that reduces friction at the decision point. If the customer declines the repair, the diagnostic fee stands — you've provided skilled labor and expertise regardless of what they decide to do with the information.</p>
+
+            <p><strong>The repair labor charge:</strong> Time and expertise applied to actually fixing the problem, beyond the diagnostic. This is billed either at your hourly rate or as a flat rate per repair type. Flat rate pricing is the industry standard for HVAC repair work and is covered in the next section.</p>
+
+            <p><strong>Your HVAC labor rate in 2026:</strong> Skilled HVAC technicians in most U.S. markets should be charging <strong>$95 to $150 per hour</strong> for repair labor. Highly specialized work — commercial refrigeration, complex controls, VRF systems — supports rates at or above the top of that range. Markets where HVAC technicians are in short supply (most markets) support the upper half of the range for any experienced tech.</p>
+
+            <p>If you're currently charging below $95/hour for residential HVAC service labor, run your hourly rate calculation using the method in our guide on <a href="/blog/how-to-calculate-contractor-hourly-rate.html">how to calculate your contractor hourly rate</a> before your next service call. The number may surprise you.</p>
+
+            <h2 id="flat-rate-vs-tm">Flat Rate vs. Time and Materials for HVAC Repairs</h2>
+
+            <p>This is the pricing structure decision with the biggest impact on your profitability per service call, and it's worth understanding both options clearly.</p>
+
+            <h3>Time and Materials (T&amp;M)</h3>
+
+            <p>You charge your hourly labor rate for actual time spent plus your <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">marked-up material costs</a>. Simple in concept. In practice, T&amp;M has two significant problems for HVAC service work:</p>
+
+            <p>First, experienced technicians are penalized for efficiency. A tech who can replace a capacitor in 20 minutes earns less on T&amp;M than one who takes 45 minutes. Expertise and speed — your most valuable assets — reduce your revenue rather than rewarding it.</p>
+
+            <p>Second, customers sometimes resist paying for time they didn't observe. A homeowner who saw you in the driveway for 90 minutes but watched you actually work for 40 of those minutes will sometimes dispute the labor charge on the difference. Flat rate eliminates this entirely.</p>
+
+            <h3>Flat Rate Pricing</h3>
+
+            <p>You charge a predetermined price per repair type regardless of how long it takes. Capacitor replacement: $285. Contactor replacement: $320. Thermostat replacement (standard): $295. Blower motor replacement: $585–$750 depending on motor type.</p>
+
+            <p>The flat rate includes parts and labor bundled. The customer knows the cost before you begin. You have no incentive to stretch the job — you're paid the same either way. Your efficiency directly improves your effective hourly rate.</p>
+
+            <p><strong>Why flat rate wins for HVAC service work:</strong></p>
+
+            <ul>
+              <li>Rewards technician efficiency and expertise</li>
+              <li>Eliminates per-minute labor disputes</li>
+              <li>Gives the customer a clear price before work begins</li>
+              <li>Supports higher effective hourly rates than T&amp;M billing</li>
+              <li>Simplifies invoicing</li>
+            </ul>
+
+            <p><strong>Sample flat rate pricing for common HVAC repairs in 2026:</strong></p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Repair Type</th>
+                  <th>Flat Rate Range</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-label">Capacitor replacement (run or start)</td>
+                  <td>$250 – $425</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Contactor replacement</td>
+                  <td>$280 – $395</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Thermostat replacement (non-smart)</td>
+                  <td>$265 – $395</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Smart thermostat (customer-supplied)</td>
+                  <td>$175 – $250 (labor only)</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Smart thermostat (contractor-supplied)</td>
+                  <td>$325 – $550</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Blower motor replacement</td>
+                  <td>$550 – $850</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Inducer motor replacement</td>
+                  <td>$600 – $950</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Condenser fan motor replacement</td>
+                  <td>$450 – $750</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Flame sensor cleaning / replacement</td>
+                  <td>$150 – $275</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Igniter replacement</td>
+                  <td>$250 – $375</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Control board replacement</td>
+                  <td>$650 – $1,100+</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>These ranges reflect parts plus labor on flat-rate billing. Your actual flat rate should be built from your specific parts cost, your overhead, and your target margin — not from the benchmarks above, which are reference points rather than your numbers.</p>
+
+            <div class="callout">
+              <p><strong>Build your own flat rates:</strong> The <a href="#calculator">Job Profit Calculator</a> can help — enter the parts cost as materials, your estimated time as labor, and set your margin target to see what price produces your desired profit on each repair type.</p>
+            </div>
+
+            <h2 id="refrigerant">Refrigerant Pricing in 2026 — The R-410A Phaseout Impact</h2>
+
+            <p>This is the issue every HVAC business needs to price correctly in 2026, because the refrigerant landscape has shifted significantly and many contractors are still pricing refrigerant the way they did three years ago.</p>
+
+            <h3>What Happened to R-410A</h3>
+
+            <p>The EPA's AIM Act mandated the phasedown of high-GWP refrigerants including R-410A. As of January 1, 2025, new HVAC equipment manufactured in the U.S. can no longer use R-410A. New residential systems now use lower-GWP alternatives — primarily <strong>R-454B</strong> (sold under names like Puron Advance) and <strong>R-32</strong>, with R-466A emerging for specific applications.</p>
+
+            <p><strong>R-410A is not banned for service use.</strong> Existing systems running R-410A can still be serviced and recharged with R-410A. However, the supply of new R-410A is restricted, and prices have increased substantially as remaining inventory is drawn down and import allowances are limited.</p>
+
+            <h3>How to Price Refrigerant Correctly in 2026</h3>
+
+            <p>Refrigerant should never be passed to the customer at your cost. It is a material with carrying cost, handling risk, handling certification requirements, and now significant price volatility. Treat it like any other specialty material and apply an appropriate markup.</p>
+
+            <p><strong>Current pricing reality for R-410A:</strong> Prices vary significantly by region and supplier, but R-410A wholesale costs in many markets have risen from pre-phaseout levels of $35–$55/lb to $65–$120+/lb or higher depending on supply conditions in your area. Monitor your supplier pricing actively — this is not a set-and-forget line item right now.</p>
+
+            <p><strong>How to charge for R-410A in 2026:</strong></p>
+
+            <p>Structure your refrigerant charge in one of two ways:</p>
+
+            <p><em>Option 1 — Per-pound pricing:</em> Charge a flat per-pound rate that covers your wholesale cost plus a significant markup to account for price volatility, recovery, handling, and the replacement cost if a cylinder is damaged or stolen. A minimum of <strong>2× your current wholesale cost per pound</strong> is a reasonable starting floor, with many contractors charging 2.5–3× given current volatility.</p>
+
+            <p><em>Option 2 — Refrigerant line item at market rate:</em> Present refrigerant as a separate line item priced at "current market rate" rather than a fixed per-pound price. This is particularly appropriate when your supplier cost is fluctuating monthly. State in your <a href="/blog/how-to-write-contractor-estimate.html">estimate</a>: <em>"Refrigerant charged at current market rate at time of service."</em></p>
+
+            <p><strong>For new R-454B and R-32 systems:</strong> Apply the same markup discipline. These refrigerants are not yet commodity-priced and availability constraints exist in many markets. Don't price new refrigerants at old R-410A rates.</p>
+
+            <div class="callout">
+              <p><strong>The leak finding rule:</strong> Before adding refrigerant to any system, find and repair the leak. This is both an EPA requirement and sound business practice. A recharge without leak repair is a temporary fix that will bring the customer back — but potentially with a dispute about why it needed recharging again so soon. Price the leak search and repair separately from the refrigerant charge.</p>
+            </div>
+
+            <h2 id="installation">How to Price an HVAC Installation</h2>
+
+            <p>Equipment installations — full system replacements, new installs, mini-splits — are higher-ticket jobs with a different cost and pricing structure than service work.</p>
+
+            <h3>The Components of an HVAC Installation Price</h3>
+
+            <p><strong>Equipment cost with markup:</strong> The unit itself — air handler, condenser, coil, furnace, heat pump, or mini-split — is your largest cost line. <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">Mark up equipment</a> 20–40% above your wholesale cost. The exact markup depends on the equipment tier (entry-level, mid-grade, premium) and competitive pressure in your market.</p>
+
+            <p>Do not pass equipment at cost. Equipment sourcing, storage, delivery logistics, warranty handling, and the risk of damaged or defective units are all real costs that the markup covers. A contractor who passes equipment at wholesale is essentially providing free logistics and warranty services.</p>
+
+            <p><strong>Installation labor:</strong> Priced by system type and complexity. Rough benchmarks for residential installation labor in 2026:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Job Type</th>
+                  <th>Labor Hours (Typical)</th>
+                  <th>Labor Cost Range</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-label">Split system condenser swap (like-for-like)</td>
+                  <td>3 – 5 hrs</td>
+                  <td>$375 – $750</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Air handler / coil replacement</td>
+                  <td>3 – 6 hrs</td>
+                  <td>$375 – $900</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Full split system replacement (AC + coil)</td>
+                  <td>6 – 10 hrs</td>
+                  <td>$750 – $1,500</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Gas furnace replacement</td>
+                  <td>4 – 8 hrs</td>
+                  <td>$500 – $1,200</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Full system replacement (AC + furnace)</td>
+                  <td>8 – 14 hrs</td>
+                  <td>$1,000 – $2,100</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Mini-split single zone install</td>
+                  <td>4 – 8 hrs</td>
+                  <td>$500 – $1,200</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Mini-split multi-zone (per additional zone)</td>
+                  <td>3 – 5 hrs additional</td>
+                  <td>$375 – $750 each</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>These are labor estimates only — your actual billable labor depends on site conditions, access difficulty, ductwork modifications, and crew size.</p>
+
+            <p><strong>Associated materials and supplies:</strong> Line sets, disconnect boxes, pad or bracket, drain lines, flue pipe, electrical connections, refrigerant for initial charge, filter, thermostat (if included). These should be itemized and marked up 20–30%.</p>
+
+            <p><strong>Permit and inspection fees:</strong> Where required, permits are typically passed through to the customer at cost — or with a modest handling fee for your time administering the permit process. Never absorb permit costs. They are a job cost that belongs on the customer's invoice.</p>
+
+            <p><strong>Disposal and haul-off:</strong> Old equipment removal and refrigerant recovery require labor, a recovery cylinder, and proper disposal. This is a separate billable line item, not something to absorb into the base installation price. Standard disposal charges: $75–$175 for a split system, more for larger commercial equipment.</p>
+
+            <h3>Putting the Installation Price Together</h3>
+
+            <p>A full residential split system replacement (4-ton AC + coil, mid-grade equipment) in a typical market in 2026 might look like this:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Line Item</th>
+                  <th>Your Cost</th>
+                  <th>Billable Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-label">Condenser unit (4-ton, mid-grade)</td>
+                  <td>$1,800</td>
+                  <td>$2,700 (50% markup)</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Air handler / coil</td>
+                  <td>$900</td>
+                  <td>$1,350 (50% markup)</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Installation labor (10 hrs × $110)</td>
+                  <td>$1,100</td>
+                  <td>$1,100</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Refrigerant (initial charge, 8 lbs R-454B)</td>
+                  <td>$240</td>
+                  <td>$480 (2× markup)</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Line set, materials, supplies</td>
+                  <td>$180</td>
+                  <td>$270 (50% markup)</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Disposal and haul-off</td>
+                  <td>—</td>
+                  <td>$125</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Permit</td>
+                  <td>$150</td>
+                  <td>$200 (+ handling)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="row-total">
+                  <td class="row-label">Total</td>
+                  <td><strong>$4,370 cost</strong></td>
+                  <td><strong>$6,225 billable (~30% net margin)</strong></td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <p>This is a legitimate range for a well-priced installation. If you're pricing the same job significantly below this, you're almost certainly underselling equipment or underpricing labor. Run the numbers through the <a href="#calculator">Job Profit Calculator</a> to check your margin before sending the estimate.</p>
+
+            <h2 id="parts-markup">Markup on HVAC Parts and Equipment</h2>
+
+            <p>Parts and equipment markup is where HVAC businesses consistently leave money on the table. The common mistake is treating markup as fixed across all materials rather than scaling it to match part type, availability, and the effort involved in sourcing and handling it.</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Markup Range</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-label">Major equipment (units, air handlers)</td>
+                  <td>30% – 50%</td>
+                  <td>Higher on premium tiers</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Replacement motors</td>
+                  <td>50% – 80%</td>
+                  <td>Moderate availability risk</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Electronic components (boards, controls)</td>
+                  <td>75% – 100%+</td>
+                  <td>Higher risk, diagnostic skill required</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Capacitors, contactors, relays</td>
+                  <td>100% – 200%+</td>
+                  <td>Small cost, high convenience value</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Thermostats</td>
+                  <td>50% – 100%</td>
+                  <td>Depends on brand and tier</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Refrigerant</td>
+                  <td>100% – 200%+ of cost</td>
+                  <td>Price volatility justifies premium</td>
+                </tr>
+                <tr>
+                  <td class="row-label">Filters, UV bulbs, consumables</td>
+                  <td>75% – 150%</td>
+                  <td>Convenience + carrying cost</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Small, inexpensive parts warrant the highest percentage markup precisely because the absolute dollar amount is still modest. A capacitor that costs you $12 wholesale and is billed at $55 is a 358% markup in percentage terms — but $55 for a part that solves the customer's immediate problem is completely reasonable and not one most customers will contest.</p>
+
+            <h2 id="warranty">Warranty Callbacks: What You're Obligated to Do (And What You're Not)</h2>
+
+            <p>This is a topic HVAC techs and business owners get wrong in both directions — either giving away too much free labor out of misplaced obligation, or damaging customer relationships by refusing to stand behind legitimate work.</p>
+
+            <p><strong>Your actual legal obligations are limited.</strong> Unless your written contract or written warranty states specific callback terms, you are generally not legally required to return free of charge for any issue that arises after a job is complete. Your professional license requirements may impose some minimum standard of workmanship, but they do not typically mandate free callbacks.</p>
+
+            <p><strong>Best practice — the 30-day same-issue rule:</strong> Most HVAC businesses establish a written warranty covering the specific work performed: <em>"Labor warranted for 30 days on repairs. If the same component fails within 30 days of repair, we will return and repair at no additional labor charge."</em></p>
+
+            <p>This policy is professional, customer-friendly, and bounded. It says: we stand behind the specific repair we made. It does not say: we'll return free of charge for any issue at any time.</p>
+
+            <p><strong>What is not covered by a reasonable callback policy:</strong></p>
+
+            <ul>
+              <li>A different failure in the same system after repair of an unrelated component</li>
+              <li>A system that has a new problem caused by age, use, or external factors</li>
+              <li>Work performed at the customer's direction against your recommendation</li>
+              <li>Refrigerant loss from a leak that was not repaired (if customer declined leak repair at time of service)</li>
+            </ul>
+
+            <p><strong>When a manufacturer warranty applies:</strong> Equipment manufacturers typically warrant parts for 5–10 years on registered equipment. Parts replacement may be covered. Labor typically is not — unless you offer an extended labor warranty as a service. Be clear with customers about the distinction between parts warranty (manufacturer's responsibility) and labor warranty (yours).</p>
+
+            <p>Put your warranty policy in writing on every invoice and <a href="/blog/how-to-write-contractor-estimate.html">estimate</a>. Verbal warranty commitments are unenforceable and unlimited in scope. A written warranty is professional, bounded, and protects both sides.</p>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <h3>How much should an HVAC technician charge per hour?</h3>
+            <p>In most U.S. markets in 2026, experienced residential HVAC technicians should charge $95–$150 per hour for service labor. Commercial and specialty work supports the top of that range and above. Most HVAC service work is better priced on a flat-rate basis — where your effective hourly rate can exceed your stated rate when jobs run efficiently.</p>
+
+            <h3>How do I price refrigerant now that R-410A costs have increased?</h3>
+            <p>Price refrigerant at a minimum of 2× your current wholesale cost per pound, with many contractors charging 2.5–3× given current price volatility and supply uncertainty. Never pass refrigerant at cost. Price volatility, handling requirements, EPA certification requirements, and replacement cost all justify a significant markup. Consider presenting refrigerant as a separate line item at "current market rate" rather than a fixed price, to protect you when your wholesale cost changes.</p>
+
+            <h3>What's a fair markup on HVAC equipment and parts?</h3>
+            <p>Major equipment (condensers, air handlers, furnaces): 30–50%. Replacement components (motors, controls, boards): 50–100%+. Small parts (capacitors, contactors): 100–200%+. Refrigerant: 100–200%+ of cost. The markup covers not just profit but also parts sourcing effort, storage, warranty handling, and the risk of callbacks on installed components.</p>
+
+            <h3>Should I use flat rate or time and materials for HVAC service?</h3>
+            <p>Flat rate is the stronger choice for most HVAC service work. It rewards technician efficiency, eliminates per-minute labor disputes, gives customers a clear price upfront, and typically produces higher effective hourly rates than T&amp;M billing. Time and materials is appropriate for diagnostic work where the scope is unknown before investigation begins — present it as a diagnostic fee, then transition to flat rate once the repair is identified.</p>
+
+            <h3>How should I price a warranty callback — am I obligated to do it free?</h3>
+            <p>Not unless your written warranty says so. Establish a written 30-day same-issue labor warranty on repairs and state it on every invoice. This covers legitimate callbacks on your work without creating an open-ended obligation for unrelated failures. Stand behind what you did. Don't absorb what you didn't.</p>
+
+            <h3>How does the R-410A phaseout affect pricing on new installations?</h3>
+            <p>New equipment using R-454B, R-32, or other low-GWP refrigerants may carry slightly different equipment costs than equivalent R-410A systems. Some new refrigerant types require updated tooling and handling procedures. Factor both into your installation pricing. Do not price new refrigerant types at old R-410A rates.</p>
+
+            <h2 id="bottom-line">The Bottom Line</h2>
+
+            <p>HVAC is a premium trade with premium pricing potential — but only if the pricing is built on actual job costs rather than what the last tech charged or what the customer expects. Service calls should carry a diagnostic fee plus flat-rate repair pricing. Refrigerant should be marked up significantly and priced at current market conditions, not 2022 rates. Equipment should be marked up 30–50%. Warranty obligations should be defined in writing before the job begins.</p>
+
+            <p>Before your next HVAC quote, run the job numbers through the <a href="#calculator">Job Profit Calculator</a>. Enter your labor, parts, equipment, and refrigerant costs — and your target margin. The calculator tells you what to charge the customer to hit that margin, not just to cover your costs.</p>
+
+            <p>That number is the one that goes on the estimate.</p>
+
+            <p class="disclaimer">Refrigerant pricing, EPA regulations, and equipment availability change frequently. Verify current regulatory requirements and pricing with your suppliers and the EPA's AIM Act guidance. Consult a licensed HVAC professional for trade-specific compliance questions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-sec no-print" id="guides" aria-labelledby="more-h2">
+      <div class="container">
+        <p class="sec-eyebrow">Keep Learning</p>
+        <h2 class="sec-h2" id="more-h2">More HVAC and Pricing Guides</h2>
+        <div class="guide-list">
+          <a href="/blog/how-to-price-hvac-job.html">How to price an HVAC job<span>The original long-form guide — service calls, installs, and refrigerant.</span></a>
+          <a href="/calculator">Job profit calculator<span>Same tool, any trade — plumber, electrician, HVAC, and more.</span></a>
+          <a href="/blog/contractor-profit-margins-by-trade.html">Contractor profit margins by trade<span>Where HVAC margins typically land versus other trades.</span></a>
+          <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">How to mark up materials<span>Equipment, parts, and refrigerant markup without guessing.</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo" aria-label="JobProfitCalc home">
+            <div class="logo-mark" aria-hidden="true">JPC</div>
+            <span class="logo-name">Job<em>Profit</em>Calc</span>
+          </a>
+          <p>A free pricing tool for trade professionals who want to know exactly what they're earning on every job.</p>
+        </div>
+        <nav aria-label="Footer legal links">
+          <p class="footer-col-title">Legal</p>
+          <div class="footer-links">
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Use</a>
+          </div>
+        </nav>
+        <nav aria-label="Footer site links">
+          <p class="footer-col-title">Site</p>
+          <div class="footer-links">
+            <a href="/calculator">Calculator</a>
+            <a href="/hvac-job-pricing">HVAC Pricing</a>
+            <a href="/#how-to-price">Pricing Guide</a>
+            <a href="/blog/">Blog</a>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 JobProfitCalc.com. All rights reserved.</p>
+        <p class="footer-disc">Results are estimates for educational purposes only. Consult a licensed tax professional for advice specific to your situation.</p>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<!-- Sticky results mini-bar -->
+<div class="sticky-results no-print" id="stickyResults" aria-hidden="true">
+  <button type="button" class="sticky-results-inner" id="stickyResultsBtn" aria-label="Jump to full results">
+    <span class="sr-cell">
+      <span class="sr-lbl">Charge</span>
+      <span class="sr-price" id="srPrice">$0.00</span>
+    </span>
+    <span class="sr-cell">
+      <span class="sr-lbl">Margin</span>
+      <span class="sr-val" id="srMargin">0%</span>
+    </span>
+    <span class="sr-cell">
+      <span class="sr-lbl">Profit</span>
+      <span class="sr-val" id="srProfit">$0</span>
+    </span>
+    <span class="sr-go" aria-hidden="true">View results ↓</span>
+  </button>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" role="alert" aria-live="assertive"></div>
+
+<script src="/js/calculator.js"></script>
+<script src="/js/site-ui.js"></script>
+<script>
+(function () {
+  var trade = document.getElementById('tradeSelect');
+  if (!trade || trade.value !== 'hvac') return;
+  trade.dispatchEvent(new Event('change'));
+})();
+</script>
+</body>
+</html>

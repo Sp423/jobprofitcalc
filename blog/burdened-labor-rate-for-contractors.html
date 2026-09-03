@@ -64,12 +64,12 @@
       {
         "@type": "Question",
         "name": "What if I have no employees?",
-        "acceptedAnswer": { "@type": "Answer", "text": "If you have no W-2 payroll, you may not need this stack. You still cannot treat your own time as $0. Price your hour from the charge-out hourly rate method. If you run payroll for yourself, burden those hours the same way you would a crew member." }
+        "acceptedAnswer": { "@type": "Answer", "text": "If you have no W-2 payroll, you may not need an employee payroll burden calculation. Your own time still has a value and cannot go into a quote at zero. Build what you charge for that time with the charge-out hourly rate method. If your company runs payroll for you, include the related employer costs just as you would for any other person on payroll." }
       },
       {
         "@type": "Question",
         "name": "The workers' comp audit changed my premium after the job closed. Do I go back and reprice old work?",
-        "acceptedAnswer": { "@type": "Answer", "text": "You cannot reprice a closed ticket. You can stop using last year's premium on next month's quotes. The audit is a trailing adjustment on payroll you already paid. The forward-looking rate is the one that belongs in the next labor line." }
+        "acceptedAnswer": { "@type": "Answer", "text": "A closed job usually stays closed. The audit tells you that the rate used on earlier quotes did not cover the final premium. Update the workers' comp amount in your burdened rate for new work, and account for any audit balance in your current books rather than pretending the old rate is still accurate." }
       }
     ]
   }
@@ -272,7 +272,7 @@
             <div class="article-meta">
               <span>September 3, 2026</span>
               <span class="article-meta-sep">·</span>
-              <span>6 min read</span>
+              <span>9 min read</span>
               <span class="article-meta-sep">·</span>
               <span>JobProfitCalc.com</span>
             </div>
@@ -282,45 +282,65 @@
 
             <figure>
               <img src="/images/burdened-labor-rate-for-contractors.jpg" alt="Contractor in a hi-vis orange vest comparing a crew wage to the fully loaded hourly cost after payroll tax, workers' comp, and benefits" width="1280" height="640" class="post-thumb" fetchpriority="high">
-              <figcaption>What you pay a crew member is the short column. The tall one is that same hour after payroll tax, workers' compensation, and benefits, the cost that belongs on the ticket.</figcaption>
+              <figcaption>Your payroll cost is taller than the wage once employer taxes, workers' compensation, and benefits are included. That full cost belongs in the labor line.</figcaption>
             </figure>
 
-            <p>The Maple Street office was supposed to be the clean one. Two days, one guy on the tools, a check that cleared before the dumpster left the lot. Marco ran it at $28 an hour (an example wage, not a claim about pay in your market), the owner priced the labor line at that same $28, and the job felt fine the Friday they walked out. Three weeks later the quarterly payroll tax deposit came due, and the workers' comp carrier sent a mid-year premium adjustment after the payroll report. The owner sat down with Marco's timesheets and the job folder and watched a win turn into a short ticket.</p>
+            <p>A burdened labor rate is the full cost of one paid labor hour, including wages and payroll burden. It is a cost, not what you charge the customer.</p>
 
-            <p>Most owners do not build a loaded rate until a week like that one. Quoting off the wage is the expensive habit, and it survives because the bill arrives weeks after the job felt fine.</p>
+            <p>Quoting off the wage costs money. Owners keep doing it because the wage is visible right now: it is on the pay stub, in the payroll screen, and usually in your head. The rest shows up later in a quarterly payroll deposit, a benefits invoice, or a workers' comp audit after the payroll report. By then, the job that should have carried those costs may be closed.</p>
 
             <h2 id="cost-not-price">The Burdened Labor Rate Is a Cost, Not a Price</h2>
 
-            <p>What he typed was a wage. What that hour actually cost him was the wage plus everything the quarterly deposit and the comp notice turned out to contain, spread back across the hours Marco worked. That loaded figure is the burdened labor rate, and the thing to notice about it is that it is a cost, not a price.</p>
+            <p>You need three separate numbers to quote work cleanly. The burdened labor rate is what an employee's hour costs the company. Your <a href="/blog/how-to-calculate-contractor-hourly-rate.html">charge-out hourly rate</a> is what you sell that hour for after accounting for the business and the return you need. Overhead covers costs such as the truck, shop, tools, general liability, and software that keep running whether a particular employee is on a particular job.</p>
 
-            <p>The price is its own calculation. A <a href="/blog/how-to-calculate-contractor-hourly-rate.html">charge-out hourly rate</a> gets built from what the business needs to earn, not from what Marco's stub says, so a shop that quotes its own cost has given away the margin before the truck pulls up.</p>
+            <p>Payroll tax and workers' comp follow payroll, so they belong with labor. The truck does not become cheaper when a crew member takes a day off, so it belongs in overhead. If you need to set that bucket, work from your own books and the method in <a href="/blog/contractor-overhead-percentage.html">what overhead percentage a contractor should use</a>.</p>
 
-            <p>Overhead is the piece people fold in by accident. The truck, the shop, general liability, the software: those bills arrive whether Maple Street happens or not, which is why they belong in their own percentage of direct costs, walked from your own books the way <a href="/blog/contractor-overhead-percentage.html">what overhead percentage a contractor should use</a> lays out. Push the pickup into Marco's hour and you inflate the labor line on every quote you write. Bury the employer payroll tax in overhead and it quietly leaves both lines.</p>
+            <p>For the report-based method, use period totals and divide by the paid hours from that same period:</p>
 
-            <p>Here is the paid-hour formula:</p>
+            <div class="formula-block">Burdened labor rate = (Total wages + Employer payroll taxes + Workers' comp + Benefits + Other payroll burden) ÷ Paid hours</div>
 
-            <div class="formula-block">Burdened labor rate = (Wage + Employer payroll taxes + Workers' comp + Benefits + Other payroll burden) ÷ Paid hours</div>
+            <p>That formula is for totals pulled from a payroll register, tax return, or insurance invoice covering one matched period. Mixing time periods produces a useless rate.</p>
 
-            <p>Divide those same dollars by the hours that actually hit a ticket and the cost on the tools goes up, because some of what you paid Marco never landed on that job.</p>
+            <p>If every component has already been converted to a per-hour amount, add those hourly amounts and stop. Do not divide the sum by hours again. The example table below ($28.00 + $2.50 + $1.80 + $4.70 = $37.00) is that second method.</p>
 
             <h2 id="what-goes-in">What Goes Into a Fully Loaded Hour</h2>
 
-            <p>Pull the pieces from your own payroll. A forum's "typical burden percent" is someone else's class code and someone else's benefits, which is how a precise-looking quote ends up wrong.</p>
+            <p>Start with the payroll register and use the wages you pay, separating straight-time and overtime where they differ. The register shows what you actually paid your own people during that period, while a borrowed percentage reflects someone else's shop, state, and benefit plan. Building from your payroll keeps the starting cost tied to the employee's paid hour.</p>
 
-            <p>The wage is the only line most owners type. $28 an hour (example) is what Marco sees on the stub. This ticket stayed straight time, so the owner used $28 and stopped. If a job runs overtime, load that higher wage. The burden rides on the dollars you actually pay.</p>
+            <p>Read the tax lines: employee withholding is money taken from the employee's check, not an extra company cost. The employer share of Social Security and Medicare, along with federal and state unemployment costs, adds to payroll. Including those amounts explains why the labor hour costs more than the wage shown to the employee.</p>
 
-            <p>He stopped because he used to be the guy on the tools, and the only taxes he ever watched were the ones withheld from his own check. Those are Marco's share. The employer share of Social Security and Medicare, plus federal and state unemployment, never prints on that stub. A person who has only ever been an employee can go years thinking taxes are already handled, which is why the quarterly deposit felt like it came out of nowhere.</p>
+            <p>Workers' compensation belongs in the hour because its premium is tied to payroll and the class of work that creates the exposure. Since a carrier may revise the premium when it audits payroll, use the audit to update the rate instead of treating an earlier estimate as final. Benefits and paid time belong for the same practical reason: the company pays for health coverage, retirement contributions, holidays, vacation, and sick time, as well as the Friday someone spends in the shop preparing for the next job. Those dollars still have to be recovered even when that paid time never appears on a customer ticket.</p>
 
-            <p>Workers' compensation landed the same week. The carrier is not insuring the truck. It is pricing the chance Marco gets hurt doing the work you sent him to do, and that price scales with payroll in his class code. Put the premium on the labor hour or it vanishes from the job that created the exposure.</p>
+            <p>Other payroll-tied costs, such as processing, required paid leave, or employment-provided uniforms, should have a consistent home in your books. Keep each cost in one bucket so it does not disappear between labor and overhead or get counted twice.</p>
 
-            <p>Benefits are the quiet monthly ones. Health insurance the shop writes a check for, a retirement match if you run one. Convert the month into an amount per paid hour. You still write that check in a week with no tickets, so the hours that get billed have to carry it.</p>
+            <p>That is the reasoning. Here is the order to work in with the reports open, holding one period steady the whole way down.</p>
 
-            <p>Paid time off works the same way, and so does the Friday Marco spent in the shop sorting material so Monday on Maple Street would start clean. You pay those hours. They do not appear on a customer's invoice. Skip them on the burden and skip them in the denominator, and you have two ways to pretend the hour is cheaper than it is.</p>
+            <ol>
+              <li>Pick the period first, then pull the payroll register for it. A quarter is usually enough; a trailing twelve months smooths seasonal swings. Write those dates down so every figure matches. Take paid hours, gross wages, and the straight-time and overtime split.</li>
+              <li>Total the employer tax lines for that same period. Labels vary, but look for employer Social Security or OASDI, employer Medicare, FUTA, and SUTA or state unemployment. Employee withholding stays out of this. It passes through your account rather than becoming a company cost.</li>
+              <li>Bring workers' compensation onto the period. Prorate an annual premium. For payroll-based cost, use your invoice and class of work, not an online percentage.</li>
+              <li>Total the employer-paid benefits for the same period and divide by paid hours: the employer health contribution, any retirement match actually paid, and paid holidays and time off when a productive-hours denominator is not already handling them. Split a mid-year change for historical work; use current cost for new quotes.</li>
+              <li>Add the other payroll-tied costs you have assigned to labor, such as payroll processing, required paid leave, or uniforms provided as a condition of employment. Either bucket works. Both buckets at once does not. Pick one, write the choice down, and answer the same way next quarter.</li>
+              <li>Divide the total loaded payroll cost by the paid hours from that period, and you have the loaded cost per paid hour. Check timesheets and use the productive-hour adjustment when non-ticket time takes a real share.</li>
+            </ol>
 
-            <h2 id="example">Calculating Marco's Burdened Labor Rate on Maple Street</h2>
+            <p>Choose one way to handle paid time off. Either include PTO dollars in the numerator and divide by paid hours, or leave PTO out of the numerator and let it reduce productive hours in the productive-hour calculation. Never do both, or the same days get counted twice.</p>
 
-            <p>The figures below are an example only, invented to show the math, not a claim about pay, workers' comp in your state, or typical benefits. The owner rebuilt one paid hour of Marco the way the bills actually arrived.</p>
+            <p>Numbers show the shape. Say the quarter holds 500 paid hours, $14,000 in gross wages, $1,250 of employer taxes, $900 of prorated comp, and $2,350 of employer-paid benefits, with nothing in step five because processing sits in overhead. That is $18,500 of loaded payroll, and $18,500 ÷ 500 = $37.00 per paid hour, the same figure the example below builds. Made-up figures.</p>
 
+            <h3>Where Each Number Lives When the Report Is Missing</h3>
+            <p>Without a payroll service, use Form 941, the state unemployment return, check register, and bookkeeper detail. Labels vary, and this is not tax advice, so ask whoever prepares your filings. Divide annual comp across the same paid-hour base and update it after the audit. Split changed benefits for historical work and use current renewal cost for new quotes. Match all costs and hours to a partial-year window; never divide annual insurance by three months of hours.</p>
+            <h3>Overtime Hours</h3>
+            <p>Burden follows the wages, so an overtime hour carries more employer tax than a straight-time hour, and comp can move with it depending on your state and class. Multiplying the regular loaded rate by time and a half glosses over that. When overtime is material, load the overtime wage separately.</p>
+            <h3>A Crew With Different Pay Rates</h3>
+            <p>Per-person rates fit when a task belongs to a specific person, or when the gap between a lead's wage and a helper's is wide enough to change the answer. Use a blended rate when the same crew mix repeats and records support it. Weight by paid hours, not a simple average.</p>
+            <h3>Subcontractors Are Not Payroll</h3>
+            <p>A subcontractor's invoice is a job cost, closer to material than to a loaded hour, and no employee burden gets added to it because you pay no employer taxes, comp, or benefits on that person. Classification is a legal and tax issue, not a pricing choice; ask a professional.</p>
+            <h3>If the Owner Is on the Payroll</h3>
+            <p>An owner paid through payroll works like anyone else, so the employer payroll costs and employer-paid benefits on those wages belong in the rate. An owner draw is not payroll, though your time still needs a place in the price. Ask your tax professional about treatment.</p>
+
+            <h2 id="example">Calculating a Burdened Labor Rate</h2>
+            <p>These are made-up example figures chosen only to make the arithmetic easy to follow. They are not typical percentages, market wages, or advice about what your payroll should cost.</p>
             <div class="calc-example" role="table" aria-label="Example burdened labor rate, made-up numbers">
               <div class="calc-example-header">Example hour (made-up numbers, not a typical rate)</div>
               <div class="calc-row"><span>Hourly wage</span><span class="calc-val">$28.00</span></div>
@@ -329,47 +349,45 @@
               <div class="calc-row"><span>Health insurance and other benefits, per hour (example)</span><span class="calc-val">$4.70</span></div>
               <div class="calc-row total"><span>Fully loaded cost per paid hour</span><span class="calc-val">$37.00</span></div>
             </div>
-
             <div class="formula-block">$28.00 + $2.50 + $1.80 + $4.70 = $37.00</div>
-
-            <p>That is nine dollars an hour above the wage he typed into the quote. Sixteen hours at $28 had booked $448 of labor; at $37 the labor line is $592. The $144 difference is the quarterly deposit, the benefits, and the comp premium sitting in a job price that never saw them. That $37 is still a cost, and it goes on the job as the labor line, next to materials and a separate overhead percentage.</p>
+            <p>The wage is $28, but one paid hour costs the company $37. If a quote carries six labor hours at the wage, it includes $168. The same six hours at the loaded cost are $222. That $54 gap does not wait politely for the next job. It comes out of the money you thought was available for overhead and profit.</p>
+            <p>The $37 still is not a billing rate. It is the labor cost you need in the estimate before you add overhead and profit. Selling an hour for its loaded cost would cover that employee's hour and nothing else.</p>
+            <h3>Sanity-Checking the Number</h3>
+            <p>No universal ratio between a wage and its loaded cost fits every state, comp class, and benefit plan, so check the result against your own reports instead of a rule of thumb. Where employer costs exist, the loaded rate has to come out above the wage; if it equals the wage, an input is missing. Tie each add-on back to the invoice or report it came from. A rate near double the wage can be honest with rich benefits, heavy paid time off, or very low productive hours, but more often it means a unit or period mismatch or the same dollars counted twice. Rebuild the rate after a wage change, a comp audit, a benefits renewal, or a payroll tax change, and at least once a year besides.</p>
 
             <h2 id="productive-hours">Cost per Productive Hour: The Hours That Never Hit the Ticket</h2>
-
-            <p>Even that $37 assumes every paid hour is a billed hour. Marco's week was not built that way. Shop time, waiting on a delivery, unbilled cleanup, the holiday Monday after this job closed: you pay them, and if you recover cost only on hours that hit a ticket, those idle hours have nowhere to go except onto the hours that did.</p>
-
-            <p>Take one of the two days on Maple Street. The owner paid 8 hours at the $37 loaded rate, $296. Marco was on the tools for 6.5 of them, because the morning was load-out and the last stretch was a return trip the customer was never going to see on the invoice.</p>
-
+            <p>A paid hour and a job hour are not always the same hour. Someone spends Friday in the shop receiving material, cleaning the van, or getting Monday's work ready. There is also paid training, a slow morning waiting on a delivery, unbilled cleanup, holidays, and vacation. Payroll still runs, but none of those hours may appear on a customer ticket.</p>
+            <p>If you recover labor cost only through productive job hours, those hours have to carry the paid time that did not reach a job. Use your time records rather than guessing. The formula is:</p>
             <div class="formula-block">Cost per productive hour = (Loaded cost per paid hour × Paid hours) ÷ Productive hours</div>
-
-            <div class="formula-block">$37.00 × 8 ÷ 6.5 ≈ $45.54</div>
-
-            <p>The job should have seen about $46 per hour on site, not $28, and not even the $37 paid-hour rate. If almost every paid hour is on a job, the paid-hour rate is close enough. If a lot of paid time is shop, wait, and PTO, divide the year's fully loaded labor cost by productive hours instead.</p>
+            <p>Suppose you pay eight hours at the $37 loaded rate, but only 6.5 hours reach the ticket. The day's loaded payroll cost is $296, spread over 6.5 productive hours.</p>
+            <div class="formula-block">$37 × 8 ÷ 6.5 = $45.54</div>
+            <p>The cost on the job is $45.54 for each productive hour. Nothing new was added; the denominator changed to the hours that can actually recover the cost. If nearly every paid hour reaches a job, your paid-hour and productive-hour rates will be close. If shop, travel, waiting, and paid leave take a meaningful share of the week, the difference deserves a place in the quote.</p>
+            <h3>Seasonal Work</h3>
+            <p>Productive hours swing hard in seasonal work. Summer ticket hours do not resemble February shop days, so busy-month rates leave winter unfunded. Build separate seasonal rates, or use a trailing twelve-month rate weighted by paid hours.</p>
 
             <h2 id="on-the-job">Put the Loaded Rate on the Ticket</h2>
-
-            <p>On the next estimate, put hours × crew × the burdened rate on the labor line. For this example job that is 16 × $37 if every hour hits the ticket, or closer to the productive-hour figure if your timesheets look like Marco's.</p>
-
-            <p>Keep overhead as its own percentage of direct costs. Walk that rate from <a href="/blog/contractor-overhead-percentage.html">your overhead percentage</a>, not from this labor stack. Folding the truck into Marco's hour is how the wage looks covered and the pickup still eats the month.</p>
-
-            <p>Open the <a href="/calculator">job profit calculator</a>. Enter hours and crew size, then put the fully loaded cost per hour (the $37, or the productive-hour figure if that is the honest one) in the hourly labor rate field. Fill materials, overhead, drive, and the margin you want. Pasting the wage into that field is how this ticket got approved in the first place.</p>
-
+            <p>On an estimate, multiply planned labor hours by the number of workers and by the appropriate loaded rate. Use the productive-hour rate when those planned ticket hours must recover non-ticket time. Use the paid-hour rate only when your estimating method already handles nonproductive paid hours elsewhere.</p>
+            <p>Then add overhead separately. That keeps you from loading the shop and truck into payroll while still forgetting employer taxes. It also lets you compare estimated labor with the actual labor cost after the job, which is how you catch a production miss instead of blaming every short job on materials.</p>
+            <p>In the <a href="/calculator">job profit calculator</a>, enter the fully loaded cost in the hourly labor rate field, along with the crew size and hours. Add materials, drive, overhead, and your intended margin in their own places. The field needs the cost of labor, not the number printed next to hourly pay in your payroll system.</p>
             <div class="callout">
-              <p><strong>The expensive habit:</strong> typing $28 into a labor field because that is the number you know by heart. Maple Street got approved that way. The deposit did not care what the quote felt like.</p>
+              <p><strong>The expensive habit:</strong> typing the wage into a quote because it is the number you can see today. The quarterly deposit and comp adjustment arrive later, but they belong to the work you are pricing now.</p>
             </div>
+            <h3>Where This Usually Goes Wrong</h3>
+            <ul>
+              <li>Double-counting payroll processing or paid time off in burden and again in overhead. Pick one bucket per item, write it down, and read the two lists against each other once.</li>
+              <li>Taking a burden percentage from a forum post. It came from another state, class code, and benefit plan, so build yours from your own payroll report and comp invoice.</li>
+              <li>Letting a comp audit pass without touching the rate. Put the audited figure into the quotes you are writing now.</li>
+              <li>Dividing annual costs by a quarter of hours. Match the dates on both sides before you divide, and note the period on the sheet.</li>
+              <li>Treating paid hours as productive hours. Pull the timesheets, find what share reaches a ticket, and apply one method everywhere.</li>
+            </ul>
 
             <h2 id="faq">Frequently Asked Questions</h2>
-
             <h3>What if I have no employees?</h3>
-            <p>If you have no W-2 payroll, you may not need this stack. You still cannot treat your own time as $0. Price your hour from the <a href="/blog/how-to-calculate-contractor-hourly-rate.html">charge-out hourly rate</a> method. If you run payroll for yourself, burden those hours the same way you would a crew member.</p>
-
+            <p>If you have no W-2 payroll, you may not need an employee payroll burden calculation. Your own time still has a value and cannot go into a quote at zero. Build what you charge for that time with the <a href="/blog/how-to-calculate-contractor-hourly-rate.html">charge-out hourly rate</a> method. If your company runs payroll for you, include the related employer costs just as you would for any other person on payroll.</p>
             <h3>The workers' comp audit changed my premium after the job closed. Do I go back and reprice old work?</h3>
-            <p>You cannot reprice a closed ticket. You can stop using last year's premium on next month's quotes. The audit is a trailing adjustment on payroll you already paid. The forward-looking rate is the one that belongs in the next labor line.</p>
-
+            <p>A closed job usually stays closed. The audit tells you that the rate used on earlier quotes did not cover the final premium. Update the workers' comp amount in your burdened rate for new work, and account for any audit balance in your current books rather than pretending the old rate is still accurate.</p>
             <h2 id="bottom-line">The Bottom Line</h2>
-
-            <p>Maple Street felt profitable because the labor line was a wage. Load payroll taxes, workers' comp, and benefits onto that example hour and it costs $37; once unbilled paid time is in the denominator, it shakes out near $46 on the tools. Use that loaded cost on the labor line, keep overhead separate, and run the next job in the <a href="/calculator">job profit calculator</a> before the quarter closes on you.</p>
-
+            <p>Pull the employer costs from your payroll report and current bills, put them on the paid hour, and check how many paid hours actually reach tickets. Then carry that cost into each estimate. If you want to see the full job with labor, overhead, materials, and margin kept separate, run the numbers in the <a href="/calculator">job profit calculator</a> before you send the quote.</p>
             <p class="disclaimer">Results are estimates for educational purposes only. Consult a licensed tax professional for advice specific to your situation.</p>
 
           </div><!-- /article-body -->
@@ -418,7 +436,7 @@
             <ul class="toc-list">
               <li><a href="#cost-not-price">The burdened labor rate is a cost, not a price</a></li>
               <li><a href="#what-goes-in">What goes into a fully loaded hour</a></li>
-              <li><a href="#example">Calculating Marco's burdened labor rate on Maple Street</a></li>
+              <li><a href="#example">Calculating a burdened labor rate</a></li>
               <li><a href="#productive-hours">Cost per productive hour</a></li>
               <li><a href="#on-the-job">Put the loaded rate on the ticket</a></li>
               <li><a href="#faq">FAQ</a></li>

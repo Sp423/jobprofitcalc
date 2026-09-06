@@ -115,6 +115,22 @@
           "@type": "Answer",
           "text": "Effective $/hr is net profit divided by job hours (hours × workers). Drive time is not included in those hours — only time on the job."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is desired profit capped at 89%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The field and the math both cap at 89%. A 100% margin would make the suggested price infinite (cost ÷ 0). Type 90–100 and the field snaps to 89."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do workers, overhead, and markup snap to a limit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Workers has a minimum of 1. Overhead is capped at 100%. Material markup is capped at 200%. The field and the math use the same limits so the number you see is the number used."
+        }
       }
     ]
   }
@@ -703,6 +719,26 @@
             </button></h3>
             <div class="faq-a" id="cfq-a7">
               Effective $/hr is net profit divided by job hours (hours × workers). Drive time is not included in those hours — only time on the job.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="cfq-a8">
+              Why is desired profit capped at 89%?
+              <span class="faq-ico" aria-hidden="true">+</span>
+            </button></h3>
+            <div class="faq-a" id="cfq-a8">
+              The field and the math both cap at 89%. A 100% margin would make the suggested price infinite (cost ÷ 0). Type 90–100 and the field snaps to 89.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <h3 class="faq-heading"><button class="faq-q" aria-expanded="false" aria-controls="cfq-a9">
+              Why do workers, overhead, and markup snap to a limit?
+              <span class="faq-ico" aria-hidden="true">+</span>
+            </button></h3>
+            <div class="faq-a" id="cfq-a9">
+              Workers has a minimum of 1. Overhead is capped at 100%. Material markup is capped at 200%. The field and the math use the same limits so the number you see is the number used.
             </div>
           </div>
 

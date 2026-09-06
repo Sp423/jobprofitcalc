@@ -39,6 +39,9 @@ const $ = {
   // Results
   price:    G('suggestedPrice'),
   note:     G('priceNote'),
+  staxLive: G('salesTaxLive'),
+  staxTotal:G('salesTaxTotal'),
+  staxDetail:G('salesTaxDetail'),
   netP:     G('netProfit'),
   margin:   G('marginDisplay'),
   eff:      G('effRate'),
@@ -104,9 +107,15 @@ function parseBound(el) {
   return out;
 }
 function num(el) { return parseBound(el); }
-function snapBounds(el) {
+function snapBounds(el, fromBlur) {
   const raw = String(el.value).trim();
-  if (raw === '' || raw === '-' || raw === '.' || raw === '-.') return;
+  if (raw === '' || raw === '-' || raw === '.' || raw === '-.') {
+    if (fromBlur) {
+      const min = attrBound(el, 'min');
+      el.value = String(isFinite(min) ? min : 0);
+    }
+    return;
+  }
   const v = parseFloat(raw);
   if (!isFinite(v)) return;
   const bounded = parseBound(el);
@@ -135,7 +144,7 @@ function calc() {
   const matTotal   = matCost * (1 + matMark);
   // Overhead on labor + materials
   const overhead   = (totalLabor + matTotal) * ohPct;
-  // Travel: drive hours billed at labor rate + flat fuel
+  // Travel: drive hours billed once at labor rate (not × workers) + flat fuel
   const travel     = (driveTime * laborRate) + fuelCost;
   // Subtotal of all direct costs
   const subtotal   = totalLabor + matTotal + overhead + travel;
@@ -149,7 +158,7 @@ function calc() {
   // Net profit and margin
   const netProfit  = suggested - totalCost;
   const realMargin = suggested > 0 ? (netProfit / suggested) * 100 : 0;
-  // Effective hourly rate = profit divided by total hours worked
+  // Effective $/hr = profit ÷ job hours only (hours × workers; excludes drive)
   const totalHrs   = hours * workers;
   const effRate    = totalHrs > 0 ? netProfit / totalHrs : 0;
 
@@ -184,6 +193,18 @@ function update() {
   pop($.price);
   $.price.textContent = fmtD(r.suggested, 2);
   $.note.textContent  = `Total cost: ${fmtD(r.totalCost, 2)}  ·  Target margin: ${num($.profit)}%`;
+
+  const { staxPct, staxAmt, grandTotal } = customerQuoteParts(r);
+  const showStax = $.inclStax.checked;
+  if ($.staxLive) {
+    $.staxLive.hidden = !showStax;
+    if (showStax) {
+      $.staxTotal.textContent = fmtD(grandTotal, 2);
+      $.staxDetail.textContent = staxAmt > 0
+        ? `Includes ${fmtD(staxAmt, 2)} sales tax (${staxPct}% on marked-up materials)`
+        : 'Sales tax is on — rate is 0%, so the customer total matches the suggested charge.';
+    }
+  }
 
   // Net profit
   pop($.netP);
@@ -554,18 +575,53 @@ $.bkToggle.addEventListener('click', function() {
 });
 
 /* ============================================================
-   TOOLTIP TAP TOGGLE (mobile)
+   TOOLTIP TAP / KEYBOARD TOGGLE
 ============================================================ */
+function closeTips(except) {
+  document.querySelectorAll('.tip').forEach(function(o) {
+    if (except && o === except) return;
+    o.classList.remove('active');
+    o.setAttribute('aria-expanded', 'false');
+  });
+}
+function setTipOpen(tip, open) {
+  closeTips(open ? tip : null);
+  tip.classList.toggle('active', open);
+  tip.setAttribute('aria-expanded', String(open));
+}
 document.querySelectorAll('.tip').forEach(function(t) {
+  if (!t.hasAttribute('aria-expanded')) t.setAttribute('aria-expanded', 'false');
+  // Pointer-down + click toggle; keyboard focus opens via focusin so
+  // aria-expanded matches visibility (no CSS-only :focus-visible open).
+  t.addEventListener('pointerdown', function() { t._tipPointer = true; });
+  t.addEventListener('focusin', function() {
+    if (t._tipPointer) return;
+    setTipOpen(t, true);
+  });
+  t.addEventListener('focusout', function() {
+    t._tipPointer = false;
+    setTipOpen(t, false);
+  });
   t.addEventListener('click', function(e) {
+    e.preventDefault();
     e.stopPropagation();
-    const isOpen = t.classList.contains('active');
-    document.querySelectorAll('.tip').forEach(function(o) { o.classList.remove('active'); });
-    if (!isOpen) t.classList.add('active');
+    t._tipPointer = false;
+    setTipOpen(t, !t.classList.contains('active'));
+  });
+  t.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      e.preventDefault();
+      setTipOpen(t, false);
+      t.blur();
+    }
   });
 });
-document.addEventListener('click', function() {
-  document.querySelectorAll('.tip').forEach(function(t) { t.classList.remove('active'); });
+document.addEventListener('click', function() { closeTips(); });
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Escape' && e.key !== 'Esc') return;
+  closeTips();
+  const focused = document.activeElement;
+  if (focused && focused.classList && focused.classList.contains('tip')) focused.blur();
 });
 
 /* ============================================================
@@ -630,6 +686,7 @@ function updateStickyBar() {
   const show = calcOnScreen && resultsBelowFold;
   stickyBar.classList.toggle('show', show);
   stickyBar.setAttribute('aria-hidden', String(!show));
+  document.body.classList.toggle('has-sticky-results', show);
 }
 window.addEventListener('scroll', updateStickyBar, { passive: true });
 window.addEventListener('resize', updateStickyBar, { passive: true });
@@ -644,9 +701,14 @@ updateStickyBar();
 [$.hours, $.workers, $.labor, $.matCost, $.matMark,
  $.overhead, $.drive, $.fuel, $.profit, $.se, $.state
 ].forEach(el => {
-  el.addEventListener('input', update);
+  el.addEventListener('input', function() { snapBounds(el); update(); });
   el.addEventListener('change', function() { snapBounds(el); update(); });
-  el.addEventListener('blur', function() { snapBounds(el); update(); });
+  el.addEventListener('blur', function() { snapBounds(el, true); update(); });
+});
+[$.staxRate, $.inclStax].forEach(el => {
+  if (!el) return;
+  el.addEventListener('input', update);
+  el.addEventListener('change', update);
 });
 
 /* ============================================================

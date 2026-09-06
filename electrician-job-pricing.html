@@ -108,7 +108,7 @@
        crossorigin="anonymous"></script>
 
   <!-- Cache-bust: bump ?v= after JS/CSS deploys so Cloudflare/browsers don't serve stale assets. -->
-  <link rel="stylesheet" href="/css/site.css?v=e1998e63">
+  <link rel="stylesheet" href="/css/site.css?v=f837a2c">
 </head>
 
 <body>
@@ -263,7 +263,7 @@
                 <div class="igroup">
                   <label class="ilabel" for="overhead">
                     Overhead &amp; Burden
-                    <span class="tip" data-tip="Covers insurance, tools, truck depreciation, software, marketing, and admin time. Applied as a % of total labor + materials." aria-label="What is overhead and burden">?</span>
+                    <button type="button" class="tip" data-tip="Covers insurance, tools, truck depreciation, software, marketing, and admin time. Applied as a % of total labor + materials." aria-label="What is overhead and burden" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
                     <input type="number" id="overhead" min="0" max="100" step="1" value="15" aria-label="Overhead and burden percentage">
@@ -271,7 +271,10 @@
                   </div>
                 </div>
                 <div class="igroup">
-                  <label class="ilabel" for="driveTime">Drive Time</label>
+                  <label class="ilabel" for="driveTime">
+                    Drive Time
+                    <button type="button" class="tip" data-tip="Billed once at the hourly labor rate, plus the fuel/travel amount. Not multiplied by Number of Workers — a 2-person crew does not double drive time." aria-label="How drive time is billed" aria-expanded="false">?</button>
+                  </label>
                   <div class="ifield has-suf">
                     <input type="number" id="driveTime" min="0" step="0.25" value="0.5" aria-label="Drive time in hours">
                     <span class="isuf" aria-hidden="true">hrs</span>
@@ -292,17 +295,17 @@
                 <div class="igroup">
                   <label class="ilabel" for="profitMargin">
                     Desired Profit Margin
-                    <span class="tip tip-lg" data-tip="Markup vs margin&#10;&#10;Markup is added on top of your costs. Margin is what you keep as a percent of what you charge. They're not the same number.&#10;&#10;A 25% markup → 20% margin&#10;A 33% markup → 25% margin&#10;&#10;This field uses margin. Enter the percent of your final charge you want to keep as profit." aria-label="Markup vs margin explained">?</span>
+                    <button type="button" class="tip tip-lg" data-tip="Markup vs margin&#10;&#10;Markup is added on top of your costs. Margin is what you keep as a percent of what you charge. They're not the same number.&#10;&#10;A 25% markup → 20% margin&#10;A 33% markup → 25% margin&#10;&#10;This field uses margin (1–89%). A 100% margin would make the suggested price infinite, so the field and the math both cap at 89%." aria-label="Markup vs margin explained" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="profitMargin" min="1" max="89" step="1" value="20" aria-label="Desired profit margin percentage">
+                    <input type="number" id="profitMargin" min="1" max="89" step="1" value="20" aria-label="Desired profit margin percentage, capped at 89">
                     <span class="isuf" aria-hidden="true">%</span>
                   </div>
                 </div>
                 <div class="igroup">
                   <label class="ilabel" for="seTax">
                     SE Tax (on costs)
-                    <span class="tip" data-tip="Applied to your cost subtotal (labor + marked-up materials + overhead + travel), not to profit or the final charge. Default 15.3% is Social Security (12.4%) + Medicare (2.9%). This is a pricing allowance so the quote covers that burden — not a tax-return calculation." aria-label="About self-employment tax basis">?</span>
+                    <button type="button" class="tip" data-tip="Applied to your cost subtotal (labor + marked-up materials + overhead + travel), not to profit or the final charge. Default 15.3% is Social Security (12.4%) + Medicare (2.9%). This is a pricing allowance so the quote covers that burden — not a tax-return calculation." aria-label="About self-employment tax basis" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
                     <input type="number" id="seTax" min="0" max="50" step="0.1" value="15.3" aria-label="Self-employment tax rate percentage applied to cost subtotal">
@@ -312,7 +315,7 @@
                 <div class="igroup">
                   <label class="ilabel" for="stateTax">
                     State Tax (on costs)
-                    <span class="tip" data-tip="Applied to the same cost subtotal as SE tax (labor + marked-up materials + overhead + travel), not to earnings or the final charge. TX, FL, WA = 0%. CA is often 9.3%+. Enter your effective rate as a pricing allowance." aria-label="About state tax basis">?</span>
+                    <button type="button" class="tip" data-tip="Applied to the same cost subtotal as SE tax (labor + marked-up materials + overhead + travel), not to earnings or the final charge. TX, FL, WA = 0%. CA is often 9.3%+. Enter your effective rate as a pricing allowance." aria-label="About state tax basis" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
                     <input type="number" id="stateTax" min="0" max="20" step="0.1" value="5" aria-label="State tax rate percentage applied to cost subtotal">
@@ -320,6 +323,7 @@
                   </div>
                 </div>
               </div>
+              <p class="field-hint">Desired profit margin is capped at 89% to match the math — 100% would make the suggested price infinite.</p>
               <p class="field-hint">SE and state tax % apply to your cost subtotal (labor + marked-up materials + overhead + travel), not to earnings or the suggested charge.</p>
 
               <!-- Quote Settings (collapsed — used by Customer Quote / Customer PDF) -->
@@ -424,6 +428,10 @@
                 <p class="price-lbl">Suggested Charge to Customer</p>
                 <div class="price-num" id="suggestedPrice" aria-label="Suggested price to charge">$0.00</div>
                 <p class="price-note" id="priceNote">Enter your job details above</p>
+                <div class="price-tax" id="salesTaxLive" hidden>
+                  <p class="price-tax-line">Customer total with sales tax: <span id="salesTaxTotal">$0.00</span></p>
+                  <p class="price-tax-detail" id="salesTaxDetail"></p>
+                </div>
               </div>
 
               <div class="metrics" role="region" aria-label="Key performance metrics">
@@ -436,8 +444,11 @@
                   <div class="metric-val c-white" id="marginDisplay" aria-label="Profit margin percentage">0%</div>
                 </div>
                 <div class="metric">
-                  <div class="metric-lbl">Effective $/hr</div>
-                  <div class="metric-val c-white" id="effRate" aria-label="Effective hourly rate after taxes">$0/hr</div>
+                  <div class="metric-lbl">
+                    Effective $/hr
+                    <button type="button" class="tip" data-tip="Net profit ÷ job hours (hours × workers). Drive time is not included in those hours — only time on the job." aria-label="What effective dollars per hour includes" aria-expanded="false">?</button>
+                  </div>
+                  <div class="metric-val c-white" id="effRate" aria-label="Effective hourly rate on job hours only">$0/hr</div>
                 </div>
               </div>
 
@@ -721,8 +732,8 @@
 <!-- Toast notification -->
 <div id="toast" role="alert" aria-live="assertive"></div>
 
-<script src="/js/calculator.js?v=e1998e63"></script>
-<script src="/js/site-ui.js?v=e1998e63"></script>
+<script src="/js/calculator.js?v=f837a2c"></script>
+<script src="/js/site-ui.js?v=f837a2c"></script>
 <script>
 (function () {
   var trade = document.getElementById('tradeSelect');

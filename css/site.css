@@ -31,7 +31,7 @@
       --shadow-lg:     0 8px 48px rgba(0,0,0,0.55);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
 
     body {
       font-family: var(--font-body);
@@ -41,6 +41,11 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
+      overflow-x: clip;
+    }
+    body.has-sticky-results {
+      padding-bottom: 76px;
+      scroll-padding-bottom: 76px;
     }
 
     /* Subtle dot-grid texture */
@@ -117,6 +122,17 @@
        LAYOUT CONTAINER
     ============================================================ */
     .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    @media (max-width: 430px) {
+      .container { padding: 0 16px; }
+      .header-inner { padding: 0 16px; }
+      .calc-body { padding: 18px 16px; }
+      .calc-actions { padding: 16px; }
+      .calc-top { padding: 16px; }
+      .qs-acc-hint { display: none; }
+      .btn { min-width: 0; }
+      .price-num { font-size: clamp(36px, 11vw, 56px); letter-spacing: -1px; }
+      .action-group { flex-basis: 100%; }
+    }
 
     /* ============================================================
        AD ZONES — clearly marked, styled as placeholders
@@ -147,7 +163,7 @@
       padding: 14px 0 18px;
       border-bottom: 1px solid var(--border);
     }
-    .ad-header { display: block; width: 728px; height: 90px; }
+    .ad-header { display: block; width: 728px; max-width: 100%; height: 90px; }
     @media (max-width: 760px) { .ad-header { width: 100%; max-width: 728px; height: auto; } }
 
     /* ── AD ZONE 2 — Sidebar ── */
@@ -159,7 +175,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
     .sidebar-ad-wrap .ad-label { align-self: stretch; text-align: left; }
-    .ad-sidebar { width: 300px; height: 250px; flex-shrink: 0; border-radius: var(--r); }
+    .ad-sidebar { width: 300px; max-width: 100%; height: auto; flex-shrink: 1; border-radius: var(--r); }
 
     /* ── AD ZONE 3 — In-Content Two-Column Editorial ── */
     .ad-zone3-wrap {
@@ -187,11 +203,12 @@
       max-width: 520px;
     }
     .ad-zone3-col {
-      flex-shrink: 0;
+      flex-shrink: 1;
+      max-width: 100%;
       display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
     .ad-zone3-col .ad-label { align-self: stretch; text-align: left; }
-    .ad-content { width: 336px; height: 280px; border-radius: var(--r); }
+    .ad-content { width: 336px; max-width: 100%; height: auto; border-radius: var(--r); }
 
     /* Zone 3 — collapse to stacked on smaller viewports */
     @media (max-width: 800px) {
@@ -380,16 +397,25 @@
       line-height: 1.45;
     }
 
-    /* Tooltip */
+    /* Tooltip — real buttons; hover + .active (JS) show the bubble.
+       Focus visibility is driven by JS .active / aria-expanded, not CSS-only. */
     .tip {
       display: inline-flex; align-items: center; justify-content: center;
       width: 15px; height: 15px;
       background: var(--border-hi);
+      border: 0; padding: 0; margin: 0;
       border-radius: 50%;
+      font-family: inherit;
       font-size: 9px; font-weight: 700;
       color: var(--text-muted); cursor: help;
       position: relative; flex-shrink: 0;
       line-height: 1;
+      appearance: none; -webkit-appearance: none;
+    }
+    .tip:focus { outline: none; }
+    .tip:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
     .tip::before {
       content: attr(data-tip);
@@ -404,7 +430,9 @@
       line-height: 1.5; letter-spacing: 0; text-transform: none;
       padding: 9px 12px;
       border-radius: var(--r);
-      white-space: pre-line; width: 230px;
+      white-space: pre-line;
+      width: min(230px, calc(100vw - 32px));
+      max-width: calc(100vw - 32px);
       text-align: left;
       opacity: 0; pointer-events: none;
       transition: opacity 0.18s;
@@ -423,7 +451,7 @@
     }
     .tip:hover::before, .tip:hover::after,
     .tip.active::before, .tip.active::after { opacity: 1; }
-    .tip-lg::before { width: 260px; }
+    .tip-lg::before { width: min(260px, calc(100vw - 32px)); }
 
     /* Input wrapper */
     .ifield { position: relative; display: flex; align-items: center; }
@@ -512,6 +540,21 @@
       transition: color 0.2s;
     }
     .price-note { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+    .price-tax[hidden] { display: none !important; }
+    .price-tax {
+      margin-top: 12px; padding-top: 10px;
+      border-top: 1px dashed var(--border-hi);
+    }
+    .price-tax-line {
+      font-size: 14px; color: var(--text-pri); font-weight: 600;
+    }
+    .price-tax-line span {
+      color: var(--accent);
+      font-family: var(--font-disp); font-weight: 800; font-size: 18px;
+    }
+    .price-tax-detail {
+      font-size: 12px; color: var(--text-muted); margin-top: 3px;
+    }
 
     /* Metrics row */
     .metrics {
@@ -532,6 +575,7 @@
     }
     .metric:last-child { border-right: none; }
     .metric-lbl {
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
       font-size: 11px; font-weight: 600;
       text-transform: uppercase; letter-spacing: 0.8px;
       color: var(--text-muted); margin-bottom: 4px;
@@ -623,6 +667,7 @@
       text-transform: uppercase; letter-spacing: 1px; text-align: left;
       transition: background 0.18s, color 0.18s;
     }
+    .qs-acc-toggle > span { min-width: 0; }
     .qs-acc-toggle:hover { color: var(--text-pri); }
     .qs-acc-toggle.open .bk-arrow { transform: rotate(180deg); }
     .qs-acc-hint {
@@ -671,7 +716,9 @@
       line-height: 1.55; letter-spacing: 0; text-transform: none;
       padding: 10px 13px;
       border-radius: var(--r);
-      white-space: pre-line; width: 240px;
+      white-space: pre-line;
+      width: min(240px, calc(100vw - 32px));
+      max-width: calc(100vw - 32px);
       text-align: left;
       opacity: 0; pointer-events: none;
       transition: opacity 0.18s;
@@ -882,8 +929,10 @@
       color: var(--text-sec);
     }
     @media (max-width: 480px) {
-      .sticky-results-inner { gap: 18px; }
+      .sticky-results-inner { gap: 12px; padding: 9px 12px 11px; }
       .sr-go { display: none; }
+      .sr-price { font-size: 20px; }
+      .sr-val { font-size: 17px; }
     }
 
     /* ============================================================
@@ -1168,7 +1217,7 @@
     .tip-list a:hover { text-decoration: underline; }
 
     /* Reused trade-guide article (landing pages) */
-    .guide-body { font-size: 16px; color: var(--text-sec); line-height: 1.78; max-width: 800px; }
+    .guide-body { font-size: 16px; color: var(--text-sec); line-height: 1.78; max-width: 800px; overflow-x: auto; }
     .guide-body p { margin-bottom: 16px; }
     .guide-body p:last-child { margin-bottom: 0; }
     .guide-body h2 {

@@ -397,7 +397,8 @@
       line-height: 1.45;
     }
 
-    /* Tooltip — real buttons; hover / focus / .active all show the bubble */
+    /* Tooltip — real buttons; hover + .active (JS) show the bubble.
+       Focus visibility is driven by JS .active / aria-expanded, not CSS-only. */
     .tip {
       display: inline-flex; align-items: center; justify-content: center;
       width: 15px; height: 15px;
@@ -449,7 +450,6 @@
       transition: opacity 0.18s;
     }
     .tip:hover::before, .tip:hover::after,
-    .tip:focus-visible::before, .tip:focus-visible::after,
     .tip.active::before, .tip.active::after { opacity: 1; }
     .tip-lg::before { width: min(260px, calc(100vw - 32px)); }
 

@@ -591,9 +591,21 @@ function setTipOpen(tip, open) {
 }
 document.querySelectorAll('.tip').forEach(function(t) {
   if (!t.hasAttribute('aria-expanded')) t.setAttribute('aria-expanded', 'false');
+  // Pointer-down + click toggle; keyboard focus opens via focusin so
+  // aria-expanded matches visibility (no CSS-only :focus-visible open).
+  t.addEventListener('pointerdown', function() { t._tipPointer = true; });
+  t.addEventListener('focusin', function() {
+    if (t._tipPointer) return;
+    setTipOpen(t, true);
+  });
+  t.addEventListener('focusout', function() {
+    t._tipPointer = false;
+    setTipOpen(t, false);
+  });
   t.addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
+    t._tipPointer = false;
     setTipOpen(t, !t.classList.contains('active'));
   });
   t.addEventListener('keydown', function(e) {

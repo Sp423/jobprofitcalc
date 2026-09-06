@@ -328,25 +328,26 @@
                 </div>
                 <div class="igroup">
                   <label class="ilabel" for="seTax">
-                    SE Tax Rate
-                    <span class="tip" data-tip="Self-employment tax is 15.3%: the full employer + employee share of Social Security (12.4%) and Medicare (2.9%). Sole proprietors pay both halves." aria-label="About self-employment tax">?</span>
+                    SE Tax (on costs)
+                    <span class="tip" data-tip="Applied to your cost subtotal (labor + marked-up materials + overhead + travel), not to profit or the final charge. Default 15.3% is Social Security (12.4%) + Medicare (2.9%). This is a pricing allowance so the quote covers that burden — not a tax-return calculation." aria-label="About self-employment tax basis">?</span>
                   </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="seTax" min="0" max="50" step="0.1" value="15.3" aria-label="Self-employment tax rate percentage">
+                    <input type="number" id="seTax" min="0" max="50" step="0.1" value="15.3" aria-label="Self-employment tax rate percentage applied to cost subtotal">
                     <span class="isuf" aria-hidden="true">%</span>
                   </div>
                 </div>
                 <div class="igroup">
                   <label class="ilabel" for="stateTax">
-                    State Income Tax
-                    <span class="tip" data-tip="Adjust for your state. TX, FL, WA = 0%. CA = 9.3%+. Enter your effective marginal state rate." aria-label="About state income tax rate">?</span>
+                    State Tax (on costs)
+                    <span class="tip" data-tip="Applied to the same cost subtotal as SE tax (labor + marked-up materials + overhead + travel), not to earnings or the final charge. TX, FL, WA = 0%. CA is often 9.3%+. Enter your effective rate as a pricing allowance." aria-label="About state tax basis">?</span>
                   </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="stateTax" min="0" max="20" step="0.1" value="5" aria-label="State income tax rate percentage">
+                    <input type="number" id="stateTax" min="0" max="20" step="0.1" value="5" aria-label="State tax rate percentage applied to cost subtotal">
                     <span class="isuf" aria-hidden="true">%</span>
                   </div>
                 </div>
               </div>
+              <p class="field-hint">SE and state tax % apply to your cost subtotal (labor + marked-up materials + overhead + travel), not to earnings or the suggested charge.</p>
 
               <!-- Quote Settings (collapsed — used by Customer Quote / Customer PDF) -->
               <div class="qs-accordion">
@@ -489,11 +490,11 @@
                   <span class="bk-rowval" id="bd-travel">$0.00</span>
                 </div>
                 <div class="bk-row">
-                  <span class="bk-rowlbl">Self-Employment Tax</span>
+                  <span class="bk-rowlbl">SE Tax (on cost subtotal)</span>
                   <span class="bk-rowval" id="bd-se">$0.00</span>
                 </div>
                 <div class="bk-row">
-                  <span class="bk-rowlbl">State Income Tax</span>
+                  <span class="bk-rowlbl">State Tax (on cost subtotal)</span>
                   <span class="bk-rowval" id="bd-state">$0.00</span>
                 </div>
                 <div class="bk-total">
@@ -546,10 +547,10 @@
                 <p class="action-group-lbl">For Your Customer</p>
                 <div class="action-btns">
                   <button class="btn btn-ghost" id="custBtn"
-                    data-tip="Copies a clean customer quote to your clipboard. Paste it directly into a text, email, or invoice app. No internal pricing details included."
+                    data-tip="Copies a customer quote to your clipboard. Labor is loaded (includes overhead, taxes, and profit); materials include markup."
                     aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
                   <button class="btn btn-ghost" id="custPdfBtn"
-                    data-tip="Saves a printable customer quote as a PDF. Shows Labor, Materials, Travel, and Total Due — no internal pricing details. Includes your business info and any options set in Quote Settings."
+                    data-tip="Saves a printable customer quote as a PDF. Labor is loaded (includes overhead, taxes, and profit); materials include markup. Includes your business info and any options set in Quote Settings."
                     aria-label="Save customer quote as PDF">📄 Customer PDF</button>
                 </div>
               </div>

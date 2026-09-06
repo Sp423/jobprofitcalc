@@ -80,13 +80,38 @@ const $ = {
 ============================================================ */
 function fmtD(n, dec = 0) {
   if (!isFinite(n) || isNaN(n)) return '$0';
-  return '$' + Math.abs(n).toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const absStr = Math.abs(n).toFixed(dec);
+  const zero = /^0+(?:\.0+)?$/.test(absStr);
+  const sign = !zero && n < 0 ? '-' : '';
+  return sign + '$' + absStr.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 function fmtP(n, dec = 1) {
   if (!isFinite(n) || isNaN(n)) return '0%';
   return n.toFixed(dec) + '%';
 }
-function num(el) { return parseFloat(el.value) || 0; }
+function attrBound(el, name) {
+  if (!el || el[name] === '' || el[name] == null) return NaN;
+  return parseFloat(el[name]);
+}
+function parseBound(el) {
+  const v = parseFloat(el.value);
+  if (!isFinite(v)) return 0;
+  let out = v;
+  const min = attrBound(el, 'min');
+  const max = attrBound(el, 'max');
+  if (isFinite(min) && out < min) out = min;
+  if (isFinite(max) && out > max) out = max;
+  return out;
+}
+function num(el) { return parseBound(el); }
+function snapBounds(el) {
+  const raw = String(el.value).trim();
+  if (raw === '' || raw === '-' || raw === '.' || raw === '-.') return;
+  const v = parseFloat(raw);
+  if (!isFinite(v)) return;
+  const bounded = parseBound(el);
+  if (bounded !== v) el.value = String(bounded);
+}
 
 /* ============================================================
    CALCULATE — all math verified to spec
@@ -114,7 +139,7 @@ function calc() {
   const travel     = (driveTime * laborRate) + fuelCost;
   // Subtotal of all direct costs
   const subtotal   = totalLabor + matTotal + overhead + travel;
-  // Taxes on subtotal
+  // Tax allowances on the cost subtotal (not earnings / suggested price)
   const seAmt      = subtotal * sePct;
   const stateAmt   = subtotal * statePct;
   // Total cost
@@ -268,8 +293,8 @@ $.copy.addEventListener('click', function() {
     `  Materials (w/ markup):${fmtD(r.matTotal,   2)}`,
     `  Overhead & Burden:    ${fmtD(r.overhead,   2)}`,
     `  Travel Cost:          ${fmtD(r.travel,     2)}`,
-    `  Self-Employment Tax:  ${fmtD(r.seAmt,      2)}`,
-    `  State Income Tax:     ${fmtD(r.stateAmt,   2)}`,
+    `  SE Tax (on costs):    ${fmtD(r.seAmt,      2)}`,
+    `  State Tax (on costs): ${fmtD(r.stateAmt,   2)}`,
     `  ──────────────────────────────`,
     `  Total Cost:           ${fmtD(r.totalCost,  2)}`,
     '',
@@ -347,6 +372,22 @@ $.pdf.addEventListener('click', function() {
 });
 
 /* ============================================================
+   CUSTOMER QUOTE LINE ITEMS
+   Labor is a loaded remainder (suggested − materials − travel).
+   Materials already include markup. Disclose both on the quote.
+============================================================ */
+const CUST_BUILD_NOTE = 'Labor is loaded: it includes overhead, taxes, and target profit. Materials include markup.';
+
+function customerQuoteParts(r) {
+  const travel      = r.travel > 0 ? r.travel : 0;
+  const laborCharge = r.suggested - r.matTotal - travel;
+  const staxPct     = $.inclStax.checked ? (parseFloat($.staxRate.value) || 0) : 0;
+  const staxAmt     = r.matTotal * (staxPct / 100);
+  const grandTotal  = r.suggested + staxAmt;
+  return { travel, laborCharge, staxPct, staxAmt, grandTotal };
+}
+
+/* ============================================================
    CUSTOMER PDF
 ============================================================ */
 $.custPdf.addEventListener('click', function() {
@@ -358,12 +399,7 @@ $.custPdf.addEventListener('click', function() {
   const dateShort = mon + ' ' + now.getDate() + ' ' + now.getFullYear();
   const dateLong  = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-  // Customer-facing math
-  const travel      = r.travel > 0 ? r.travel : 0;
-  const laborCharge = r.suggested - r.matTotal - travel;
-  const staxPct     = $.inclStax.checked ? (parseFloat($.staxRate.value) || 0) : 0;
-  const staxAmt     = r.matTotal * (staxPct / 100);
-  const grandTotal  = r.suggested + staxAmt;
+  const { travel, laborCharge, staxPct, staxAmt, grandTotal } = customerQuoteParts(r);
 
   // Populate print header
   G('custPrintTitle').textContent = lbl || trd;
@@ -393,10 +429,11 @@ $.custPdf.addEventListener('click', function() {
   function mkRow(label, val) {
     return '<div class="bk-row"><span class="bk-rowlbl">' + label + '</span><span class="bk-rowval">' + fmtD(val, 2) + '</span></div>';
   }
-  let itemsHtml = mkRow('Labor', laborCharge);
-  itemsHtml += mkRow('Materials', r.matTotal);
+  let itemsHtml = mkRow('Labor (loaded)', laborCharge);
+  itemsHtml += mkRow('Materials (incl. markup)', r.matTotal);
   if (staxAmt > 0) itemsHtml += mkRow('Sales Tax (' + staxPct + '%)', staxAmt);
   if (travel  > 0) itemsHtml += mkRow('Travel', travel);
+  itemsHtml += '<p class="cust-quote-note">' + CUST_BUILD_NOTE + '</p>';
   G('custLineItems').innerHTML = itemsHtml;
 
   // Footer: total row + optional payment terms
@@ -432,13 +469,11 @@ $.cust.addEventListener('click', function() {
   const now = new Date();
   const date = now.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
 
-  // Customer-facing line items: overhead/taxes/profit silently folded into labor
-  const travel      = r.travel > 0 ? r.travel : 0;
-  const laborCharge = r.suggested - r.matTotal - travel;
+  const { travel, laborCharge, staxPct, staxAmt, grandTotal } = customerQuoteParts(r);
 
   // Column alignment helper
   function col(label, val) {
-    const spaces = Math.max(1, 22 - label.length);
+    const spaces = Math.max(1, 26 - label.length);
     return '  ' + label + ' '.repeat(spaces) + val;
   }
 
@@ -467,17 +502,14 @@ $.cust.addEventListener('click', function() {
   if (validLine) lines.push(validLine);
   lines.push('═══════════════════════════════════');
   lines.push('');
-  // Sales tax on materials (collected from customer, not contractor income)
-  const staxPct = $.inclStax.checked ? (parseFloat($.staxRate.value) || 0) : 0;
-  const staxAmt = r.matTotal * (staxPct / 100);
-  const grandTotal = r.suggested + staxAmt;
-
-  lines.push(col('Labor:',     fmtD(laborCharge, 2)));
-  lines.push(col('Materials:', fmtD(r.matTotal,  2)));
+  lines.push(col('Labor (loaded):',          fmtD(laborCharge, 2)));
+  lines.push(col('Materials (incl. markup):', fmtD(r.matTotal,  2)));
   if (staxAmt > 0) lines.push(col('Sales Tax (' + staxPct + '%):',  fmtD(staxAmt, 2)));
   if (travel > 0)  lines.push(col('Travel:',     fmtD(travel,       2)));
   lines.push('  ─────────────────────────────────');
   lines.push(col('TOTAL DUE:', fmtD(grandTotal,  2)));
+  lines.push('');
+  lines.push('  ' + CUST_BUILD_NOTE);
   lines.push('');
   if ($.inclTerms.checked && $.payTerms.value.trim()) {
     lines.push('  Payment Terms:');
@@ -611,7 +643,11 @@ updateStickyBar();
 ============================================================ */
 [$.hours, $.workers, $.labor, $.matCost, $.matMark,
  $.overhead, $.drive, $.fuel, $.profit, $.se, $.state
-].forEach(el => { el.addEventListener('input', update); el.addEventListener('change', update); });
+].forEach(el => {
+  el.addEventListener('input', update);
+  el.addEventListener('change', function() { snapBounds(el); update(); });
+  el.addEventListener('blur', function() { snapBounds(el); update(); });
+});
 
 /* ============================================================
    INITIAL RENDER

@@ -188,11 +188,16 @@ function marginClass(m) {
 ============================================================ */
 function update() {
   const r = calc();
+  const isEmpty = r.totalCost === 0 || r.suggested === 0;
+  const resultsEl = G('resultsPanel');
+  if (resultsEl) resultsEl.classList.toggle('is-empty', isEmpty);
 
   // Price
   pop($.price);
   $.price.textContent = fmtD(r.suggested, 2);
-  $.note.textContent  = `Total cost: ${fmtD(r.totalCost, 2)}  ·  Target margin: ${num($.profit)}%`;
+  $.note.textContent  = isEmpty
+    ? 'Enter hours, a labor rate, or materials to see a suggested charge.'
+    : `Total cost: ${fmtD(r.totalCost, 2)}  ·  Target margin: ${num($.profit)}%`;
 
   const { staxPct, staxAmt, grandTotal } = customerQuoteParts(r);
   const showStax = $.inclStax.checked;
@@ -209,20 +214,23 @@ function update() {
   // Net profit
   pop($.netP);
   $.netP.textContent  = fmtD(r.netProfit, 0);
-  $.netP.className    = 'metric-val ' + marginClass(r.realMargin);
+  $.netP.className    = 'metric-val ' + (isEmpty ? 'c-white' : marginClass(r.realMargin));
 
   // Margin
   pop($.margin);
   $.margin.textContent = fmtP(r.realMargin, 1);
-  $.margin.className   = 'metric-val ' + marginClass(r.realMargin);
+  $.margin.className   = 'metric-val ' + (isEmpty ? 'c-white' : marginClass(r.realMargin));
 
   // Effective rate
   pop($.eff);
   $.eff.textContent  = fmtD(r.effRate, 0) + '/hr';
-  $.eff.className    = 'metric-val ' + (r.effRate >= 30 ? 'c-green' : r.effRate >= 15 ? 'c-warn' : 'c-red');
+  $.eff.className    = 'metric-val ' + (isEmpty ? 'c-white' : (r.effRate >= 30 ? 'c-green' : r.effRate >= 15 ? 'c-warn' : 'c-red'));
 
   // Money badge
-  if (r.realMargin >= 10) {
+  if (isEmpty) {
+    $.badge.className = 'money-badge idle';
+    $.badgeTxt.textContent = 'ENTER JOB DETAILS';
+  } else if (r.realMargin >= 10) {
     $.badge.className = 'money-badge yes';
     $.badgeTxt.textContent = '✓ MAKING MONEY';
   } else if (r.realMargin > 0) {

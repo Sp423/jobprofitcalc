@@ -597,7 +597,7 @@ document.querySelectorAll('.tip').forEach(function(t) {
     setTipOpen(t, !t.classList.contains('active'));
   });
   t.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' || e.key === 'Esc') {
       e.preventDefault();
       setTipOpen(t, false);
       t.blur();
@@ -606,7 +606,10 @@ document.querySelectorAll('.tip').forEach(function(t) {
 });
 document.addEventListener('click', function() { closeTips(); });
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeTips();
+  if (e.key !== 'Escape' && e.key !== 'Esc') return;
+  closeTips();
+  const focused = document.activeElement;
+  if (focused && focused.classList && focused.classList.contains('tip')) focused.blur();
 });
 
 /* ============================================================

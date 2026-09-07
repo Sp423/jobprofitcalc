@@ -63,28 +63,13 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Can I still swap just one HVAC component on an existing R-410A system?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Section F of FR Doc. 2026-10387 did not ban single-component R-410A repair parts and did not change EPA's treatment of replacement condensing units used to service existing systems. When labels, manufacturer match rules, and your AHJ allow a like-for-like one-side replacement, price it as a component-swap / service path. This is educational, not legal advice — verify date codes and the current 40 CFR 84.54 text." }
+        "name": "Is replacing only the outdoor unit always legal under federal rules?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not “always”—it depends on whether you are servicing an existing system with a specified-component replacement versus installing a new system, plus manufacturer match rules and your AHJ. FR Doc. 2026-10387 Section F did not ban single-component R-410A repair parts and did not change treatment of replacement condensing units for servicing existing systems. Verify labels and local requirements; this is not legal advice." }
       },
       {
         "@type": "Question",
-        "name": "If I replace the outdoor unit now and the indoor coil later, is the later visit still a like-for-like service path?",
-        "acceptedAnswer": { "@type": "Answer", "text": "EPA's preamble at 91 FR 31319 (FR Doc. 2026-10387) states that replacing all components over time constitutes installation of a new system: swapping the outdoor now without the indoor coil is not a new system under that approach, but replacing the indoor coil later is, and the reverse order is treated the same way. Price that later visit as a changeout / A2L path (or verified pre-2025 inventory), not as forever like-for-like service." }
-      },
-      {
-        "@type": "Question",
-        "name": "Should I add a standard A2L equipment premium to the changeout ticket?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. None of the 2025–2026 market signals invent a national A2L equipment premium. Leave that gap blank and type the distributor invoice for the exact SKUs you will order. Use your pounds and current cylinder cost for refrigerant." }
-      },
-      {
-        "@type": "Question",
-        "name": "Why run two calculator tickets instead of quoting one path?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Same customer and same target job margin, different hours and material stacks. One ticket hides whether the cheaper-looking path actually pays your hour, or whether the changeout still hits margin after the extra crew and matched set. Compare net profit and effective dollars per hour before anyone sees a quote." }
-      },
-      {
-        "@type": "Question",
-        "name": "What if my city or state is stricter than 40 CFR 84.54?",
-        "acceptedAnswer": { "@type": "Answer", "text": "State and local rules can be stricter than the federal baseline — New York is the usual example people raise. Check the AHJ before you federalize the answer on the customer's porch. Price the path the AHJ will pass." }
+        "name": "When does condenser plus indoor coil become a new-system install?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When you are field-assembling a new matched system from those components, treat it as installing a new residential or light commercial AC/HP system under 40 CFR 84.54(c)(1): GWP under 700 path, unless every specified component is manufactured or imported before January 1, 2025 and you can document that inventory path. Replacing both sides is the system fork Allied Air restated on June 16, 2026—price it that way. Doing the sides in sequence does not keep you on the service path forever: 91 FR 31319 (FR Doc. 2026-10387) treats the later replacement of the other side as a new-system install, order does not matter. Price that later visit as changeout / A2L (or verified pre-2025 inventory)." }
       }
     ]
   }
@@ -352,86 +337,76 @@
 
             <p>Assume a residential straight-cool split where the outdoor unit failed, the indoor coil is still serviceable on paper, and you are offering (A) a like-for-like outdoor swap when labels and AHJ allow it, and (B) a matched outdoor-plus-indoor changeout on compliant new-system equipment. Target job margin: 25% of selling price on both. One tech on the swap; two workers on the changeout. Tax percentages identical on both runs.</p>
 
-            <p>Loaded labor is $80 per hour on both runs. Material markup is 20%. Overhead is 20% of labor plus marked-up materials. Drive is one hour plus $20 fuel on both tickets, so the changeout is not padded with a trip the swap also makes. Self-employment tax is 15% and state tax is 5%, each applied to the cost subtotal the way the <a href="/calculator">calculator</a> does. Refrigerant sits inside materials at invoice: Path A reuses the legacy charge after recovery; Path B uses the new-system charge. The outdoor-plus-indoor number is an invoice stand-in, not a claimed A2L premium.</p>
-
-            <h3>Path A — outdoor component swap</h3>
-
-            <p>Four hours, one tech. Replacement outdoor at invoice, plus the drier, fittings, and recovered-and-recharged refrigerant pounds from the data plate.</p>
-
-            <div class="calc-example" role="table" aria-label="Path A outdoor component swap, made-up numbers">
-              <div class="calc-example-header">Path A — like-for-like outdoor swap (made-up numbers)</div>
-              <div class="calc-row"><span>Labor (4 hrs × 1 × $80)</span><span class="calc-val">$320</span></div>
-              <div class="calc-row"><span>Materials invoice (outdoor, small parts, refrigerant)</span><span class="calc-val">$1,400</span></div>
-              <div class="calc-row"><span>Materials after 20% markup</span><span class="calc-val">$1,680</span></div>
-              <div class="calc-row"><span>Overhead (20% of labor + marked-up materials)</span><span class="calc-val">$400</span></div>
-              <div class="calc-row"><span>Drive / fuel</span><span class="calc-val">$100</span></div>
-              <div class="calc-row"><span>Cost subtotal</span><span class="calc-val">$2,500</span></div>
-              <div class="calc-row"><span>SE tax (15% of subtotal)</span><span class="calc-val">$375</span></div>
-              <div class="calc-row"><span>State tax (5% of subtotal)</span><span class="calc-val">$125</span></div>
-              <div class="calc-row total"><span>Total cost</span><span class="calc-val">$3,000</span></div>
-              <div class="calc-row total"><span>Suggested charge (25% margin)</span><span class="calc-val">$4,000</span></div>
-              <div class="calc-row profit"><span>Net profit</span><span class="calc-val">$1,000</span></div>
-              <div class="calc-row profit"><span>Effective $/hr ($1,000 ÷ 4)</span><span class="calc-val">$250</span></div>
+            <div class="calc-example" role="table" aria-label="Made-up swap path inputs">
+              <div class="calc-example-header">Path A — component swap (made-up numbers)</div>
+              <div class="calc-row"><span>Labor hours × workers</span><span class="calc-val">5 hrs × 1</span></div>
+              <div class="calc-row"><span>Hourly labor rate (loaded cost in calculator)</span><span class="calc-val">$85</span></div>
+              <div class="calc-row"><span>Labor cost</span><span class="calc-val">$425</span></div>
+              <div class="calc-row"><span>Outdoor unit at invoice</span><span class="calc-val">$1,600</span></div>
+              <div class="calc-row"><span>Small parts at invoice</span><span class="calc-val">$120</span></div>
+              <div class="calc-row"><span>Refrigerant (example lbs × your invoice $/lb)</span><span class="calc-val">$280</span></div>
+              <div class="calc-row"><span>Material cost subtotal</span><span class="calc-val">$2,000</span></div>
+              <div class="calc-row"><span>Material markup (example 40%)</span><span class="calc-val">→ $2,800 marked-up materials</span></div>
+              <div class="calc-row"><span>Drive / fuel (same-day single trip)</span><span class="calc-val">$40</span></div>
+              <div class="calc-row"><span>Overhead allocated to this ticket (example)</span><span class="calc-val">$200</span></div>
+              <div class="calc-row"><span>Tax % fields</span><span class="calc-val">same as Path B</span></div>
+              <div class="calc-row total"><span>Target margin</span><span class="calc-val">25%</span></div>
             </div>
 
-            <h3>Path B — matched outdoor-plus-indoor changeout</h3>
-
-            <p>Ten hours, two workers. Outdoor and indoor as a matched set at invoice, plus line set, pad hardware, and the new-system refrigerant charge. Same loaded rate, markup, overhead percent, drive, and tax rates as Path A.</p>
-
-            <div class="calc-example" role="table" aria-label="Path B matched changeout, made-up numbers">
-              <div class="calc-example-header">Path B — matched changeout (made-up numbers)</div>
-              <div class="calc-row"><span>Labor (10 hrs × 2 × $80)</span><span class="calc-val">$1,600</span></div>
-              <div class="calc-row"><span>Materials invoice (outdoor, indoor, line set, refrigerant)</span><span class="calc-val">$4,500</span></div>
-              <div class="calc-row"><span>Materials after 20% markup</span><span class="calc-val">$5,400</span></div>
-              <div class="calc-row"><span>Overhead (20% of labor + marked-up materials)</span><span class="calc-val">$1,400</span></div>
-              <div class="calc-row"><span>Drive / fuel</span><span class="calc-val">$100</span></div>
-              <div class="calc-row"><span>Cost subtotal</span><span class="calc-val">$8,500</span></div>
-              <div class="calc-row"><span>SE tax (15% of subtotal)</span><span class="calc-val">$1,275</span></div>
-              <div class="calc-row"><span>State tax (5% of subtotal)</span><span class="calc-val">$425</span></div>
-              <div class="calc-row total"><span>Total cost</span><span class="calc-val">$10,200</span></div>
-              <div class="calc-row total"><span>Suggested charge (25% margin)</span><span class="calc-val">$13,600</span></div>
-              <div class="calc-row profit"><span>Net profit</span><span class="calc-val">$3,400</span></div>
-              <div class="calc-row profit"><span>Effective $/hr ($3,400 ÷ 20)</span><span class="calc-val">$170</span></div>
+            <div class="calc-example" role="table" aria-label="Made-up changeout path inputs">
+              <div class="calc-example-header">Path B — full changeout (made-up numbers)</div>
+              <div class="calc-row"><span>Labor hours × workers</span><span class="calc-val">9 hrs × 2</span></div>
+              <div class="calc-row"><span>Hourly labor rate (loaded cost in calculator)</span><span class="calc-val">$85</span></div>
+              <div class="calc-row"><span>Labor cost</span><span class="calc-val">$1,530</span></div>
+              <div class="calc-row"><span>Matched outdoor + indoor at invoice</span><span class="calc-val">use your invoice (A2L premium blank)</span></div>
+              <div class="calc-row"><span>Example placeholder equipment invoice total</span><span class="calc-val">$3,400</span></div>
+              <div class="calc-row"><span>Line set, pad, disconnect, drain (invoice)</span><span class="calc-val">$350</span></div>
+              <div class="calc-row"><span>Refrigerant for new charge (invoice)</span><span class="calc-val">$360</span></div>
+              <div class="calc-row"><span>Material cost subtotal</span><span class="calc-val">$4,110</span></div>
+              <div class="calc-row"><span>Material markup (example 35%)</span><span class="calc-val">→ $5,548.50 marked-up materials</span></div>
+              <div class="calc-row"><span>Drive / fuel (includes example second trip)</span><span class="calc-val">$95</span></div>
+              <div class="calc-row"><span>Overhead allocated to this ticket (example)</span><span class="calc-val">$380</span></div>
+              <div class="calc-row"><span>Tax % fields</span><span class="calc-val">same % as Path A</span></div>
+              <div class="calc-row total"><span>Target margin</span><span class="calc-val">25%</span></div>
             </div>
 
-            <div class="formula-block">$4,000 swap at $250/hr vs $13,600 changeout at $170/hr — same 25% margin, different hour math</div>
+            <p>Run Path A and Path B separately. On Path A, labor is lighter and materials are one major piece plus recharge. On Path B, labor expands with crew and hours, materials jump because you are selling a matched set, and the same tax percentage sits on a larger cost subtotal—so tax dollars rise even though you did not change the rate fields. Compare suggested customer charge, net profit, the margin the calculator shows (profit ÷ price), and effective $/hr. If Path A shows a thin effective hourly rate after recovery and vacuum time, you will see it before you discount. If Path B’s price looks high only because you forgot material markup or loaded labor, you will see that too.</p>
 
-            <p>Check the tax line: 15% and 5% did not change, but Path B’s $8,500 subtotal carries $1,700 of tax against Path A’s $500. The material-heavy changeout moves the tax dollars even when the rate does not. $10,200 ÷ 0.75 = $13,600. $3,000 ÷ 0.75 = $4,000. Both are 25% of selling price because you set margin, not a markup that only looks like 25%.</p>
+            <div class="formula-block">Price for target margin = Cost basis ÷ (1 − Target margin)</div>
 
-            <h2 id="read-both-tickets">What the Two Tickets Tell You Before You Quote</h2>
+            <p>That is the same relationship as the markup-vs-margin walkthrough: a 25% margin needs enough price that 25% of the selling price remains after cost. Do not “split the difference” between the two suggested charges and call it pricing. Adjust hours, invoice costs, or markup fields that are wrong; keep the margin target honest on both.</p>
 
-            <p>Both paths hit the same 25% target. The changeout leaves more dollars ($3,400 vs $1,000) because the cost base is larger. It pays less per labor hour ($170 vs $250) because twenty crew-hours sit under that leftover. If you only present the $13,600 changeout, you never see that the swap — when it is the allowed and matchable path — can be the better hour. If you only present the $4,000 condenser, you never see whether the changeout still hits margin after the extra crew and the matched set.</p>
+            <h2 id="sanity-checks">Sanity Checks and Common Mistakes</h2>
 
-            <p>The customer can still choose. You should know the margin and the effective dollars per hour on both choices before anyone hears a number. Run your own invoices and hours in the <a href="/calculator">job profit calculator</a>; do not copy these figures onto a real ticket.</p>
+            <ul>
+              <li><strong>Quoting only the changeout “because A2L.”</strong> Classify first. If a single-component service path is allowed, build that ticket anyway so the customer sees a real comparison and you know what each path pays.</li>
+              <li><strong>Quoting a bare condenser with no matched-system ticket when both sides must change.</strong> If the coil is wrong for the outdoor, the warranty will not save the margin. Price the matched path you will actually install.</li>
+              <li><strong>Selling pre-2025 inventory without date codes.</strong> The amended 84.54(c)(1) path needs all specified components manufactured or imported before January 1, 2025. No plate, no path—order verified stock or move to compliant new-system equipment.</li>
+              <li><strong>Mismatched tonnage to “make the old coil work.”</strong> That is a comfort and warranty problem waiting to become a callback. Match to manufacturer rules, not to the cheapest outdoor on the truck.</li>
+              <li><strong>Absorbing refrigerant, recovery, or disposal into labor.</strong> Keep refrigerant visible. Recovery and haul-off are job costs; if they happen, they belong on the ticket that uses them.</li>
+              <li><strong>Padding drive on the swap to close the price gap with the changeout.</strong> Only charge the second trip when there is a second trip. Crooked overhead makes both paths untrustworthy when you review jobs later.</li>
+              <li><strong>Treating material markup as job margin.</strong> Markup on the condenser is not 25% of the selling price. Fix the labels with the <a href="/blog/contractor-markup-vs-margin.html">markup vs margin</a> method, then re-run both paths.</li>
+              <li><strong>Ignoring AHJ stricter rules.</strong> Federal text is not a local permit. If the inspector will not pass the swap, the profitable ticket was fiction.</li>
+              <li><strong>Leaving A2L tooling, leak detection, or training off the changeout path when they are real incremental costs.</strong> Put them in overhead or as materials/tooling recovery the way your books already treat them—do not scare the customer with vibes, and do not eat them silently.</li>
+            </ul>
 
             <div class="callout">
-              <p><strong>Do not stage the second side as a forever service path.</strong> EPA’s preamble at 91 FR 31319 (FR Doc. 2026-10387) states that replacing all components over time constitutes installation of a new system. Swapping the outdoor now without the indoor coil is not a new system under that approach, but replacing the indoor coil later is, and the reverse order is treated the same way. Price that later visit as a changeout / A2L path (or verified pre-2025 inventory), not as forever like-for-like service.</p>
+              <p><strong>When a figure is missing:</strong> no invoice yet → call the distributor and hold the quote, or quote a not-to-exceed with the invoice placeholder called out. No hour history → use a written high/low and protect margin at the high. No date code → do not claim the pre-2025 inventory exception. No AHJ answer → do not promise the swap path in writing.</p>
             </div>
 
-            <h2 id="faq">Frequently Asked Questions</h2>
+            <h2 id="faq">Short FAQ</h2>
 
-            <h3>Can I still swap just one HVAC component on an existing R-410A system?</h3>
-            <p>Section F of FR Doc. 2026-10387 did not ban single-component R-410A repair parts and did not change EPA’s treatment of replacement condensing units used to service existing systems. When labels, manufacturer match rules, and your AHJ allow a like-for-like one-side replacement, price it as a component-swap / service path. This is educational, not legal advice — verify date codes and the current <a href="https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-84/subpart-B/section-84.54">40 CFR 84.54</a> text.</p>
+            <h3>Is replacing only the outdoor unit always legal under federal rules?</h3>
+            <p>Not “always”—it depends on whether you are servicing an existing system with a specified-component replacement versus installing a new system, plus manufacturer match rules and your AHJ. FR Doc. 2026-10387 Section F did not ban single-component R-410A repair parts and did not change treatment of replacement condensing units for servicing existing systems. Verify labels and local requirements; this is not legal advice.</p>
 
-            <h3>If I replace the outdoor unit now and the indoor coil later, is the later visit still a like-for-like service path?</h3>
-            <p>EPA’s preamble at 91 FR 31319 (FR Doc. 2026-10387) states that replacing all components over time constitutes installation of a new system: swapping the outdoor now without the indoor coil is not a new system under that approach, but replacing the indoor coil later is, and the reverse order is treated the same way. Price that later visit as a changeout / A2L path (or verified pre-2025 inventory), not as forever like-for-like service.</p>
-
-            <h3>Should I add a standard A2L equipment premium to the changeout ticket?</h3>
-            <p>No. None of the 2025–2026 market signals invent a national A2L equipment premium. Leave that gap blank and type the distributor invoice for the exact SKUs you will order. Use your pounds and current cylinder cost for refrigerant.</p>
-
-            <h3>Why run two calculator tickets instead of quoting one path?</h3>
-            <p>Same customer and same target job margin, different hours and material stacks. One ticket hides whether the cheaper-looking path actually pays your hour, or whether the changeout still hits margin after the extra crew and matched set. Compare net profit and effective dollars per hour before anyone sees a quote.</p>
-
-            <h3>What if my city or state is stricter than 40 CFR 84.54?</h3>
-            <p>State and local rules can be stricter than the federal baseline—New York is the usual example people raise. Check the AHJ before you federalize the answer on the customer’s porch. Price the path the AHJ will pass.</p>
+            <h3>When does condenser plus indoor coil become a new-system install?</h3>
+            <p>When you are field-assembling a new matched system from those components, treat it as installing a new residential or light commercial AC/HP system under 40 CFR 84.54(c)(1): GWP under 700 path, unless every specified component is manufactured or imported before January 1, 2025 and you can document that inventory path. Replacing both sides is the system fork Allied Air restated on June 16, 2026—price it that way. Doing the sides in sequence does not keep you on the service path forever: 91 FR 31319 (FR Doc. 2026-10387) treats the later replacement of the other side as a new-system install, order does not matter. Price that later visit as changeout / A2L (or verified pre-2025 inventory).</p>
 
             <h2 id="bottom-line">The Bottom Line</h2>
 
-            <p>Classify the job from the failed side, the data plates, and whether you are replacing one specified component or both — including both sides over time. Then build the swap ticket and the changeout ticket on the same target margin. Cite FR Doc. 2026-10387 / 91 FR 31284 and <a href="https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-84/subpart-B/section-84.54">40 CFR 84.54</a>, verify labels and the AHJ, and leave any A2L equipment premium blank until the invoice is in front of you.</p>
+            <p>Classify the failure, read the plates and date codes, check the AHJ, then build a swap ticket and a changeout ticket on the same margin before you present a path. Put hours, matched materials, refrigerant, and only the drive you will actually run into the <a href="/calculator">job profit calculator</a>, and keep broader service-call, flat-rate, and refrigerant markup method on <a href="/hvac-job-pricing">how to price HVAC jobs</a> instead of reinventing it here. The first heating season under the July 27, 2026 effective date is exactly when guessing one path costs you either the job or the margin.</p>
 
-            <p>Open two runs in the <a href="/calculator">job profit calculator</a> before you present either path. Read suggested charge, net profit, and effective dollars per hour on both. The customer can still choose. You should already know what each choice pays.</p>
-
-            <p class="disclaimer">Results are estimates for educational purposes only. This post is not legal, tax, or code advice. Verify date codes, manufacturer match rules, your AHJ, and the current Federal Register and eCFR text. Consult a licensed tax professional and your authority having jurisdiction for advice specific to your situation.</p>
+            <p class="disclaimer">Educational estimates only — not legal, tax, or engineering advice. Verify current EPA text (FR Doc. 2026-10387 / 91 FR 31284 and 40 CFR 84.54), equipment labels, manufacturer match rules, and your AHJ. Consult licensed HVAC, legal, and tax professionals for your situation.</p>
 
           </div><!-- /article-body -->
 
@@ -448,8 +423,8 @@
             <div class="related-grid">
               <a href="/hvac-job-pricing" class="related-card">
                 <span class="related-card-tag">HVAC Pricing</span>
-                <span class="related-card-title">How to Price an HVAC Job: Service Calls, Installs, and Refrigerant</span>
-                <span class="related-card-meta">10 min read</span>
+                <span class="related-card-title">How to Price HVAC Jobs</span>
+                <span class="related-card-meta">Trade guide</span>
               </a>
               <a href="/blog/contractor-markup-vs-margin.html" class="related-card">
                 <span class="related-card-tag">Pricing Strategy</span>
@@ -457,9 +432,9 @@
                 <span class="related-card-meta">6 min read</span>
               </a>
               <a href="/calculator" class="related-card">
-                <span class="related-card-tag">Getting Started</span>
+                <span class="related-card-tag">Tools</span>
                 <span class="related-card-title">Job Profit Calculator</span>
-                <span class="related-card-meta">Free tool</span>
+                <span class="related-card-meta">Live tool</span>
               </a>
             </div>
           </nav>
@@ -481,8 +456,8 @@
               <li><a href="#decision-tree">Classify the job before you open the calculator</a></li>
               <li><a href="#build-both-tickets">Build both tickets side by side</a></li>
               <li><a href="#worked-example">Worked example: same customer, two tickets</a></li>
-              <li><a href="#read-both-tickets">What the two tickets tell you</a></li>
-              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#sanity-checks">Sanity checks and common mistakes</a></li>
+              <li><a href="#faq">Short FAQ</a></li>
               <li><a href="#bottom-line">The bottom line</a></li>
             </ul>
           </div>

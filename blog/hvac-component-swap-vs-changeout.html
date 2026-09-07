@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HVAC Component Swap vs Full Changeout | Pricing the A2L Decision</title>
+  <meta name="description" content="Price an HVAC component swap against a full changeout on the same margin. Classify the A2L path from data plates and 40 CFR 84.54, then build both tickets before you quote.">
+  <link rel="canonical" href="https://jobprofitcalc.com/blog/hvac-component-swap-vs-changeout.html">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:site_name" content="JobProfitCalc">
+  <meta property="og:title" content="HVAC Component Swap vs Full Changeout | Pricing the A2L Decision">
+  <meta property="og:description" content="Price an HVAC component swap against a full changeout on the same margin. Classify the A2L path from data plates and 40 CFR 84.54, then build both tickets before you quote.">
+  <meta property="og:url" content="https://jobprofitcalc.com/blog/hvac-component-swap-vs-changeout.html">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-09-08T00:00:00Z">
+  <meta property="article:modified_time"  content="2026-09-08T00:00:00Z">
+  <meta property="article:author"          content="JobProfitCalc.com">
+  <meta property="article:section"         content="HVAC Pricing">
+  <meta property="og:image" content="https://jobprofitcalc.com/images/hvac-component-swap-vs-changeout.jpg?v=88a4ba42">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jobprofitcalc.com/images/hvac-component-swap-vs-changeout.jpg?v=88a4ba42">
+  <meta name="twitter:title" content="HVAC Component Swap vs Full Changeout | Pricing the A2L Decision">
+  <meta name="twitter:description" content="Price an HVAC component swap against a full changeout on the same margin. Classify the A2L path from data plates and 40 CFR 84.54, then build both tickets before you quote.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Price an HVAC Component Swap Against a Full Changeout",
+    "description": "Price an HVAC component swap against a full changeout on the same margin. Classify the A2L path from data plates and 40 CFR 84.54, then build both tickets before you quote.",
+    "url": "https://jobprofitcalc.com/blog/hvac-component-swap-vs-changeout.html",
+    "image": "https://jobprofitcalc.com/images/hvac-component-swap-vs-changeout.jpg?v=88a4ba42",
+    "datePublished": "2026-09-08",
+    "dateModified": "2026-09-08",
+    "author": { "@type": "Organization", "name": "JobProfitCalc.com" },
+    "publisher": { "@type": "Organization", "name": "JobProfitCalc.com", "url": "https://jobprofitcalc.com", "logo": { "@type": "ImageObject", "url": "https://jobprofitcalc.com/og-image.png" } },
+    "mainEntityOfPage": "https://jobprofitcalc.com/blog/hvac-component-swap-vs-changeout.html"
+  }
+  </script>
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobprofitcalc.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jobprofitcalc.com/blog/"},
+      {"@type": "ListItem", "position": 3, "name": "HVAC Component Swap vs Changeout", "item": "https://jobprofitcalc.com/blog/hvac-component-swap-vs-changeout.html"}
+    ]
+  }
+  </script>
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I still swap just one HVAC component on an existing R-410A system?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Section F of FR Doc. 2026-10387 did not ban single-component R-410A repair parts and did not change EPA's treatment of replacement condensing units used to service existing systems. When labels, manufacturer match rules, and your AHJ allow a like-for-like one-side replacement, price it as a component-swap / service path. This is educational, not legal advice — verify date codes and the current 40 CFR 84.54 text." }
+      },
+      {
+        "@type": "Question",
+        "name": "If I replace the outdoor unit now and the indoor coil later, is the later visit still a like-for-like service path?",
+        "acceptedAnswer": { "@type": "Answer", "text": "EPA's preamble at 91 FR 31319 (FR Doc. 2026-10387) states that replacing all components over time constitutes installation of a new system: swapping the outdoor now without the indoor coil is not a new system under that approach, but replacing the indoor coil later is, and the reverse order is treated the same way. Price that later visit as a changeout / A2L path (or verified pre-2025 inventory), not as forever like-for-like service." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I add a standard A2L equipment premium to the changeout ticket?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. None of the 2025–2026 market signals invent a national A2L equipment premium. Leave that gap blank and type the distributor invoice for the exact SKUs you will order. Use your pounds and current cylinder cost for refrigerant." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why run two calculator tickets instead of quoting one path?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Same customer and same target job margin, different hours and material stacks. One ticket hides whether the cheaper-looking path actually pays your hour, or whether the changeout still hits margin after the extra crew and matched set. Compare net profit and effective dollars per hour before anyone sees a quote." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if my city or state is stricter than 40 CFR 84.54?",
+        "acceptedAnswer": { "@type": "Answer", "text": "State and local rules can be stricter than the federal baseline — New York is the usual example people raise. Check the AHJ before you federalize the answer on the customer's porch. Price the path the AHJ will pass." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYWHVVF5J0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VYWHVVF5J0');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7735208952918665"
+       crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-base:    #0D1B2A;
+      --bg-surface: #142232;
+      --bg-elevated:#1B2F44;
+      --accent:     #F59E0B;
+      --accent-hover:#FBB924;
+      --text-pri:   #F1F5F9;
+      --text-sec:   #94A3B8;
+      --text-muted: #7A95B0;
+      --border:     #1E3A54;
+      --border-hi:  #2B5070;
+      --font-disp:  'Barlow Condensed', sans-serif;
+      --font-body:  'DM Sans', sans-serif;
+      --r:          8px;
+      --r-lg:       12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg-base); color: var(--text-pri); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(rgba(245,158,11,0.035) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; z-index: 0; }
+    .page-wrap { position: relative; z-index: 1; }
+    .site-header { background: var(--bg-surface); border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 24px rgba(0,0,0,0.5); }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 62px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .logo-mark { width: 38px; height: 38px; background: var(--accent); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-family: var(--font-disp); font-weight: 800; font-size: 15px; color: var(--bg-base); letter-spacing: -0.5px; line-height: 1; flex-shrink: 0; }
+    .logo-name { font-family: var(--font-disp); font-weight: 800; font-size: 21px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-pri); }
+    .logo-name em { color: var(--accent); font-style: normal; }
+    .site-nav { display: flex; gap: 6px; align-items: center; }
+    .site-nav a { color: var(--text-sec); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: var(--r); transition: color 0.18s, background 0.18s; }
+    .site-nav a:hover { color: var(--text-pri); background: rgba(255,255,255,0.05); }
+    .nav-btn { background: var(--accent) !important; color: var(--bg-base) !important; font-weight: 700 !important; padding: 7px 16px !important; border-radius: var(--r) !important; margin-left: 6px; }
+    .nav-btn:hover { background: var(--accent-hover) !important; }
+    @media (max-width: 700px) { .site-nav .hide-mobile { display: none; } .logo-name { font-size: 17px; } }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 280px; gap: 56px; padding: 56px 0 80px; align-items: start; }
+    @media (max-width: 960px) { .article-layout { grid-template-columns: 1fr; } .article-sidebar { display: none; } }
+    .breadcrumb { padding: 20px 0 0; font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.18s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { opacity: 0.5; }
+    .article-header { margin-bottom: 40px; }
+    .article-tag { display: inline-block; font-family: var(--font-disp); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); border-radius: 4px; padding: 3px 8px; margin-bottom: 16px; }
+    .article-header h1 { font-family: var(--font-disp); font-weight: 800; font-size: clamp(30px, 4vw, 48px); text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pri); line-height: 1.07; margin-bottom: 20px; }
+    .article-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .article-meta-sep { opacity: 0.4; }
+    .article-body { font-size: 15px; color: var(--text-sec); line-height: 1.8; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-body h2 { font-family: var(--font-disp); font-weight: 800; font-size: 26px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pri); line-height: 1.1; margin: 44px 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .article-body h3 { font-family: var(--font-disp); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-pri); line-height: 1.15; margin: 28px 0 12px; }
+    .article-body strong { color: var(--text-pri); font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body a { color: var(--accent); text-decoration: none; }
+    .article-body a:hover { text-decoration: underline; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .article-body ul li, .article-body ol li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-sec); line-height: 1.7; }
+    .article-body ul li::before { content: '▸'; color: var(--accent); font-size: 11px; margin-top: 4px; flex-shrink: 0; }
+    .article-body ol { counter-reset: ol-counter; }
+    .article-body ol li { counter-increment: ol-counter; }
+    .article-body ol li::before { content: counter(ol-counter) '.'; color: var(--accent); font-family: var(--font-disp); font-weight: 700; font-size: 13px; margin-top: 2px; flex-shrink: 0; min-width: 18px; }
+    .callout { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25); border-left: 4px solid var(--accent); border-radius: var(--r); padding: 18px 22px; margin: 24px 0; }
+    .callout p { margin-bottom: 0; color: var(--text-sec); }
+    .callout strong { color: var(--accent); }
+    .formula-block { background: var(--bg-elevated); border: 1px solid var(--border-hi); border-radius: var(--r); padding: 16px 20px; margin: 20px 0; font-family: 'DM Sans', monospace; font-size: 14px; color: var(--text-pri); text-align: center; letter-spacing: 0.3px; }
+    .article-body .disclaimer { font-size: 13px; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 32px; }
+    .calc-example { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin: 24px 0; }
+    .calc-example-header { background: var(--bg-elevated); padding: 14px 20px; font-family: var(--font-disp); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 20px; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text-sec); }
+    .calc-row:last-child { border-bottom: none; }
+    .calc-row.total { background: rgba(245,158,11,0.06); color: var(--text-pri); font-weight: 600; }
+    .calc-row.total .calc-val { color: var(--accent); font-size: 16px; }
+    .calc-row.profit { background: rgba(34,197,94,0.06); }
+    .calc-row.profit .calc-val { color: #22C55E; }
+    .calc-val { font-weight: 600; color: var(--text-pri); }
+    .article-sidebar { position: sticky; top: 82px; display: flex; flex-direction: column; gap: 20px; }
+    .sidebar-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; }
+    .sidebar-card-title { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list a { display: block; padding: 7px 10px; border-radius: var(--r); font-size: 13px; color: var(--text-sec); text-decoration: none; transition: color 0.18s, background 0.18s; line-height: 1.4; }
+    .toc-list a:hover { color: var(--accent); background: rgba(245,158,11,0.07); }
+    .cta-card { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: var(--r-lg); padding: 20px; }
+    .cta-card h3 { font-family: var(--font-disp); font-weight: 800; font-size: 18px; text-transform: uppercase; color: var(--text-pri); margin-bottom: 8px; }
+    .cta-card p { font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 16px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: var(--bg-base); font-family: var(--font-disp); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: var(--r); text-decoration: none; width: 100%; justify-content: center; transition: background 0.18s; }
+    .cta-btn:hover { background: var(--accent-hover); }
+    .related-section { border-top: 1px solid var(--border); padding-top: 40px; margin-top: 52px; }
+    .related-label { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 20px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .related-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: border-color 0.2s; }
+    .related-card:hover { border-color: var(--accent); }
+    .related-card-tag { font-family: var(--font-disp); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); }
+    .related-card-title { font-family: var(--font-disp); font-weight: 700; font-size: 17px; text-transform: uppercase; color: var(--text-pri); line-height: 1.2; }
+    .related-card:hover .related-card-title { color: var(--accent); }
+    .related-card-meta { font-size: 12px; color: var(--text-muted); }
+    .site-footer { background: var(--bg-surface); border-top: 1px solid var(--border); padding: 48px 24px 32px; position: relative; z-index: 1; }
+    .footer-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto auto; gap: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 12px; max-width: 280px; }
+    .footer-col-title { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: var(--text-sec); text-decoration: none; font-size: 13px; transition: color 0.18s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .footer-copy { color: var(--text-muted); font-size: 12px; }
+    .footer-disc { font-size: 11px; color: var(--text-muted); max-width: 500px; }
+    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+    .article-body figure { margin: 0 0 32px; }
+    .article-body figure img { width: 100%; height: auto; border-radius: var(--r-lg); display: block; }
+    .article-body figcaption { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 8px; font-style: italic; line-height: 1.5; }
+    .article-ad-leader { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 28px 0; }
+    .article-ad-leader img { display: block; width: 728px; height: 90px; }
+    @media (max-width: 760px) { .article-ad-leader img { width: 100%; max-width: 728px; height: auto; } }
+    .article-ad-rect { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 32px 0 0; border-top: 1px solid var(--border); margin-top: 4px; }
+    .article-ad-rect img { display: block; width: 300px; height: 250px; border-radius: var(--r); }
+    .sidebar-ad-zone { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .sidebar-ad-zone img { display: block; width: 100%; height: auto; max-width: 252px; border-radius: var(--r); }
+    .ad-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); text-align: center; }
+    .menu-btn { display: none; background: none; border: none; cursor: pointer; color: #94A3B8; padding: 6px 8px; border-radius: 8px; font-size: 22px; line-height: 1; align-items: center; justify-content: center; transition: color 0.18s, background 0.18s; }
+    .menu-btn:hover { color: #F59E0B; background: rgba(255,255,255,0.05); }
+    @media (max-width: 700px) { .menu-btn { display: flex; } }
+    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #142232; border-top: 1px solid #1E3A54; border-bottom: 2px solid #F59E0B; box-shadow: 0 8px 32px rgba(0,0,0,0.5); flex-direction: column; z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { display: block; color: #94A3B8; text-decoration: none; padding: 15px 24px; font-size: 15px; font-weight: 500; border-bottom: 1px solid #1E3A54; font-family: 'DM Sans', sans-serif; transition: color 0.18s, background 0.18s; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #F59E0B; background: rgba(255,255,255,0.03); }
+    .mobile-menu .mob-cta { color: #F59E0B !important; font-weight: 700 !important; background: rgba(245,158,11,0.06); }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="JobProfitCalc home">
+        <div class="logo-mark" aria-hidden="true">JPC</div>
+        <span class="logo-name">Job<em>Profit</em>Calc</span>
+      </a>
+      <nav class="site-nav" aria-label="Site navigation">
+        <a href="/#how-to-price" class="hide-mobile">Pricing Guide</a>
+        <a href="/#tips" class="hide-mobile">Trade Tips</a>
+        <a href="/#faq" class="hide-mobile">FAQ</a>
+        <a href="/blog/" class="hide-mobile">Blog</a>
+        <a href="/calculator" class="nav-btn">Calculate Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-icon">☰</span></button>
+      </nav>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+      <a href="/#how-to-price">Pricing Guide</a>
+      <a href="/#tips">Trade Tips</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
+      <a href="/calculator" class="mob-cta">Calculate Now</a>
+    </div>
+  </header>
+
+  <main role="main">
+    <div class="container">
+
+      <!-- Ad Zone A: Leaderboard -->
+      <div class="article-ad-leader">
+        <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+          <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" width="728" height="90">
+        </a>
+        <p class="ad-label">Advertisement</p>
+      </div>
+      <!-- End Ad Zone A -->
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="/blog/">Blog</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">HVAC Component Swap vs Changeout</span>
+      </nav>
+
+      <div class="article-layout">
+
+        <article>
+          <header class="article-header">
+            <div class="article-tag">HVAC Pricing</div>
+            <h1>How to Price an HVAC Component Swap Against a Full Changeout</h1>
+            <div class="article-meta">
+              <span>September 8, 2026</span>
+              <span class="article-meta-sep">·</span>
+              <span>11 min read</span>
+              <span class="article-meta-sep">·</span>
+              <span>JobProfitCalc.com</span>
+            </div>
+          </header>
+
+          <!-- Ad Zone A: Leaderboard sits here in production -->
+
+          <div class="article-body">
+
+            <figure>
+              <img src="/images/hvac-component-swap-vs-changeout.jpg" alt="Illustrated HVAC contractor comparing a component-swap ticket to a full-changeout ticket for the same customer" width="1280" height="640" class="post-thumb" fetchpriority="high">
+              <figcaption>Build the swap ticket and the changeout ticket on the same target margin before you present either path.</figcaption>
+            </figure>
+
+            <p>Price both paths on the same customer and the same target margin: a single-component swap when like-for-like servicing is allowed, and a matched condenser-plus-indoor changeout when you are installing a new system. Classify the job from the failed side, the data plate, and whether you are replacing one specified component or both, then load hours, materials, refrigerant, and tax into separate calculator runs so you can compare net profit and effective dollars per hour before anyone sees a quote.</p>
+
+            <p>The costly mistake is presenting one option—a forced full changeout, or a bare condenser with no second ticket—without building both stacks. Fall is when that fork shows up on real calls: FR Doc. 2026-10387 (91 FR 31284), published May 26, 2026 and effective July 27, 2026, removed the hard install deadline for residential and light commercial AC/HP systems when every specified component was manufactured or imported before January 1, 2025, so this is the first heating season under that amended inventory path at <a href="https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-84/subpart-B/section-84.54">40 CFR 84.54</a>. HARDI reported on November 19, 2025 that A2L equipment was about 91% of distributor unitary sales in September 2025. ACCA’s May 22, 2026 note tied the lift of the deadline to refrigerant economics you still have to price as your own line. Energy.gov’s fall furnace-check guidance clusters seasonal maintenance traffic, and Allied Air’s June 16, 2026 manufacturer note restated the field rule of thumb: one component can be a repair; replacing both sides is treated as a system, with pre-2025 inventory installable while supplies last. None of those signals invent a national A2L equipment premium—leave that blank and use your invoice.</p>
+
+            <h2 id="why-the-fork">Why the Fork Matters for the Quote</h2>
+
+            <p>A failed outdoor unit on an existing R-410A split is not automatically a “must change out everything” sales script, and it is not automatically a “drop in any condenser” parts ticket. The regulatory path and the cost stack move together. When you treat a condenser-plus-coil install as a new system, you are usually on the A2L / GWP under 700 equipment path unless every specified component is verified pre-2025 manufacture or import inventory. When you replace one side only for servicing an existing system, you may still be in like-for-like territory when labels, manufacturer match rules, and your authority having jurisdiction (AHJ) allow it. Section F of FR Doc. 2026-10387 did not ban single-component R-410A repair parts and did not change EPA’s treatment of replacement condensing units used to service existing systems.</p>
+
+            <p>State and local rules can be stricter than the federal baseline—New York is the usual example people raise—so check the AHJ before you federalize the answer on the customer’s porch. This post is educational, not legal advice. Verify date codes, “for servicing existing equipment” labels, and manufacturer matching yourself, and read the current Federal Register and eCFR text rather than an old FAQ that still frames a blanket install cutoff.</p>
+
+            <h2 id="decision-tree">Classify the Job Before You Open the Calculator</h2>
+
+            <p>Walk the equipment first. The quote is only as honest as the classification.</p>
+
+            <ol>
+              <li><strong>Name what failed.</strong> Outdoor condensing unit, indoor coil or air handler, compressor-only inside the outdoor cabinet, or both sides. Write that on the ticket before you price anything. A compressor job inside an existing outdoor shell is not the same scope as swapping the outdoor unit, and neither is the same as pairing a new outdoor with a new indoor.</li>
+              <li><strong>Read the existing data plates.</strong> Refrigerant type, tonnage, model and serial, and any match or AHRI pairing notes come from the plates on the equipment in front of you. Photograph them. If a plate is missing or unreadable, stop guessing from memory—pull the manufacturer lookup or treat the job as needing a matched changeout until you can verify.</li>
+              <li><strong>Read the candidate replacement labels and date codes.</strong> Manufacture or import date, refrigerant designation, and any “servicing existing equipment” language live on the carton and unit labels your distributor sends. For a pre-2025 inventory path on a new-system install, you need every specified component of that system manufactured or imported before January 1, 2025, per the amended text at 40 CFR 84.54(c)(1). If you cannot document that, do not sell that path as compliant inventory.</li>
+              <li><strong>Decide one component vs both — including both sides over time.</strong> One failed side, like-for-like replacement that your manufacturer and AHJ allow → price as a component swap / service path. Condenser and indoor coil together as a new matched system → price as a changeout on the A2L (or other compliant low-GWP) path, unless the full set is verified qualifying pre-2025 inventory. Allied Air’s June 16, 2026 summary matches that field split: one component can be OK for repair; both sides means you are in system territory. Do not treat staging as a workaround. EPA’s preamble at 91 FR 31319 (FR Doc. 2026-10387) states that replacing all components over time constitutes installation of a new system: swapping the outdoor now without the indoor coil is not a new system under that approach, but replacing the indoor coil later is, and the reverse order is treated the same way. Price that later visit as a changeout / A2L path (or verified pre-2025 inventory), not as forever like-for-like service.</li>
+              <li><strong>Check the AHJ and match rules before you lock the path.</strong> Local code, permit, and manufacturer warranty match requirements can kill a “legal under federal text” swap. If the AHJ is stricter, price the path the AHJ will pass—not the path that sounded cheapest on the phone.</li>
+              <li><strong>Only then open two calculator drafts.</strong> Same customer, same target job margin, different hours and material stacks. The regulatory fork is a cost-stack fork.</li>
+            </ol>
+
+            <div class="callout">
+              <p><strong>Stale framing to drop:</strong> a universal R-410A installation cutoff tied to New Year's Day 2026 for every system, or a claim that every new split must be GWP under 700 with no inventory exception. The reconsideration rule at FR Doc. 2026-10387 / 91 FR 31284 removed the install deadline for qualifying pre-2025 specified-component inventory and left single-component servicing treatment in place. Cite the FR and 40 CFR 84.54, then verify labels on the job.</p>
+            </div>
+
+            <h2 id="build-both-tickets">Build the Swap Ticket and the Changeout Ticket Side by Side</h2>
+
+            <p>Use the same target margin on both paths. If you want 25% of the selling price, you are setting margin—not typing 25% into a material markup box and calling it done. Keep material markup and job margin separate the way <a href="/blog/contractor-markup-vs-margin.html">markup vs margin</a> walks on one ticket. Enter each path in the <a href="/calculator">job profit calculator</a> as its own run.</p>
+
+            <h3>Numbered build for both paths</h3>
+
+            <ol>
+              <li><strong>Lock the margin target and the tax percentages first.</strong> Desired profit margin is the same field on both runs. SE tax % and state tax % (the calculator applies them to your cost subtotal) stay the same percentages too. What changes is the material-heavy changeout’s larger cost base, so the tax dollars move even when the rate does not.</li>
+              <li><strong>Set labor hours and workers from the scope, not from a single habit number.</strong> Swap path: hours and crew for recovering the old charge, swapping the one component, reconnecting, evacuating, and charging. Changeout path: hours and crew for outdoor and indoor, line-set decisions, possible pad or disconnect work, recovery, and startup. Pull planned hours from your time records on similar scopes; if you have no similar job, write a high and low hour range and run both, then pick the quote that still hits margin at the high end. Loaded labor cost—not the wage alone—belongs in the hourly labor rate field. If you still quote off wage, fix that with your <a href="/blog/burdened-labor-rate-for-contractors.html">burdened labor rate</a> before you compare paths.</li>
+              <li><strong>Enter materials as one part vs a matched set.</strong> Swap: the replacement condenser or coil at your invoice cost, plus the small parts that actually ride that ticket (driers, fittings, pad bolts—only what this job uses). Changeout: outdoor and indoor as a matched set at invoice cost, plus line set, pad, disconnect, drain, and other install materials. Material cost is what you paid. Material markup is its own field—do not confuse it with job margin. For refrigerant markup method and broader install pricing structure, use <a href="/hvac-job-pricing">HVAC job pricing</a>; this post does not restate that section.</li>
+              <li><strong>Put refrigerant on its own line inside materials (or as its own material entry you can see).</strong> Swap path often reuses the legacy refrigerant type for a like-for-like service charge after recovery. Changeout path usually means a different refrigerant family when you are on new A2L equipment. Either way, use the pounds from the data plate or weighed recovery and your current cylinder invoice—never a memorized “per pound” from two seasons ago. Leave any equipment price gap between legacy and A2L blank in this method; type the numbers from the distributor invoice for the exact SKUs you will order.</li>
+              <li><strong>Add overhead and drive only when they are real for that path.</strong> If both quotes are the same trip pattern, keep drive and overhead allocation consistent so you are not padding one path. If the changeout needs a second trip for crane, attic coil, or inspection that the swap does not, put that second trip’s drive/fuel and any extra overhead only on the changeout run.</li>
+              <li><strong>Read suggested charge, net profit, margin, and effective $/hr on both runs before you talk options.</strong> Presenting only the changeout (or only the condenser) hides whether the “cheaper” path actually pays your hour. The customer can still choose; you should know the margin on both choices.</li>
+            </ol>
+
+            <div class="formula-block">Same customer + same target margin → two calculator runs → compare net profit and effective $/hr</div>
+
+            <h2 id="worked-example">Worked Example: Same Customer, Two Tickets</h2>
+
+            <p>These are <strong>made-up round numbers</strong> chosen so the arithmetic is easy to follow. They are not market prices, typical jobs, or a claim about what A2L equipment “usually” costs above R-410A. For A2L outdoor and indoor pricing, use your invoice; the example leaves that premium unstated on purpose.</p>
+
+            <p>Assume a residential straight-cool split where the outdoor unit failed, the indoor coil is still serviceable on paper, and you are offering (A) a like-for-like outdoor swap when labels and AHJ allow it, and (B) a matched outdoor-plus-indoor changeout on compliant new-system equipment. Target job margin: 25% of selling price on both. One tech on the swap; two workers on the changeout. Tax percentages identical on both runs.</p>
+
+            <p>Loaded labor is $80 per hour on both runs. Material markup is 20%. Overhead is 20% of labor plus marked-up materials. Drive is one hour plus $20 fuel on both tickets, so the changeout is not padded with a trip the swap also makes. Self-employment tax is 15% and state tax is 5%, each applied to the cost subtotal the way the <a href="/calculator">calculator</a> does. Refrigerant sits inside materials at invoice: Path A reuses the legacy charge after recovery; Path B uses the new-system charge. The outdoor-plus-indoor number is an invoice stand-in, not a claimed A2L premium.</p>
+
+            <h3>Path A — outdoor component swap</h3>
+
+            <p>Four hours, one tech. Replacement outdoor at invoice, plus the drier, fittings, and recovered-and-recharged refrigerant pounds from the data plate.</p>
+
+            <div class="calc-example" role="table" aria-label="Path A outdoor component swap, made-up numbers">
+              <div class="calc-example-header">Path A — like-for-like outdoor swap (made-up numbers)</div>
+              <div class="calc-row"><span>Labor (4 hrs × 1 × $80)</span><span class="calc-val">$320</span></div>
+              <div class="calc-row"><span>Materials invoice (outdoor, small parts, refrigerant)</span><span class="calc-val">$1,400</span></div>
+              <div class="calc-row"><span>Materials after 20% markup</span><span class="calc-val">$1,680</span></div>
+              <div class="calc-row"><span>Overhead (20% of labor + marked-up materials)</span><span class="calc-val">$400</span></div>
+              <div class="calc-row"><span>Drive / fuel</span><span class="calc-val">$100</span></div>
+              <div class="calc-row"><span>Cost subtotal</span><span class="calc-val">$2,500</span></div>
+              <div class="calc-row"><span>SE tax (15% of subtotal)</span><span class="calc-val">$375</span></div>
+              <div class="calc-row"><span>State tax (5% of subtotal)</span><span class="calc-val">$125</span></div>
+              <div class="calc-row total"><span>Total cost</span><span class="calc-val">$3,000</span></div>
+              <div class="calc-row total"><span>Suggested charge (25% margin)</span><span class="calc-val">$4,000</span></div>
+              <div class="calc-row profit"><span>Net profit</span><span class="calc-val">$1,000</span></div>
+              <div class="calc-row profit"><span>Effective $/hr ($1,000 ÷ 4)</span><span class="calc-val">$250</span></div>
+            </div>
+
+            <h3>Path B — matched outdoor-plus-indoor changeout</h3>
+
+            <p>Ten hours, two workers. Outdoor and indoor as a matched set at invoice, plus line set, pad hardware, and the new-system refrigerant charge. Same loaded rate, markup, overhead percent, drive, and tax rates as Path A.</p>
+
+            <div class="calc-example" role="table" aria-label="Path B matched changeout, made-up numbers">
+              <div class="calc-example-header">Path B — matched changeout (made-up numbers)</div>
+              <div class="calc-row"><span>Labor (10 hrs × 2 × $80)</span><span class="calc-val">$1,600</span></div>
+              <div class="calc-row"><span>Materials invoice (outdoor, indoor, line set, refrigerant)</span><span class="calc-val">$4,500</span></div>
+              <div class="calc-row"><span>Materials after 20% markup</span><span class="calc-val">$5,400</span></div>
+              <div class="calc-row"><span>Overhead (20% of labor + marked-up materials)</span><span class="calc-val">$1,400</span></div>
+              <div class="calc-row"><span>Drive / fuel</span><span class="calc-val">$100</span></div>
+              <div class="calc-row"><span>Cost subtotal</span><span class="calc-val">$8,500</span></div>
+              <div class="calc-row"><span>SE tax (15% of subtotal)</span><span class="calc-val">$1,275</span></div>
+              <div class="calc-row"><span>State tax (5% of subtotal)</span><span class="calc-val">$425</span></div>
+              <div class="calc-row total"><span>Total cost</span><span class="calc-val">$10,200</span></div>
+              <div class="calc-row total"><span>Suggested charge (25% margin)</span><span class="calc-val">$13,600</span></div>
+              <div class="calc-row profit"><span>Net profit</span><span class="calc-val">$3,400</span></div>
+              <div class="calc-row profit"><span>Effective $/hr ($3,400 ÷ 20)</span><span class="calc-val">$170</span></div>
+            </div>
+
+            <div class="formula-block">$4,000 swap at $250/hr vs $13,600 changeout at $170/hr — same 25% margin, different hour math</div>
+
+            <p>Check the tax line: 15% and 5% did not change, but Path B’s $8,500 subtotal carries $1,700 of tax against Path A’s $500. The material-heavy changeout moves the tax dollars even when the rate does not. $10,200 ÷ 0.75 = $13,600. $3,000 ÷ 0.75 = $4,000. Both are 25% of selling price because you set margin, not a markup that only looks like 25%.</p>
+
+            <h2 id="read-both-tickets">What the Two Tickets Tell You Before You Quote</h2>
+
+            <p>Both paths hit the same 25% target. The changeout leaves more dollars ($3,400 vs $1,000) because the cost base is larger. It pays less per labor hour ($170 vs $250) because twenty crew-hours sit under that leftover. If you only present the $13,600 changeout, you never see that the swap — when it is the allowed and matchable path — can be the better hour. If you only present the $4,000 condenser, you never see whether the changeout still hits margin after the extra crew and the matched set.</p>
+
+            <p>The customer can still choose. You should know the margin and the effective dollars per hour on both choices before anyone hears a number. Run your own invoices and hours in the <a href="/calculator">job profit calculator</a>; do not copy these figures onto a real ticket.</p>
+
+            <div class="callout">
+              <p><strong>Do not stage the second side as a forever service path.</strong> EPA’s preamble at 91 FR 31319 (FR Doc. 2026-10387) states that replacing all components over time constitutes installation of a new system. Swapping the outdoor now without the indoor coil is not a new system under that approach, but replacing the indoor coil later is, and the reverse order is treated the same way. Price that later visit as a changeout / A2L path (or verified pre-2025 inventory), not as forever like-for-like service.</p>
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <h3>Can I still swap just one HVAC component on an existing R-410A system?</h3>
+            <p>Section F of FR Doc. 2026-10387 did not ban single-component R-410A repair parts and did not change EPA’s treatment of replacement condensing units used to service existing systems. When labels, manufacturer match rules, and your AHJ allow a like-for-like one-side replacement, price it as a component-swap / service path. This is educational, not legal advice — verify date codes and the current <a href="https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-84/subpart-B/section-84.54">40 CFR 84.54</a> text.</p>
+
+            <h3>If I replace the outdoor unit now and the indoor coil later, is the later visit still a like-for-like service path?</h3>
+            <p>EPA’s preamble at 91 FR 31319 (FR Doc. 2026-10387) states that replacing all components over time constitutes installation of a new system: swapping the outdoor now without the indoor coil is not a new system under that approach, but replacing the indoor coil later is, and the reverse order is treated the same way. Price that later visit as a changeout / A2L path (or verified pre-2025 inventory), not as forever like-for-like service.</p>
+
+            <h3>Should I add a standard A2L equipment premium to the changeout ticket?</h3>
+            <p>No. None of the 2025–2026 market signals invent a national A2L equipment premium. Leave that gap blank and type the distributor invoice for the exact SKUs you will order. Use your pounds and current cylinder cost for refrigerant.</p>
+
+            <h3>Why run two calculator tickets instead of quoting one path?</h3>
+            <p>Same customer and same target job margin, different hours and material stacks. One ticket hides whether the cheaper-looking path actually pays your hour, or whether the changeout still hits margin after the extra crew and matched set. Compare net profit and effective dollars per hour before anyone sees a quote.</p>
+
+            <h3>What if my city or state is stricter than 40 CFR 84.54?</h3>
+            <p>State and local rules can be stricter than the federal baseline—New York is the usual example people raise. Check the AHJ before you federalize the answer on the customer’s porch. Price the path the AHJ will pass.</p>
+
+            <h2 id="bottom-line">The Bottom Line</h2>
+
+            <p>Classify the job from the failed side, the data plates, and whether you are replacing one specified component or both — including both sides over time. Then build the swap ticket and the changeout ticket on the same target margin. Cite FR Doc. 2026-10387 / 91 FR 31284 and <a href="https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-84/subpart-B/section-84.54">40 CFR 84.54</a>, verify labels and the AHJ, and leave any A2L equipment premium blank until the invoice is in front of you.</p>
+
+            <p>Open two runs in the <a href="/calculator">job profit calculator</a> before you present either path. Read suggested charge, net profit, and effective dollars per hour on both. The customer can still choose. You should already know what each choice pays.</p>
+
+            <p class="disclaimer">Results are estimates for educational purposes only. This post is not legal, tax, or code advice. Verify date codes, manufacturer match rules, your AHJ, and the current Federal Register and eCFR text. Consult a licensed tax professional and your authority having jurisdiction for advice specific to your situation.</p>
+
+          </div><!-- /article-body -->
+
+          <!-- Ad Zone D: Rectangle -->
+          <div class="article-ad-rect">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250" loading="lazy">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
+          <nav class="related-section" aria-label="Related articles">
+            <p class="related-label">Continue Reading</p>
+            <div class="related-grid">
+              <a href="/hvac-job-pricing" class="related-card">
+                <span class="related-card-tag">HVAC Pricing</span>
+                <span class="related-card-title">How to Price an HVAC Job: Service Calls, Installs, and Refrigerant</span>
+                <span class="related-card-meta">10 min read</span>
+              </a>
+              <a href="/blog/contractor-markup-vs-margin.html" class="related-card">
+                <span class="related-card-tag">Pricing Strategy</span>
+                <span class="related-card-title">Markup vs Margin on a Real Ticket</span>
+                <span class="related-card-meta">6 min read</span>
+              </a>
+              <a href="/calculator" class="related-card">
+                <span class="related-card-tag">Getting Started</span>
+                <span class="related-card-title">Job Profit Calculator</span>
+                <span class="related-card-meta">Free tool</span>
+              </a>
+            </div>
+          </nav>
+
+        </article>
+
+        <aside class="article-sidebar" aria-label="Article navigation">
+          <div class="sidebar-ad-zone">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250" loading="lazy">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
+          <div class="sidebar-card">
+            <p class="sidebar-card-title">In This Article</p>
+            <ul class="toc-list">
+              <li><a href="#why-the-fork">Why the fork matters for the quote</a></li>
+              <li><a href="#decision-tree">Classify the job before you open the calculator</a></li>
+              <li><a href="#build-both-tickets">Build both tickets side by side</a></li>
+              <li><a href="#worked-example">Worked example: same customer, two tickets</a></li>
+              <li><a href="#read-both-tickets">What the two tickets tell you</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#bottom-line">The bottom line</a></li>
+            </ul>
+          </div>
+          <div class="cta-card">
+            <h3>Price Both Paths</h3>
+            <p>Open two calculator runs. Same customer, same target margin, different hours and material stacks. Compare net profit and effective $/hr before you quote.</p>
+            <a href="/calculator" class="cta-btn">Open Calculator →</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="JobProfitCalc home">
+          <div class="logo-mark" aria-hidden="true">JPC</div>
+          <span class="logo-name">Job<em>Profit</em>Calc</span>
+        </a>
+        <p>A free pricing tool and knowledge base for trade professionals who want to know exactly what they're earning on every job.</p>
+      </div>
+      <nav aria-label="Footer legal links">
+        <p class="footer-col-title">Legal</p>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+        </div>
+      </nav>
+      <nav aria-label="Footer site links">
+        <p class="footer-col-title">Site</p>
+        <div class="footer-links">
+          <a href="/calculator">Calculator</a>
+          <a href="/blog/">Blog</a>
+          <a href="/#faq">FAQ</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 JobProfitCalc.com. All rights reserved.</p>
+      <p class="footer-disc">Results are estimates for educational purposes only. Consult a licensed tax professional for advice specific to your situation.</p>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var btn = document.getElementById("menuBtn");
+  var menu = document.getElementById("mobileMenu");
+  if (!btn || !menu) return;
+  btn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var open = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.querySelector(".menu-icon").textContent = open ? "✕" : "☰";
+  });
+  document.addEventListener("click", function() {
+    menu.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");
+    btn.querySelector(".menu-icon").textContent = "☰";
+  });
+  menu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      menu.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+      btn.querySelector(".menu-icon").textContent = "☰";
+    });
+  });
+})();
+</script>
+</body>
+</html>

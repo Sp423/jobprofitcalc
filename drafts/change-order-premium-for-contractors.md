@@ -1,0 +1,641 @@
+---
+title: "Should a Change Order Cost More Than the Same Work on the Bid?"
+h1: "Should a Change Order Cost More Than the Bid Rate?"
+meta: "Same hours mid-job are not the same as the bid — remobilization and schedule hits eat margin unless the change order carries a premium."
+canonical: "https://jobprofitcalc.com/blog/change-order-premium-for-contractors.html"
+url: "/blog/change-order-premium-for-contractors.html"
+robots: "index,follow"
+date: "September 24, 2026"
+slot: "Thu Sep 24, 2026"
+tag: "Job Pricing"
+read_time: "9 min read"
+card_file: "/images/change-order-premium-for-contractors.jpg"
+card_dimensions: "1280x640"
+card_class: "post-thumb"
+card_scene: "Two side-by-side calculator screens — left shows same hours at bid rate with a margin bar falling short of the target line, right shows same hours with a higher rate and explicit remobilization hours with the margin bar reaching the target; minimal labels, sparse text, no brands, illustrated style"
+card_alt: "Side-by-side illustration comparing a change order priced at bid rate showing a margin miss versus the same work priced with a premium and remobilization hours showing the target margin holding"
+internal_links:
+  - "/calculator"
+  - "/blog/contractor-change-order-scope-creep.html"
+  - "/blog/burdened-labor-rate-for-contractors.html"
+  - "/hvac-job-pricing"
+cannibalization: "No overlap with contractor-change-order-scope-creep.html — that article covers process, template, and signature. This article covers only the dollar decision: bid-rate vs premium math on the same scope."
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Should a Change Order Cost More Than the Same Work on the Bid? | JobProfitCalc.com</title>
+  <meta name="description" content="Same hours mid-job are not the same as the bid — remobilization and schedule hits eat margin unless the change order carries a premium.">
+  <link rel="canonical" href="https://jobprofitcalc.com/blog/change-order-premium-for-contractors.html">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:site_name" content="JobProfitCalc">
+  <meta property="og:title" content="Should a Change Order Cost More Than the Same Work on the Bid?">
+  <meta property="og:description" content="Same hours mid-job are not the same as the bid — remobilization and schedule hits eat margin unless the change order carries a premium.">
+  <meta property="og:url" content="https://jobprofitcalc.com/blog/change-order-premium-for-contractors.html">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-09-24T00:00:00Z">
+  <meta property="article:modified_time"  content="2026-09-24T00:00:00Z">
+  <meta property="article:author"          content="JobProfitCalc.com">
+  <meta property="article:section"         content="Contractor Pricing">
+  <meta property="og:image" content="https://jobprofitcalc.com/images/change-order-premium-for-contractors.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jobprofitcalc.com/images/change-order-premium-for-contractors.jpg">
+  <meta name="twitter:title" content="Should a Change Order Cost More Than the Same Work on the Bid?">
+  <meta name="twitter:description" content="Same hours mid-job are not the same as the bid — remobilization and schedule hits eat margin unless the change order carries a premium.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Should a Change Order Cost More Than the Same Work on the Bid?",
+    "description": "Same hours mid-job are not the same as the bid — remobilization and schedule hits eat margin unless the change order carries a premium.",
+    "url": "https://jobprofitcalc.com/blog/change-order-premium-for-contractors.html",
+    "image": "https://jobprofitcalc.com/images/change-order-premium-for-contractors.jpg",
+    "datePublished": "2026-09-24",
+    "dateModified": "2026-09-24",
+    "author": { "@type": "Organization", "name": "JobProfitCalc.com" },
+    "publisher": { "@type": "Organization", "name": "JobProfitCalc.com", "url": "https://jobprofitcalc.com", "logo": { "@type": "ImageObject", "url": "https://jobprofitcalc.com/og-image.png" } },
+    "mainEntityOfPage": "https://jobprofitcalc.com/blog/change-order-premium-for-contractors.html"
+  }
+  </script>
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobprofitcalc.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jobprofitcalc.com/blog/"},
+      {"@type": "ListItem", "position": 3, "name": "Should a Change Order Cost More Than the Bid Rate?", "item": "https://jobprofitcalc.com/blog/change-order-premium-for-contractors.html"}
+    ]
+  }
+  </script>
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a standard change order markup percentage contractors should use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no industry-standard percentage. The right premium is whatever brings your change order back to your target margin after you account for remobilization, extra drive, and any schedule disruption specific to that job. Run the numbers in the calculator, not a rule of thumb someone posted online."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I explain a higher change order price to a customer who expects bid-rate pricing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Show the cost components: the original labor hours, plus the remobilization time and any extra supply run that the change created. Customers who understand that mid-job work triggers setup costs they would not have paid on the original bid generally accept the math. What they object to is a higher number with no explanation."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYWHVVF5J0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VYWHVVF5J0');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7735208952918665"
+       crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-base:    #0D1B2A;
+      --bg-surface: #142232;
+      --bg-elevated:#1B2F44;
+      --accent:     #F59E0B;
+      --accent-hover:#FBB924;
+      --text-pri:   #F1F5F9;
+      --text-sec:   #94A3B8;
+      --text-muted: #7A95B0;
+      --border:     #1E3A54;
+      --border-hi:  #2B5070;
+      --font-disp:  'Barlow Condensed', sans-serif;
+      --font-body:  'DM Sans', sans-serif;
+      --r:          8px;
+      --r-lg:       12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg-base); color: var(--text-pri); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(rgba(245,158,11,0.035) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; z-index: 0; }
+    .page-wrap { position: relative; z-index: 1; }
+    .site-header { background: var(--bg-surface); border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 24px rgba(0,0,0,0.5); }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 62px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .logo-mark { width: 38px; height: 38px; background: var(--accent); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-family: var(--font-disp); font-weight: 800; font-size: 15px; color: var(--bg-base); letter-spacing: -0.5px; line-height: 1; flex-shrink: 0; }
+    .logo-name { font-family: var(--font-disp); font-weight: 800; font-size: 21px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-pri); }
+    .logo-name em { color: var(--accent); font-style: normal; }
+    .site-nav { display: flex; gap: 6px; align-items: center; }
+    .site-nav a { color: var(--text-sec); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: var(--r); transition: color 0.18s, background 0.18s; }
+    .site-nav a:hover { color: var(--text-pri); background: rgba(255,255,255,0.05); }
+    .nav-btn { background: var(--accent) !important; color: var(--bg-base) !important; font-weight: 700 !important; padding: 7px 16px !important; border-radius: var(--r) !important; margin-left: 6px; }
+    .nav-btn:hover { background: var(--accent-hover) !important; }
+    @media (max-width: 700px) { .site-nav .hide-mobile { display: none; } .logo-name { font-size: 17px; } }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 280px; gap: 56px; padding: 56px 0 80px; align-items: start; }
+    @media (max-width: 960px) { .article-layout { grid-template-columns: 1fr; } .article-sidebar { display: none; } }
+    .breadcrumb { padding: 20px 0 0; font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.18s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { opacity: 0.5; }
+    .article-header { margin-bottom: 40px; }
+    .article-tag { display: inline-block; font-family: var(--font-disp); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); border-radius: 4px; padding: 3px 8px; margin-bottom: 16px; }
+    .article-header h1 { font-family: var(--font-disp); font-weight: 800; font-size: clamp(30px, 4vw, 48px); text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pri); line-height: 1.07; margin-bottom: 20px; }
+    .article-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .article-meta-sep { opacity: 0.4; }
+    .article-body { font-size: 15px; color: var(--text-sec); line-height: 1.8; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-body h2 { font-family: var(--font-disp); font-weight: 800; font-size: 26px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pri); line-height: 1.1; margin: 44px 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .article-body h3 { font-family: var(--font-disp); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-pri); line-height: 1.15; margin: 28px 0 12px; }
+    .article-body strong { color: var(--text-pri); font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body a { color: var(--accent); text-decoration: none; }
+    .article-body a:hover { text-decoration: underline; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .article-body ul li, .article-body ol li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-sec); line-height: 1.7; }
+    .article-body ul li::before { content: '▸'; color: var(--accent); font-size: 11px; margin-top: 4px; flex-shrink: 0; }
+    .article-body ol { counter-reset: ol-counter; }
+    .article-body ol li { counter-increment: ol-counter; }
+    .article-body ol li::before { content: counter(ol-counter) '.'; color: var(--accent); font-family: var(--font-disp); font-weight: 700; font-size: 13px; margin-top: 2px; flex-shrink: 0; min-width: 18px; }
+    .callout { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25); border-left: 4px solid var(--accent); border-radius: var(--r); padding: 18px 22px; margin: 24px 0; }
+    .callout p { margin-bottom: 0; color: var(--text-sec); }
+    .callout strong { color: var(--accent); }
+    .formula-block { background: var(--bg-elevated); border: 1px solid var(--border-hi); border-radius: var(--r); padding: 16px 20px; margin: 20px 0; font-family: 'DM Sans', monospace; font-size: 14px; color: var(--text-pri); text-align: center; letter-spacing: 0.3px; }
+    .article-body .disclaimer { font-size: 13px; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 32px; }
+    .calc-example { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin: 24px 0; }
+    .calc-example-header { background: var(--bg-elevated); padding: 14px 20px; font-family: var(--font-disp); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 20px; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text-sec); }
+    .calc-row:last-child { border-bottom: none; }
+    .calc-row.total { background: rgba(245,158,11,0.06); color: var(--text-pri); font-weight: 600; }
+    .calc-row.total .calc-val { color: var(--accent); font-size: 16px; }
+    .calc-row.miss { background: rgba(239,68,68,0.06); }
+    .calc-row.miss .calc-val { color: #F87171; }
+    .calc-row.win { background: rgba(34,197,94,0.06); }
+    .calc-row.win .calc-val { color: #22C55E; }
+    .calc-val { font-weight: 600; color: var(--text-pri); }
+    .pass-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    @media (max-width: 640px) { .pass-grid { grid-template-columns: 1fr; } }
+    .pass-label { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); padding: 10px 16px; background: var(--bg-elevated); }
+    .pass-label.pass-a { border-left: 4px solid #F87171; }
+    .pass-label.pass-b { border-left: 4px solid #22C55E; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    .data-table th { background: var(--bg-elevated); color: var(--text-muted); font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text-sec); vertical-align: top; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .row-label { font-weight: 600; color: var(--text-pri); }
+    .data-table .row-total td { background: rgba(245,158,11,0.06); font-weight: 700; color: var(--text-pri); border-top: 1px solid var(--border-hi); }
+    .data-table .row-total .row-label { color: var(--accent); }
+    .data-table .row-miss td { background: rgba(239,68,68,0.06); color: #F87171; font-weight: 600; }
+    .data-table .row-win td { background: rgba(34,197,94,0.06); color: #22C55E; font-weight: 600; }
+    .article-body figure { margin: 0 0 32px; }
+    .article-body figure img { width: 100%; height: auto; border-radius: var(--r-lg); display: block; }
+    .article-body figcaption { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 8px; font-style: italic; line-height: 1.5; }
+    .article-sidebar { position: sticky; top: 82px; display: flex; flex-direction: column; gap: 20px; }
+    .sidebar-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; }
+    .sidebar-card-title { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list a { display: block; padding: 7px 10px; border-radius: var(--r); font-size: 13px; color: var(--text-sec); text-decoration: none; transition: color 0.18s, background 0.18s; line-height: 1.4; }
+    .toc-list a:hover { color: var(--accent); background: rgba(245,158,11,0.07); }
+    .cta-card { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: var(--r-lg); padding: 20px; }
+    .cta-card h3 { font-family: var(--font-disp); font-weight: 800; font-size: 18px; text-transform: uppercase; color: var(--text-pri); margin-bottom: 8px; }
+    .cta-card p { font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 16px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: var(--bg-base); font-family: var(--font-disp); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: var(--r); text-decoration: none; width: 100%; justify-content: center; transition: background 0.18s; }
+    .cta-btn:hover { background: var(--accent-hover); }
+    .related-section { border-top: 1px solid var(--border); padding-top: 40px; margin-top: 52px; }
+    .related-label { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 20px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .related-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: border-color 0.2s; }
+    .related-card:hover { border-color: var(--accent); }
+    .related-card-tag { font-family: var(--font-disp); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); }
+    .related-card-title { font-family: var(--font-disp); font-weight: 700; font-size: 17px; text-transform: uppercase; color: var(--text-pri); line-height: 1.2; }
+    .related-card:hover .related-card-title { color: var(--accent); }
+    .related-card-meta { font-size: 12px; color: var(--text-muted); }
+    .site-footer { background: var(--bg-surface); border-top: 1px solid var(--border); padding: 48px 24px 32px; position: relative; z-index: 1; }
+    .footer-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto auto; gap: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 12px; max-width: 280px; }
+    .footer-col-title { font-family: var(--font-disp); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: var(--text-sec); text-decoration: none; font-size: 13px; transition: color 0.18s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .footer-copy { color: var(--text-muted); font-size: 12px; }
+    .footer-disc { font-size: 11px; color: var(--text-muted); max-width: 500px; }
+    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+    .article-ad-leader { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 28px 0; }
+    .article-ad-leader img { display: block; width: 728px; height: 90px; }
+    @media (max-width: 760px) { .article-ad-leader img { width: 100%; max-width: 728px; height: auto; } }
+    .article-ad-rect { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 32px 0 0; border-top: 1px solid var(--border); margin-top: 4px; }
+    .article-ad-rect img { display: block; width: 300px; height: 250px; border-radius: var(--r); }
+    .sidebar-ad-zone { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .sidebar-ad-zone img { display: block; width: 100%; height: auto; max-width: 252px; border-radius: var(--r); }
+    .ad-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); text-align: center; }
+    .menu-btn { display: none; background: none; border: none; cursor: pointer; color: #94A3B8; padding: 6px 8px; border-radius: 8px; font-size: 22px; line-height: 1; align-items: center; justify-content: center; transition: color 0.18s, background 0.18s; }
+    .menu-btn:hover { color: #F59E0B; background: rgba(255,255,255,0.05); }
+    @media (max-width: 700px) { .menu-btn { display: flex; } }
+    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #142232; border-top: 1px solid #1E3A54; border-bottom: 2px solid #F59E0B; box-shadow: 0 8px 32px rgba(0,0,0,0.5); flex-direction: column; z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { display: block; color: #94A3B8; text-decoration: none; padding: 15px 24px; font-size: 15px; font-weight: 500; border-bottom: 1px solid #1E3A54; font-family: 'DM Sans', sans-serif; transition: color 0.18s, background 0.18s; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #F59E0B; background: rgba(255,255,255,0.03); }
+    .mobile-menu .mob-cta { color: #F59E0B !important; font-weight: 700 !important; background: rgba(245,158,11,0.06); }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="JobProfitCalc home">
+        <div class="logo-mark" aria-hidden="true">JPC</div>
+        <span class="logo-name">Job<em>Profit</em>Calc</span>
+      </a>
+      <nav class="site-nav" aria-label="Site navigation">
+        <a href="/#how-to-price" class="hide-mobile">Pricing Guide</a>
+        <a href="/#tips" class="hide-mobile">Trade Tips</a>
+        <a href="/#faq" class="hide-mobile">FAQ</a>
+        <a href="/blog/" class="hide-mobile">Blog</a>
+        <a href="/calculator" class="nav-btn">Calculate Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-icon">☰</span></button>
+      </nav>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+      <a href="/#how-to-price">Pricing Guide</a>
+      <a href="/#tips">Trade Tips</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
+      <a href="/calculator" class="mob-cta">Calculate Now</a>
+    </div>
+  </header>
+
+  <main role="main">
+    <div class="container">
+
+      <!-- Ad Zone A: Leaderboard -->
+      <div class="article-ad-leader">
+        <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+          <img src="/images/MitchellQuote_TabletBanner_728x90.jpg" alt="MitchellQuote — job quoting software for contractors" width="728" height="90">
+        </a>
+        <p class="ad-label">Advertisement</p>
+      </div>
+      <!-- End Ad Zone A -->
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="/blog/">Blog</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">Should a Change Order Cost More Than the Bid Rate?</span>
+      </nav>
+
+      <div class="article-layout">
+
+        <article>
+          <header class="article-header">
+            <div class="article-tag">Job Pricing</div>
+            <h1>Should a Change Order Cost More Than the Bid Rate?</h1>
+            <div class="article-meta">
+              <span>September 24, 2026</span>
+              <span class="article-meta-sep">·</span>
+              <span>9 min read</span>
+              <span class="article-meta-sep">·</span>
+              <span>JobProfitCalc.com</span>
+            </div>
+          </header>
+
+          <div class="article-body">
+
+            <figure>
+              <img src="/images/change-order-premium-for-contractors.jpg"
+                   alt="Side-by-side illustration comparing a change order priced at bid rate showing a margin miss versus the same work priced with a premium and remobilization hours showing the target margin holding"
+                   class="post-thumb"
+                   width="1280" height="640"
+                   fetchpriority="high">
+              <figcaption>Same hours, same materials — different outcomes. The bid rate ignores remobilization and re-drive; the premium pass captures them and holds the margin.</figcaption>
+            </figure>
+
+            <p>Yes, a change order can — and often should — cost more than the same work would have on the original bid. The bid rate was priced for scheduled work on a clean slate. The change order arrives mid-job, short-notice, with setup costs already baked in: someone stops what they are doing, re-plans, drives for parts that were not on the original materials list, and disrupts the rest of the schedule. That friction is real labor cost. If you do not price it, it comes out of your margin.</p>
+
+            <p>This article teaches the dollar decision. For the process of writing, presenting, and getting a signature on a change order, see <a href="/blog/contractor-change-order-scope-creep.html">the change order and scope creep guide</a>. What follows is strictly the math: bid rate versus premium on identical scope, why the numbers diverge, and how to run both through the <a href="/calculator">calculator</a> to see whether your target margin holds.</p>
+
+            <h2 id="what-is-premium">What Change-Order Premium Actually Means</h2>
+
+            <p>A change-order premium is the dollar amount above your original bid unit rate that a mid-job change order needs to carry in order to cover friction costs and hold your target margin. It is not a penalty. It is not a made-up fee. It is the mathematical consequence of the fact that the same physical task costs more to execute when it is unplanned, short-notice, and inserted into an existing work sequence.</p>
+
+            <p>The premium can show up in your pricing two ways:</p>
+
+            <ul>
+              <li><strong>A higher Hourly Labor Rate</strong> — you apply a bumped charge-out rate to the change order hours, reflecting the higher cost-per-productive-hour when crew time is partially consumed by remobilization and re-planning.</li>
+              <li><strong>Explicit friction hours</strong> — you price the actual hours at your standard rate, but you count all the hours: the productive work plus the remobilization time, the extra supply-run drive, and any setup that the change created.</li>
+            </ul>
+
+            <p>Either method works. Many shops use both: a modest rate bump to reflect schedule disruption, plus explicit remob hours for any physical re-drive or setup the change requires. What does not work is entering only the productive task hours at the bid rate and calling it done — that is the combination that turns mid-job disruption into unpaid overhead.</p>
+
+            <div class="callout">
+              <p><strong>Key distinction:</strong> Change-order premium is separate from whether you wrote a change order at all. You can write a perfectly formatted, customer-signed change order and still underprice it by using the bid rate without accounting for friction. The process and the dollar math are two separate disciplines.</p>
+            </div>
+
+            <p>The same principle applies whether you are doing <a href="/hvac-job-pricing">HVAC work</a> or any other trade — the moment a mid-job addition forces you to break from the current task and reset, you have incurred cost the original bid rate never covered.</p>
+
+            <h2 id="worked-example">The Same Scope, Priced Two Ways</h2>
+
+            <p>All dollar figures below are made-up examples chosen to make the arithmetic clear. They are not typical rates, margins, or labor costs for any specific trade or market.</p>
+
+            <p><strong>Scenario (made-up):</strong> A plumbing crew is three days into a bathroom renovation. The customer requests a laundry sink rough-in — a discrete, self-contained scope that was never in the bid. The work itself: 4 hours of productive labor for 2 plumbers, plus $240 in PEX fittings, drain stub-out, and supply (already marked up). You have run this type of work before. On the bid, it would have been straightforward.</p>
+
+            <p>But mid-job, two things happen that would not have happened if this were a line item on the original estimate:</p>
+
+            <ul>
+              <li><strong>Remobilization:</strong> The lead plumber breaks from the current task, reviews the rough-in location, and re-plans the run — 0.5 hours per plumber = 1 remob hour total.</li>
+              <li><strong>Extra supply run:</strong> The fittings are not on the truck. One plumber drives to the supply house and back — 0.75 hours of labor and drive time you will not recover if you forget to count it.</li>
+            </ul>
+
+            <p>Those two items add 1.75 total labor-hours of cost you did not build into the productive-work estimate. Here is what happens when you price it both ways.</p>
+
+            <h3>Pass A — Bid Rate, No Friction Accounted For</h3>
+
+            <div class="calc-example" role="table" aria-label="Pass A: bid-rate change order, made-up numbers">
+              <div class="calc-example-header pass-a">Pass A — Bid Rate (made-up numbers)</div>
+              <div class="calc-row"><span>Labor hours</span><span class="calc-val">4 hrs × 2 workers = 8 hrs</span></div>
+              <div class="calc-row"><span>Hourly Labor Rate (bid)</span><span class="calc-val">$90 / hr</span></div>
+              <div class="calc-row"><span>Labor cost</span><span class="calc-val">$720</span></div>
+              <div class="calc-row"><span>Materials (with markup)</span><span class="calc-val">$240</span></div>
+              <div class="calc-row"><span>Overhead (16%)</span><span class="calc-val">$153.60</span></div>
+              <div class="calc-row total"><span>Cost basis</span><span class="calc-val">$1,113.60</span></div>
+              <div class="calc-row"><span>Suggested charge at 22% target margin</span><span class="calc-val">$1,428</span></div>
+              <div class="calc-row miss"><span>Unrecovered friction cost (1.75 hrs × 2 workers × $90)</span><span class="calc-val">−$315</span></div>
+              <div class="calc-row miss"><span>Actual margin delivered</span><span class="calc-val">≈ 6%</span></div>
+            </div>
+
+            <p>The calculator screen looks fine. The math says 22%. But the real cost of executing this change order — including the remob hour and the supply run — is $315 higher than the input reflects. That $315 did not appear in the calculator because you did not enter it. The crew worked it anyway. At a $1,428 charge with a true cost of $1,428.60, you are working near break-even on a job you priced for 22%.</p>
+
+            <h3>Pass B — Premium Pass, Friction Captured</h3>
+
+            <div class="calc-example" role="table" aria-label="Pass B: premium change order, made-up numbers">
+              <div class="calc-example-header pass-b">Pass B — Premium (made-up numbers)</div>
+              <div class="calc-row"><span>Labor hours (4 productive + 0.5 remob per worker)</span><span class="calc-val">4.5 hrs × 2 workers = 9 hrs</span></div>
+              <div class="calc-row"><span>Drive time (supply run, both workers)</span><span class="calc-val">0.75 hrs added</span></div>
+              <div class="calc-row"><span>Total billable hours</span><span class="calc-val">9.75 hrs</span></div>
+              <div class="calc-row"><span>Hourly Labor Rate (premium)</span><span class="calc-val">$95 / hr</span></div>
+              <div class="calc-row"><span>Labor cost</span><span class="calc-val">$926.25</span></div>
+              <div class="calc-row"><span>Materials (with markup)</span><span class="calc-val">$240</span></div>
+              <div class="calc-row"><span>Overhead (16%)</span><span class="calc-val">$185.80</span></div>
+              <div class="calc-row total"><span>Cost basis</span><span class="calc-val">$1,352.05</span></div>
+              <div class="calc-row win"><span>Suggested charge at 22% target margin</span><span class="calc-val">$1,733</span></div>
+              <div class="calc-row win"><span>Actual margin delivered</span><span class="calc-val">22% ✓</span></div>
+            </div>
+
+            <p>The $5/hr rate bump is not a standard. It is a number this shop chose after running the calculator and seeing that $90/hr with full hours captured still fell slightly short of their target due to overhead dilution. Your shop may choose to hold the rate and add only the explicit hours, or bump the rate more and add fewer extra hours — what matters is that the cost basis in the calculator reflects every hour of real labor, and the suggested charge holds the margin you need.</p>
+
+            <p>The difference between Pass A and Pass B is $305 on a small change order. On ten change orders across a busy month, that gap is over $3,000 in margin you either keep or give away.</p>
+
+            <h2 id="when-premium">When a Premium Is Rational — and When Bid Rate Is Fine</h2>
+
+            <p>Not every change order justifies a premium rate. The question is whether the change created friction costs that were not in your original estimate. If the answer is no, bid rate is appropriate. If yes, the premium reflects actual cost, not preference.</p>
+
+            <h3>Charge a premium when</h3>
+
+            <ul>
+              <li><strong>The change is short-notice.</strong> A customer request that arrives mid-job, on-site, with no planning window means your crew pivots from a scheduled task. That pivot has a cost even if no one drives anywhere.</li>
+              <li><strong>Remobilization is real.</strong> Any time the crew has to stop, re-assess, re-plan, re-set tools, or re-sequence work around the change, those minutes are on the clock whether or not they appear on a ticket.</li>
+              <li><strong>An extra materials run is required.</strong> If the change needs parts not already on the truck, someone is driving. That drive time is a labor cost. If it is 45 minutes round-trip for two workers, that is 1.5 hours of your <a href="/blog/burdened-labor-rate-for-contractors.html">fully loaded labor cost</a> sitting in a van.</li>
+              <li><strong>The change disrupts other scheduled work.</strong> A late addition that pushes the afternoon task to tomorrow means you now have a scheduling gap, a possibly delayed customer, and idle time you absorbed. That schedule hit belongs in the cost basis even if it never shows up as a line item.</li>
+              <li><strong>The change is small relative to setup cost.</strong> A one-hour productive task with 0.75 hours of setup has a labor ratio that no flat bid rate was designed to absorb. Small changes in particular carry disproportionate friction per productive hour.</li>
+            </ul>
+
+            <h3>Bid rate is fine when</h3>
+
+            <ul>
+              <li><strong>The change was anticipated.</strong> If your original estimate included an allowance for this type of addition, or the crew already had the materials and the setup cost was built into the job schedule, bid rate is appropriate.</li>
+              <li><strong>The crew is already on site and set up for exactly this work.</strong> If the change requires no extra drive, no disruption to existing tasks, and the materials are already on the truck, the marginal cost of the extra work is genuinely close to the bid unit rate. Price it that way.</li>
+              <li><strong>The change is large enough to absorb its own setup.</strong> A substantial addition — say, an HVAC zone upgrade that warrants its own mobilization — may be priced as a clean sub-scope with its own setup and teardown built into the hours, at a rate close to your standard bid rate. The friction has its own line; you do not need a rate bump on top.</li>
+            </ul>
+
+            <p>The honest version of this question is: <em>does this change order carry any cost that my bid rate was not designed to recover?</em> If yes, build that cost in explicitly. If no, your standard rate already covers it.</p>
+
+            <h2 id="calculator-two-passes">How to Model This in the Calculator</h2>
+
+            <p>The <a href="/calculator">Job Profit Calculator</a> does not have a dedicated change-order premium field. You build the premium through the inputs. The method is to run the same change order twice: once at bid rate to establish your baseline, and once with friction captured to find the charge that actually holds your margin. Here are the numbered steps for each pass.</p>
+
+            <h3>Pass A — The Bid-Rate Baseline</h3>
+
+            <ol>
+              <li>Enter the <strong>productive labor hours</strong> for the change: the hours the work itself actually requires, the same hours you would have entered if this scope were on the original bid.</li>
+              <li>Enter the <strong>number of workers</strong> assigned to this change order.</li>
+              <li>Enter your standard <strong>Hourly Labor Rate</strong> — the same rate you used when you built the original bid.</li>
+              <li>Enter <strong>materials with markup</strong>: the cost of parts and supplies for this specific change, marked up at your standard materials rate.</li>
+              <li>Enter your <strong>overhead %</strong> as usual.</li>
+              <li>Leave <strong>drive time</strong> at zero for now.</li>
+              <li>Enter your <strong>target margin</strong>.</li>
+              <li>Note the Suggested Charge the calculator returns. This is what the change would cost if it carried no friction at all — a perfect-world bid-rate price. Write it down.</li>
+            </ol>
+
+            <p>That number is your floor. It is the minimum the change order should generate assuming zero remobilization, zero extra drive, and perfect schedule absorption. In practice, if any of those assumptions are false, your actual margin at this charge is lower than displayed.</p>
+
+            <h3>Pass B — The Premium Pass</h3>
+
+            <ol>
+              <li>Keep <strong>materials and overhead</strong> the same as Pass A.</li>
+              <li>Estimate the <strong>remobilization time</strong> honestly: how long did the lead spend re-planning, re-assessing, or re-sequencing? Add those hours to the productive labor hours. If each of two workers spent 30 minutes re-orienting, that is 1 additional labor-hour.</li>
+              <li>Enter the updated <strong>total hours</strong> (productive + remob) into the Labor Hours field.</li>
+              <li>Use the <strong>Drive Time</strong> field for any extra supply run. This is not the original drive to the job — it is only the unplanned drive this change required. Enter the round-trip time honestly.</li>
+              <li>Decide whether to adjust the <strong>Hourly Labor Rate</strong>. If the schedule disruption is significant — the change pushed other work, created idle time, or forced a crew into an inefficient work sequence — a rate increase on top of the extra hours is defensible. If you have fully captured the remob time in hours and drive time, a flat rate may already close the gap. Run both and compare the Suggested Charge.</li>
+              <li>Enter your <strong>target margin</strong> (same as Pass A).</li>
+              <li>Note the Suggested Charge. This is your premium price — the number that holds your margin after real costs are captured.</li>
+            </ol>
+
+            <p>The difference between Pass A and Pass B is your change-order premium in dollar terms. That is the number you can show a customer if they ask why the change order costs more than the "same work" would have on the original bid: it is the remob time and the supply run, priced at your standard rate or slightly above, run through the same margin math you use on every job.</p>
+
+            <div class="callout">
+              <p><strong>No invented percentages needed.</strong> You do not need an "industry standard" CO premium markup. Your shop's premium is whatever brings Pass B's suggested charge up to your target margin after all real hours are entered. That number is different for a 30-minute re-plan versus a 2-hour remobilization, as it should be.</p>
+            </div>
+
+            <h2 id="common-mistakes">Five Mistakes That Kill Change-Order Margin</h2>
+
+            <p>Most change-order margin loss comes from a small set of consistent errors. Each one is a version of the same root cause: pricing the change as if it were bid work, when it is not.</p>
+
+            <ul>
+              <li>
+                <strong>Matching the bid unit rate on every change order, automatically.</strong>
+                The bid rate was built for planned, scheduled work. It was not built to absorb re-planning, short-notice pivots, or extra supply runs. Applying it automatically to every CO means absorbing those costs silently on every change order that carries them.
+              </li>
+              <li>
+                <strong>Forgetting remob time entirely.</strong>
+                Remobilization is invisible on paper because no one writes "30 minutes re-planning" on a job ticket. It happens in real time and gets absorbed into the productive labor without a trace. The fix is to estimate it explicitly before you write the CO price — not after the job closes. Ask: will the crew need to stop what they are doing, re-assess, and reset before starting this change? If yes, add those hours.
+              </li>
+              <li>
+                <strong>Treating the re-drive as a sunk cost.</strong>
+                An extra trip to the supply house is not "part of the job." It is a direct consequence of the change order arriving after the truck was already loaded. That drive is your labor cost, and it belongs in the CO price. If you routinely forget supply-run drive on change orders, add a drive time line as a matter of policy and let the calculator absorb it.
+              </li>
+              <li>
+                <strong>Using the CO as a way to give the customer a break.</strong>
+                Some contractors price change orders below cost intentionally, trying to keep the customer happy mid-job. This is the inverse of sound pricing: the job you already committed to covers your fixed costs, and the CO work competes with nothing. It should carry your full margin, not a discount. A CO priced at 10% margin on a job with a 22% target means that work subsidized your overhead without leaving anything for profit.
+              </li>
+              <li>
+                <strong>Raising the CO price without math to back it up.</strong>
+                The opposite error: sensing that the change "deserves" a premium and quoting higher without running the calculator to justify it. When a customer asks why the change order is more expensive than the same work on the bid, "it always is" is not an answer. "This is the remob time and the extra supply run, here are the hours" is an answer. Math is the defense; instinct is not.
+              </li>
+            </ul>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <h3>Is there a standard change order markup percentage contractors should use?</h3>
+            <p>There is no industry-standard percentage. The right premium is whatever brings your change order back to your target margin after you account for remobilization, extra drive, and any schedule disruption specific to that job. Run the numbers in the <a href="/calculator">calculator</a>, not a rule of thumb someone posted online. A 30-minute remob on a 6-hour CO requires a smaller premium than a 2-hour remob on a 2-hour CO — the math is not the same, and a flat percentage treats them as if it is.</p>
+
+            <h3>How do I explain a higher change order price to a customer who expects bid-rate pricing?</h3>
+            <p>Show the cost components: the original productive hours, plus the remobilization time and any extra supply run that the change created. Customers who understand that mid-job work triggers setup costs they would not have paid on the original bid generally accept the math. What they object to is a higher number with no explanation. "The extra drive and remob time brought this to 9.75 hours instead of 8, at a slightly higher rate because the change came in short-notice — here is how the calculator built the price" is a defensible answer. "Change orders cost more" is not.</p>
+
+            <h2 id="bottom-line">The Bottom Line</h2>
+
+            <p>Pricing a change order at bid rate is not neutral. It is a choice to absorb every minute of friction — remobilization, re-planning, unplanned supply runs, schedule disruption — without recovering it in the price. On any individual change order the loss might be small. Across a season of mid-job additions, you are systematically converting disruption into unpaid overhead.</p>
+
+            <p>The fix is not a gut-feel markup. It is two passes through the <a href="/calculator">calculator</a>: one at bid rate to see the floor, one with all real hours entered to see the number that holds your margin. The difference is your premium. Some changes will produce a small one. Some will produce a meaningful one. All of them deserve to be checked rather than assumed.</p>
+
+            <p>For the process side — writing the document, getting the signature, having the mid-job conversation — see <a href="/blog/contractor-change-order-scope-creep.html">the change order and scope creep guide</a>. The dollar decision ends here.</p>
+
+            <p class="disclaimer">This article is for educational purposes only and does not constitute legal, financial, or tax advice. Pricing decisions depend on your specific costs, market, and business structure. Consult a qualified professional for advice specific to your situation.</p>
+
+          </div><!-- /article-body -->
+
+          <!-- Ad Zone D: Rectangle -->
+          <div class="article-ad-rect">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250" loading="lazy">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
+          <nav class="related-section" aria-label="Related articles">
+            <p class="related-label">Continue Reading</p>
+            <div class="related-grid">
+              <a href="/blog/contractor-change-order-scope-creep.html" class="related-card">
+                <span class="related-card-tag">Estimating &amp; Proposals</span>
+                <span class="related-card-title">Change Orders for Contractors: How to Stop Scope Creep From Killing Your Margin</span>
+                <span class="related-card-meta">9 min read</span>
+              </a>
+              <a href="/blog/burdened-labor-rate-for-contractors.html" class="related-card">
+                <span class="related-card-tag">Overhead &amp; Costs</span>
+                <span class="related-card-title">What Is a Burdened Labor Rate for Contractors?</span>
+                <span class="related-card-meta">9 min read</span>
+              </a>
+              <a href="/calculator" class="related-card">
+                <span class="related-card-tag">Tools</span>
+                <span class="related-card-title">Job Profit Calculator — Price Any Job or Change Order</span>
+                <span class="related-card-meta">Free tool</span>
+              </a>
+            </div>
+          </nav>
+
+        </article>
+
+        <aside class="article-sidebar" aria-label="Article navigation">
+          <div class="sidebar-ad-zone">
+            <a href="https://go.getjobber.com/jpc" target="_blank" rel="noopener sponsored" aria-label="Advertisement: MitchellQuote — visit sponsor">
+              <img src="/images/MitchellQuote_MedBanner_300x250.jpg" alt="MitchellQuote — job quoting software for contractors" width="300" height="250" loading="lazy">
+            </a>
+            <p class="ad-label">Advertisement</p>
+          </div>
+
+          <div class="sidebar-card">
+            <p class="sidebar-card-title">In This Article</p>
+            <ul class="toc-list">
+              <li><a href="#what-is-premium">What change-order premium means</a></li>
+              <li><a href="#worked-example">Same scope, priced two ways</a></li>
+              <li><a href="#when-premium">When premium is rational</a></li>
+              <li><a href="#calculator-two-passes">Model it in the calculator</a></li>
+              <li><a href="#common-mistakes">Five common mistakes</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#bottom-line">The bottom line</a></li>
+            </ul>
+          </div>
+          <div class="cta-card">
+            <h3>Run Both Passes Now</h3>
+            <p>Enter the change order hours at bid rate, note the charge. Then add remob and drive time and compare. The difference is your premium.</p>
+            <a href="/calculator" class="cta-btn">Open Calculator →</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="JobProfitCalc home">
+          <div class="logo-mark" aria-hidden="true">JPC</div>
+          <span class="logo-name">Job<em>Profit</em>Calc</span>
+        </a>
+        <p>A free pricing tool and knowledge base for trade professionals who want to know exactly what they're earning on every job.</p>
+      </div>
+      <nav aria-label="Footer legal links">
+        <p class="footer-col-title">Legal</p>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+        </div>
+      </nav>
+      <nav aria-label="Footer site links">
+        <p class="footer-col-title">Site</p>
+        <div class="footer-links">
+          <a href="/calculator">Calculator</a>
+          <a href="/blog/">Blog</a>
+          <a href="/#faq">FAQ</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 JobProfitCalc.com. All rights reserved.</p>
+      <p class="footer-disc">Results are estimates for educational purposes only. Consult a licensed professional for advice specific to your situation.</p>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var btn = document.getElementById("menuBtn");
+  var menu = document.getElementById("mobileMenu");
+  if (!btn || !menu) return;
+  btn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var open = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.querySelector(".menu-icon").textContent = open ? "✕" : "☰";
+  });
+  document.addEventListener("click", function() {
+    menu.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");
+    btn.querySelector(".menu-icon").textContent = "☰";
+  });
+  menu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      menu.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+      btn.querySelector(".menu-icon").textContent = "☰";
+    });
+  });
+})();
+</script>
+</body>
+</html>

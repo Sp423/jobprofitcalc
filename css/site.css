@@ -1086,6 +1086,8 @@
       padding-top: 16px;
     }
     .faq-item.open .faq-a { display: block; }
+    .faq-a a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .faq-a a:hover { text-decoration: underline; }
 
     /* ============================================================
        FOOTER

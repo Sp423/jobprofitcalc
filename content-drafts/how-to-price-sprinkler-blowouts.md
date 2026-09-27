@@ -22,6 +22,7 @@ internal_links:
   - /blog/burdened-labor-rate-for-contractors.html
   - /blog/after-hours-rate-for-contractors.html
   - /blog/contractor-markup-vs-margin.html
+  - /blog/contractor-overhead-percentage.html
 cannibalization: none
 ---
 
@@ -87,26 +88,24 @@ cannibalization: none
     <div class="calc-row profit"><span>Net Profit</span><span class="calc-val">$19.63 (20%)</span></div>
   </div>
 
-  <p>At 20% margin, that $98.16 is a floor — not a quote. Your labor rate, compressor cost, overhead percentage, and drive will all differ. What matters is the structure: zone count feeds into Estimated Hours, compressor cost goes into Material Cost at 0% markup, and drive time is entered once at your labor rate regardless of how many workers are on the stop.</p>
+  <p>At 20% margin, that $98.16 is a floor — not a quote. Your labor rate, compressor cost, overhead percentage, and drive will all differ. What matters is the structure: zone count feeds into Estimated Hours, compressor cost goes into Material Cost at 0% markup, and drive time is entered once at your labor rate for a solo tech, with the second worker's ride time added for a two-person crew (Step 3 shows how).</p>
 
   <h2 id="pricing-structure">Flat Rate, Per Zone, or Both: Structuring Sprinkler Winterization Pricing</h2>
 
   <p>The most common structure is a hybrid: a flat base covering a typical system up to a defined zone count, then a small add-on per zone above that threshold. Shops in the Midwest and mid-Atlantic often call this service sprinkler winterization — same procedure, different regional vocabulary. Per-zone pricing from zone one creates unpredictable revenue on small systems and under-recovers fixed setup costs — the fixed setup time is the same whether you have 4 zones or 8, and the per-zone time difference is relatively small.</p>
 
-  <p>The worked example above shows why flat-base pricing tracks costs: the difference in Suggested Charge between a 2-zone stop and a 6-zone stop — with everything else held constant — is only about $13 (see the minimum charge section for the 2-zone math). The fixed costs — compressor allocation, drive, overhead, and taxes — are the same for both stops.</p>
-
   <p>To find your per-zone add-on rate from the calculator rather than guessing a number:</p>
 
   <ol>
-    <li>Run the calculator at your typical zone count. In the made-up baseline example, 6 zones = 0.5 hr → Suggested Charge <strong>$98.16</strong>.</li>
-    <li>Run it again at a large system. At 14 zones = 0.83 hr (rounded) → Suggested Charge <strong>$123.84</strong>.</li>
+    <li>Run the calculator at your typical zone count. In the made-up baseline example, 6 zones at 0.5 hr produces a Suggested Charge of <strong>$98.16</strong>.</li>
+    <li>Run it again at a large system. At 14 zones (0.83 hr, rounded), the Suggested Charge is <strong>$123.84</strong>.</li>
     <li>Subtract and divide by the zone difference: $123.84 − $98.16 = $25.68 ÷ 8 added zones = <strong>$3.21 per zone</strong> on the calculator's cost-plus-margin math for added labor time alone.</li>
   </ol>
 
-  <p>That $3.21 reflects only the added on-site time at the baseline rate and overhead. Published per-zone rates of $5–$10 are higher for legitimate reasons: larger systems carry more risk of a zone that doesn't purge cleanly, more time variability, and the practical reality that a published add-on rate needs to be a clean, easy number. Use the calculator result as your floor — your costs are covered — then decide where above it to publish based on your risk tolerance and market.</p>
+  <p>That $3.21 reflects only the added on-site time at the baseline rate and overhead. Whether to charge more — to buffer for larger-system uncertainty, cover a cleaner published number, or match your local market — is your judgment call. Use the calculator result as your floor.</p>
 
   <div class="callout">
-    <p><strong>Where prices actually move:</strong> On a tight 12-stop route with a $250/day rental, your compressor allocation ($21) and travel ($15.25) together equal your labor cost ($22.50). Those two inputs are where prices move most. Set your base to cover them, then add a per-zone rate for systems larger than your typical stop.</p>
+    <p>On a tight 12-stop route with a $250/day rental, your compressor allocation ($21) and travel ($15.25) together equal your labor cost ($22.50). Those two inputs are where prices move most. Set your base to cover them, then add a per-zone rate for systems larger than your typical stop.</p>
   </div>
 
   <h2 id="calculator-setup">How to Build Your Price in the Calculator</h2>
@@ -118,7 +117,7 @@ cannibalization: none
       <strong>Open the calculator and overwrite the Landscaper preset.</strong> The Landscaper preset loads Hours: 5, Workers: 2, Rate: $45, Material: $100 at 20% markup, Overhead: 15%, Drive: 1.0 hr, Fuel: $20. That configuration is sized for a full morning of landscape work — not a 30-minute residential blowout stop. Change every field before you read any result.
     </li>
     <li>
-      <strong>Enter Estimated Hours using zone count and fixed time.</strong> The calculator has no zone field; zone count determines hours. Formula: (fixed setup minutes + zones × minutes per zone) ÷ 60. A reasonable starting point for residential work: 15 fixed minutes, 2–3 minutes per zone in two short cycles. For a 6-zone stop: (15 + 6 × 2.5) ÷ 60 = 0.5 hr. For a 10-zone stop: (15 + 10 × 2.5) ÷ 60 = 0.67 hr. If you don't have real time data yet, time your first dozen stops of the season and use that to update the formula.
+      <strong>Enter Estimated Hours using zone count and fixed time.</strong> The calculator has no zone field; zone count determines hours. Multiply fixed setup minutes plus zones times minutes per zone, then divide by 60 to get the hour figure. A reasonable starting point for residential work is 15 fixed minutes and 2–3 minutes per zone run in two short cycles. For a 6-zone stop: (15 + 6 × 2.5) ÷ 60 = 0.5 hr. For a 10-zone stop: (15 + 10 × 2.5) ÷ 60 = 0.67 hr. If you don't have real time data yet, time your first dozen stops of the season and use that to update the formula.
     </li>
     <li>
       <strong>Enter Number of Workers.</strong> A solo tech is 1; a two-person crew is 2. The calculator multiplies labor hours by worker count but bills drive time once at the labor rate. That's accurate for a solo tech, where the drive is purely a vehicle cost. For a two-person crew, the second worker is also being paid while riding to the stop — that cost isn't captured by the single-rate drive field alone. To account for it, either enter Drive Time as the actual drive hours multiplied by 2, or add the second worker's pay for the drive to the Fuel / Travel Cost field.
@@ -127,23 +126,23 @@ cannibalization: none
       <strong>Enter your <a href="/blog/burdened-labor-rate-for-contractors.html">Hourly Labor Rate</a>.</strong> This should be your fully loaded field rate — what you pay the worker plus your share of payroll taxes, workers' comp, and any other direct labor burden. If you are the owner doing the work, use the rate you would pay a qualified tech. Your time isn't free because you own the business.
     </li>
     <li>
-      <strong>Enter compressor cost as Material Cost at 0% markup.</strong> The calculator has no equipment or compressor field. Enter your per-stop compressor allocation in Material Cost and set Material Markup to 0% — you're recovering cost, not marking up a product. Alternatively, fold the equipment cost into Overhead &amp; Burden as a percentage (see the compressor section). The per-stop allocation: your daily rental cost or owned-machine daily cost divided by the stops you complete that day.
+      <strong>Enter compressor cost as Material Cost at 0% markup.</strong> The calculator has no equipment or compressor field. Enter your per-stop compressor allocation in Material Cost and set Material Markup to 0% — you're recovering cost, not marking up a product. Alternatively, fold the equipment cost into Overhead &amp; Burden as a percentage (see the compressor section). Divide your daily rental cost (or owned-machine daily cost) by the stops you complete that day to get the per-stop allocation.
     </li>
     <li>
-      <strong>Enter Overhead &amp; Burden as a percentage of labor plus materials.</strong> This covers office costs, insurance, equipment wear, and anything else not in labor or materials. Your overhead ratio should come from your actual books — track your fixed monthly costs and divide by monthly revenue to get the number for your operation. If you haven't calculated it yet, start tracking now and use a conservative estimate as a placeholder.
+      <strong>Enter Overhead &amp; Burden as a percentage of labor plus materials.</strong> This covers office costs, insurance, equipment wear, and anything else not in labor or materials. Your overhead ratio should come from your actual books — divide your monthly overhead costs by your monthly labor plus materials costs to get the percentage. See the <a href="/blog/contractor-overhead-percentage.html">overhead percentage guide</a> for the full calculation.
     </li>
     <li>
-      <strong>Enter Drive Time and Fuel / Travel Cost for your per-stop route share.</strong> Your per-stop drive time: total route drive hours ÷ stops on that route. Whether you bill drive time on the invoice is a separate policy question (see <a href="/blog/should-contractors-charge-for-drive-time.html">should contractors charge for drive time</a>); what matters here is that the cost appears in your inputs.
+      <strong>Enter Drive Time and Fuel / Travel Cost for your per-stop route share.</strong> Divide total route drive hours by stops on that route to get your per-stop drive time. Whether you bill drive time on the invoice is a separate policy question (see <a href="/blog/should-contractors-charge-for-drive-time.html">should contractors charge for drive time</a>); what matters here is that the cost appears in your inputs.
     </li>
     <li>
       <strong>Set Desired Profit Margin and tax fields.</strong> SE Tax defaults to 15.3% and State Tax to 5% — both applied to the cost subtotal, not to the suggested price. If you're in a state with a different rate, update the State Tax field. The Desired Profit Margin uses margin math: 20% margin means the profit is 20% of the price, not 20% of the cost. If you think in markup, see the <a href="/blog/contractor-markup-vs-margin.html">markup vs. margin guide</a> before entering a number — the two are not interchangeable.
     </li>
     <li>
-      <strong>Read the Suggested Charge.</strong> That is your floor for this specific configuration of inputs. Change any input — more zones, more drive, fewer stops on the compressor — and the suggested charge moves. There is no fixed "right answer" for the market; there is only the number that covers your costs at your margin target.
+      <strong>Read the Suggested Charge.</strong> That is your floor for this specific configuration of inputs. Change any input — more zones, more drive, fewer stops on the compressor — and the suggested charge moves.
     </li>
   </ol>
 
-  <p>For the minimum charge, run the calculator with your smallest typical system — say, a 2-zone residential setup — and use the resulting Suggested Charge as your posted floor. Your minimum comes directly from running the calculator on your cheapest stop, not from what a competitor charges.</p>
+  <p>For the minimum charge, run the calculator with your smallest typical system — say, a 2-zone residential setup — and use the resulting Suggested Charge as your posted floor. Your minimum comes directly from running the calculator on your cheapest stop.</p>
 
   <h2 id="compressor-cost">Compressor Cost: How Many Stops You Complete Decides the Per-Stop Number</h2>
 
@@ -175,7 +174,11 @@ cannibalization: none
 
   <h3>CFM and pressure</h3>
 
-  <p>K-Rain's blowout guide specifies a minimum of 20–25 CFM and caps blowout pressure at 50 psi on all pipe types. Hunter's general winterization guide uses a different sizing formula — divide the GPM of your largest zone by 7.5 to get the required CFM — and sets pressure limits at 50 psi for polyethylene pipe and 80 psi for PVC. Hunter's valves and winterization procedures page gives a more specific CFM figure: 80–100 CFM for any mainline of 2 inches or less. CSU Extension's Fact Sheet 4.719 uses the same GPM ÷ 7.5 formula and calls the ideal range 40–80 psi, with the same PVC and poly maximums. Where sources set different ceilings, Hunter states the governing principle directly: "The blowout pressure should remain below the maximum operating pressure specification of the lowest pressure-rated component in that zone." Regulate at the compressor outlet accordingly. Connect the airline downstream of the backflow device — never push air through the backflow preventer.</p>
+  <p>On CFM sizing, K-Rain's blowout guide calls for a minimum of 20–25 CFM. Hunter's general winterization guide recommends calculating required CFM by dividing the GPM of your largest zone by 7.5 — a formula CSU Extension's Fact Sheet 4.719 also uses. Hunter's valves and winterization procedures page specifies 80–100 CFM for mainlines up to 2 inches in diameter.</p>
+
+  <p>On pressure, K-Rain caps blowout pressure at 50 psi on all pipe types. Hunter and CSU Extension both allow up to 80 psi on rigid PVC and cap polyethylene at 50 psi. Hunter's guidance adds the practical governing rule: stay below the maximum operating pressure of the lowest-rated component in the zone. Regulate at the compressor outlet.</p>
+
+  <p>Connect the airline downstream of the backflow device — never push air through the backflow preventer.</p>
 
   <h2 id="route-density">Route Density and Drive Time</h2>
 
@@ -193,20 +196,25 @@ cannibalization: none
 
   <p>The $52 range between a dense route and a scattered one — with identical zone count, labor rate, compressor cost, and overhead — comes purely from drive. Shops that schedule by city-day (dedicating each day to a specific geographic cluster) compress per-stop drive time and lower their cost structure, which lets them either offer a more competitive price or hold the same price at a higher margin.</p>
 
-  <p>Enter Drive Time as your per-stop share of the route (total route drive ÷ stops), not your full one-way commute. Fuel / Travel Cost is the incremental fuel for that stop's share of the route, not your total vehicle fuel for the day. For the billing question — whether to show drive time on the customer invoice — see <a href="/blog/should-contractors-charge-for-drive-time.html">should contractors charge for drive time</a>.</p>
+  <p>Enter Drive Time as your per-stop share of the route (total route drive ÷ stops). Fuel / Travel Cost is the incremental fuel for that stop's share of the route. For the billing question — whether to show drive time on the customer invoice — see <a href="/blog/should-contractors-charge-for-drive-time.html">should contractors charge for drive time</a>.</p>
 
   <h2 id="return-visits">No-Access, Not-Home, and Return Visits</h2>
 
-  <p>A locked gate, a dog blocking the valve box, no one home to let you into the basement shutoff, or a valve box buried in mulch — these are not rare edge cases on a blowout route. They are regular occurrences, and each one costs you a stop's worth of drive and setup time without producing a billable result unless you have a written policy.</p>
+  <p>A locked gate, a dog blocking the valve box, no one home to let you into the basement shutoff, or a valve box buried in mulch — all of these come up on every blowout route. Each one costs you a stop's worth of drive and setup time without a billable result unless you have a written policy.</p>
 
   <p>Decide before the season starts:</p>
 
-  <ul>
-    <li><strong>No-access fee:</strong> If you arrive and cannot complete the blowout — locked gate, buried valve, no access to the interior shutoff — charge a stated trip fee. The value of that fee is the Suggested Charge from running the calculator with your drive time and 0 productive hours. You drove and set up; that time and cost are real.</li>
-    <li><strong>Not-home policy:</strong> If the customer was supposed to be present and is not, the same logic applies. Set a cancellation window — whatever your policy says — that lets customers reschedule without penalty while giving you the ability to charge same-day no-shows.</li>
-    <li><strong>Return visit charge:</strong> If you complete the blowout but the customer calls back believing a zone was missed or improperly purged, your return trip is a new cost event. For building a financial reserve to cover freeze-damage returns without eating your margin, see <a href="/blog/callback-reserve-for-contractors.html">building a callback reserve</a>.</li>
-    <li><strong>Late-cancel fee:</strong> A same-day cancellation after you've loaded the trailer and left the yard deserves the same treatment as a no-show. Some shops match their standard trip fee; the amount matters less than the consistency of enforcement.</li>
-  </ul>
+  <h3>No-access fee</h3>
+  <p>If you arrive and cannot complete the blowout — locked gate, buried valve, no access to the interior shutoff — charge a stated trip fee. Run the calculator with your drive time and your real setup minutes entered as hours (connecting and disconnecting takes time even when no zone runs), and zero zone purge time, to find the floor for that fee.</p>
+
+  <h3>Not-home and cancellation</h3>
+  <p>If the customer was supposed to be present and is not, the same logic applies. Set a specific cancellation window — 24 hours is a common threshold — state it clearly at booking, and charge same-day no-shows at your standard trip fee.</p>
+
+  <h3>Return visit charge</h3>
+  <p>If you complete the blowout but the customer calls back believing a zone was missed or improperly purged, your return trip is a new cost event. For building a financial reserve to cover freeze-damage returns without eating your margin, see <a href="/blog/callback-reserve-for-contractors.html">building a callback reserve</a>.</p>
+
+  <h3>Late-cancel fee</h3>
+  <p>A same-day cancellation after you've loaded the trailer and left the yard deserves the same treatment as a no-show. Some shops match their standard trip fee; the amount matters less than the consistency of enforcement.</p>
 
   <p>If callbacks happen more than occasionally, bump the Overhead &amp; Burden percentage in the calculator to build a reserve into every job — the same principle as any callback-risk business.</p>
 
@@ -228,13 +236,36 @@ cannibalization: none
 
   <p>Adding a second worker to the stop changes the labor calculation in one specific way: the Workers field multiplies labor hours by worker count. A 0.5-hour stop with 2 workers bills 1.0 total labor-hour. At $45/hr, that's $45 in labor vs. $22.50 solo. The two-person model only makes sense economically when the second person materially speeds up the stop — compressing 30 minutes to 20 minutes allows more stops per day and lowers the compressor allocation per stop. Run the numbers both ways before committing to a crew configuration for the season.</p>
 
+  <p>The made-up example below uses the baseline inputs with Workers set to 2 and Drive Time doubled to 0.5 hr (entering 0.25 hr × 2 to account for both workers being paid during the drive):</p>
+
+  <div class="calc-example" role="table" aria-label="Two-person crew — made-up example">
+    <div class="calc-example-header">Two-Person Crew — 6-Zone Stop, 12-Stop Route (made-up numbers, example only)</div>
+    <div class="calc-row"><span>Estimated Hours</span><span class="calc-val">0.5 hr</span></div>
+    <div class="calc-row"><span>Number of Workers</span><span class="calc-val">2</span></div>
+    <div class="calc-row"><span>Hourly Labor Rate</span><span class="calc-val">$45</span></div>
+    <div class="calc-row"><span>Material Cost (compressor allocation, 0% markup)</span><span class="calc-val">$21</span></div>
+    <div class="calc-row"><span>Overhead &amp; Burden</span><span class="calc-val">15%</span></div>
+    <div class="calc-row"><span>Drive Time (0.25 hr per-stop × 2 workers)</span><span class="calc-val">0.5 hr</span></div>
+    <div class="calc-row"><span>Fuel / Travel Cost</span><span class="calc-val">$4</span></div>
+    <div class="calc-row"><span>Total Labor ($45 × 0.5 hr × 2 workers)</span><span class="calc-val">$45.00</span></div>
+    <div class="calc-row"><span>Materials</span><span class="calc-val">$21.00</span></div>
+    <div class="calc-row"><span>Overhead 15% on labor + materials</span><span class="calc-val">$9.90</span></div>
+    <div class="calc-row"><span>Travel ($45 × 0.5 hr + $4 fuel)</span><span class="calc-val">$26.50</span></div>
+    <div class="calc-row"><span>SE + State Tax (20.3% on subtotal $102.40)</span><span class="calc-val">$20.79</span></div>
+    <div class="calc-row"><span>Total Cost</span><span class="calc-val">$123.19</span></div>
+    <div class="calc-row total"><span>Suggested Charge to Customer</span><span class="calc-val">$153.98</span></div>
+    <div class="calc-row profit"><span>Net Profit</span><span class="calc-val">$30.80 (20%)</span></div>
+  </div>
+
+  <p>The two-person stop costs $55.82 more than the solo baseline ($153.98 vs. $98.16). Whether the crew compresses the stop enough to run more stops per day — and thus lowers compressor allocation — is what makes the two-person model viable or not. If the second person doesn't speed up the route, the higher price per stop has to hold on its own.</p>
+
   <p>If you are the owner doing the blowouts yourself, enter a labor rate in the calculator even though you don't write yourself a paycheck for field hours. Use the rate you would pay a qualified tech, or the rate you could be earning doing other work. Paying yourself $0 to do a job is an invisible subsidy that makes your pricing look healthier than it is.</p>
 
   <h2 id="late-season">Late-Season and Cold-Snap Calls</h2>
 
   <p>Once the regular route season closes and a customer calls for a single emergency blowout, the cost structure is entirely different. You are mobilizing the compressor for one stop rather than spreading it across a full day of work. Drive may be cross-town. Your tech may be pulling from a different schedule at overtime rates. A properly priced late-season one-off runs substantially higher than a route stop.</p>
 
-  <p>Cold-weather stops also tend to run longer than peak-season route stops — components may need more purging time, connections require more care, and some heads may need inspection before the zone is declared clear. The made-up example below uses 0.75 hr versus the baseline's 0.5 hr for this reason. Adjust based on what you actually see in your market.</p>
+  <p>This example assumes 0.75 hr for a late-season one-off (unfamiliar property, full setup for one job, no route efficiencies). Adjust to your own stop times.</p>
 
   <div class="calc-example" role="table" aria-label="Late-season one-off vs route-priced comparison — made-up example">
     <div class="calc-example-header">Late-Season One-Off vs Route Stop — Made-Up Numbers</div>
@@ -246,7 +277,7 @@ cannibalization: none
 
   <p>The $484.35 reflects the actual costs: a half-day rental allocated entirely to one stop ($175), an elevated labor rate reflecting out-of-schedule work, and a longer drive. If you price the same stop at $117.61 when your actual cost is $387.48, you take a loss on every late-season call you accept at that rate.</p>
 
-  <p>Whether and how to apply a late-season premium — a higher rate, a flat fee, a published "after-season" price tier — is a policy question. For the math behind late-season overtime rate structures, see <a href="/blog/after-hours-rate-for-contractors.html">the after-hours rate guide</a>. The key point: late-season one-off calls must be priced from their own cost inputs, not inherited from the route schedule.</p>
+  <p>Whether and how to apply a late-season premium — a higher rate, a flat fee, a published "after-season" price tier — is a policy question. For the math behind late-season overtime rate structures, see <a href="/blog/after-hours-rate-for-contractors.html">the after-hours rate guide</a>. Price late-season one-off calls from their own cost inputs.</p>
 
   <h2 id="addons-and-bundle">Add-Ons, Backflow, and the Fall-to-Spring Bundle</h2>
 
@@ -275,21 +306,13 @@ cannibalization: none
     <div class="calc-row total"><span>Two-visit package total (before any deliberate discount)</span><span class="calc-val">$177.95</span></div>
   </div>
 
-  <p>If you want to offer a small bundle discount to incentivize pre-booking, you now know your floor: $177.95 covers both jobs at 20% margin. A $10 discount reduces total revenue by $10 — make it a deliberate choice, not a vague round number. Locking in the spring visit at blowout time also reduces your spring booking overhead and protects the appointment from competitors calling in March.</p>
+  <p>If you want to offer a small bundle discount to incentivize pre-booking, you now know your floor: $177.95 covers both jobs at 20% margin. A $10 discount reduces total revenue by $10 — make it a deliberate choice. Locking in the spring visit at blowout time also reduces your spring booking overhead and protects the appointment from competitors calling in March.</p>
 
   <h2 id="sanity-checks">A Few Pricing Mistakes Worth Catching Early</h2>
 
   <h3>Charging large systems at small-system rates</h3>
 
-  <p>A 14-zone stop takes about 0.83 hr (rounded) at the baseline inputs versus 0.5 hr for a 6-zone stop. The Suggested Charge for the 14-zone stop is $123.84 — $25.68 more than the 6-zone price of $98.16, or about $3.21 per added zone on the pure cost math. If you charge the same 6-zone price for all systems, that shortfall accumulates across every large property on the route. Use zone bands with explicit pricing, or enter actual hours for each configuration.</p>
-
-  <div class="calc-example" role="table" aria-label="14-zone stop vs 6-zone price — made-up example">
-    <div class="calc-example-header">14-Zone Stop: Priced Correctly vs Charged at 6-Zone Rate (made-up numbers)</div>
-    <div class="calc-row"><span>14-zone hours: (15 + 14 × 2.5) ÷ 60 = 0.83 hr (rounded)</span><span class="calc-val">&nbsp;</span></div>
-    <div class="calc-row total"><span>Suggested Charge at 14 zones (correctly priced)</span><span class="calc-val">$123.84</span></div>
-    <div class="calc-row"><span>If you charge the 6-zone baseline price instead</span><span class="calc-val">$98.16</span></div>
-    <div class="calc-row profit"><span>Revenue shortfall per large-system stop</span><span class="calc-val">$25.68</span></div>
-  </div>
+  <p>The per-zone steps above show the math: charging 6-zone rates for a 14-zone stop ($25.68 gap, $3.21 per added zone) leaves a shortfall that accumulates across every large property on the route. Use zone bands with explicit pricing, or enter actual hours for each configuration.</p>
 
   <h3>Marking up the compressor allocation</h3>
 
@@ -297,7 +320,7 @@ cannibalization: none
 
   <h3>Not reviewing prices mid-season</h3>
 
-  <p>A price set in September based on 12 expected stops may be wrong in November based on 7 stops. If your rental rate goes up, your labor rate changes, or your stop count drops consistently, run the calculator again. The inputs are the price — when they change, so should the output.</p>
+  <p>A price set in September based on 12 expected stops may be wrong in November based on 7 stops. If your rental rate goes up, your labor rate changes, or your stop count drops consistently, run the calculator again. Schedule a quick calculator refresh at the start and midpoint of the blowout season.</p>
 
   <h2 id="faq">Frequently Asked Questions</h2>
 

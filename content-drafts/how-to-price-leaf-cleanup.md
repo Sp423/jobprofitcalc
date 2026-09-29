@@ -8,7 +8,7 @@ robots: "index,follow"
 date: "September 29, 2026"
 slot: "Tue Sep 29, 2026"
 tag: "Job Pricing"
-read_time: "17 min read"
+read_time: "21 min read"
 primary_keyword: "how much to charge for leaf removal / leaf cleanup pricing"
 secondary_keywords:
   - how to price leaf removal
@@ -42,7 +42,7 @@ cannibalization: none
   <div class="article-meta">
     <span>September 29, 2026</span>
     <span class="article-meta-sep">·</span>
-    <span>17 min read</span>
+    <span>21 min read</span>
     <span class="article-meta-sep">·</span>
     <span>JobProfitCalc.com</span>
   </div>
@@ -337,27 +337,23 @@ cannibalization: none
     <li>Make sure the Material Markup field is at 0% if you put the dump fee there. A leftover 20% from the Landscaper preset quietly marks up the disposal.</li>
   </ul>
 
-  <h2 id="mistakes">Common pricing mistakes and how to fix them</h2>
+  <h2 id="mistakes">Mistakes that quietly lower your price, and the fix for each</h2>
 
-  <h3>Pricing from a consumer cost guide</h3>
+  <h3>Mixing wet and dry jobs in the same log</h3>
 
-  <p>An average customer price is a result of other shops' costs in other places. Use your own inputs and let the average serve as the sanity check above. If your price is well over the average and you are losing bids, the fix is in your costs or your routing, which you can see in the calculator's breakdown.</p>
+  <p>If your job log averages every cleanup together, the dry jobs make your wet estimates too low and the wet jobs make your dry quotes too high. Tag each entry as wet or dry when you write it down, along with tree count and whether the leaves were hauled or left at the curb. Estimate from matching entries only.</p>
 
-  <h3>Treating the dump run as free time</h3>
+  <h3>Logging only the time spent blowing</h3>
 
-  <p>The drive to the yard-waste site, the line at the scale, and unloading all take paid time. Add them to Drive Time. On the example job the dump detour is a third of the drive entry.</p>
+  <p>Unloading equipment, laying tarps, loading the truck, tying down the load, and a final pass on the driveway all belong in Estimated Hours. A log that starts when the blower starts will undercount every job by the same amount, and the error repeats across the whole season. Record arrival to departure.</p>
 
-  <h3>Quoting a flat price with no wet-leaf terms</h3>
+  <h3>Discounting the program to close the sale</h3>
 
-  <p>The example shows a dry quote losing money when the job goes wet. Add the wet condition to every quote scheduled after your area's usual peak drop, or price those jobs at the wet rate from the start.</p>
+  <p>A season discount feels harmless, but it comes straight out of the margin. On the example program, a $30 discount on $456.76 takes net profit from $91.35 to $61.35, which drops the margin from 20% to about 14.4%. If you want to offer a discount, rerun the program with a lower Desired Profit Margin first and decide whether you can live with the result.</p>
 
-  <h3>Letting the program slide into a one-time job</h3>
+  <h3>Carrying last season's rates into this one</h3>
 
-  <p>If visits keep getting skipped, the final visit becomes a wet one-time cleanup billed at program rates. The skip and catch-up terms exist to prevent exactly that. Enforce them the first time they apply.</p>
-
-  <h3>Forgetting to rerun the numbers mid-season</h3>
-
-  <p>Fuel prices, dump rates, and your crew's pace all change during a season. Rerun your standard bands at the start of the season and again when the heavy drop begins, and update your minimum if your drive times have grown.</p>
+  <p>Yard-waste sites change their fees, fuel moves, and wages go up. Before the first quote of the season, check the current dump rate and a recent fuel receipt, update your burdened labor rate from payroll, and rerun your minimum and your standard lot sizes. Do it again when the heavy drop begins if any of those have moved.</p>
 
   <h2 id="faq">Frequently asked questions</h2>
 

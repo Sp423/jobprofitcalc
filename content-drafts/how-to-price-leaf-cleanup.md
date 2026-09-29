@@ -8,7 +8,7 @@ robots: "index,follow"
 date: "September 29, 2026"
 slot: "Tue Sep 29, 2026"
 tag: "Job Pricing"
-read_time: "21 min read"
+read_time: "20 min read"
 primary_keyword: "how much to charge for leaf removal / leaf cleanup pricing"
 secondary_keywords:
   - how to price leaf removal
@@ -42,7 +42,7 @@ cannibalization: none
   <div class="article-meta">
     <span>September 29, 2026</span>
     <span class="article-meta-sep">·</span>
-    <span>21 min read</span>
+    <span>20 min read</span>
     <span class="article-meta-sep">·</span>
     <span>JobProfitCalc.com</span>
   </div>
@@ -58,7 +58,7 @@ cannibalization: none
          class="post-thumb"
          width="1280" height="640"
          fetchpriority="high">
-    <figcaption>Tarping a pile at the edge of the lawn before loading: most of a cleanup's cost is in the moving and hauling.</figcaption>
+    <figcaption>Tarping a pile at the edge of the lawn before loading. In the solo example below, the drive and the dump fee account for $72.00 of the $214.50 cost subtotal.</figcaption>
   </figure>
 
   <p>Charge for leaf removal by building the price from your own costs: crew hours on the property, drive time for everyone in the truck, disposal as its own line, overhead, and a margin, with a minimum charge underneath so small yards still pay for the trip. LawnStarter's 2026 leaf removal guide puts the average customer price around $170 with an $80 minimum, which is a useful gut check but tells you nothing about what your truck, your crew, and your dump cost. Price late-season wet leaves higher than dry ones, and consider selling a two-to-four-visit fall program instead of one big cleanup at the end of the season.</p>
@@ -71,7 +71,7 @@ cannibalization: none
 
   <p>Labor is the time on the property multiplied by the people doing the work and their loaded hourly cost. Disposal is whatever you pay to get rid of the leaves, plus bags if you use them. Overhead is the share of your insurance, equipment wear, phone, software, and office time that each job has to carry. Travel is the drive to the property and back, including any detour to the yard-waste site. Then the calculator adds a tax allowance and your margin on top.</p>
 
-  <p>The example job used throughout is a suburban lot with lawn in front and back, two planting beds, and a line of mature trees along one side. The leaves are dry. A solo operator clears it with a backpack blower and a tarp, loads the truck, and hauls the load to a yard-waste site that charges a flat fee per pickup load. Nothing about this lot is meant to be typical. It is simply one set of inputs you can follow from start to finish.</p>
+  <p>The example job used throughout is a suburban lot with lawn in front and back, two planting beds, and a line of mature trees along one side. The leaves are dry. A solo operator clears it with a backpack blower and a tarp, loads the truck, and hauls the load to a yard-waste site that charges a flat fee per pickup load. These are example inputs, chosen so you can follow one lot from start to finish.</p>
 
   <h3>Where each input comes from</h3>
 
@@ -115,7 +115,7 @@ cannibalization: none
     <div class="calc-row profit"><span>Net Profit</span><span class="calc-val">$64.51 (20%)</span></div>
   </div>
 
-  <p>The suggested charge is well above the $170 average LawnStarter reports, and that is fine. An average blends tiny townhouse yards with big wooded lots across the whole country. This example is a three-hour job with a haul, so it should cost more than the middle of a national range. If your own numbers put a small yard far above that average, though, look hard at your drive time and minimum before you assume the market is wrong.</p>
+  <p>A three-hour job with a haul should price well above a small front yard, and a national average blends tiny townhouse yards with big wooded lots. If your own numbers put a small yard far above the market average, though, look hard at your drive time and minimum before you assume the market is wrong.</p>
 
   <p>Notice where the money goes. Labor is $120, but travel alone is $42, more than the dump fee and the overhead combined. On a leaf job the truck spends a surprising share of the day moving between the property, the next property, and the dump. The <a href="/blog/should-contractors-charge-for-drive-time.html">drive time guide</a> covers whether to show that as a separate trip fee or fold it into the price. Either way, it has to be in the inputs.</p>
 
@@ -139,7 +139,7 @@ cannibalization: none
 
   <h2 id="two-person-crew">Two people on the job means paying two people to ride</h2>
 
-  <p>A second worker gets the same property clear faster, but they also sit in the truck on the way there and back. The calculator's Drive Time field bills drive hours once at the labor rate, and its tooltip says so directly. That is correct for a solo operator. For a crew, you have to account for the second person's paid ride time yourself. The simplest way is to multiply the drive hours by the number of workers before you enter them.</p>
+  <p>A second worker gets the same property clear faster, but they also sit in the truck on the way there and back. The calculator's Drive Time field bills drive hours once at the labor rate. That is correct for a solo operator. For a crew, you have to account for the second person's paid ride time yourself. The simplest way is to multiply the drive hours by the number of workers before you enter them.</p>
 
   <p>For the example lot, assume two people finish in 1.75 hours instead of 3. Two people usually don't cut the time exactly in half, because one tarp still has to be dragged to one truck and some tasks don't split well. Your job log is the only real source for your crew's speed. Everything else stays the same except the doubled drive entry.</p>
 
@@ -170,13 +170,13 @@ cannibalization: none
 
   <p>Hours drive everything else, and leaf jobs vary more from lot to lot than most landscape work. Four things move the number most.</p>
 
-  <p>Tree cover is the first. A lot with one young maple and a lot under a stand of mature oaks can be the same size and produce very different volumes. When you walk a property for the quote, count the large trees on it and the ones overhanging it from next door. Last season's log will tell you how your hours tracked with tree count.</p>
+  <p>Start with tree cover. A lot with one young maple and a lot under a stand of mature oaks can be the same size and produce very different volumes. When you walk a property for the quote, count the large trees on it and the ones overhanging it from next door. Last season's log will tell you how your hours tracked with tree count.</p>
 
-  <p>Beds versus lawn is the second. Open lawn clears fast with a blower or a mower with a bagger. Beds full of shrubs, groundcover, and mulch have to be cleared carefully so you don't blow the mulch out with the leaves, and hand work in beds can take as long as the whole lawn. Some shops quote beds as a separate line, which also gives the customer an easy way to trim the price if they want to do the beds themselves.</p>
+  <p>Open lawn clears fast with a blower or a mower with a bagger. Beds full of shrubs, groundcover, and mulch have to be cleared carefully so you don't blow the mulch out with the leaves, and hand work in beds can take as long as the whole lawn. Some shops quote beds as a separate line, which also gives the customer an easy way to trim the price if they want to do the beds themselves.</p>
 
-  <p>Equipment is the third. A backpack blower is usually enough for small and mid-size residential lots. A walk-behind blower moves large open areas much faster. A truck-mounted leaf loader or vacuum can turn a long tarp-dragging job into a short one, but it costs money every day it exists. That cost belongs somewhere. If the machine runs on most jobs, fold its payment, maintenance, and depreciation into your Overhead &amp; Burden percentage. If it only comes out on big jobs, divide its daily cost by the jobs it serves that day and add that share to Material Cost at 0% markup, the same way you would handle a rental.</p>
+  <p>The equipment you bring changes the hours as well. A backpack blower is usually enough for small and mid-size residential lots. A walk-behind blower moves large open areas much faster. A truck-mounted leaf loader or vacuum can turn a long tarp-dragging job into a short one, but it costs money every day it exists. That cost belongs somewhere. If the machine runs on most jobs, fold its payment, maintenance, and depreciation into your Overhead &amp; Burden percentage. If it only comes out on big jobs, divide its daily cost by the jobs it serves that day and add that share to Material Cost at 0% markup, the same way you would handle a rental.</p>
 
-  <p>Access is the fourth. Narrow gates, steep slopes, fenced yards where the tarp has to go through a side door, and long carries from the back lot to the curb all add time. None of these shows up on a satellite view, which is one more reason to walk a new property before you commit to a price.</p>
+  <p>Narrow gates, steep slopes, fenced yards where the tarp has to go through a side door, and long carries from the back lot to the curb all add time. None of these shows up on a satellite view, which is one more reason to walk a new property before you commit to a price.</p>
 
   <p>Once you have a season of logs, you can build simple bands such as small, medium, and large, each with its own hours, and use them for quick quotes. Until then, use the actual hours from the jobs you have timed and round up.</p>
 
@@ -203,7 +203,7 @@ cannibalization: none
     <div class="calc-row profit"><span>Net Profit</span><span class="calc-val">$18.80 (20%)</span></div>
   </div>
 
-  <p>The calculator carries full precision and rounds only for display, so net profit shows $18.80 even though the rounded lines subtract to $18.79. Travel is almost as large as labor here, which is exactly why small jobs need a floor. For this example shop, a posted minimum of $95 covers the trip with a little room. That lands above the $80 minimum LawnStarter cites, and there is nothing wrong with that. Your minimum should come from your drive and your labor rate. If your number comes out far lower than $80, check whether you left the drive time out.</p>
+  <p>The calculator carries full precision and rounds only for display, so net profit shows $18.80 even though the rounded lines subtract to $18.79. Travel is almost as large as labor here, which is exactly why small jobs need a floor. For this example shop, a posted minimum of $95 covers the trip with a little room. That lands above the $80 minimum LawnStarter cites, and there is nothing wrong with that. Your minimum should come from your drive and your labor rate. If your number comes out far lower than that, check whether you left the drive time out.</p>
 
   <p>Rerun the minimum whenever your service area changes. A minimum set for jobs ten minutes from the shop will not hold for a customer forty minutes out. Some shops publish one minimum for their core zone and a higher one beyond it.</p>
 
@@ -242,7 +242,7 @@ cannibalization: none
 
   <h2 id="overtime-and-owner">Late-season overtime and the owner in the field</h2>
 
-  <p>The last few weeks of leaf season tend to stack up. Customers tend to want the final cleanup at the same time, daylight is shorter, and crews end up working past 40 hours. Overtime raises your labor cost per hour, and the job's price needs to reflect that when the hours will actually be paid at time and a half.</p>
+  <p>The last few weeks of leaf season tend to stack up. Customers often want the final cleanup at the same time, daylight is shorter, and crews end up working past 40 hours. Overtime raises your labor cost per hour, and the job's price needs to reflect that when the hours will actually be paid at time and a half.</p>
 
   <p>Premium pay does not raise every part of your burden by the same amount, so the overtime rate you enter is usually less than 1.5 times your full loaded rate. The <a href="/blog/after-hours-rate-for-contractors.html">after-hours pricing guide</a> walks through the split. The example below uses $55 an hour as an example overtime loaded rate for the same solo dry job. Because drive time is billed at the labor rate, the higher rate raises travel too.</p>
 
@@ -322,7 +322,7 @@ cannibalization: none
 
   <h3>Weather delays</h3>
 
-  <p>Rain, early snow, and wind storms will push visits around. Write the program with visit windows, such as a week, rather than fixed dates, and say what happens when a window is missed because of weather: the visit moves to the next open day on the route and is billed at the regular program rate. If a delay turns dry leaves into wet ones, the wet-leaf terms from your quote apply. If early snow ends the season before the final visit, decide in advance whether that visit is refunded, credited to spring cleanup, or delivered once the snow melts.</p>
+  <p>Rain, early snow, and wind storms will push visits around. Give each program visit a week-long window, and say in the agreement what happens when weather closes that window: the visit moves to the next open day on the route and is billed at the regular program rate. A delay can change four fields. Leaves that sit longer add Estimated Hours and, at a weight-based site, raise Material Cost. A visit that can't be moved to another route day loses its routed share of Drive Time and Fuel / Travel Cost, so rerun it with the full trip before you confirm the price. If a delay turns dry leaves into wet ones, the wet-leaf terms from your quote apply. If early snow ends the season before the final visit, decide in advance whether that visit is refunded, credited to spring cleanup, or delivered once the snow melts.</p>
 
   <h2 id="sanity-checks">Sanity checks before the quote goes out</h2>
 
@@ -333,7 +333,6 @@ cannibalization: none
     <li>Check that Drive Time was multiplied by the number of workers on any crew job.</li>
     <li>Confirm the dump fee reflects wet weight if the site charges by weight and the job is late in the season.</li>
     <li>Compare the quote to your own minimum charge. Nothing should go out below it.</li>
-    <li>Compare it loosely to LawnStarter's reported $170 average and $80 minimum. A very big gap in either direction is worth a second look at the inputs, though it is not a reason by itself to change a price your costs support.</li>
     <li>Make sure the Material Markup field is at 0% if you put the dump fee there. A leftover 20% from the Landscaper preset quietly marks up the disposal.</li>
   </ul>
 
@@ -341,7 +340,7 @@ cannibalization: none
 
   <h3>Mixing wet and dry jobs in the same log</h3>
 
-  <p>If your job log averages every cleanup together, the dry jobs make your wet estimates too low and the wet jobs make your dry quotes too high. Tag each entry as wet or dry when you write it down, along with tree count and whether the leaves were hauled or left at the curb. Estimate from matching entries only.</p>
+  <p>If your job log averages every cleanup together, the dry jobs make your wet estimates too low and the wet jobs make your dry quotes too high. The error shows up in two fields: Estimated Hours, and Material Cost wherever the dump charges by weight. Tag each entry as wet or dry when you write it down, along with tree count and whether the leaves were hauled or left at the curb. Pull Estimated Hours and Material Cost only from matching entries.</p>
 
   <h3>Logging only the time spent blowing</h3>
 
@@ -357,31 +356,15 @@ cannibalization: none
 
   <h2 id="faq">Frequently asked questions</h2>
 
-  <h3>How much should I charge for leaf removal?</h3>
+  <h3>How do I price leaf removal by the hour instead of by the job?</h3>
 
-  <p>Charge what your own costs say plus your margin, with a minimum charge underneath. Enter your hours, workers, burdened rate, disposal, drive, and fuel in the <a href="/calculator">calculator</a> and use the Suggested Charge as your floor for that property. LawnStarter's 2026 guide reports an average customer price around $170, which you can use as a loose reference point.</p>
-
-  <h3>How do I price leaf removal for a lot I've never done?</h3>
-
-  <p>Walk it before quoting. Count the large trees, note how much of it is beds versus open lawn, check access for the tarp or loader, and find out where the leaves will go. Then pick the closest job from your log for hours. If you have no log, quote conservatively and time the job so the next quote is based on real hours.</p>
+  <p>Run a typical job in the calculator, then divide its Suggested Charge to Customer by the job's on-site hours. That hourly figure carries drive, overhead, and margin with it, so it only holds for jobs with a similar drive. Bill disposal as a separate line at cost when you charge hourly, because the dump fee doesn't grow with the hours. Hourly billing protects you on slow, wet days, but it leaves the customer guessing at the leaf removal cost, and some customers would rather see a fixed number. A fixed price with a stated hour cap, billed hourly past the cap, splits that risk.</p>
 
   <h3>How should fall cleanup pricing differ from a single leaf job?</h3>
 
-  <p>A full fall cleanup often adds bed cutbacks, gutter clearing, or a final mow, and each added task needs its own hours in the calculator. A multi-visit program should be priced per visit from its routed inputs, then totaled for the season, as in the three-visit example above.</p>
+  <p>A full fall cleanup often adds bed cutbacks, gutter clearing, or a final mow, and each added task needs its own hours in the calculator. Gutter work usually means a ladder, so check that your insurance covers it before you add it to the menu, and consider raising Overhead &amp; Burden for jobs that include it if your premium does go up.</p>
 
-  <h3>What goes into the leaf removal cost for the shop?</h3>
-
-  <p>Burdened labor, drive time for everyone in the truck, fuel, disposal or bags, overhead, and the tax allowance. Disposal is easy to leave out, and drive time is easy to undercount for crews.</p>
-
-  <h3>What should my leaf cleanup minimum charge be?</h3>
-
-  <p>Run the smallest job you would accept, with its real drive time, and use that Suggested Charge as the minimum. In the example it came to $93.98, which the shop rounded to $95. LawnStarter's 2026 guide cites an $80 minimum, but your drive and labor rate should set yours.</p>
-
-  <h2 id="bottom-line">The bottom line</h2>
-
-  <p>Build each leaf quote from your job log, payroll report, dump tickets, and fuel receipts. Put a real minimum under every job, write wet-leaf and skip terms in before the season turns, and run a fall program through the <a href="/calculator">calculator</a> for any lot heavy enough to need more than one visit.</p>
-
-  <p class="disclaimer">This article is for educational purposes only and does not constitute legal, financial, or tax advice. All shop dollar figures and examples are example numbers for illustration; they do not represent typical prices, rates, or costs in any market. The only outside market figures cited are from LawnStarter's 2026 leaf removal cost guide. Check local yard-waste and curbside collection rules before quoting disposal. Consult qualified professionals for advice specific to your business and jurisdiction.</p>
+  <p class="disclaimer">This article is for educational purposes only and does not constitute legal, financial, or tax advice. All shop dollar figures and examples are example numbers for illustration; they do not represent typical prices, rates, or costs in any market. Check local yard-waste and curbside collection rules before quoting disposal. Consult qualified professionals for advice specific to your business and jurisdiction.</p>
 
 </div><!-- /article-body -->
 

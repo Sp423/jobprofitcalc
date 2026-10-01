@@ -1,7 +1,7 @@
 ---
 title: "How to Price Sprinkler Blowouts: Per Zone, Flat Rate, or Both?"
 h1: "How Much to Charge for a Sprinkler Blowout"
-meta: "How to price sprinkler blowouts and sprinkler winterization: compressor allocation, route drive, minimum charge, and worked calculator examples for solo and two-person crews."
+meta: "How to price sprinkler blowouts and sprinkler winterization: compressor cost, drive time, minimum charge, and worked examples for solo and two-person crews."
 canonical: "https://jobprofitcalc.com/blog/how-to-price-sprinkler-blowouts.html"
 url: "/blog/how-to-price-sprinkler-blowouts.html"
 robots: "index,follow"
@@ -117,7 +117,7 @@ cannibalization: none
       <strong>Open the calculator and overwrite the Landscaper preset.</strong> The Landscaper preset loads Hours: 5, Workers: 2, Rate: $45, Material: $100 at 20% markup, Overhead: 15%, Drive: 1.0 hr, Fuel: $20. That configuration is sized for a full morning of landscape work — not a 30-minute residential blowout stop. Change every field before you read any result.
     </li>
     <li>
-      <strong>Enter Estimated Hours using zone count and fixed time.</strong> The calculator has no zone field; zone count determines hours. Multiply fixed setup minutes plus zones times minutes per zone, then divide by 60 to get the hour figure. A reasonable starting point for residential work is 15 fixed minutes and 2–3 minutes per zone run in two short cycles. For a 6-zone stop: (15 + 6 × 2.5) ÷ 60 = 0.5 hr. For a 10-zone stop: (15 + 10 × 2.5) ÷ 60 = 0.67 hr. If you don't have real time data yet, time your first dozen stops of the season and use that to update the formula.
+      <strong>Enter Estimated Hours using zone count and fixed time.</strong> The calculator has no zone field; zone count determines hours. Add your fixed setup minutes to zones times minutes per zone, then divide by 60. A reasonable starting point for residential work is 15 fixed minutes and 2–3 minutes per zone run in two short cycles. For a 6-zone stop: (15 + 6 × 2.5) ÷ 60 = 0.5 hr. For a 10-zone stop: (15 + 10 × 2.5) ÷ 60 = 0.67 hr. If you don't have real time data yet, time your first dozen stops of the season and use that to update the formula.
     </li>
     <li>
       <strong>Enter Number of Workers.</strong> A solo tech is 1; a two-person crew is 2. The calculator multiplies labor hours by worker count but bills drive time once at the labor rate. That's accurate for a solo tech, where the drive is purely a vehicle cost. For a two-person crew, the second worker is also being paid while riding to the stop — that cost isn't captured by the single-rate drive field alone. To account for it, either enter Drive Time as the actual drive hours multiplied by 2, or add the second worker's pay for the drive to the Fuel / Travel Cost field.
@@ -202,13 +202,13 @@ cannibalization: none
 
   <p>A locked gate, a dog blocking the valve box, no one home to let you into the basement shutoff, or a valve box buried in mulch — all of these come up on every blowout route. Each one costs you a stop's worth of drive and setup time without a billable result unless you have a written policy.</p>
 
-  <p>Decide before the season starts:</p>
+  <p>Set these four policies before the season starts.</p>
 
   <h3>No-access fee</h3>
   <p>If you arrive and cannot complete the blowout — locked gate, buried valve, no access to the interior shutoff — charge a stated trip fee. Run the calculator with your drive time and your real setup minutes entered as hours (connecting and disconnecting takes time even when no zone runs), and zero zone purge time, to find the floor for that fee.</p>
 
   <h3>Not-home and cancellation</h3>
-  <p>If the customer was supposed to be present and is not, the same logic applies. Set a specific cancellation window — 24 hours is a common threshold — state it clearly at booking, and charge same-day no-shows at your standard trip fee.</p>
+  <p>If the customer was supposed to be present and is not, the same logic applies. Pick a specific cancellation window (for example, 24 hours), state it clearly at booking, and charge same-day no-shows at your standard trip fee.</p>
 
   <h3>Return visit charge</h3>
   <p>If you complete the blowout but the customer calls back believing a zone was missed or improperly purged, your return trip is a new cost event. For building a financial reserve to cover freeze-damage returns without eating your margin, see <a href="/blog/callback-reserve-for-contractors.html">building a callback reserve</a>.</p>
@@ -257,7 +257,7 @@ cannibalization: none
     <div class="calc-row profit"><span>Net Profit</span><span class="calc-val">$30.80 (20%)</span></div>
   </div>
 
-  <p>The two-person stop costs $55.82 more than the solo baseline ($153.98 vs. $98.16). Whether the crew compresses the stop enough to run more stops per day — and thus lowers compressor allocation — is what makes the two-person model viable or not. If the second person doesn't speed up the route, the higher price per stop has to hold on its own.</p>
+  <p>The two-person stop costs $55.82 more than the solo baseline ($153.98 vs. $98.16). If the second person doesn't speed up the route, the higher price per stop has to hold on its own.</p>
 
   <p>If you are the owner doing the blowouts yourself, enter a labor rate in the calculator even though you don't write yourself a paycheck for field hours. Use the rate you would pay a qualified tech, or the rate you could be earning doing other work. Paying yourself $0 to do a job is an invisible subsidy that makes your pricing look healthier than it is.</p>
 

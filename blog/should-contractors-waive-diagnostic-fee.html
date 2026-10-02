@@ -170,6 +170,10 @@
     .calc-row.total .calc-val { color: var(--accent); font-size: 16px; }
     .calc-row.profit { background: rgba(34,197,94,0.06); }
     .calc-row.profit .calc-val { color: #22C55E; }
+    .calc-row.miss { background: rgba(248,113,113,0.08); }
+    .calc-row.miss .calc-val { color: #F87171; }
+    .calc-row.win { background: rgba(34,197,94,0.06); }
+    .calc-row.win .calc-val { color: #22C55E; }
     .calc-val { font-weight: 600; color: var(--text-pri); }
     .article-sidebar { position: sticky; top: 82px; display: flex; flex-direction: column; gap: 20px; }
     .sidebar-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; }
@@ -436,7 +440,7 @@
 
             <ul>
               <li><strong>They declined the repair:</strong> The diagnostic did exactly what it was supposed to do. You went out, identified the problem, gave a professional assessment. Keep the fee without hesitation — that's the product you sold.</li>
-              <li><strong>Small repair where the diagnostic is the only profitable line:</strong> Use a separate cost stack for that ticket. Do not reuse the large-repair combined cost. Example (made-up $): same $183.00 diagnostic visit cost, then a small same-visit repair of 0.5 hr labor ($37.50), $40 materials at cost, and $17.05 overhead (22% of $77.50) = $94.55 repair cost, or $277.55 combined. Keep both fees and you collect $165 + $200 = $365 against $277.55, a profit of $87.45. Credit the full diagnostic and you collect only $200 against that same $277.55, an outright loss of $77.55. On low-ticket repairs, the diagnostic fee isn't optional padding. It's the job's margin.</li>
+              <li><strong>Small repair where the diagnostic fee carries the ticket:</strong> Use a separate cost stack for that ticket. Do not reuse the large-repair combined cost. Example (made-up $): same $183.00 diagnostic visit cost, then a small same-visit repair of 0.5 hr labor ($37.50), $40 materials at cost, and $17.05 overhead (22% of $77.50) = $94.55 repair cost, or $277.55 combined. Keep both fees and you collect $165 + $200 = $365 against $277.55, a profit of $87.45. Credit the full diagnostic and you collect only $200 against that same $277.55, an outright loss of $77.55. On low-ticket repairs, the diagnostic fee is what keeps the ticket profitable. Without it, the repair alone doesn't cover the visit and the repair together.</li>
               <li><strong>Long drive already spent:</strong> If you drove 45 minutes each way for this call, that drive cost is in the ticket regardless of what happens next. See the section on <a href="/blog/should-contractors-charge-for-drive-time.html">drive time billing</a> for the full structure. The diagnostic fee helps recover travel cost that the repair ticket alone may not cover.</li>
               <li><strong>First visit, unknown customer:</strong> You don't owe a credit to someone you've never worked with before. If the repair is priced at margin and the diagnostic was a separate visit, both stand on their own numbers. Offering an unsolicited credit to a new customer just trains them to expect it next time.</li>
             </ul>
@@ -449,7 +453,7 @@
             <ol>
               <li>
                 <strong>Run the diagnostic as its own job ticket.</strong>
-                Enter: labor hours for the diagnostic visit, 1 worker, your hourly labor rate, no materials, your overhead %, and drive time (round-trip hours; the calculator multiplies it by the number of workers). Enter a target margin. The calculator shows your suggested charge. Compare that to your flat diagnostic fee to confirm the fee is covering cost and margin. If your flat fee is below the suggested charge, your diagnostic is underpriced. In this article's example, the suggested charge is $281.54 against a $165 fee.
+                Enter: labor hours for the diagnostic visit, 1 worker, your hourly labor rate, no materials, your overhead %, and drive time (round-trip hours; the calculator multiplies it by the number of workers). Enter a target margin. The calculator shows your suggested charge. Compare that to your flat diagnostic fee to confirm the fee is covering cost and margin. If your flat fee is below the suggested charge, your diagnostic is underpriced.
               </li>
               <li>
                 <strong>Run the repair as a second, separate ticket, with zero drive time.</strong>
@@ -516,7 +520,7 @@
               </li>
               <li>
                 <strong>Never reviewing whether your diagnostic fee is covering cost.</strong>
-                If your flat diagnostic fee was set several years ago and your labor cost has increased since, your diagnostic might be running at zero margin or below. In this article's example, the $165 fee sits $18.00 below the $183.00 cost of a visit with 30 minutes of driving each way. Run Pass 1 quarterly: enter current labor rate, overhead, and drive time. If the suggested charge exceeds your current fee, your fee is underpriced, and crediting it is doubly bad.
+                If your flat diagnostic fee was set several years ago and your labor cost has increased since, your diagnostic might be running at zero margin or below. In this article's example, the $165 fee is already below the cost of a visit with 30 minutes of driving each way. Run Pass 1 quarterly: enter current labor rate, overhead, and drive time. If the suggested charge exceeds your current fee, your fee is underpriced, and crediting it is doubly bad.
               </li>
             </ol>
 

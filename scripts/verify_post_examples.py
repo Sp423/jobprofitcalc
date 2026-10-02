@@ -545,17 +545,43 @@ def se_tax(net_dollars):
     return js_round(cents(net_dollars) * SE_NET_FACTOR * SE_RATE)
 
 
+# 2026 federal figures, single filer (IRS Rev. Proc. 2025-32).
+STD_DEDUCTION_2026 = 16100
+BRACKETS_2026 = [(12400, 0.10), (50400, 0.12), (105700, 0.22)]
+# Idaho 2026 single filer: first $4,811 at 0%, the rest at 5.3% (tax.idaho.gov rate schedule).
+IDAHO_ZERO_BRACKET = 4811
+IDAHO_RATE = 0.053
+
+
+def federal_tax_2026(taxable):
+    tax, lower = 0, 0
+    for upper, rate in BRACKETS_2026:
+        tax += max(0, min(taxable, upper) - lower) * rate
+        lower = upper
+    return js_round(tax)
+
+
+def idaho_tax(income):
+    return js_round(max(0, income - IDAHO_ZERO_BRACKET) * IDAHO_RATE)
+
+
 def hourly_derived():
     target = 72000
-    se = se_tax(target)
-    state = cents(target * 0.053)
-    need = cents(target) + js_round(se / 100) * 100 + cents(10000) + state + cents(7200) + cents(3600)
-    working = 107000  # post rounds the need up to the next $1,000
+    se = js_round(se_tax(target) / 100)
+    half = js_round(se / 2)
+    taxable = target - half - STD_DEDUCTION_2026
+    fed = federal_tax_2026(taxable)
+    state = idaho_tax(target)
+    need = target + se + fed + state + 7200 + 3600
+    working = -(-need // 1000) * 1000  # post rounds the need up to the next $1,000
     floor = cents(working / 1400)
     return {
-        "SE tax on $72,000 (whole dollars)": usd0(se),
-        "Idaho 5.3% on $72,000": usd0(state),
-        "total annual need": usd0(need),
+        "SE tax on $72,000 (whole dollars)": "${:,}".format(se),
+        "half SE deduction": "${:,}".format(half),
+        "federal taxable income": "${:,}".format(taxable),
+        "federal income tax (2026, single)": "${:,}".format(fed),
+        "Idaho tax on $72,000 (simplified)": "${:,}".format(state),
+        "total annual need": "${:,}".format(need),
         "rounded working number": "${:,}".format(working),
         "minimum hourly rate": usd(floor) + "/hr",
         "buffered sanity-check rate": usd(js_round(floor * 1.20)) + "/hr",
@@ -566,9 +592,6 @@ DERIVED[HOURLY] = hourly_derived
 
 
 SETAX = "self-employment-tax-for-contractors.html"
-# 2026 federal figures, single filer (IRS Rev. Proc. 2025-32).
-STD_DEDUCTION_2026 = 16100
-BRACKETS_2026 = [(12400, 0.10), (50400, 0.12), (105700, 0.22)]
 
 
 def setax_derived():
@@ -586,7 +609,7 @@ def setax_derived():
         fed += portion * rate
         lower = upper
     fed = js_round(fed)
-    state = js_round(net * 0.053)
+    state = idaho_tax(net)
     burden = se + fed + state
     eff = burden / net
     out = {
@@ -599,7 +622,7 @@ def setax_derived():
     out.update(rows)
     out.update({
         "federal income tax": "${:,}".format(fed),
-        "Idaho 5.3% on net (simplified)": "${:,}".format(state),
+        "Idaho tax on net (simplified)": "${:,}".format(state),
         "total tax burden": "${:,}".format(burden),
         "take-home": "${:,}".format(net - burden),
         "effective rate": "~{:.1f}%".format(eff * 100),
@@ -659,31 +682,46 @@ STALE_EVERYWHERE = [
     "$15–$20 extra per additional assembly", "$50,000+", "earning enough to make it worthwhile",
     "between 1,000 and 1,500 hours", "1,400–1,600", "800–1,000", "realistic starting point",
     "the realistic number is 1,200",
+    # Final QA (Hank, Oct 2 2026): Idaho is not a flat 5.3%; first $4,811 is taxed at 0%.
+    "flat 5.3%", "5.3% flat", "Idaho 5.3%",
 ]
 # Old example figures that must be gone after the rerun.
 STALE = {
     LEAF: ["$322.55", "$258.04", "$402.25", "$93.98", "$452.25", "$417.29", "$152.25",
            "$456.76", "$39.85", "$264.66", "$214.50"],
     SPRINK: ["$98.16", "$123.84", "$134.47", "$61.84", "$75.23", "$127.86", "$84.93",
-             "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21"],
+             "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21",
+             "the Workers field"],
     HVAC: ["$5,548.50", "$2,800 marked-up", "Tax % fields", "$1,530"],
-    AFTER: ["~$263", "~$183"],
-    CALLBACK: ["$3,200", "19.3%", "19.5%", "$469", "14.7%", "18.6%", "Gross margin", "of revenue)"],
+    AFTER: ["~$263", "~$183", "This matches two separate runs"],
+    CALLBACK: ["$3,200", "19.3%", "19.5%", "$469", "14.7%", "18.6%", "Gross margin", "of revenue)",
+               "it has to raise the price"],
     DIAG: ["$845", "$678", "$129", "$1,010", "$1,043", "$878", "$713", "21.8%", "32.9%",
            "19.8%", "$96.00", "$227", "15 min each way", "$137.25", "$27.75", "16.8%", "$756.40",
            "$1,163.69", "$998.69", "$361.14", "$196.14", "$279.14", "$407.29", "$231.80",
-           "$31.80", "32.3%", "20.6%", "27.0%", "27.4%", "about 29%", "only profitable hour"],
+           "$31.80", "32.3%", "20.6%", "27.0%", "27.4%", "about 29%", "only profitable hour",
+           "only profitable line", "In this article's example, the suggested charge is $281.54",
+           "sits $18.00 below"],
     CO: ["$185.80", "$1,352.05", "$1,733", "$1,428", "$1,113.60", "$157.50", "$305",
-         "$90 / hr", "$95 / hr", "overhead dilution", "charge-out rate to"],
+         "$90 / hr", "$95 / hr", "overhead dilution", "charge-out rate to",
+         '<span class="calc-val">0.75 hrs</span>'],
     HOURLY: ["$11,016", "5.8%", "$4,176", "$107,992", "$108,000", "$77.14", "$77/hr",
              "rate you should be quoting for your direct labor", "Self-employment and state income tax",
-             "typically 15–30% above your cost"],
+             "typically 15–30% above your cost", "$3,816", "$106,789", "$107,000", "$76.43",
+             "$91.72", "about $92", "$92 as the labor rate", "Federal income tax (est.)",
+             "$8,000–$12,000", "22% federal bracket", "$75 – $150", "$80 – $130", "$85 – $150",
+             "Roofer", "General Contractor", "Carpenter (finish)", "Flooring Installer", "Painter",
+             "Landscaper</td>", "$55 – $90", "rough illustrations"],
     SETAX: ["$14,600", "$57,889", "$7,788", "$2,362", "$23,209", "$54,791", "29.8%", "5.8%",
             "2024", "$160,000–$170,000", "full tax burden", "gross payments", "Enter your SE tax rate",
-            "price it into every job"],
+            "price it into every job", "$4,134", "$22,273", "$55,727", "$55,700", "28.6%",
+            "71 cents", "about $71", "$0.71", "$714", "$357"],
     ESTIMATE: ["and tax rates"],
     OVERHEAD: ["before profit and taxes", "(labor + materials) on every job", "5–8 percentage points",
                "5–8 points", "Studies of trade contractor", "3–5 points", "a healthy range is"],
+    "how-to-use-the-job-profit-calculator.html": [
+        "very top of the calculator", "Adjust them once", "stored anywhere", "stored on a server",
+        "Revisit your default inputs", "settings and defaults are dialed in"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

@@ -657,6 +657,8 @@ STALE_EVERYWHERE = [
     # Unsourced figures replaced with sourced ones (Pulse sourcing check, Oct 2026).
     "1,000–1,600", "1,200–1,400 hours", "$80–$130/hr", "between $75 and $150 per hour",
     "$15–$20 extra per additional assembly", "$50,000+", "earning enough to make it worthwhile",
+    "between 1,000 and 1,500 hours", "1,400–1,600", "800–1,000", "realistic starting point",
+    "the realistic number is 1,200",
 ]
 # Old example figures that must be gone after the rerun.
 STALE = {

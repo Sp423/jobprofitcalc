@@ -517,6 +517,34 @@ def co_derived():
 DERIVED[CO] = co_derived
 
 
+HOURLY = "how-to-calculate-contractor-hourly-rate.html"
+
+
+def se_tax(net_dollars):
+    """SE tax per IRS: net SE earnings x 92.35% x 15.3%, in cents."""
+    return js_round(cents(net_dollars) * SE_NET_FACTOR * SE_RATE)
+
+
+def hourly_derived():
+    target = 72000
+    se = se_tax(target)
+    state = cents(target * 0.053)
+    need = cents(target) + js_round(se / 100) * 100 + cents(10000) + state + cents(7200) + cents(3600)
+    working = 107000  # post rounds the need up to the next $1,000
+    floor = cents(working / 1400)
+    return {
+        "SE tax on $72,000 (whole dollars)": usd0(se),
+        "Idaho 5.3% on $72,000": usd0(state),
+        "total annual need": usd0(need),
+        "rounded working number": "${:,}".format(working),
+        "minimum hourly rate": usd(floor) + "/hr",
+        "buffered sanity-check rate": usd(js_round(floor * 1.20)) + "/hr",
+    }
+
+
+DERIVED[HOURLY] = hourly_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -550,6 +578,9 @@ STALE = {
            "19.8%", "$96.00", "$227", "30 min each way"],
     CO: ["$185.80", "$1,352.05", "$1,733", "$1,428", "$1,113.60", "$157.50", "$305",
          "$90 / hr", "$95 / hr", "overhead dilution", "charge-out rate to"],
+    HOURLY: ["$11,016", "5.8%", "$4,176", "$107,992", "$108,000", "$77.14", "$77/hr",
+             "rate you should be quoting for your direct labor", "Self-employment and state income tax",
+             "typically 15–30% above your cost"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 
@@ -558,7 +589,7 @@ def main():
     missing = 0
     current_post = None
     ordered = []
-    for post in dict.fromkeys(e[0] for e in EXAMPLES):
+    for post in POSTS:
         ordered += [e for e in EXAMPLES if e[0] == post]
         if post in DERIVED:
             ordered.append((post, "Derived figures", None, DERIVED[post]))

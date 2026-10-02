@@ -65,7 +65,7 @@
         "name": "What does this job profit calculator include?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The calculator uses a loaded labor cost, crew size, materials at cost, overhead on labor + drive labor + materials at cost (fuel excluded), drive time multiplied by crew size, and fuel as its own line. Price is total cost divided by one minus your margin. It shows profit, margin, and profit per labor hour. An estimated owner self-employment tax set-aside is shown and is not added to the price."
+          "text": "The calculator uses a loaded labor cost, crew size, and materials at cost. Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded). Drive time is multiplied by crew size, and fuel is its own line. Price is total cost divided by one minus your margin. It shows profit, margin, and profit per labor hour. An estimated owner self-employment tax set-aside is shown and is not added to the price."
         }
       },
       {
@@ -304,7 +304,7 @@
                 <div class="igroup">
                   <label class="ilabel" for="overhead">
                     Overhead %
-                    <button type="button" class="tip tip-lg" data-tip="Overhead ÷ direct job costs (labor + drive labor + materials at cost (fuel excluded)). Exclude payroll taxes/workers' comp if already in your labor rate." aria-label="How to set overhead percent" aria-expanded="false">?</button>
+                    <button type="button" class="tip tip-lg" data-tip="Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded)." aria-label="How to set overhead percent" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
                     <input type="number" id="overhead" min="0" max="100" step="1" value="15" inputmode="decimal" aria-label="Overhead percent of direct job costs">
@@ -641,7 +641,7 @@
         <p class="sec-eyebrow">How It Works</p>
         <h2 class="sec-h2" id="hiw-h2">What This Job Profit Calculator Shows You</h2>
         <div class="prose">
-          <p>A <strong>job profit calculator</strong> is not hours times rate. This tool prices labor, drive labor (drive hours times crew size), and materials at cost. Overhead is a percent of labor + drive labor + materials at cost (fuel excluded). Fuel is its own line. The suggested charge is total cost divided by one minus your margin. Profit and margin are pre-tax. An estimated owner self-employment tax set-aside is shown and is not added to the price.</p>
+          <p>A <strong>job profit calculator</strong> is not hours times rate. This tool prices labor, drive labor (drive hours times crew size), and materials at cost. Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded). Fuel is its own line. The suggested charge is total cost divided by one minus your margin. Profit and margin are pre-tax. An estimated owner self-employment tax set-aside is shown and is not added to the price.</p>
           <p>Pick a trade to load example defaults, then replace every field with the job in front of you. The hourly labor rate is your loaded cost, not what you charge. Results update as you type: suggested charge, net profit, profit margin, and profit per labor hour. Open the cost breakdown for the lines behind that price.</p>
           <p>Need a walkthrough of each field, quote settings, and the customer PDF? Read <a href="/blog/how-to-use-the-job-profit-calculator.html">how to use the job profit calculator</a>. For the pricing method behind the math, see <a href="/blog/how-to-price-a-contractor-job.html">how to price a contractor job</a>.</p>
         </div>
@@ -837,7 +837,7 @@
 <!-- Toast notification -->
 <div id="toast" role="alert" aria-live="assertive"></div>
 
-<script src="/js/pricing.js?v=20261002d"></script>
+<script src="/js/pricing.js?v=20261002e"></script>
 <script src="/js/calculator.js?v=20261002d"></script>
 <script src="/js/site-ui.js?v=40a9750"></script>
 </body>

@@ -24,11 +24,13 @@ function assertIdentity(result, marginPct) {
   assert.equal(result.seTax, 0);
   assert.equal(result.stateTax, 0);
   assert.equal(result.taxes, 0);
-  const expectedPrice = marginPct === 0
-    ? result.cents.totalCost
-    : Math.round(Number((result.cents.totalCost * 100 / (100 - marginPct)).toPrecision(15)));
+  const denom = Number((100 - marginPct).toPrecision(12));
+  const expectedPrice = Math.round(Number((result.cents.totalCost * 100 / denom).toPrecision(15)));
   assert.equal(result.cents.price, expectedPrice);
-  assert.ok(Math.abs(result.price - result.totalCost / (1 - marginPct / 100)) <= 0.01);
+  assert.ok(Math.abs(result.price - result.cents.totalCost / denom) <= 0.01);
+  if (result.cents.price > 0) {
+    assert.ok((result.cents.price - result.cents.totalCost) / result.cents.price < 0.95);
+  }
   assert.equal(result.cents.price, result.cents.totalCost + result.cents.profit);
   if (result.cents.price > 0) {
     assert.ok(Math.abs(result.marginPct / 100 - result.profit / result.price) < 1e-12);
@@ -514,7 +516,12 @@ test('exact-decimal reference matches every line on seeded jobs', () => {
   }
   let mismatches = 0;
   const samples = [];
-  for (let i = 0; i < 4000; i++) {
+  const bands = [
+    { count: 4000, margin: [0, 60] },
+    { count: 2000, margin: [90, 94.99] }
+  ];
+  for (const band of bands) {
+  for (let i = 0; i < band.count; i++) {
     const input = {
       hours: digits(0, 40, 2),
       workers: digits(1, 8, 0),
@@ -523,7 +530,7 @@ test('exact-decimal reference matches every line on seeded jobs', () => {
       overhead: digits(0, 40, 2),
       driveTime: digits(0, 4, 2),
       fuelCost: digits(0, 80, 2),
-      margin: digits(0, 60, 2)
+      margin: digits(band.margin[0], band.margin[1], 2)
     };
     const got = P.priceJob({
       hours: Number(input.hours),
@@ -542,7 +549,8 @@ test('exact-decimal reference matches every line on seeded jobs', () => {
     const direct = labor + driveLabor + materials;
     const overhead = overheadCents(direct, input.overhead);
     const totalCost = direct + overhead + fuel;
-    const price = priceCents(totalCost, input.margin);
+    let price = priceCents(totalCost, input.margin);
+    if (totalCost > 0n && price >= 20n * totalCost) price = 20n * totalCost - 1n;
     const profit = price - totalCost;
     const setNumer = profit * 9235n * 153n;
     const setDenom = 10000000n;
@@ -557,5 +565,53 @@ test('exact-decimal reference matches every line on seeded jobs', () => {
       if (samples.length < 5) samples.push({ input, bad, got: got.cents, expect });
     }
   }
+  }
   assert.equal(mismatches, 0, JSON.stringify(samples));
+});
+
+test('high-margin prices match the exact half-up cent', () => {
+  const a = P.priceJob(job({ materialCost: 3611.04, margin: 94.88 }));
+  assert.equal(a.totalCost, 3611.04);
+  assert.equal(a.price, 70528.13);
+  const b = P.priceJob(job({ materialCost: 3886.84, margin: 93.6 }));
+  assert.equal(b.totalCost, 3886.84);
+  assert.equal(b.price, 60731.88);
+});
+
+test('margin inputs keep at most 2 decimal places, and the cap stays under 95%', () => {
+  const furnace = {
+    hours: '1.5', workers: '1', laborRate: '48', materialCost: '5.65',
+    overhead: '25', driveTime: '0.5', fuelCost: '8.93', margin: '94.9999999'
+  };
+  const rejected = P.validateJob(furnace);
+  assert.equal(rejected.ok, false);
+  assert.equal(rejected.messages.margin.level, 'error');
+  assert.match(rejected.messages.margin.message, /2 decimal places/);
+
+  const twoPlaces = P.validateJob(Object.assign({}, furnace, { margin: '94.99' }));
+  assert.equal(twoPlaces.ok, true);
+
+  function underCap(result) {
+    assert.equal(result.ok, true);
+    assert.ok(result.cents.price > 0);
+    assert.ok((result.cents.price - result.cents.totalCost) / result.cents.price < 0.95);
+    assert.notEqual(P.formatPercent(result.profit / result.price), '95.0%');
+  }
+
+  const direct = P.priceJob(job({
+    hours: 1.5, workers: 1, laborRate: 48, materialCost: 5.65,
+    overhead: 25, driveTime: 0.5, fuelCost: 8.93, margin: 94.9999999
+  }));
+  underCap(direct);
+  assert.notEqual(direct.price, 2719.8);
+
+  const twentyOne = P.priceJob(job({ fuelCost: 0.21, margin: 94.9986 }));
+  assert.equal(twentyOne.totalCost, 0.21);
+  underCap(twentyOne);
+  assert.notEqual(twentyOne.price, 4.2);
+
+  const penny = P.priceJob(job({ fuelCost: 0.01, margin: 94.99 }));
+  assert.equal(penny.totalCost, 0.01);
+  underCap(penny);
+  assert.notEqual(penny.price, 0.2);
 });

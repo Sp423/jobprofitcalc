@@ -138,7 +138,7 @@ test('blog cases on calculator.html at desktop and mobile', async ({ page }) => 
     await page.goto('/calculator.html');
     await expect(page.locator('#materialMarkup')).toHaveCount(0);
     const tip = await page.locator('label[for="overhead"] .tip').getAttribute('data-tip');
-    expect(tip).toContain('labor + drive labor + materials at cost (fuel excluded)');
+    expect(tip).toBe('Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded).');
     for (const fields of Object.values(BLOG)) {
       await fillJob(page, fields);
       await expect(page.locator('#suggestedPrice')).toHaveText(fields.price);

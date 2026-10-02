@@ -10,7 +10,12 @@
      overhead     = roundCents(directCost × overhead%)
      fuel         = roundCents(fuel)                   // added after overhead
      totalCost    = directCost + overhead + fuel
-     price        = roundCents(totalCost / (1 − margin))
+     price        = roundCents(totalCost × 100 / (100 − margin))
+   The (100 − margin) denominator is cleaned with toPrecision(12) before dividing,
+   so a binary float does not leave the price 1 cent low.
+   If that rounded price would make profit / price ≥ 95%, the price steps down to
+   the largest cent amount with margin under 95%. That cap clamp is the only
+   exception to price = cost / (1 − margin), to the cent.
    No self-employment tax and no state income tax in the cost or the price.
 
    There is no material markup. A leftover markup value on the input is ignored.
@@ -40,7 +45,7 @@
     overhead:       { min: 0, max: 100,     label: 'Overhead' },
     driveTime:      { min: 0, max: 100,     label: 'Drive time' },
     fuelCost:       { min: 0, max: 50000,   label: 'Fuel' },
-    margin:         { min: 0, max: MARGIN_CAP, exclusiveMax: true, warnAbove: MARGIN_WARN, label: 'Desired profit margin' },
+    margin:         { min: 0, max: MARGIN_CAP, exclusiveMax: true, maxDecimals: 2, warnAbove: MARGIN_WARN, label: 'Desired profit margin' },
     salesTaxRate:   { min: 0, max: 20,      label: 'Sales tax' }
   };
 
@@ -188,7 +193,9 @@
     var direct = labor + driveLabor + materials;
     var overhead = rc(direct * overheadPct / 100);
     var totalCost = direct + overhead + fuel;
-    var price = marginPct === 0 ? totalCost : rc(totalCost * 100 / (100 - marginPct));
+    var price = rc(totalCost * 100 / Number((100 - marginPct).toPrecision(12)));
+    // Rounded price can land on exactly 95% (price === 20 × cost). Stay under the cap.
+    if (totalCost > 0 && price >= totalCost * 20) price = totalCost * 20 - 1;
     if (price < 0 || totalCost < 0) return { ok: false, error: 'Invalid input.' };
     var profit = price - totalCost;
 
@@ -269,6 +276,13 @@
     }
     if (spec.integer && Math.floor(n) !== n) {
       return { level: 'error', message: 'Enter a whole number.' };
+    }
+    if (spec.maxDecimals != null) {
+      var dot = s.indexOf('.');
+      var places = dot === -1 ? 0 : s.length - dot - 1;
+      if (places > spec.maxDecimals) {
+        return { level: 'error', message: 'Use at most ' + spec.maxDecimals + ' decimal places.' };
+      }
     }
     if (spec.exclusiveMax ? n >= spec.max : n > spec.max) {
       if (spec.exclusiveMax) return { level: 'error', message: 'Margin must be under ' + spec.max + '%.' };

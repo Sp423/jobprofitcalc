@@ -356,6 +356,60 @@ def after_derived():
 DERIVED[AFTER] = after_derived
 
 
+# ---- callback-reserve-for-contractors.html --------------------------------
+CALLBACK = "callback-reserve-for-contractors.html"
+CB_IN = dict(hours=8, workers=1, rate=65, materials=1400, overhead=18, drive=0.5, fuel=27.5, margin=20)
+CB_RESERVE = 4150      # 0.20 x 2.5 hr x $65 + 0.20 x $45, in cents
+CB_COST = 13000 + 4500  # one return: 2 hr x $65 + $45 drive and fuel
+CB_RATE = 0.20
+
+
+def cb_reserve_pct():
+    direct = price_job(**CB_IN)["direct"]
+    return round(CB_RESERVE / direct * 100, 2)
+
+
+@example(CALLBACK, "Install, no callback buffer", **CB_IN)
+def _(r):
+    out = std_lines(r)
+    out["profit after one callback"] = usd(r["profit"] - CB_COST)
+    out["margin after one callback"] = "{:.1f}%".format((r["profit"] - CB_COST) / r["price"] * 100)
+    return out
+
+
+@example(CALLBACK, "Install, reserve folded into Overhead % (18% + 2.13%)",
+         **{**CB_IN, "overhead": 18 + 2.13})
+def _(r):
+    return {"overhead": usd(r["overhead"]), "total cost": usd(r["total_cost"]),
+            "price": usd(r["price"]), "profit": usd(r["profit"])}
+
+
+def cb_derived():
+    base = price_job(**CB_IN)
+    pct = cb_reserve_pct()
+    res = price_job(**{**CB_IN, "overhead": 18 + pct})
+    real_no_cb = res["price"] - base["total_cost"]
+    real_cb = real_no_cb - CB_COST
+    return {
+        "reserve per job": usd(CB_RESERVE),
+        "reserve / (1 - margin)": usd(js_round(CB_RESERVE / 0.8)),
+        "reserve % of direct cost": "{:.2f}%".format(pct),
+        "price increase": usd(res["price"] - base["price"]),
+        "reserve collected in cost": usd(res["total_cost"] - base["total_cost"]),
+        "no-callback job, real profit": usd(real_no_cb),
+        "no-callback job, real margin": "{:.1f}%".format(real_no_cb / res["price"] * 100),
+        "callback job with reserve": usd(real_cb),
+        "callback job with reserve, margin": "{:.1f}%".format(real_cb / res["price"] * 100),
+        "category avg margin, with reserve": "{:.1f}%".format(
+            (real_no_cb - CB_RATE * CB_COST) / res["price"] * 100),
+        "category avg margin, without": "{:.1f}%".format(
+            (base["profit"] - CB_RATE * CB_COST) / base["price"] * 100),
+    }
+
+
+DERIVED[CALLBACK] = cb_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -384,6 +438,7 @@ STALE = {
              "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21"],
     HVAC: ["$5,548.50", "$2,800 marked-up", "Tax % fields", "$1,530"],
     AFTER: ["~$263", "~$183"],
+    CALLBACK: ["$3,200", "19.3%", "19.5%", "$469", "14.7%", "18.6%", "Gross margin", "of revenue)"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

@@ -276,6 +276,34 @@ def sprink_derived():
 DERIVED[SPRINK] = sprink_derived
 
 
+# ---- how-to-price-a-contractor-job.html -----------------------------------
+JOB = "how-to-price-a-contractor-job.html"
+JOB_IN = dict(hours=3, workers=1, rate=71.43, materials=650, overhead=20, drive=0.5, fuel=15, margin=20)
+
+
+@example(JOB, "Water heater replacement", **JOB_IN)
+def _(r):
+    out = std_lines(r)
+    out["set-aside"] = usd(r["set_aside"])
+    return out
+
+
+def job_derived():
+    r = price_job(**JOB_IN)
+    drive_one_person = cents(1.5 * 71.43)
+    return {
+        "loaded rate ($100,000 / 1,400)": "${:.2f}".format(100000 / 1400),
+        "profit at $1,100 gut-feel price": usd(110000 - r["total_cost"]),
+        "profit at $1,200 gut-feel price": usd(120000 - r["total_cost"]),
+        "1.5 hr drive at $71.43": usd(drive_one_person),
+        "x 200 calls": "${:,}".format(js_round(200 * drive_one_person / 100)),
+        "SE tax on $500 profit": usd(js_round(50000 * SE_NET_FACTOR * SE_RATE)),
+    }
+
+
+DERIVED[JOB] = job_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -302,6 +330,7 @@ STALE = {
            "$456.76", "$39.85", "$264.66", "$214.50"],
     SPRINK: ["$98.16", "$123.84", "$134.47", "$61.84", "$75.23", "$127.86", "$84.93",
              "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21"],
+    JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 
 

@@ -120,6 +120,23 @@ scout_lock: LOCKED
 
   <table class="data-table">
     <thead>
+      <tr><th>Calculator field</th><th>What to enter for Example B (example inputs)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="row-label">Estimated Hours</td><td>1.5 (Reliable's published average)</td></tr>
+      <tr><td class="row-label">Number of Workers</td><td>1</td></tr>
+      <tr><td class="row-label">Hourly Labor Rate</td><td>$48, the example loaded cost per hour</td></tr>
+      <tr><td class="row-label">Material Cost</td><td>$5.65, the filter at cost</td></tr>
+      <tr><td class="row-label">Material Markup</td><td>0%, because the margin produces the profit</td></tr>
+      <tr><td class="row-label">Overhead &amp; Burden</td><td>25%, applied to labor, drive labor, and materials at cost</td></tr>
+      <tr><td class="row-label">Drive Time</td><td>0.5 hr</td></tr>
+      <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.93, kept out of the overhead base <!-- REFRESH after EIA Oct 5 update --></td></tr>
+      <tr><td class="row-label">Desired Profit Margin</td><td>20%</td></tr>
+    </tbody>
+  </table>
+
+  <table class="data-table">
+    <thead>
       <tr><th>Example B: 1.5 hr on site, 0.5 hr drive, one tech (example inputs)</th><th>Arithmetic</th><th>Amount</th></tr>
     </thead>
     <tbody>
@@ -252,7 +269,7 @@ scout_lock: LOCKED
   <section id="october-capacity">
   <h2>Step 7: Protect October before you sell the slots</h2>
 
-  <p>Most of the fall specials above expire Oct 31, 2026. That's the same window when the first cold nights bring in no-heat calls, which pay full rate. A cheap special that fills your best weeks pushes those calls into overtime or onto a competitor.</p>
+  <p>Several of the specials above (One Hour, HB, NW Natural) expire Oct 31, 2026. That's the same window when the first cold nights bring in no-heat calls, which pay full rate. A cheap special that fills your best weeks pushes those calls into overtime or onto a competitor.</p>
 
   <p>Count the slots before you advertise. This is an example with assumed inputs: say you have 3 techs and 22 working days in October at 8 hours a day. That's 3 x 22 x 8 = 528 tech-hours. Say you hold back 40% for no-heat and repair calls, based on last October's call log: 528 x 40% = 211.20 hours reserved, leaving 528 - 211.20 = 316.80 hours. If a tune-up takes 2.0 hours with the drive (Example B's 1.5 on site plus 0.5 driving), that's 316.80 / 2.0 = 158.4, so 158 tune-up slots. Sell 158 and stop.</p>
 
@@ -268,7 +285,7 @@ scout_lock: LOCKED
   <p>The second furnace adds on-site time but no drive. Price it as extra hours plus its own filter on the same visit, the way Example F prices the flame sensor. PHA in Suffolk County, NY charges $17 a month for each additional system on its Comfort plan (Oct 1, 2026), which shows shops do charge separately for the second unit.</p>
 
   <h3>Propane and oil</h3>
-  <p>JC Energy's cost guide adds $20 to $40 for a propane furnace (Sep 29, 2026), and HB Home Service Team lists an oil tune-up at $189 against $89 for gas (expires Oct 31, 2026). Both reflect more time on site. Time your own propane and oil visits as their own group in Step 1 and price them separately.</p>
+  <p>JC Energy's cost guide adds $20 to $40 for a propane furnace (Sep 29, 2026), and HB Home Service Team lists an oil tune-up at $189 against $89 for gas (expires Oct 31, 2026). Both likely reflect more time on site. Time your own propane and oil visits as their own group in Step 1 and price them separately.</p>
 
   <h3>A dirty system that runs long</h3>
   <p>If the visit runs well past your average because the unit hasn't been touched in years, the special price doesn't cover the extra time. Say in the offer what the price includes, and quote extra cleaning as additional work before the tech starts it.</p>

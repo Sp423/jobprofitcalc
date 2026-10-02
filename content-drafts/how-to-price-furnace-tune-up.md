@@ -127,13 +127,14 @@ scout_lock: LOCKED
       <tr><td class="row-label">Number of Workers</td><td>1</td></tr>
       <tr><td class="row-label">Hourly Labor Rate</td><td>$48, the example loaded cost per hour</td></tr>
       <tr><td class="row-label">Material Cost</td><td>$5.65, the filter at cost</td></tr>
-      <tr><td class="row-label">Material Markup</td><td>0%, because the margin produces the profit</td></tr>
-      <tr><td class="row-label">Overhead &amp; Burden</td><td>25%, applied to labor, drive labor, and materials at cost</td></tr>
+      <tr><td class="row-label">Overhead %</td><td>25%, applied to labor, drive labor, and materials at cost</td></tr>
       <tr><td class="row-label">Drive Time</td><td>0.5 hr</td></tr>
       <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.93, kept out of the overhead base <!-- REFRESH after EIA Oct 5 update --></td></tr>
       <tr><td class="row-label">Desired Profit Margin</td><td>20%</td></tr>
     </tbody>
   </table>
+
+  <p>Leave any field not listed at zero.</p>
 
   <table class="data-table">
     <thead>

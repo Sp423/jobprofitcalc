@@ -187,6 +187,95 @@ def leaf_derived():
 
 DERIVED = {LEAF: leaf_derived}
 
+# ---- how-to-price-sprinkler-blowouts.html ---------------------------------
+SPRINK = "how-to-price-sprinkler-blowouts.html"
+SPRINK_BASE = dict(hours=0.5, workers=1, rate=45, materials=21, overhead=15, drive=0.25, fuel=4, margin=20)
+
+
+def sprink(**over):
+    return {**SPRINK_BASE, **over}
+
+
+@example(SPRINK, "Baseline, 6 zones, solo", **sprink())
+def _(r):
+    return std_lines(r)
+
+
+@example(SPRINK, "14 zones (0.83 hr)", **sprink(hours=0.83))
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+@example(SPRINK, "Scenario B, 6 stops ($42 compressor)", **sprink(materials=42))
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+@example(SPRINK, "Scenario C, no compressor cost", **sprink(materials=0))
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+@example(SPRINK, "Dense route (0 drive, $0 fuel)", **sprink(drive=0, fuel=0))
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+@example(SPRINK, "Scattered route (0.6 hr, $8 fuel)", **sprink(drive=0.6, fuel=8))
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+@example(SPRINK, "2-zone minimum (0.33 hr)", **sprink(hours=0.33))
+def _(r):
+    return {"labor": usd(r["labor"]), "price": usd(r["price"])}
+
+
+@example(SPRINK, "Two-person crew", **sprink(workers=2))
+def _(r):
+    return std_lines(r)
+
+
+@example(SPRINK, "Late season, priced like a route stop", **sprink(hours=0.75))
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+@example(SPRINK, "Late season one-off", **sprink(hours=0.75, rate=67.5, drive=0.75, fuel=12, materials=175))
+def _(r):
+    return {"total cost": usd(r["total_cost"]), "price": usd(r["price"])}
+
+
+@example(SPRINK, "Spring start-up", **sprink(hours=0.75, materials=0, fuel=3))
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+def sprink_derived():
+    base = price_job(**sprink())
+    big = price_job(**sprink(hours=0.83))
+    b = price_job(**sprink(materials=42))
+    dense = price_job(**sprink(drive=0, fuel=0))
+    scattered = price_job(**sprink(drive=0.6, fuel=8))
+    mini = price_job(**sprink(hours=0.33))
+    crew = price_job(**sprink(workers=2))
+    spring = price_job(**sprink(hours=0.75, materials=0, fuel=3))
+    gap = big["price"] - base["price"]
+    return {
+        "14-zone minus 6-zone price": usd(gap),
+        "per added zone (gap / 8)": usd(js_round(gap / 8)),
+        "Scenario B minus A": usd0(b["price"] - base["price"]),
+        "scattered minus dense": usd0(scattered["price"] - dense["price"]),
+        "6-zone minus 2-zone": usd0(base["price"] - mini["price"]),
+        "crew minus solo": usd(crew["price"] - base["price"]),
+        "compressor + travel": usd(base["materials"] + base["drive_labor"] + base["fuel"]),
+        "fall + spring package": usd(base["price"] + spring["price"]),
+    }
+
+
+DERIVED[SPRINK] = sprink_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -211,13 +300,20 @@ STALE_EVERYWHERE = [
 STALE = {
     LEAF: ["$322.55", "$258.04", "$402.25", "$93.98", "$452.25", "$417.29", "$152.25",
            "$456.76", "$39.85", "$264.66", "$214.50"],
+    SPRINK: ["$98.16", "$123.84", "$134.47", "$61.84", "$75.23", "$127.86", "$84.93",
+             "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21"],
 }
 
 
 def main():
     missing = 0
     current_post = None
-    for post, name, inputs, fn in EXAMPLES + [(p, "Derived figures", None, f) for p, f in DERIVED.items()]:
+    ordered = []
+    for post in dict.fromkeys(e[0] for e in EXAMPLES):
+        ordered += [e for e in EXAMPLES if e[0] == post]
+        if post in DERIVED:
+            ordered.append((post, "Derived figures", None, DERIVED[post]))
+    for post, name, inputs, fn in ordered:
         path = os.path.join(BLOG, post)
         html = open(path, encoding="utf-8").read()
         if post != current_post:

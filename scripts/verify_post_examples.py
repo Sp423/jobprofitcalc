@@ -479,6 +479,44 @@ def diag_derived():
 DERIVED[DIAG] = diag_derived
 
 
+# ---- change-order-premium-for-contractors.html ----------------------------
+CO = "change-order-premium-for-contractors.html"
+CO_A = dict(hours=4, workers=2, rate=45, materials=240, overhead=16, drive=0, fuel=0, margin=22)
+# One of two plumbers makes a 0.75 hr supply run; Drive Time is x workers, so enter 0.375.
+CO_B = dict(hours=4.5, workers=2, rate=45, materials=240, overhead=16, drive=0.375, fuel=0, margin=22)
+
+
+@example(CO, "Pass A, bid-rate baseline", **CO_A)
+def _(r):
+    return {"labor": usd(r["labor"]), "materials": usd(r["materials"]), "direct": usd(r["direct"]),
+            "overhead": usd(r["overhead"]), "total cost": usd(r["total_cost"]), "price": usd(r["price"])}
+
+
+@example(CO, "Pass B, friction hours captured, same rate", **CO_B)
+def _(r):
+    return std_lines(r)
+
+
+def co_derived():
+    a = price_job(**CO_A)
+    b = price_job(**CO_B)
+    friction_labor = cents(1.75 * 45)
+    friction_oh = js_round(friction_labor * 0.16)
+    true_cost = a["total_cost"] + friction_labor + friction_oh
+    return {
+        "friction labor (1.75 x $45)": usd(friction_labor),
+        "overhead on friction": usd(friction_oh),
+        "unrecovered friction": usd(friction_labor + friction_oh),
+        "true cost of Pass A work": usd(true_cost),
+        "Pass A true margin": "{:.1f}%".format((a["price"] - true_cost) / a["price"] * 100),
+        "Pass B minus Pass A": usd(b["price"] - a["price"]),
+        "ten change orders": "${:,}".format((b["price"] - a["price"]) * 10 // 100 // 100 * 100),
+    }
+
+
+DERIVED[CO] = co_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -510,6 +548,8 @@ STALE = {
     CALLBACK: ["$3,200", "19.3%", "19.5%", "$469", "14.7%", "18.6%", "Gross margin", "of revenue)"],
     DIAG: ["$845", "$678", "$129", "$1,010", "$1,043", "$878", "$713", "21.8%", "32.9%",
            "19.8%", "$96.00", "$227", "30 min each way"],
+    CO: ["$185.80", "$1,352.05", "$1,733", "$1,428", "$1,113.60", "$157.50", "$305",
+         "$90 / hr", "$95 / hr", "overhead dilution", "charge-out rate to"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

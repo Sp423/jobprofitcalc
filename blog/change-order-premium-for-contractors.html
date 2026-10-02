@@ -100,7 +100,7 @@
       "name": "How do I explain a higher change order price to a customer who expects bid-rate pricing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Show the cost components: the original productive hours, plus the remobilization time and any extra supply run that the change created. Customers who understand that mid-job work triggers setup costs they would not have paid on the original bid generally accept the math. What they object to is a higher number with no explanation. \"The extra drive and remob time brought this to 9.75 hours instead of 8, at a slightly higher rate because the change came in short-notice — here is how the calculator built the price\" is a defensible answer. \"Change orders cost more\" is not."
+        "text": "Show the cost components: the original productive hours, plus the remobilization time and any extra supply run that the change created. Customers who understand that mid-job work triggers setup costs they would not have paid on the original bid generally accept the math. What they object to is a higher number with no explanation. \"The extra drive and remob time brought this to 9.75 hours instead of 8, and here is how the calculator built the price\" is a defensible answer. \"Change orders cost more\" is not."
       }
     }
   ]
@@ -345,11 +345,11 @@
             <p>The premium can show up in your pricing two ways:</p>
 
             <ul>
-              <li><strong>A higher Hourly Labor Rate</strong> — you apply a bumped charge-out rate to the change order hours, reflecting the higher cost-per-productive-hour when crew time is partially consumed by remobilization and re-planning.</li>
+              <li><strong>A higher Hourly Labor Rate</strong>, but only when your actual cost per hour goes up for the change, such as overtime pay for after-hours change work. The calculator's Hourly Labor Rate is your loaded labor cost, not what you charge, so it should move only when that cost moves.</li>
               <li><strong>Explicit friction hours</strong> — you price the actual hours at your standard rate, but you count all the hours: the productive work plus the remobilization time, the extra supply-run drive, and any setup that the change created.</li>
             </ul>
 
-            <p>Either method works. Many shops use both: a modest rate bump to reflect schedule disruption, plus explicit remob hours for any physical re-drive or setup the change requires. What does not work is entering only the productive task hours at the bid rate and calling it done — that is the combination that turns mid-job disruption into unpaid overhead.</p>
+            <p>For most change orders, explicit friction hours are the method: your labor cost per hour has not changed, but the number of hours has. Use both only when the change also raises your real hourly cost, for example by forcing overtime. What does not work is entering only the productive task hours at the bid rate and calling it done — that is the combination that turns mid-job disruption into unpaid overhead.</p>
 
             <div class="callout">
               <p><strong>Key distinction:</strong> Change-order premium is separate from whether you wrote a change order at all. You can write a perfectly formatted, customer-signed change order and still underprice it by using the bid rate without accounting for friction. The process and the dollar math are two separate disciplines.</p>
@@ -361,7 +361,7 @@
 
             <p>All dollar figures below are made-up examples chosen to make the arithmetic clear. They are not typical rates, margins, or labor costs for any specific trade or market.</p>
 
-            <p><strong>Scenario (made-up):</strong> A plumbing crew is three days into a bathroom renovation. The customer requests a laundry sink rough-in — a discrete, self-contained scope that was never in the bid. The work itself: 4 hours of productive labor for 2 plumbers, plus $240 in PEX fittings, drain stub-out, and supply (already marked up). You have run this type of work before. On the bid, it would have been straightforward.</p>
+            <p><strong>Scenario (made-up):</strong> A plumbing crew is three days into a bathroom renovation. The customer requests a laundry sink rough-in — a discrete, self-contained scope that was never in the bid. The work itself: 4 hours of productive labor for 2 plumbers, plus $240 in PEX fittings, drain stub-out, and supply at cost. You have run this type of work before. On the bid, it would have been straightforward.</p>
 
             <p>But mid-job, two things happen that would not have happened if this were a line item on the original estimate:</p>
 
@@ -377,37 +377,39 @@
             <div class="calc-example" role="table" aria-label="Pass A: bid-rate change order, made-up numbers">
               <div class="calc-example-header pass-a">Pass A — Bid Rate (made-up numbers)</div>
               <div class="calc-row"><span>Labor hours</span><span class="calc-val">4 hrs × 2 workers = 8 hrs</span></div>
-              <div class="calc-row"><span>Hourly Labor Rate (bid)</span><span class="calc-val">$90 / hr</span></div>
-              <div class="calc-row"><span>Labor cost</span><span class="calc-val">$720</span></div>
-              <div class="calc-row"><span>Materials (with markup)</span><span class="calc-val">$240</span></div>
-              <div class="calc-row"><span>Overhead (16%)</span><span class="calc-val">$153.60</span></div>
-              <div class="calc-row total"><span>Cost basis</span><span class="calc-val">$1,113.60</span></div>
-              <div class="calc-row"><span>Suggested charge at 22% target margin</span><span class="calc-val">$1,428</span></div>
-              <div class="calc-row miss"><span>Unrecovered friction cost (1.75 hrs × $90)</span><span class="calc-val">−$157.50</span></div>
-              <div class="calc-row miss"><span>Actual margin delivered</span><span class="calc-val">≈ 11%</span></div>
+              <div class="calc-row"><span>Hourly Labor Rate (example loaded cost)</span><span class="calc-val">$45 / hr</span></div>
+              <div class="calc-row"><span>Labor cost</span><span class="calc-val">$360.00</span></div>
+              <div class="calc-row"><span>Materials (at cost)</span><span class="calc-val">$240.00</span></div>
+              <div class="calc-row"><span>Overhead (16% of $600.00 direct cost)</span><span class="calc-val">$96.00</span></div>
+              <div class="calc-row total"><span>Cost basis</span><span class="calc-val">$696.00</span></div>
+              <div class="calc-row"><span>Suggested charge at 22% target margin ($696.00 ÷ 0.78)</span><span class="calc-val">$892.31</span></div>
+              <div class="calc-row miss"><span>Unrecovered friction cost (1.75 hrs × $45 = $78.75, plus $12.60 overhead)</span><span class="calc-val">−$91.35</span></div>
+              <div class="calc-row miss"><span>Actual margin delivered</span><span class="calc-val">≈ 11.8%</span></div>
             </div>
 
-            <p>The calculator screen looks fine. The math says 22%. But the real cost of executing this change order — including the remob hour and the supply run — is about $157.50 higher in labor alone than the input reflects (1.75 hours × $90), before overhead on those hours. That cost did not appear in the calculator because you did not enter it. The crew worked it anyway. At a $1,428 charge against a true cost near $1,271, you deliver roughly 11% margin on a ticket you priced for 22%.</p>
+            <p>The calculator screen looks fine. The math says 22%. But the real cost of executing this change order, including the remob hour and the supply run, is $91.35 higher than the input reflects: $78.75 in labor (1.75 hours × $45) plus $12.60 of overhead on that labor. That cost did not appear in the calculator because you did not enter it. The crew worked it anyway. At an $892.31 charge against a true cost of $787.35, you deliver about 11.8% margin on a ticket you priced for 22%.</p>
 
             <h3>Pass B — Premium Pass, Friction Captured</h3>
 
             <div class="calc-example" role="table" aria-label="Pass B: premium change order, made-up numbers">
               <div class="calc-example-header pass-b">Pass B — Premium (made-up numbers)</div>
               <div class="calc-row"><span>Labor hours (4 productive + 0.5 remob per worker)</span><span class="calc-val">4.5 hrs × 2 workers = 9 hrs</span></div>
-              <div class="calc-row"><span>Drive time (supply run, one worker)</span><span class="calc-val">0.75 hrs added</span></div>
-              <div class="calc-row"><span>Total billable hours</span><span class="calc-val">9.75 hrs</span></div>
-              <div class="calc-row"><span>Hourly Labor Rate (premium)</span><span class="calc-val">$95 / hr</span></div>
-              <div class="calc-row"><span>Labor cost</span><span class="calc-val">$926.25</span></div>
-              <div class="calc-row"><span>Materials (with markup)</span><span class="calc-val">$240</span></div>
-              <div class="calc-row"><span>Overhead (16%)</span><span class="calc-val">$185.80</span></div>
-              <div class="calc-row total"><span>Cost basis</span><span class="calc-val">$1,352.05</span></div>
-              <div class="calc-row win"><span>Suggested charge at 22% target margin</span><span class="calc-val">$1,733</span></div>
+              <div class="calc-row"><span>Hourly Labor Rate (same example loaded cost)</span><span class="calc-val">$45 / hr</span></div>
+              <div class="calc-row"><span>Labor cost (9 hrs × $45)</span><span class="calc-val">$405.00</span></div>
+              <div class="calc-row"><span>Drive Time entered: 0.375 hr (one worker's 0.75-hr supply run; the calculator multiplies drive by 2 workers)</span><span class="calc-val">0.75 hrs</span></div>
+              <div class="calc-row"><span>Drive labor (0.375 hr × 2 workers × $45)</span><span class="calc-val">$33.75</span></div>
+              <div class="calc-row"><span>Materials (at cost)</span><span class="calc-val">$240.00</span></div>
+              <div class="calc-row"><span>Overhead (16% of $678.75 direct cost)</span><span class="calc-val">$108.60</span></div>
+              <div class="calc-row"><span>Fuel / Travel Cost (example)</span><span class="calc-val">$0.00</span></div>
+              <div class="calc-row total"><span>Cost basis</span><span class="calc-val">$787.35</span></div>
+              <div class="calc-row win"><span>Suggested charge at 22% target margin ($787.35 ÷ 0.78)</span><span class="calc-val">$1,009.42</span></div>
+              <div class="calc-row win"><span>Net profit</span><span class="calc-val">$222.07</span></div>
               <div class="calc-row win"><span>Actual margin delivered</span><span class="calc-val">22% ✓</span></div>
             </div>
 
-            <p>The $5/hr rate bump is not a standard. It is a number this shop chose after running the calculator and seeing that $90/hr with full hours captured still fell slightly short of their target due to overhead dilution. Your shop may choose to hold the rate and add only the explicit hours, or bump the rate more and add fewer extra hours — what matters is that the cost basis in the calculator reflects every hour of real labor, and the suggested charge holds the margin you need.</p>
+            <p>Pass B keeps the same $45 hourly cost. No rate bump is needed to hold the margin, because overhead is a percentage of direct cost and the charge is cost ÷ (1 − margin), so every captured hour carries its own overhead and profit. The Pass B cost basis of $787.35 is exactly the true cost Pass A missed. Raise the Hourly Labor Rate only if the change raises what an hour actually costs you, such as overtime pay. What matters is that the cost basis in the calculator reflects every hour of real labor, and the suggested charge holds the margin you need.</p>
 
-            <p>The difference between Pass A and Pass B is $305 on a small change order. On ten change orders across a busy month, that gap is over $3,000 in margin you either keep or give away.</p>
+            <p>The difference between Pass A and Pass B is $117.11 on a small change order. On ten change orders across a busy month, that gap is over $1,100 in margin you either keep or give away.</p>
 
             <h2 id="when-premium">When a Premium Is Rational — and When Bid Rate Is Fine</h2>
 
@@ -442,8 +444,8 @@
             <ol>
               <li>Enter the <strong>productive labor hours</strong> for the change: the hours the work itself actually requires, the same hours you would have entered if this scope were on the original bid.</li>
               <li>Enter the <strong>number of workers</strong> assigned to this change order.</li>
-              <li>Enter your standard <strong>Hourly Labor Rate</strong> — the same rate you used when you built the original bid.</li>
-              <li>Enter <strong>materials with markup</strong>: the cost of parts and supplies for this specific change, marked up at your standard materials rate.</li>
+              <li>Enter your standard <strong>Hourly Labor Rate</strong>: your loaded labor cost per hour, the same cost you used when you built the original bid.</li>
+              <li>Enter <strong>materials at cost</strong>: what you paid for the parts and supplies for this specific change. The margin is applied to the whole cost, so no separate markup goes on top.</li>
               <li>Enter your <strong>overhead %</strong> as usual.</li>
               <li>Leave <strong>drive time</strong> at zero for now.</li>
               <li>Enter your <strong>target margin</strong>.</li>
@@ -458,13 +460,13 @@
               <li>Keep <strong>materials and overhead</strong> the same as Pass A.</li>
               <li>Estimate the <strong>remobilization time</strong> honestly: how long did the lead spend re-planning, re-assessing, or re-sequencing? Add those hours to the productive labor hours. If each of two workers spent 30 minutes re-orienting, that is 1 additional labor-hour.</li>
               <li>Enter the updated <strong>total hours</strong> (productive + remob) into the Labor Hours field.</li>
-              <li>Use the <strong>Drive Time</strong> field for any extra supply run. This is not the original drive to the job — it is only the unplanned drive this change required. Enter the round-trip time honestly.</li>
-              <li>Decide whether to adjust the <strong>Hourly Labor Rate</strong>. If the schedule disruption is significant — the change pushed other work, created idle time, or forced a crew into an inefficient work sequence — a rate increase on top of the extra hours is defensible. If you have fully captured the remob time in hours and drive time, a flat rate may already close the gap. Run both and compare the Suggested Charge.</li>
+              <li>Use the <strong>Drive Time</strong> field for any extra supply run. This is not the original drive to the job — it is only the unplanned drive this change required. Enter the round-trip time honestly. The calculator multiplies Drive Time by the Number of Workers, so if only one of two workers makes the run, enter half the round trip.</li>
+              <li>Leave the <strong>Hourly Labor Rate</strong> at your standard loaded cost unless the change raises your real cost per hour, such as overtime pay. If the change pushed other work or created idle time, capture that as hours instead.</li>
               <li>Enter your <strong>target margin</strong> (same as Pass A).</li>
               <li>Note the Suggested Charge. This is your premium price — the number that holds your margin after real costs are captured.</li>
             </ol>
 
-            <p>The difference between Pass A and Pass B is your change-order premium in dollar terms. That is the number you can show a customer if they ask why the change order costs more than the "same work" would have on the original bid: it is the remob time and the supply run, priced at your standard rate or slightly above, run through the same margin math you use on every job.</p>
+            <p>The difference between Pass A and Pass B is your change-order premium in dollar terms. That is the number you can show a customer if they ask why the change order costs more than the "same work" would have on the original bid: it is the remob time and the supply run, priced at your standard loaded labor cost, run through the same margin math you use on every job.</p>
 
             <div class="callout">
               <p><strong>No invented percentages needed.</strong> You do not need an "industry standard" CO premium markup. Your shop's premium is whatever brings Pass B's suggested charge up to your target margin after all real hours are entered. That number is different for a 30-minute re-plan versus a 2-hour remobilization, as it should be.</p>
@@ -503,7 +505,7 @@
             <p>There is no industry-standard percentage. The right premium is whatever brings your change order back to your target margin after you account for remobilization, extra drive, and any schedule disruption specific to that job. Run the numbers in the <a href="/calculator">calculator</a>, not a rule of thumb someone posted online. A 30-minute remob on a 6-hour CO requires a smaller premium than a 2-hour remob on a 2-hour CO — the math is not the same, and a flat percentage treats them as if it is.</p>
 
             <h3>How do I explain a higher change order price to a customer who expects bid-rate pricing?</h3>
-            <p>Show the cost components: the original productive hours, plus the remobilization time and any extra supply run that the change created. Customers who understand that mid-job work triggers setup costs they would not have paid on the original bid generally accept the math. What they object to is a higher number with no explanation. "The extra drive and remob time brought this to 9.75 hours instead of 8, at a slightly higher rate because the change came in short-notice — here is how the calculator built the price" is a defensible answer. "Change orders cost more" is not.</p>
+            <p>Show the cost components: the original productive hours, plus the remobilization time and any extra supply run that the change created. Customers who understand that mid-job work triggers setup costs they would not have paid on the original bid generally accept the math. What they object to is a higher number with no explanation. "The extra drive and remob time brought this to 9.75 hours instead of 8, and here is how the calculator built the price" is a defensible answer. "Change orders cost more" is not.</p>
 
             <h2 id="bottom-line">The Bottom Line</h2>
 

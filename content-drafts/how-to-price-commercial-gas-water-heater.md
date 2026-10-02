@@ -62,21 +62,31 @@ scout_lock: LOCKED
   <section id="rule-basics">
   <h2>What the rule actually changes for your quote</h2>
 
-  <p>As of Oct 6, 2026, the DOE efficiency standard for commercial gas water heaters takes effect today. It applies to covered units manufactured on or after Oct 6, 2026 (10 CFR 431.110, as amended by the final rule published at 88 FR 69686 on Oct 6, 2023). For gas storage heaters, minimum thermal efficiency goes from 80% to 95%. For gas instantaneous heaters and hot water supply boilers, it goes from 80% to 96%. Residential-duty commercial gas storage units get higher UEF requirements too. Oil-fired and electric commercial water heaters did not change.</p>
+  <p class="legal-status">Legal status as of Oct 6, 2026. This section summarizes the federal documents named or linked below and isn't legal advice.</p>
 
-  <p>As of Oct 6, 2026, the rule's size definitions in 10 CFR 431.102 decide whether a unit is covered. A commercial gas storage heater is rated above 75,000 Btu/h input. A commercial gas instantaneous heater is rated above 200,000 Btu/h. A gas storage unit at or under 105,000 Btu/h and 120 gallons can count as residential-duty commercial, which is still covered. Check the rating plate before you assume a small unit is outside the rule.</p>
+  <p>The DOE efficiency standard for commercial gas water heaters takes effect today. It applies to covered units manufactured on or after Oct 6, 2026 (10 CFR 431.110, as amended by the final rule published at 88 FR 69686 on Oct 6, 2023). For gas storage heaters, minimum thermal efficiency goes from 80% to 95%. For gas instantaneous heaters and hot water supply boilers, it goes from 80% to 96%. Residential-duty commercial gas storage units get higher UEF requirements too. Oil-fired and electric commercial water heaters did not change.</p>
 
-  <p>As of Oct 6, 2026, in practice, 95% thermal efficiency means condensing. The 2023 final rule records A.O. Smith supporting a standard "that will require the utilization of condensing technology." That is why the second ticket carries plastic venting, a condensate drain, and usually a neutralizer.</p>
+  <p>The size definitions in 10 CFR 431.102 decide whether a unit is covered. A commercial gas storage heater is rated above 75,000 Btu/h input. A commercial gas instantaneous heater is rated above 200,000 Btu/h. A gas storage unit at or under 105,000 Btu/h and 120 gallons can count as residential-duty commercial, which is still covered. Check the rating plate before you assume a small unit is outside the rule.</p>
 
-  <p>As of Oct 6, 2026, the rule regulates the manufacture date, not the install date. Bradford White's DOE FAQ (opened Oct 1, 2026) says units "manufactured prior to that date can still be sold and installed. Be sure to check your local building/plumbing codes." Do that last part. Your local code or utility program may set its own requirements.</p>
+  <p>In practice, 95% thermal efficiency means condensing. The 2023 final rule records A.O. Smith supporting a standard "that will require the utilization of condensing technology." That is why the second ticket carries plastic venting, a condensate drain, and usually a neutralizer.</p>
+
+  <p>The rule regulates the manufacture date, not the install date. Bradford White's DOE FAQ (opened Oct 1, 2026) says units "manufactured prior to that date can still be sold and installed. Be sure to check your local building/plumbing codes." Do that last part. Your local code or utility program may set its own requirements.</p>
 
   <h3>The enforcement window</h3>
 
-  <p>As of Oct 6, 2026, DOE has a nonbinding enforcement policy, issued May 5, 2026, saying it will not seek civil penalties for covered commercial gas water heaters manufactured from Oct 6, 2026 through Oct 5, 2027. The policy PDF (energy.gov, "2026 CWH Enforcement Policy, 5.04.2026 clarifications") covers gas storage and storage-type instantaneous heaters, gas instantaneous heaters and hot water supply boilers, and residential-duty commercial gas storage heaters. It also carries this disclaimer, verbatim:</p>
+  <p>DOE's nonbinding enforcement policy, issued May 5, 2026, says it will not seek civil penalties for covered commercial gas water heaters manufactured from Oct 6, 2026 through Oct 5, 2027. The policy PDF (energy.gov, "2026 CWH Enforcement Policy, 5.04.2026 clarifications") covers gas storage and storage-type instantaneous heaters, gas instantaneous heaters and hot water supply boilers, and residential-duty commercial gas storage heaters. It also carries this disclaimer, verbatim:</p>
 
   <blockquote>"This policy does not create or remove any rights or duties and does not affect any other aspect of EPCA or DOE regulations, including the EPCA preemption provisions at 42 U.S.C. § 6297. This policy statement is not a final agency action, has no legally binding effect on persons or entities outside the federal government, and may be rescinded or modified in the Department's complete discretion."</blockquote>
 
-  <p>So, as of Oct 6, 2026, the rule date is Oct 6, 2026, fines are on hold for units built through Oct 5, 2027, and DOE can change or withdraw that hold whenever it wants. If a supplier page headlines October 2027, read that as the end of the penalty window. As of Oct 6, 2026, the rule date in the regulation is still Oct 6, 2026. For pricing, the useful takeaway is narrower than the news: whether you can quote a non-condensing unit now depends on what manufacturers keep building and what your supply house has on the shelf.</p>
+  <p>So the rule date is Oct 6, 2026, fines are on hold for units built through Oct 5, 2027, and DOE can change or withdraw that hold whenever it wants. If a supplier page headlines October 2027, read that as the end of the penalty window. For pricing, the useful takeaway is narrower than the news: whether you can quote a non-condensing unit now depends on what manufacturers keep building and what your supply house has on the shelf.</p>
+
+  <h3>Where the court case stands</h3>
+
+  <p>The rule is also being fought over in court and at DOE. In an <a href="https://www.supremecourt.gov/DocketPDF/25/25-879/405546/20260428153159320_25-879%20American%20Gas%20Response.pdf">Apr 28, 2026 brief filed by the Solicitor General for DOE</a>, the government agreed with the challengers that the rules rest on an "atextual and unsound" reading of "performance characteristics" and said DOE "is considering a new rulemaking." On Jun 8, 2026, the <a href="https://www.supremecourt.gov/docket/docketfiles/html/public/25-879.html">Supreme Court vacated the D.C. Circuit decision that had upheld the rule</a> and sent the case back for further consideration in light of that position. On Jul 10, 2026, <a href="https://storage.courtlistener.com/recap/gov.uscourts.cadc.38458/gov.uscourts.cadc.38458.01208868246.0.pdf">DOE asked the D.C. Circuit to hold the case in abeyance</a> "pending administrative proceedings to revisit the challenged rules." Separately, <a href="https://www.federalregister.gov/documents/2026/04/27/2026-08145/energy-conservation-program-notification-of-petition-for-rulemaking">gas industry groups (AGA, APGA and NPGA) petitioned DOE</a> to move the compliance date to Jan 1, 2030 "at a minimum"; DOE took comments through May 27, 2026.</p>
+
+  <!-- PLACEHOLDER: Sep 17 D.C. Circuit order wording from Hank/Pulse --> [Sep 17 order: wording pending.]
+
+  <p>For your quotes, that means the rule's future is unsettled, which is one more reason to quote both options and keep the quote tied to a specific unit.</p>
   </section>
 
   <!-- Ad Zone B: In-content --><!-- End Ad Zone B -->
@@ -212,7 +222,28 @@ scout_lock: LOCKED
   <h3>What each extra crew hour costs on Option B</h3>
   <p>Using the same example inputs, one more hour for a 2-person crew adds 1 x 2 x $45 = $90.00 of labor, plus 17% overhead on it ($15.30), for $105.30 of cost. At a 20% margin that's $105.30 / 0.80 = $131.625, or about $131.63 added to the price per crew hour. Three extra hours on a conversion you underestimated is 3 x $131.625 = $394.88 of price you didn't charge. That's why your own timed conversions matter more than any number in this post.</p>
 
-  <p>You can run your real inputs through the <a href="/hvac-job-pricing">job pricing calculator</a> instead of doing this by hand. Enter hours, crew size, loaded labor rate, material cost, overhead %, drive time, fuel, and margin, and run it once per option. Plumbing shops can start from the <a href="/plumber-job-pricing">plumber pricing page</a> or go straight to the <a href="/calculator">calculator</a>. For the general walkthrough of pricing any job this way, see <a href="/blog/how-to-price-a-contractor-job.html">how to price a contractor job</a>.</p>
+  <h3>Entering the example in the calculator</h3>
+
+  <p>You can run this in the <a href="/hvac-job-pricing">job pricing calculator</a> instead of doing it by hand, once per option. Here's where each example input goes:</p>
+
+  <table>
+    <thead>
+      <tr><th>Calculator field</th><th>Option A (example)</th><th>Option B (example)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Estimated Hours</td><td>6</td><td>6</td></tr>
+      <tr><td>Number of Workers</td><td>2</td><td>2</td></tr>
+      <tr><td>Hourly Labor Rate (your loaded cost, not your billing rate)</td><td>$45</td><td>$45</td></tr>
+      <tr><td>Material Cost</td><td>$5,432.54</td><td>$9,571.95</td></tr>
+      <tr><td>Material Markup</td><td>0%</td><td>0%</td></tr>
+      <tr><td>Overhead &amp; Burden</td><td>17%</td><td>17%</td></tr>
+      <tr><td>Drive Time</td><td>1 hr</td><td>1 hr</td></tr>
+      <tr><td>Fuel / Travel Cost</td><td>$18</td><td>$18</td></tr>
+      <tr><td>Desired Profit Margin</td><td>20%</td><td>20%</td></tr>
+    </tbody>
+  </table>
+
+  <p>Material Markup stays at 0% here because this example earns margin on the box; Step 5 covers the other way to do it. Fuel stays out of the overhead base, so overhead is figured on labor, drive labor, and materials only. Leave any field not listed at zero so the result lines up with the table above. Plumbing shops can start from the <a href="/plumber-job-pricing">plumber pricing page</a> or go straight to the <a href="/calculator">calculator</a>. For the general walkthrough of pricing any job this way, see <a href="/blog/how-to-price-a-contractor-job.html">how to price a contractor job</a>.</p>
   </section>
 
   <!-- Ad Zone D: In-content --><!-- End Ad Zone D -->
@@ -258,15 +289,16 @@ scout_lock: LOCKED
   <section id="customer">
   <h2>What to tell the customer about the rule</h2>
 
-  <p>Keep it short and stick to the documents. As of Oct 6, 2026, you can say:</p>
+  <p>Keep it short and stick to the documents. You can say:</p>
   <ul>
     <li>The DOE efficiency standard applies to covered commercial gas water heaters built on or after Oct 6, 2026.</li>
     <li>DOE has said it won't seek fines for covered units built through Oct 5, 2027, and that this policy is nonbinding and can be changed or withdrawn at any time.</li>
     <li>Units built before Oct 6, 2026 can still be sold and installed, subject to local codes.</li>
+    <li>DOE has said it is considering a new rulemaking, and the case is back in front of the courts, so the rule could change later.</li>
     <li>Option A depends on a specific unit being available; Option B doesn't.</li>
   </ul>
 
-  <p>Don't tell them the rule is dead, delayed, or going away. None of that is in the documents. If they ask whether the condensing unit pays back, DOE's own analysis in the 2023 final rule (Table V.5) estimated that 17% of affected commercial gas storage buyers would see a net cost at the adopted level. So by DOE's estimate most buyers would not see a net cost, and some would. How much hot water the site uses has a lot to do with which group they're in.</p>
+  <p>Don't promise them the rule is dead, delayed, or going away. If the rule changes after they sign, you'll both be better off having said only what the documents say. If they ask whether the condensing unit pays back, DOE's own analysis in the 2023 final rule (Table V.5) estimated that 17% of affected commercial gas storage buyers would see a net cost at the adopted level. So by DOE's estimate most buyers would not see a net cost, and some would. How much hot water the site uses has a lot to do with which group they're in.</p>
 
   <p>Condensing units also bring new startup and callback risk if your crew is new to condensate and sealed venting. If you price a reserve for that, see the <a href="/blog/callback-reserve-for-contractors.html">callback reserve post</a>.</p>
   </section>
@@ -286,30 +318,12 @@ scout_lock: LOCKED
   </ul>
   </section>
 
-  <section id="faq">
-  <h2>Frequently asked questions</h2>
 
-  <h3>Can I still install a non-condensing commercial gas water heater after Oct 6?</h3>
-  <p>As of Oct 6, 2026, units manufactured before Oct 6, 2026 can still be sold and installed, per Bradford White's FAQ, subject to local codes. For covered units built on or after that date, DOE's nonbinding policy says it won't seek penalties through Oct 5, 2027. Confirm the manufacture date on the label before you quote.</p>
+  <h2 id="bottom-line">Run your own numbers</h2>
 
-  <h3>If DOE isn't fining anyone until Oct 2027, why quote condensing at all?</h3>
-  <p>Because the non-condensing unit may not be available, the penalty policy can change at any time (as of Oct 6, 2026, per DOE's own disclaimer), and the customer deserves to see both prices. A two-option quote also protects you if Option A disappears before they sign.</p>
+  <p>Put your real hours, loaded rate, and supplier prices into the <a href="/hvac-job-pricing">job pricing calculator</a>, once for each option, before the quote goes out.</p>
 
-  <h3>What extra parts and hours go into a condensing swap?</h3>
-  <p>Sealed plastic venting with a new termination, a condensate drain or pump, usually a neutralizer, possibly a 120V outlet, and a permit where required. The parts table in Step 3 shows Oct 1, 2026 listings. The hours have no reliable published figure, so time your first few and use your own.</p>
-
-  <h3>How long should I hold my price?</h3>
-  <p>Use your normal window, but add the availability clause from Step 6 so the price is tied to the specific unit you priced.</p>
-
-  <h3>Do I mark up a $9,000 to $13,000 heater the same way I mark up fittings?</h3>
-  <p>You can earn margin on it like everything else, or use a markup on the materials line instead of margin on that line. In the Option B example, the markup approach at an example 15% priced the job $957.20 lower. Pick one method per line, never both.</p>
-  </section>
-
-  <h2 id="bottom-line">The short version</h2>
-
-  <p>Call the supply house, write down what's in stock and when it was built, and build two complete tickets. Price each from your loaded labor cost, materials at cost, overhead, and margin. Date the quote, name the unit, and add an availability clause. Then run your real numbers through the <a href="/hvac-job-pricing">calculator</a> for each option.</p>
-
-  <p class="disclaimer">This article is for educational purposes only and is not legal, financial, or tax advice. Legal statements are as of Oct 6, 2026. Equipment and parts prices are as listed by the named suppliers on Oct 1, 2026 and change often. Worked-example inputs (loaded labor rate, crew size, drive time, fuel, overhead, margin, markup, and vent quantities) are assumptions for illustration. Check local codes and your own supplier pricing before quoting.</p>
+  <p class="disclaimer">This article is for educational purposes only and is not legal, financial, or tax advice. The legal summary is dated at the top of that section. Equipment and parts prices are as listed by the named suppliers on Oct 1, 2026 and change often. Worked-example inputs (loaded labor rate, crew size, drive time, fuel, overhead, margin, markup, and vent quantities) are assumptions for illustration. Check local codes and your own supplier pricing before quoting.</p>
 
 </div><!-- /article-body -->
 

@@ -304,6 +304,26 @@ def job_derived():
 DERIVED[JOB] = job_derived
 
 
+# ---- hvac-component-swap-vs-changeout.html --------------------------------
+HVAC = "hvac-component-swap-vs-changeout.html"
+
+
+@example(HVAC, "Path A, component swap", hours=5, workers=1, rate=45, materials=2000,
+         overhead=15, drive=0.5, fuel=17.5, margin=25)
+def _(r):
+    out = std_lines(r)
+    out["profit per labor hour"] = usd(r["profit_per_labor_hour"])
+    return out
+
+
+@example(HVAC, "Path B, full changeout", hours=9, workers=2, rate=45, materials=4110,
+         overhead=15, drive=1.0, fuel=35, margin=25)
+def _(r):
+    out = std_lines(r)
+    out["profit per labor hour"] = usd(r["profit_per_labor_hour"])
+    return out
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -322,7 +342,7 @@ POSTS = [
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
-    "Overhead &amp; Burden", "Overhead & Burden", "Effective $/hr", "20.3%",
+    "Overhead &amp; Burden", "Overhead & Burden", "Effective $/hr", "effective $/hr", "20.3%",
 ]
 # Old example figures that must be gone after the rerun.
 STALE = {
@@ -330,6 +350,7 @@ STALE = {
            "$456.76", "$39.85", "$264.66", "$214.50"],
     SPRINK: ["$98.16", "$123.84", "$134.47", "$61.84", "$75.23", "$127.86", "$84.93",
              "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21"],
+    HVAC: ["$5,548.50", "$2,800 marked-up", "Tax % fields", "$1,530"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

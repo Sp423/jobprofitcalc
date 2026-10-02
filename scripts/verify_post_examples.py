@@ -422,7 +422,8 @@ DERIVED[CALLBACK] = cb_derived
 
 # ---- should-contractors-waive-diagnostic-fee.html -------------------------
 DIAG = "should-contractors-waive-diagnostic-fee.html"
-DIAG_IN = dict(hours=1, workers=1, rate=75, materials=0, overhead=22, drive=0.5, fuel=0, margin=35)
+# 30 min each way = 1.0 hr round-trip Drive Time.
+DIAG_IN = dict(hours=1, workers=1, rate=75, materials=0, overhead=22, drive=1.0, fuel=0, margin=35)
 REPAIR_IN = dict(hours=2.5, workers=1, rate=75, materials=320, overhead=22, drive=0, fuel=0, margin=35)
 SMALL_IN = dict(hours=0.5, workers=1, rate=75, materials=40, overhead=22, drive=0, fuel=0, margin=35)
 DIAG_FEE = 16500
@@ -432,12 +433,17 @@ def pct(num, den):
     return "{:.1f}%".format(num / den * 100)
 
 
-@example(DIAG, "Pass 1, diagnostic visit (15 min each way)", **DIAG_IN)
+@example(DIAG, "Pass 1, diagnostic visit (30 min each way)", **DIAG_IN)
 def _(r):
+    loss = r["total_cost"] - DIAG_FEE
+    assert loss > 0
     return {"labor": usd(r["labor"]), "drive labor": usd(r["drive_labor"]),
-            "overhead": usd(r["overhead"]), "total cost": usd(r["total_cost"]),
-            "profit at $165 flat fee": usd(DIAG_FEE - r["total_cost"]),
-            "margin at $165 flat fee": pct(DIAG_FEE - r["total_cost"], DIAG_FEE)}
+            "direct": usd(r["direct"]), "overhead": usd(r["overhead"]),
+            "total cost": usd(r["total_cost"]),
+            "loss at $165 flat fee": "−" + usd(loss),
+            "loss as % of the $165 fee": pct(loss, DIAG_FEE) + " loss",
+            "fee that hits 35% (suggested charge)": usd(r["price"]),
+            "profit at that fee": usd(r["profit"])}
 
 
 @example(DIAG, "Pass 2, repair, no drive", **REPAIR_IN)
@@ -469,7 +475,7 @@ def diag_derived():
     out["C revenue"] = usd(c_rev)
     out["C profit"] = usd(c_rev - cost)
     out["C margin"] = pct(c_rev - cost, c_rev)
-    need = js_round(cost / 0.65)
+    need = rc(cost * 100 / 65)
     out["D revenue needed"] = usd(need)
     out["D repair invoice before credit"] = usd(need)
     out["D customer pays on repair"] = usd(need - DIAG_FEE)
@@ -478,11 +484,15 @@ def diag_derived():
     p75 = a_rev - 7500
     out["$75 partial revenue"] = usd(p75)
     out["$75 partial margin"] = pct(p75 - cost, p75)
-    big_cost = d + js_round(240000 * 0.65)
+    big_cost = d + rc(240000 * 0.65)
     out["$2,400 repair, keep fee, margin"] = "{:.0f}%".format((240000 + DIAG_FEE - big_cost) / (240000 + DIAG_FEE) * 100)
     out["$2,400 repair, credit, margin"] = "{:.0f}%".format((240000 - big_cost) / 240000 * 100)
     out["small combined cost"] = usd(d + small)
+    out["small keep-both profit"] = usd(DIAG_FEE + 20000 - d - small)
     out["small credit loss"] = usd(d + small - 20000)
+    fee_ok = price_job(**DIAG_IN)["price"]
+    out["fee priced off cost + repair"] = usd(fee_ok + p)
+    out["fee priced off cost, combined margin"] = pct(fee_ok + p - cost, fee_ok + p)
     return out
 
 
@@ -641,6 +651,9 @@ POSTS = [
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
     "Overhead &amp; Burden", "Overhead & Burden", "Effective $/hr", "effective $/hr", "20.3%",
+    # PR #47 head 86eb071 has no Material Markup field or breakdown row.
+    "Material Markup", "Material markup", "0% markup", "markup (not added)", "reported in dollars",
+    "reported only", "markup box", "Rate: $26", "$26 an hour",
 ]
 # Old example figures that must be gone after the rerun.
 STALE = {
@@ -652,7 +665,9 @@ STALE = {
     AFTER: ["~$263", "~$183"],
     CALLBACK: ["$3,200", "19.3%", "19.5%", "$469", "14.7%", "18.6%", "Gross margin", "of revenue)"],
     DIAG: ["$845", "$678", "$129", "$1,010", "$1,043", "$878", "$713", "21.8%", "32.9%",
-           "19.8%", "$96.00", "$227", "30 min each way"],
+           "19.8%", "$96.00", "$227", "15 min each way", "$137.25", "$27.75", "16.8%", "$756.40",
+           "$1,163.69", "$998.69", "$361.14", "$196.14", "$279.14", "$407.29", "$231.80",
+           "$31.80", "32.3%", "20.6%", "27.0%", "27.4%", "about 29%", "only profitable hour"],
     CO: ["$185.80", "$1,352.05", "$1,733", "$1,428", "$1,113.60", "$157.50", "$305",
          "$90 / hr", "$95 / hr", "overhead dilution", "charge-out rate to"],
     HOURLY: ["$11,016", "5.8%", "$4,176", "$107,992", "$108,000", "$77.14", "$77/hr",

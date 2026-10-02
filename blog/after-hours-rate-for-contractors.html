@@ -355,7 +355,7 @@
 
             <h3 id="avoid-double-count">Warning: Do Not Double-Count Overhead and Burden</h3>
 
-            <p>The calculator has a separate <strong>Overhead &amp; Burden %</strong> field. If your company runs a uniform overhead rate on every job, and that overhead rate already includes overhead items but <em>not</em> the payroll burden on wages — which is the correct setup for the burdened-rate method — then the above calculation is clean.</p>
+            <p>The calculator has a separate <strong>Overhead %</strong> field, and its tooltip says to leave payroll taxes and workers' comp out of it if they are already in your labor rate. If your company runs a uniform overhead rate on every job, and that overhead rate includes overhead items but <em>not</em> the payroll burden on wages, which is the correct setup for the burdened-rate method, then the above calculation is clean.</p>
 
             <p>Problems appear when:</p>
 
@@ -376,19 +376,19 @@
                 <strong>Hourly Labor Rate:</strong> Enter your after-hours cost per hour — the figure you built in the section above. This is a cost, not a charge-out price. The calculator builds the margin on top of it.
               </li>
               <li>
-                <strong>Hours:</strong> Enter the total billable labor hours for the call, including time on site.
+                <strong>Estimated Hours:</strong> Enter the labor hours on site for the call. Drive time goes in its own field.
               </li>
               <li>
                 <strong>Number of Workers:</strong> If you send two techs, set this to 2. The calculator multiplies hours × workers × hourly rate.
               </li>
               <li>
-                <strong>Material Cost and Material Markup:</strong> Parts are parts — no change from daytime pricing. Enter actual cost and your standard markup.
+                <strong>Material Cost and Material Markup:</strong> Parts are parts, no change from daytime pricing. Enter actual cost. Material Markup is reported in dollars only and is not added to the price; your margin already earns profit on the parts.
               </li>
               <li>
-                <strong>Overhead &amp; Burden %:</strong> Use the same rate you use on daytime tickets. Overhead does not rise for a single after-hours call.
+                <strong>Overhead %:</strong> Use the same rate you use on daytime tickets. Overhead does not rise for a single after-hours call.
               </li>
               <li>
-                <strong>Drive time:</strong> The calculator bills drive time once at the hourly labor rate. On an after-hours call, if the tech driving is also on OT, the drive-time cost is also at the OT rate — make sure your Hourly Labor Rate input reflects that.
+                <strong>Drive Time:</strong> The calculator costs drive time as drive hours × number of workers × your hourly labor rate. On an after-hours call, if the techs driving are also on OT, the drive-time cost is also at the OT rate, so make sure your Hourly Labor Rate input reflects that.
               </li>
               <li>
                 <strong>Target margin:</strong> Use the same margin target you use on all work unless your shop policy sets a different floor for emergency calls.
@@ -409,15 +409,21 @@
               <div class="calc-row"><span>Hourly Labor Rate (after-hours)</span><span class="calc-val">$55.50</span></div>
               <div class="calc-row"><span>Hours on site</span><span class="calc-val">1.5</span></div>
               <div class="calc-row"><span>Number of Workers</span><span class="calc-val">1</span></div>
-              <div class="calc-row"><span>Drive time (0.5 hr × $55.50)</span><span class="calc-val">$27.75</span></div>
+              <div class="calc-row"><span>Drive Time</span><span class="calc-val">0.5 hr</span></div>
               <div class="calc-row"><span>Material cost (contactor)</span><span class="calc-val">$32.00</span></div>
-              <div class="calc-row"><span>Material markup (35%)</span><span class="calc-val">$11.20</span></div>
-              <div class="calc-row"><span>Overhead &amp; Burden %</span><span class="calc-val">18%</span></div>
+              <div class="calc-row"><span>Material markup (35%, reported only, not added to the price)</span><span class="calc-val">$11.20</span></div>
+              <div class="calc-row"><span>Overhead %</span><span class="calc-val">18%</span></div>
+              <div class="calc-row"><span>Fuel / Travel Cost (not used in this example)</span><span class="calc-val">$0.00</span></div>
               <div class="calc-row"><span>Target margin</span><span class="calc-val">40%</span></div>
-              <div class="calc-row total"><span>Total quoted price (calculator output, made-up)</span><span class="calc-val">~$263</span></div>
+              <div class="calc-row"><span>Labor ($55.50 × 1.5 hr × 1 worker)</span><span class="calc-val">$83.25</span></div>
+              <div class="calc-row"><span>Drive labor ($55.50 × 0.5 hr × 1 worker)</span><span class="calc-val">$27.75</span></div>
+              <div class="calc-row"><span>Overhead (18% of $143.00 labor + drive labor + materials)</span><span class="calc-val">$25.74</span></div>
+              <div class="calc-row"><span>Total cost</span><span class="calc-val">$168.74</span></div>
+              <div class="calc-row total"><span>Total quoted price ($168.74 ÷ 0.60, made-up)</span><span class="calc-val">$281.23</span></div>
+              <div class="calc-row profit"><span>Net profit</span><span class="calc-val">$112.49 (40%)</span></div>
             </div>
 
-            <p>If the tech had been priced at the daytime rate of $37.00, the same ticket would yield approximately $183 before verifying margin — the delta reflects the uncovered OT cost that would have come out of profit. See the <a href="/hvac-job-pricing">HVAC job pricing guide</a> for a full breakdown of how these fields interact on HVAC service calls generally.</p>
+            <p>If the tech had been priced at the daytime rate of $37.00, the same ticket would price at $208.47. Against the real after-hours cost of $168.74, that leaves $39.73 of profit, a 19.1% margin instead of 40%. The difference is the uncovered OT cost coming out of profit. See the <a href="/hvac-job-pricing">HVAC job pricing guide</a> for a full breakdown of how these fields interact on HVAC service calls generally.</p>
 
             <!-- ============================================================ -->
             <h2 id="mixed-hours">Mixed Straight-Time and OT Hours on One Ticket</h2>
@@ -431,11 +437,11 @@
             <p>Split the ticket into its straight-time hours and its OT hours, run the calculator twice, and add the two results together.</p>
 
             <ul>
-              <li>Run 1: straight-time burdened rate, straight-time hours, no materials.</li>
-              <li>Run 2: after-hours burdened rate, OT hours, full materials and overhead on this run only (or split materials proportionally — either way, total once).</li>
+              <li>Run 1: straight-time burdened rate, straight-time hours, no materials, no drive time or fuel.</li>
+              <li>Run 2: after-hours burdened rate, OT hours, full materials, drive time, and fuel on this run only (or split materials proportionally; either way, total once).</li>
             </ul>
 
-            <p>Be careful not to apply overhead twice unless you intend to. One approach: run the materials and overhead % on one of the two runs and leave them at zero in the other.</p>
+            <p>Keep the same Overhead % and margin on both runs. The calculator applies overhead to each run's own labor, drive labor, and materials, so overhead is not counted twice. What you must enter only once is materials, drive time, and fuel.</p>
 
             <h3 id="weighted-average">Option B: Weighted Average Rate</h3>
 
@@ -447,7 +453,7 @@
 
             <div class="formula-block">(6 × $37.00 + 2 × $55.50) ÷ 8 = ($222.00 + $111.00) ÷ 8 = $333.00 ÷ 8 = $41.63/hr (made-up)</div>
 
-            <p>Enter $41.63 in the Hourly Labor Rate field and 8 in Hours. The calculator then applies materials, overhead, and margin once across the full ticket. This is arithmetically identical to two separate runs done correctly, and is easier when you know the split at quote time.</p>
+            <p>Enter $41.63 in the Hourly Labor Rate field and 8 in Hours. The calculator then applies materials, overhead, and margin once across the full ticket. This matches two separate runs done correctly (within a few cents, because $41.63 is rounded), and is easier when you know the split at quote time.</p>
 
             <div class="callout">
               <p><strong>When you do not know the OT split at quote time:</strong> Quote at the OT rate for all hours. If the job finishes without hitting OT, you have room in the ticket. If it hits OT halfway through, the cost is covered. Quoting at straight-time on a job that might go long is the riskier direction.</p>

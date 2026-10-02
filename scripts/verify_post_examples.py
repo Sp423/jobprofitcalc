@@ -324,6 +324,38 @@ def _(r):
     return out
 
 
+# ---- after-hours-rate-for-contractors.html --------------------------------
+AFTER = "after-hours-rate-for-contractors.html"
+AFTER_IN = dict(hours=1.5, workers=1, rate=55.50, materials=32, overhead=18, drive=0.5, fuel=0, margin=40)
+
+
+@example(AFTER, "Saturday no-cool call, after-hours $55.50", **AFTER_IN)
+def _(r):
+    return std_lines(r)
+
+
+@example(AFTER, "Same call priced at daytime $37.00", **{**AFTER_IN, "rate": 37})
+def _(r):
+    return {"price": usd(r["price"])}
+
+
+def after_derived():
+    ot = price_job(**AFTER_IN)
+    day = price_job(**{**AFTER_IN, "rate": 37})
+    profit = day["price"] - ot["total_cost"]
+    return {
+        "safe method $37.00 x 1.5": "${:.2f}".format(37 * 1.5),
+        "precise method": "${:.2f}".format((28 + 4.30) * 1.5 + 4.70),
+        "weighted rate (6 ST + 2 OT)": "${:.2f}".format(js_round((6 * 37 + 2 * 55.5) / 8 * 100) / 100),
+        "markup reported (35% of $32)": "$11.20",
+        "daytime price minus real cost": usd(profit),
+        "resulting margin": "{:.1f}%".format(profit / day["price"] * 100),
+    }
+
+
+DERIVED[AFTER] = after_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -351,6 +383,7 @@ STALE = {
     SPRINK: ["$98.16", "$123.84", "$134.47", "$61.84", "$75.23", "$127.86", "$84.93",
              "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21"],
     HVAC: ["$5,548.50", "$2,800 marked-up", "Tax % fields", "$1,530"],
+    AFTER: ["~$263", "~$183"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

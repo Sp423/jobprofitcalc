@@ -1,26 +1,7 @@
-/* ============================================================
-   TRADE DEFAULTS
-   Hours | Workers | LaborRate | MaterialCost | MatMarkup% | Overhead% | DriveTime | FuelCost
-============================================================ */
-const DEFAULTS = {
-  plumber:     { hours:3,  workers:1, laborRate:85,  materialCost:150, materialMarkup:25, overhead:18, driveTime:0.5, fuelCost:10 },
-  electrician: { hours:4,  workers:1, laborRate:90,  materialCost:200, materialMarkup:20, overhead:18, driveTime:0.5, fuelCost:10 },
-  hvac:        { hours:4,  workers:2, laborRate:85,  materialCost:350, materialMarkup:20, overhead:20, driveTime:1.0, fuelCost:15 },
-  roofer:      { hours:8,  workers:3, laborRate:65,  materialCost:800, materialMarkup:15, overhead:22, driveTime:1.0, fuelCost:20 },
-  painter_int: { hours:6,  workers:2, laborRate:55,  materialCost:120, materialMarkup:20, overhead:15, driveTime:0.5, fuelCost:10 },
-  painter_ext: { hours:10, workers:2, laborRate:55,  materialCost:250, materialMarkup:20, overhead:15, driveTime:1.0, fuelCost:15 },
-  landscaper:  { hours:5,  workers:2, laborRate:45,  materialCost:100, materialMarkup:20, overhead:15, driveTime:1.0, fuelCost:20 },
-  gc:          { hours:8,  workers:2, laborRate:75,  materialCost:500, materialMarkup:15, overhead:20, driveTime:1.0, fuelCost:20 },
-  carpenter:   { hours:6,  workers:1, laborRate:70,  materialCost:200, materialMarkup:20, overhead:15, driveTime:0.5, fuelCost:10 },
-  flooring:    { hours:6,  workers:2, laborRate:60,  materialCost:400, materialMarkup:15, overhead:15, driveTime:0.5, fuelCost:10 },
-  concrete:    { hours:8,  workers:2, laborRate:65,  materialCost:300, materialMarkup:15, overhead:20, driveTime:1.0, fuelCost:20 },
-  drywall:     { hours:6,  workers:2, laborRate:55,  materialCost:150, materialMarkup:20, overhead:15, driveTime:0.5, fuelCost:10 },
-  handyman:    { hours:2,  workers:1, laborRate:60,  materialCost:50,  materialMarkup:20, overhead:15, driveTime:0.5, fuelCost:10 },
-};
+/* Job profit calculator UI. Math lives in pricing.js (JobPricing). */
+const P = window.JobPricing;
+const DEFAULTS = P.TRADE_DEFAULTS;
 
-/* ============================================================
-   GET ELEMENTS
-============================================================ */
 const G = id => document.getElementById(id);
 const $ = {
   trade:    G('tradeSelect'),
@@ -29,14 +10,10 @@ const $ = {
   workers:  G('workers'),
   labor:    G('laborRate'),
   matCost:  G('materialCost'),
-  matMark:  G('materialMarkup'),
   overhead: G('overhead'),
   drive:    G('driveTime'),
   fuel:     G('fuelCost'),
   profit:   G('profitMargin'),
-  se:       G('seTax'),
-  state:    G('stateTax'),
-  // Results
   price:    G('suggestedPrice'),
   note:     G('priceNote'),
   staxLive: G('salesTaxLive'),
@@ -47,15 +24,18 @@ const $ = {
   eff:      G('effRate'),
   badge:    G('moneyBadge'),
   badgeTxt: G('moneyText'),
-  // Breakdown
   bdLabor:  G('bd-labor'),
+  bdDrive:  G('bd-drive'),
+  bdFuel:   G('bd-fuel'),
   bdMat:    G('bd-mat'),
   bdOH:     G('bd-oh'),
-  bdTravel: G('bd-travel'),
-  bdSE:     G('bd-se'),
-  bdState:  G('bd-state'),
   bdTotal:  G('bd-total'),
-  // UI
+  bdSet:    G('bd-setaside'),
+  qLabor:   G('q-labor'),
+  qMat:     G('q-mat'),
+  qDrive:   G('q-drive'),
+  qFuel:    G('q-fuel'),
+  qTotal:   G('q-total'),
   reset:    G('resetBtn'),
   pdf:      G('pdfBtn'),
   custPdf:  G('custPdfBtn'),
@@ -65,7 +45,6 @@ const $ = {
   bkBody:   G('bkBody'),
   bkLabel:  G('bkToggleLabel'),
   toast:    G('toast'),
-  // Quote Settings
   bizName:  G('bizName'),
   bizPhone: G('bizPhone'),
   bizEmail: G('bizEmail'),
@@ -75,165 +54,180 @@ const $ = {
   qvDays:   G('quoteValid'),
   inclValid:G('includeValid'),
   staxRate: G('salesTaxRate'),
-  inclStax: G('includeSalesTax'),
+  inclStax: G('includeSalesTax')
 };
 
-/* ============================================================
-   FORMATTING
-============================================================ */
-function fmtD(n, dec = 0) {
-  if (!isFinite(n) || isNaN(n)) return '$0';
-  const absStr = Math.abs(n).toFixed(dec);
-  const zero = /^0+(?:\.0+)?$/.test(absStr);
-  const sign = !zero && n < 0 ? '-' : '';
-  return sign + '$' + absStr.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const FIELD_IDS = {
+  hours: 'hours',
+  workers: 'workers',
+  laborRate: 'laborRate',
+  materialCost: 'materialCost',
+  overhead: 'overhead',
+  driveTime: 'driveTime',
+  fuelCost: 'fuelCost',
+  margin: 'profitMargin',
+  salesTaxRate: 'salesTaxRate'
+};
+
+// Job inputs are not stored and are not read from the URL.
+// Drop leftover keys from older builds, including a saved material markup.
+try {
+  ['jpc_seTax', 'jpc_stateTax', 'jpc_qs_seTax', 'jpc_qs_stateTax', 'jpc_materialMarkup', 'jpc_qs_materialMarkup'].forEach(function (key) {
+    localStorage.removeItem(key);
+  });
+  Object.keys(localStorage).forEach(function (key) {
+    if (/materialMarkup/i.test(key)) localStorage.removeItem(key);
+  });
+} catch (e) { /* private mode */ }
+
+function fmtD(n, dec) {
+  if (!Number.isFinite(n)) return dec === 0 ? '$0' : '$0.00';
+  return P.formatDollars(Math.round(n * 100), dec == null ? 2 : dec);
 }
-function fmtP(n, dec = 1) {
-  if (!isFinite(n) || isNaN(n)) return '0%';
-  return n.toFixed(dec) + '%';
-}
-function attrBound(el, name) {
-  if (!el || el[name] === '' || el[name] == null) return NaN;
-  return parseFloat(el[name]);
-}
-function parseBound(el) {
-  const v = parseFloat(el.value);
-  if (!isFinite(v)) return 0;
-  let out = v;
-  const min = attrBound(el, 'min');
-  const max = attrBound(el, 'max');
-  if (isFinite(min) && out < min) out = min;
-  if (isFinite(max) && out > max) out = max;
-  return out;
-}
-function num(el) { return parseBound(el); }
-function snapBounds(el, fromBlur) {
-  const raw = String(el.value).trim();
-  if (raw === '' || raw === '-' || raw === '.' || raw === '-.') {
-    if (fromBlur) {
-      const min = attrBound(el, 'min');
-      el.value = String(isFinite(min) ? min : 0);
-    }
-    return;
-  }
-  const v = parseFloat(raw);
-  if (!isFinite(v)) return;
-  const bounded = parseBound(el);
-  if (bounded !== v) el.value = String(bounded);
+function fmtP(n) {
+  if (!Number.isFinite(n)) return '0.0%';
+  return P.formatPercent(n / 100);
 }
 
-/* ============================================================
-   CALCULATE — all math verified to spec
-============================================================ */
-function calc() {
-  const hours      = num($.hours);
-  const workers    = Math.max(num($.workers), 1);
-  const laborRate  = num($.labor);
-  const matCost    = num($.matCost);
-  const matMark    = num($.matMark) / 100;
-  const ohPct      = num($.overhead) / 100;
-  const driveTime  = num($.drive);
-  const fuelCost   = num($.fuel);
-  const profitPct  = Math.min(num($.profit), 89) / 100;
-  const sePct      = num($.se) / 100;
-  const statePct   = num($.state) / 100;
-
-  // Labor
-  const totalLabor = hours * workers * laborRate;
-  // Materials with markup
-  const matTotal   = matCost * (1 + matMark);
-  // Overhead on labor + materials
-  const overhead   = (totalLabor + matTotal) * ohPct;
-  // Travel: drive hours billed once at labor rate (not × workers) + flat fuel
-  const travel     = (driveTime * laborRate) + fuelCost;
-  // Subtotal of all direct costs
-  const subtotal   = totalLabor + matTotal + overhead + travel;
-  // Tax allowances on the cost subtotal (not earnings / suggested price)
-  const seAmt      = subtotal * sePct;
-  const stateAmt   = subtotal * statePct;
-  // Total cost
-  const totalCost  = subtotal + seAmt + stateAmt;
-  // Suggested price to achieve desired profit margin
-  const suggested  = totalCost / (1 - profitPct);
-  // Net profit and margin
-  const netProfit  = suggested - totalCost;
-  const realMargin = suggested > 0 ? (netProfit / suggested) * 100 : 0;
-  // Effective $/hr = profit ÷ job hours only (hours × workers; excludes drive)
-  const totalHrs   = hours * workers;
-  const effRate    = totalHrs > 0 ? netProfit / totalHrs : 0;
-
-  return { totalLabor, matTotal, overhead, travel, subtotal, seAmt, stateAmt, totalCost, suggested, netProfit, realMargin, effRate, totalHrs };
-}
-
-/* ============================================================
-   ANIMATE NUMBERS
-============================================================ */
 function pop(el) {
+  if (!el) return;
   el.classList.remove('pop');
   void el.offsetWidth;
   el.classList.add('pop');
 }
-
-/* ============================================================
-   COLOR CLASS BY MARGIN
-============================================================ */
 function marginClass(m) {
   if (m >= 20) return 'c-green';
   if (m >= 10) return 'c-warn';
   return 'c-red';
 }
 
-/* ============================================================
-   UPDATE UI
-============================================================ */
+function readRaw() {
+  return {
+    hours: $.hours.value,
+    workers: $.workers.value,
+    laborRate: $.labor.value,
+    materialCost: $.matCost.value,
+    overhead: $.overhead.value,
+    driveTime: $.drive.value,
+    fuelCost: $.fuel.value,
+    margin: $.profit.value,
+    salesTaxRate: $.staxRate ? $.staxRate.value : '0'
+  };
+}
+
+function showMessages(messages) {
+  Object.keys(FIELD_IDS).forEach(function (key) {
+    const id = FIELD_IDS[key];
+    const input = G(id);
+    const msg = G('msg-' + id);
+    const info = messages[key];
+    if (!input) return;
+    const field = input.closest('.ifield');
+    const level = info ? info.level : 'ok';
+    input.setAttribute('aria-invalid', level === 'error' ? 'true' : 'false');
+    if (field) field.classList.toggle('has-error', level === 'error');
+    if (!msg) return;
+    msg.textContent = info && info.message ? info.message : '';
+    msg.className = 'field-msg' + (level === 'ok' || !info || !info.message ? '' : ' is-' + level);
+  });
+}
+
+function blankMoney() {
+  $.price.textContent = '$0.00';
+  $.netP.textContent = '$0.00';
+  $.margin.textContent = '0.0%';
+  $.eff.textContent = '$0.00/hr';
+  $.netP.className = 'metric-val c-white';
+  $.margin.className = 'metric-val c-white';
+  $.eff.className = 'metric-val c-white';
+  [$.bdLabor, $.bdDrive, $.bdFuel, $.bdMat, $.bdOH, $.bdTotal, $.bdSet,
+   $.qLabor, $.qMat, $.qDrive, $.qFuel, $.qTotal].forEach(function (el) {
+    if (el) el.textContent = '$0.00';
+  });
+  const srP = G('srPrice');
+  const srM = G('srMargin');
+  const srF = G('srProfit');
+  if (srP) srP.textContent = '$0.00';
+  if (srM) srM.textContent = '0.0%';
+  if (srF) srF.textContent = '$0.00';
+}
+
+let lastResult = null;
+
+function currentResult() {
+  const checked = P.validateJob(readRaw());
+  showMessages(checked.messages);
+  if (!checked.ok) return { ok: false, messages: checked.messages };
+  const chargeTax = $.inclStax && $.inclStax.checked;
+  const values = Object.assign({}, checked.values, {
+    salesTaxRate: chargeTax ? checked.values.salesTaxRate : 0
+  });
+  const priced = P.priceJob(values);
+  if (!priced.ok) return { ok: false, messages: checked.messages };
+  return { ok: true, messages: checked.messages, result: priced, values: values };
+}
+
 function update() {
-  const r = calc();
-  const isEmpty = r.totalCost === 0 || r.suggested === 0;
+  const state = currentResult();
   const resultsEl = G('resultsPanel');
+  lastResult = state.ok ? state.result : null;
+
+  if (!state.ok) {
+    if (resultsEl) resultsEl.classList.add('is-empty');
+    blankMoney();
+    $.note.textContent = 'Fix the fields marked above. The price stays blank until every entry is a valid number.';
+    if ($.staxLive) $.staxLive.hidden = true;
+    $.badge.className = 'money-badge no';
+    $.badgeTxt.textContent = 'CHECK INPUTS';
+    updateStickyBar();
+    return;
+  }
+
+  const r = state.result;
+  const isEmpty = r.price === 0 && r.totalCost === 0;
   if (resultsEl) resultsEl.classList.toggle('is-empty', isEmpty);
 
-  // Price
   pop($.price);
-  $.price.textContent = fmtD(r.suggested, 2);
-  $.note.textContent  = isEmpty
+  $.price.textContent = fmtD(r.price, 2);
+  $.note.textContent = isEmpty
     ? 'Enter hours, a labor rate, or materials to see a suggested charge.'
-    : `Total cost: ${fmtD(r.totalCost, 2)}  ·  Target margin: ${num($.profit)}%`;
+    : 'Total cost: ' + fmtD(r.totalCost, 2) + '  ·  Target margin: ' + state.values.margin + '%';
 
-  const { staxPct, staxAmt, grandTotal } = customerQuoteParts(r);
-  const showStax = $.inclStax.checked;
+  const showStax = $.inclStax && $.inclStax.checked;
   if ($.staxLive) {
     $.staxLive.hidden = !showStax;
     if (showStax) {
-      $.staxTotal.textContent = fmtD(grandTotal, 2);
-      $.staxDetail.textContent = staxAmt > 0
-        ? `Includes ${fmtD(staxAmt, 2)} sales tax (${staxPct}% on marked-up materials)`
+      $.staxTotal.textContent = fmtD(r.customerTotal, 2);
+      $.staxDetail.textContent = r.salesTax > 0
+        ? 'Includes ' + fmtD(r.salesTax, 2) + ' sales tax (' + state.values.salesTaxRate + '% on the materials line)'
         : 'Sales tax is on — rate is 0%, so the customer total matches the suggested charge.';
     }
   }
 
-  // Net profit
   pop($.netP);
-  $.netP.textContent  = fmtD(r.netProfit, 0);
-  $.netP.className    = 'metric-val ' + (isEmpty ? 'c-white' : marginClass(r.realMargin));
+  $.netP.textContent = fmtD(r.profit, 2);
+  $.netP.className = 'metric-val ' + (isEmpty ? 'c-white' : marginClass(r.marginPct));
 
-  // Margin
   pop($.margin);
-  $.margin.textContent = fmtP(r.realMargin, 1);
-  $.margin.className   = 'metric-val ' + (isEmpty ? 'c-white' : marginClass(r.realMargin));
+  $.margin.textContent = fmtP(r.marginPct);
+  $.margin.className = 'metric-val ' + (isEmpty ? 'c-white' : marginClass(r.marginPct));
 
-  // Effective rate
   pop($.eff);
-  $.eff.textContent  = fmtD(r.effRate, 0) + '/hr';
-  $.eff.className    = 'metric-val ' + (isEmpty ? 'c-white' : (r.effRate >= 30 ? 'c-green' : r.effRate >= 15 ? 'c-warn' : 'c-red'));
+  if (r.profitPerLaborHour == null) {
+    $.eff.textContent = '—';
+    $.eff.className = 'metric-val c-white';
+  } else {
+    $.eff.textContent = fmtD(r.profitPerLaborHour, 2) + '/hr';
+    $.eff.className = 'metric-val ' + (isEmpty ? 'c-white' : (r.profitPerLaborHour >= 30 ? 'c-green' : r.profitPerLaborHour >= 15 ? 'c-warn' : 'c-red'));
+  }
 
-  // Money badge
   if (isEmpty) {
     $.badge.className = 'money-badge idle';
     $.badgeTxt.textContent = 'ENTER JOB DETAILS';
-  } else if (r.realMargin >= 10) {
+  } else if (r.marginPct >= 10) {
     $.badge.className = 'money-badge yes';
     $.badgeTxt.textContent = '✓ MAKING MONEY';
-  } else if (r.realMargin > 0) {
+  } else if (r.marginPct > 0) {
     $.badge.className = 'money-badge warn';
     $.badgeTxt.textContent = '⚠ THIN MARGIN';
   } else {
@@ -241,211 +235,171 @@ function update() {
     $.badgeTxt.textContent = '✗ NOT PROFITABLE';
   }
 
-  // Breakdown
-  $.bdLabor.textContent  = fmtD(r.totalLabor, 2);
-  $.bdMat.textContent    = fmtD(r.matTotal,   2);
-  $.bdOH.textContent     = fmtD(r.overhead,   2);
-  $.bdTravel.textContent = fmtD(r.travel,     2);
-  $.bdSE.textContent     = fmtD(r.seAmt,      2);
-  $.bdState.textContent  = fmtD(r.stateAmt,   2);
-  $.bdTotal.textContent  = fmtD(r.totalCost,  2);
+  $.bdLabor.textContent = fmtD(r.labor, 2);
+  $.bdDrive.textContent = fmtD(r.driveLabor, 2);
+  $.bdFuel.textContent = fmtD(r.fuel, 2);
+  $.bdMat.textContent = fmtD(r.materials, 2);
+  $.bdOH.textContent = fmtD(r.overhead, 2);
+  $.bdTotal.textContent = fmtD(r.totalCost, 2);
+  $.bdSet.textContent = fmtD(r.setAside, 2);
+  $.qLabor.textContent = fmtD(r.quote.labor, 2);
+  $.qMat.textContent = fmtD(r.quote.materials, 2);
+  $.qDrive.textContent = fmtD(r.quote.driveLabor, 2);
+  $.qFuel.textContent = fmtD(r.quote.fuel, 2);
+  $.qTotal.textContent = fmtD(r.price, 2);
 
-  // Sticky mini-bar
-  G('srPrice').textContent  = fmtD(r.suggested, 2);
-  G('srMargin').textContent = fmtP(r.realMargin, 1);
-  G('srProfit').textContent = fmtD(r.netProfit, 0);
+  G('srPrice').textContent = fmtD(r.price, 2);
+  G('srMargin').textContent = fmtP(r.marginPct);
+  G('srProfit').textContent = fmtD(r.profit, 2);
   updateStickyBar();
 }
 
-/* ============================================================
-   TRADE SELECT
-============================================================ */
-$.trade.addEventListener('change', function() {
+function applyTrade(d) {
+  $.hours.value = d.hours;
+  $.workers.value = d.workers;
+  $.labor.value = d.laborRate;
+  $.matCost.value = d.materialCost;
+  $.overhead.value = d.overhead;
+  $.drive.value = d.driveTime;
+  $.fuel.value = d.fuelCost;
+}
+
+$.trade.addEventListener('change', function () {
   const d = DEFAULTS[this.value];
   if (!d) return;
-  $.hours.value   = d.hours;
-  $.workers.value = d.workers;
-  $.labor.value   = d.laborRate;
-  $.matCost.value = d.materialCost;
-  $.matMark.value = d.materialMarkup;
-  $.overhead.value= d.overhead;
-  $.drive.value   = d.driveTime;
-  $.fuel.value    = d.fuelCost;
+  applyTrade(d);
   update();
 });
 
-/* ============================================================
-   RESET
-============================================================ */
-$.reset.addEventListener('click', function() {
+$.reset.addEventListener('click', function () {
   const d = DEFAULTS[$.trade.value];
-  if (d) {
-    $.hours.value   = d.hours;
-    $.workers.value = d.workers;
-    $.labor.value   = d.laborRate;
-    $.matCost.value = d.materialCost;
-    $.matMark.value = d.materialMarkup;
-    $.overhead.value= d.overhead;
-    $.drive.value   = d.driveTime;
-    $.fuel.value    = d.fuelCost;
-  } else {
-    $.hours.value   = 4;  $.workers.value = 1;  $.labor.value   = 75;
-    $.matCost.value = 200; $.matMark.value = 20; $.overhead.value= 15;
-    $.drive.value   = 0.5; $.fuel.value    = 10;
-  }
+  if (d) applyTrade(d);
+  else applyTrade(P.PAGE_DEFAULTS);
   $.profit.value = 20;
-  $.se.value     = 15.3;
-  $.state.value  = 5;
   update();
 });
 
-/* ============================================================
-   COPY QUOTE
-============================================================ */
-$.copy.addEventListener('click', function() {
-  const r    = calc();
-  const lbl  = $.jobLabel.value || 'Job';
-  const trd  = $.trade.options[$.trade.selectedIndex]?.text || 'Contractor';
-  const date = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+const CUST_BUILD_NOTE = 'Labor, materials, and drive each include that line\'s share of overhead and profit. Fuel includes its share of profit only.';
 
-  const lines = [
+function quoteText(r) {
+  const lbl = $.jobLabel.value || 'Job';
+  const trd = $.trade.options[$.trade.selectedIndex] ? $.trade.options[$.trade.selectedIndex].text : 'Contractor';
+  const date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  return [
     '═══════════════════════════════════',
-    `  JOB QUOTE — ${lbl.toUpperCase()}`,
-    `  Trade: ${trd}`,
-    `  Date:  ${date}`,
+    '  JOB QUOTE — ' + lbl.toUpperCase(),
+    '  Trade: ' + trd,
+    '  Date:  ' + date,
     '═══════════════════════════════════',
     '',
-    `  CHARGE TO CUSTOMER:   ${fmtD(r.suggested, 2)}`,
+    '  CHARGE TO CUSTOMER:   ' + fmtD(r.price, 2),
     '',
     '  ── COST BREAKDOWN ──────────────',
-    `  Labor Cost:           ${fmtD(r.totalLabor, 2)}`,
-    `  Materials (w/ markup):${fmtD(r.matTotal,   2)}`,
-    `  Overhead & Burden:    ${fmtD(r.overhead,   2)}`,
-    `  Travel Cost:          ${fmtD(r.travel,     2)}`,
-    `  SE Tax (on costs):    ${fmtD(r.seAmt,      2)}`,
-    `  State Tax (on costs): ${fmtD(r.stateAmt,   2)}`,
-    `  ──────────────────────────────`,
-    `  Total Cost:           ${fmtD(r.totalCost,  2)}`,
+    '  Labor:                ' + fmtD(r.labor, 2),
+    '  Drive labor:          ' + fmtD(r.driveLabor, 2),
+    '  Fuel:                 ' + fmtD(r.fuel, 2),
+    '  Materials (at cost):  ' + fmtD(r.materials, 2),
+    '  Overhead:             ' + fmtD(r.overhead, 2),
+    '  ──────────────────────────────',
+    '  Total Cost:           ' + fmtD(r.totalCost, 2),
     '',
-    `  NET PROFIT:           ${fmtD(r.netProfit,  2)}`,
-    `  PROFIT MARGIN:        ${fmtP(r.realMargin, 1)}`,
-    `  EFFECTIVE $/HR:       ${fmtD(r.effRate,    2)}/hr`,
+    '  PROFIT:               ' + fmtD(r.profit, 2),
+    '  PROFIT MARGIN:        ' + fmtP(r.marginPct),
+    '  PROFIT PER LABOR HR:  ' + (r.profitPerLaborHour == null ? '—' : fmtD(r.profitPerLaborHour, 2) + '/hr'),
+    '  SE TAX SET-ASIDE:     ' + fmtD(r.setAside, 2) + '  (estimate, not in price)',
     '',
     '  Generated by JobProfitCalc.com',
-    '═══════════════════════════════════',
+    '═══════════════════════════════════'
   ].join('\n');
+}
 
+function copyText(text, okMsg) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(lines).then(() => toast('✓ Quote copied to clipboard!'));
+    navigator.clipboard.writeText(text).then(function () { toast(okMsg); });
   } else {
     const ta = document.createElement('textarea');
-    ta.value = lines;
+    ta.value = text;
     ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
     document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy');
+    ta.select();
+    document.execCommand('copy');
     document.body.removeChild(ta);
-    toast('✓ Quote copied to clipboard!');
+    toast(okMsg);
   }
+}
+
+$.copy.addEventListener('click', function () {
+  const state = currentResult();
+  if (!state.ok) { toast('Fix the highlighted fields first.'); return; }
+  copyText(quoteText(state.result), '✓ Quote copied to clipboard!');
 });
 
-/* ============================================================
-   SAVE AS PDF
-============================================================ */
-$.pdf.addEventListener('click', function() {
+$.pdf.addEventListener('click', function () {
   const lbl = $.jobLabel.value.trim();
-  const trd = $.trade.options[$.trade.selectedIndex]?.text.replace(/^\W+/, '').trim() || 'Contractor';
-  const now  = new Date();
-  const mon  = now.toLocaleDateString('en-US', { month: 'short' });
-  const day  = now.getDate();
-  const yr   = now.getFullYear();
-  const dateShort = mon + ' ' + day + ' ' + yr;
-  const dateLong  = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-
-  // Populate print-only header
+  const trd = ($.trade.options[$.trade.selectedIndex] ? $.trade.options[$.trade.selectedIndex].text : 'Contractor').replace(/^\W+/, '').trim() || 'Contractor';
+  const now = new Date();
+  const dateShort = now.toLocaleDateString('en-US', { month: 'short' }) + ' ' + now.getDate() + ' ' + now.getFullYear();
+  const dateLong = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   document.getElementById('printHeaderTitle').textContent = lbl || trd;
   document.getElementById('printHeaderMeta').textContent =
     (lbl ? trd + ' · ' + lbl + ' · ' : trd + ' · ') + dateLong + ' · Generated by JobProfitCalc.com';
-
-  // Set suggested filename (becomes default in Save As PDF dialog)
   const origTitle = document.title;
-  const safeName  = (lbl || trd).replace(/[<>:"/\\|?*]+/g, '').trim();
-  document.title  = safeName + ' · ' + dateShort + ' · JobProfitCalc';
-
+  const safeName = (lbl || trd).replace(/[<>:"/\\|?*]+/g, '').trim();
+  document.title = safeName + ' · ' + dateShort + ' · JobProfitCalc';
   window.print();
-
-  // Restore title after print dialog closes (afterprint fires on most browsers;
-  // setTimeout is the fallback for browsers that don't support it)
-  const restore = function() { document.title = origTitle; };
+  const restore = function () { document.title = origTitle; };
   window.addEventListener('afterprint', restore, { once: true });
   setTimeout(restore, 2000);
 });
 
-/* ============================================================
-   QUOTE SETTINGS — localStorage persistence + toggle
-============================================================ */
-// Persist text fields
-['bizName','bizPhone','bizEmail','paymentTerms','quoteValid','salesTaxRate'].forEach(function(id) {
+['bizName', 'bizPhone', 'bizEmail', 'paymentTerms', 'quoteValid', 'salesTaxRate'].forEach(function (id) {
   const el = G(id);
+  if (!el) return;
   const key = 'jpc_qs_' + id;
   const stored = localStorage.getItem(key);
   if (stored !== null) el.value = stored;
-  el.addEventListener('input', function() { localStorage.setItem(key, el.value); });
+  el.addEventListener('input', function () { localStorage.setItem(key, el.value); });
 });
-// Persist checkboxes
-['includeBizInfo','includeTerms','includeValid','includeSalesTax'].forEach(function(id) {
+['includeBizInfo', 'includeTerms', 'includeValid', 'includeSalesTax'].forEach(function (id) {
   const el = G(id);
+  if (!el) return;
   const key = 'jpc_qs_' + id;
   const stored = localStorage.getItem(key);
   if (stored !== null) el.checked = (stored === 'true');
-  el.addEventListener('change', function() { localStorage.setItem(key, el.checked); });
+  el.addEventListener('change', function () { localStorage.setItem(key, el.checked); });
 });
 
-/* ============================================================
-   CUSTOMER QUOTE LINE ITEMS
-   Labor is a loaded remainder (suggested − materials − travel).
-   Materials already include markup. Disclose both on the quote.
-============================================================ */
-const CUST_BUILD_NOTE = 'Labor is loaded: it includes overhead, taxes, and target profit. Materials include markup.';
-
-function customerQuoteParts(r) {
-  const travel      = r.travel > 0 ? r.travel : 0;
-  const laborCharge = r.suggested - r.matTotal - travel;
-  const staxPct     = $.inclStax.checked ? (parseFloat($.staxRate.value) || 0) : 0;
-  const staxAmt     = r.matTotal * (staxPct / 100);
-  const grandTotal  = r.suggested + staxAmt;
-  return { travel, laborCharge, staxPct, staxAmt, grandTotal };
+function customerLines(r) {
+  function col(label, val) {
+    const spaces = Math.max(1, 26 - label.length);
+    return '  ' + label + ' '.repeat(spaces) + val;
+  }
+  return { col: col };
 }
 
-/* ============================================================
-   CUSTOMER PDF
-============================================================ */
-$.custPdf.addEventListener('click', function() {
-  const r   = calc();
+$.custPdf.addEventListener('click', function () {
+  const state = currentResult();
+  if (!state.ok) { toast('Fix the highlighted fields first.'); return; }
+  const r = state.result;
   const lbl = $.jobLabel.value.trim() || 'Job';
-  const trd = $.trade.options[$.trade.selectedIndex]?.text.replace(/^\W+/, '').trim() || 'Contractor';
+  const trd = ($.trade.options[$.trade.selectedIndex] ? $.trade.options[$.trade.selectedIndex].text : 'Contractor').replace(/^\W+/, '').trim() || 'Contractor';
   const now = new Date();
-  const mon = now.toLocaleDateString('en-US', { month: 'short' });
-  const dateShort = mon + ' ' + now.getDate() + ' ' + now.getFullYear();
-  const dateLong  = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const dateShort = now.toLocaleDateString('en-US', { month: 'short' }) + ' ' + now.getDate() + ' ' + now.getFullYear();
+  const dateLong = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-  const { travel, laborCharge, staxPct, staxAmt, grandTotal } = customerQuoteParts(r);
-
-  // Populate print header
   G('custPrintTitle').textContent = lbl || trd;
-  G('custPrintMeta').textContent  = (lbl ? trd + ' · ' + lbl + ' · ' : trd + ' · ') + dateLong + ' · Generated by JobProfitCalc.com';
+  G('custPrintMeta').textContent = (lbl ? trd + ' · ' + lbl + ' · ' : trd + ' · ') + dateLong + ' · Generated by JobProfitCalc.com';
 
-  // Business info block
   const bizBlock = G('custBizBlock');
   if ($.inclBiz.checked && ($.bizName.value || $.bizPhone.value || $.bizEmail.value)) {
-    G('custBizName').textContent    = $.bizName.value.trim();
+    G('custBizName').textContent = $.bizName.value.trim();
     G('custBizContact').textContent = [$.bizPhone.value.trim(), $.bizEmail.value.trim()].filter(Boolean).join('  ·  ');
     bizBlock.style.display = '';
   } else {
     bizBlock.style.display = 'none';
   }
 
-  // Big price + valid-until note
-  G('custTotalDisplay').textContent = fmtD(grandTotal, 2);
+  G('custTotalDisplay').textContent = fmtD(r.customerTotal, 2);
   if ($.inclValid.checked && $.qvDays.value) {
     const exp = new Date(now);
     exp.setDate(exp.getDate() + parseInt($.qvDays.value, 10));
@@ -454,33 +408,37 @@ $.custPdf.addEventListener('click', function() {
     G('custValidNote').textContent = dateLong;
   }
 
-  // Line items (bk-row elements built dynamically)
-  function mkRow(label, val) {
-    return '<div class="bk-row"><span class="bk-rowlbl">' + label + '</span><span class="bk-rowval">' + fmtD(val, 2) + '</span></div>';
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
-  let itemsHtml = mkRow('Labor (loaded)', laborCharge);
-  itemsHtml += mkRow('Materials (incl. markup)', r.matTotal);
-  if (staxAmt > 0) itemsHtml += mkRow('Sales Tax (' + staxPct + '%)', staxAmt);
-  if (travel  > 0) itemsHtml += mkRow('Travel', travel);
+  function mkRow(label, val) {
+    return '<div class="bk-row"><span class="bk-rowlbl">' + escapeHtml(label) + '</span><span class="bk-rowval">' + escapeHtml(fmtD(val, 2)) + '</span></div>';
+  }
+  let itemsHtml = mkRow('Labor', r.quote.labor);
+  itemsHtml += mkRow('Materials', r.quote.materials);
+  itemsHtml += mkRow('Drive labor', r.quote.driveLabor);
+  itemsHtml += mkRow('Fuel', r.quote.fuel);
+  if (r.salesTax > 0) itemsHtml += mkRow('Sales tax (' + state.values.salesTaxRate + '%)', r.salesTax);
   itemsHtml += '<p class="cust-quote-note">' + CUST_BUILD_NOTE + '</p>';
   G('custLineItems').innerHTML = itemsHtml;
 
-  // Footer: total row + optional payment terms
-  let footerHtml = '<div class="bk-total"><span class="bk-totallbl">Total Due</span><span class="bk-totalval">' + fmtD(grandTotal, 2) + '</span></div>';
+  let footerHtml = '<div class="bk-total"><span class="bk-totallbl">Total Due</span><span class="bk-totalval">' + fmtD(r.customerTotal, 2) + '</span></div>';
   if ($.inclTerms.checked && $.payTerms.value.trim()) {
-    footerHtml += '<div class="bk-row" style="border-top:1px solid var(--border);padding:12px 20px"><span class="bk-rowlbl">Payment Terms</span><span class="bk-rowval" style="font-size:13px;text-align:right">' + $.payTerms.value.trim() + '</span></div>';
+    footerHtml += '<div class="bk-row" style="border-top:1px solid var(--border);padding:12px 20px"><span class="bk-rowlbl">Payment Terms</span><span class="bk-rowval" style="font-size:13px;text-align:right">' + escapeHtml($.payTerms.value.trim()) + '</span></div>';
   }
   G('custFooterRows').innerHTML = footerHtml;
 
-  // Set filename for Save dialog
   const origTitle = document.title;
-  const safeName  = (lbl || trd).replace(/[<>:"/\\|?*]+/g, '').trim();
-  document.title  = safeName + ' · Customer Quote · ' + dateShort + ' · JobProfitCalc';
-
-  // Switch to customer print mode, print, then restore
+  const safeName = (lbl || trd).replace(/[<>:"/\\|?*]+/g, '').trim();
+  document.title = safeName + ' · Customer Quote · ' + dateShort + ' · JobProfitCalc';
   document.body.classList.add('print-customer');
   window.print();
-  const restore = function() {
+  const restore = function () {
     document.body.classList.remove('print-customer');
     document.title = origTitle;
   };
@@ -488,55 +446,43 @@ $.custPdf.addEventListener('click', function() {
   setTimeout(restore, 2000);
 });
 
-/* ============================================================
-   CUSTOMER QUOTE
-============================================================ */
-$.cust.addEventListener('click', function() {
-  const r   = calc();
+$.cust.addEventListener('click', function () {
+  const state = currentResult();
+  if (!state.ok) { toast('Fix the highlighted fields first.'); return; }
+  const r = state.result;
   const lbl = $.jobLabel.value.trim() || 'Job';
-  const trd = $.trade.options[$.trade.selectedIndex]?.text || 'Contractor';
+  const trd = $.trade.options[$.trade.selectedIndex] ? $.trade.options[$.trade.selectedIndex].text : 'Contractor';
   const now = new Date();
-  const date = now.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+  const date = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const col = customerLines(r).col;
 
-  const { travel, laborCharge, staxPct, staxAmt, grandTotal } = customerQuoteParts(r);
-
-  // Column alignment helper
-  function col(label, val) {
-    const spaces = Math.max(1, 26 - label.length);
-    return '  ' + label + ' '.repeat(spaces) + val;
-  }
-
-  // Valid-until date
   let validLine = '';
   if ($.inclValid.checked && $.qvDays.value) {
     const exp = new Date(now);
     exp.setDate(exp.getDate() + parseInt($.qvDays.value, 10));
-    const expStr = exp.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
-    validLine = '  Valid Until:         ' + expStr;
+    validLine = '  Valid Until:         ' + exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   }
 
   const lines = ['═══════════════════════════════════'];
-
-  // Business header block
   if ($.inclBiz.checked && ($.bizName.value || $.bizPhone.value || $.bizEmail.value)) {
     if ($.bizName.value) lines.push('  ' + $.bizName.value.trim());
     const contact = [$.bizPhone.value.trim(), $.bizEmail.value.trim()].filter(Boolean).join('  |  ');
     if (contact) lines.push('  ' + contact);
     lines.push('  ─────────────────────────────────');
   }
-
   lines.push('  QUOTE — ' + lbl.toUpperCase());
   lines.push('  Trade:  ' + trd);
   lines.push('  Date:   ' + date);
   if (validLine) lines.push(validLine);
   lines.push('═══════════════════════════════════');
   lines.push('');
-  lines.push(col('Labor (loaded):',          fmtD(laborCharge, 2)));
-  lines.push(col('Materials (incl. markup):', fmtD(r.matTotal,  2)));
-  if (staxAmt > 0) lines.push(col('Sales Tax (' + staxPct + '%):',  fmtD(staxAmt, 2)));
-  if (travel > 0)  lines.push(col('Travel:',     fmtD(travel,       2)));
+  lines.push(col('Labor:', fmtD(r.quote.labor, 2)));
+  lines.push(col('Materials:', fmtD(r.quote.materials, 2)));
+  lines.push(col('Drive labor:', fmtD(r.quote.driveLabor, 2)));
+  lines.push(col('Fuel:', fmtD(r.quote.fuel, 2)));
+  if (r.salesTax > 0) lines.push(col('Sales tax (' + state.values.salesTaxRate + '%):', fmtD(r.salesTax, 2)));
   lines.push('  ─────────────────────────────────');
-  lines.push(col('TOTAL DUE:', fmtD(grandTotal,  2)));
+  lines.push(col('TOTAL DUE:', fmtD(r.customerTotal, 2)));
   lines.push('');
   lines.push('  ' + CUST_BUILD_NOTE);
   lines.push('');
@@ -547,46 +493,26 @@ $.cust.addEventListener('click', function() {
   }
   lines.push('  Generated by JobProfitCalc.com');
   lines.push('═══════════════════════════════════');
-
-  const text = lines.join('\n');
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function() { toast('✓ Customer quote copied!'); });
-  } else {
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
-    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
-    document.body.removeChild(ta);
-    toast('✓ Customer quote copied!');
-  }
+  copyText(lines.join('\n'), '✓ Customer quote copied!');
 });
 
-/* ============================================================
-   TOAST
-============================================================ */
 let toastTimer;
 function toast(msg) {
   clearTimeout(toastTimer);
   $.toast.textContent = msg;
   $.toast.classList.add('show');
-  toastTimer = setTimeout(() => $.toast.classList.remove('show'), 3200);
+  toastTimer = setTimeout(function () { $.toast.classList.remove('show'); }, 3200);
 }
 
-/* ============================================================
-   BREAKDOWN ACCORDION
-============================================================ */
-$.bkToggle.addEventListener('click', function() {
+$.bkToggle.addEventListener('click', function () {
   const open = $.bkBody.classList.toggle('open');
   this.classList.toggle('open', open);
   this.setAttribute('aria-expanded', open);
   $.bkLabel.textContent = open ? 'Hide Cost Breakdown' : 'View Full Cost Breakdown';
 });
 
-/* ============================================================
-   TOOLTIP TAP / KEYBOARD TOGGLE
-============================================================ */
 function closeTips(except) {
-  document.querySelectorAll('.tip').forEach(function(o) {
+  document.querySelectorAll('.tip').forEach(function (o) {
     if (except && o === except) return;
     o.classList.remove('active');
     o.setAttribute('aria-expanded', 'false');
@@ -597,26 +523,24 @@ function setTipOpen(tip, open) {
   tip.classList.toggle('active', open);
   tip.setAttribute('aria-expanded', String(open));
 }
-document.querySelectorAll('.tip').forEach(function(t) {
+document.querySelectorAll('.tip').forEach(function (t) {
   if (!t.hasAttribute('aria-expanded')) t.setAttribute('aria-expanded', 'false');
-  // Pointer-down + click toggle; keyboard focus opens via focusin so
-  // aria-expanded matches visibility (no CSS-only :focus-visible open).
-  t.addEventListener('pointerdown', function() { t._tipPointer = true; });
-  t.addEventListener('focusin', function() {
+  t.addEventListener('pointerdown', function () { t._tipPointer = true; });
+  t.addEventListener('focusin', function () {
     if (t._tipPointer) return;
     setTipOpen(t, true);
   });
-  t.addEventListener('focusout', function() {
+  t.addEventListener('focusout', function () {
     t._tipPointer = false;
     setTipOpen(t, false);
   });
-  t.addEventListener('click', function(e) {
+  t.addEventListener('click', function (e) {
     e.preventDefault();
     e.stopPropagation();
     t._tipPointer = false;
     setTipOpen(t, !t.classList.contains('active'));
   });
-  t.addEventListener('keydown', function(e) {
+  t.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' || e.key === 'Esc') {
       e.preventDefault();
       setTipOpen(t, false);
@@ -624,22 +548,19 @@ document.querySelectorAll('.tip').forEach(function(t) {
     }
   });
 });
-document.addEventListener('click', function() { closeTips(); });
-document.addEventListener('keydown', function(e) {
+document.addEventListener('click', function () { closeTips(); });
+document.addEventListener('keydown', function (e) {
   if (e.key !== 'Escape' && e.key !== 'Esc') return;
   closeTips();
   const focused = document.activeElement;
   if (focused && focused.classList && focused.classList.contains('tip')) focused.blur();
 });
 
-/* ============================================================
-   TRADE TIPS ACCORDION
-============================================================ */
-document.querySelectorAll('.tip-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
+document.querySelectorAll('.tip-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
     const item = this.closest('.tip-item');
     const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.tip-item').forEach(el => {
+    document.querySelectorAll('.tip-item').forEach(function (el) {
       el.classList.remove('open');
       el.querySelector('.tip-btn').setAttribute('aria-expanded', 'false');
     });
@@ -650,14 +571,11 @@ document.querySelectorAll('.tip-btn').forEach(btn => {
   });
 });
 
-/* ============================================================
-   FAQ ACCORDION
-============================================================ */
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', function() {
+document.querySelectorAll('.faq-q').forEach(function (btn) {
+  btn.addEventListener('click', function () {
     const item = this.closest('.faq-item');
     const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(el => {
+    document.querySelectorAll('.faq-item').forEach(function (el) {
       el.classList.remove('open');
       el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
     });
@@ -668,25 +586,18 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
-/* ============================================================
-   QUOTE SETTINGS ACCORDION
-============================================================ */
-G('qsToggle').addEventListener('click', function() {
+G('qsToggle').addEventListener('click', function () {
   const open = G('qsPanel').classList.toggle('open');
   this.classList.toggle('open', open);
   this.setAttribute('aria-expanded', open);
   updateStickyBar();
 });
 
-/* ============================================================
-   STICKY RESULTS MINI-BAR
-   Visible while the calculator is on screen but the full
-   results panel hasn't scrolled into view yet.
-============================================================ */
-const stickyBar    = G('stickyResults');
+const stickyBar = G('stickyResults');
 const resultsPanel = G('resultsPanel');
-const calcCardEl   = document.querySelector('.calc-card');
+const calcCardEl = document.querySelector('.calc-card');
 function updateStickyBar() {
+  if (!stickyBar || !resultsPanel || !calcCardEl) return;
   const rRect = resultsPanel.getBoundingClientRect();
   const cRect = calcCardEl.getBoundingClientRect();
   const resultsBelowFold = rRect.top > window.innerHeight - 40;
@@ -698,28 +609,19 @@ function updateStickyBar() {
 }
 window.addEventListener('scroll', updateStickyBar, { passive: true });
 window.addEventListener('resize', updateStickyBar, { passive: true });
-G('stickyResultsBtn').addEventListener('click', function() {
+G('stickyResultsBtn').addEventListener('click', function () {
   resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 updateStickyBar();
 
-/* ============================================================
-   LIVE INPUT LISTENERS
-============================================================ */
-[$.hours, $.workers, $.labor, $.matCost, $.matMark,
- $.overhead, $.drive, $.fuel, $.profit, $.se, $.state
-].forEach(el => {
-  el.addEventListener('input', function() { snapBounds(el); update(); });
-  el.addEventListener('change', function() { snapBounds(el); update(); });
-  el.addEventListener('blur', function() { snapBounds(el, true); update(); });
+[$.hours, $.workers, $.labor, $.matCost, $.overhead, $.drive, $.fuel, $.profit].forEach(function (el) {
+  el.addEventListener('input', update);
+  el.addEventListener('change', update);
 });
-[$.staxRate, $.inclStax].forEach(el => {
+[$.staxRate, $.inclStax].forEach(function (el) {
   if (!el) return;
   el.addEventListener('input', update);
   el.addEventListener('change', update);
 });
 
-/* ============================================================
-   INITIAL RENDER
-============================================================ */
 update();

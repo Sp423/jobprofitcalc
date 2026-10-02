@@ -19,7 +19,8 @@ For each example the script prints the computed lines and checks that every
 figure listed under "expect" appears in the post's HTML. Exit code 1 if any
 figure is missing.
 
-Usage: python3 scripts/verify_post_examples.py
+Usage: python3 scripts/verify_post_examples.py [--summary]
+  --summary  print one count per example instead of every figure
 """
 
 import math
@@ -659,6 +660,7 @@ STALE = {
 
 
 def main():
+    summary = "--summary" in sys.argv[1:]
     missing = 0
     current_post = None
     ordered = []
@@ -688,11 +690,17 @@ def main():
             print("    total cost {}  price {}  profit {}  margin {:.1f}%  set-aside {}".format(
                 usd(r["total_cost"]), usd(r["price"]), usd(r["profit"]), r["margin_pct"],
                 usd(r["set_aside"])))
+        found = 0
         for label, text in figures.items():
             ok = text in html
-            if not ok:
+            if ok:
+                found += 1
+            else:
                 missing += 1
-            print("    [{}] {:<38} {}".format("ok" if ok else "MISSING", label, text))
+            if not summary or not ok:
+                print("    [{}] {:<38} {}".format("ok" if ok else "MISSING", label, text))
+        if summary:
+            print("    {}/{} figures found in post".format(found, len(figures)))
     print()
     print("=" * 72)
     print("Stale strings from the old engine")

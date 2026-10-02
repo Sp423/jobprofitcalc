@@ -410,6 +410,75 @@ def cb_derived():
 DERIVED[CALLBACK] = cb_derived
 
 
+# ---- should-contractors-waive-diagnostic-fee.html -------------------------
+DIAG = "should-contractors-waive-diagnostic-fee.html"
+DIAG_IN = dict(hours=1, workers=1, rate=75, materials=0, overhead=22, drive=0.5, fuel=0, margin=35)
+REPAIR_IN = dict(hours=2.5, workers=1, rate=75, materials=320, overhead=22, drive=0, fuel=0, margin=35)
+SMALL_IN = dict(hours=0.5, workers=1, rate=75, materials=40, overhead=22, drive=0, fuel=0, margin=35)
+DIAG_FEE = 16500
+
+
+def pct(num, den):
+    return "{:.1f}%".format(num / den * 100)
+
+
+@example(DIAG, "Pass 1, diagnostic visit (15 min each way)", **DIAG_IN)
+def _(r):
+    return {"labor": usd(r["labor"]), "drive labor": usd(r["drive_labor"]),
+            "overhead": usd(r["overhead"]), "total cost": usd(r["total_cost"]),
+            "profit at $165 flat fee": usd(DIAG_FEE - r["total_cost"]),
+            "margin at $165 flat fee": pct(DIAG_FEE - r["total_cost"], DIAG_FEE)}
+
+
+@example(DIAG, "Pass 2, repair, no drive", **REPAIR_IN)
+def _(r):
+    return std_lines(r)
+
+
+@example(DIAG, "Small same-visit repair", **SMALL_IN)
+def _(r):
+    return {"labor": usd(r["labor"]), "overhead": usd(r["overhead"]), "total cost": usd(r["total_cost"])}
+
+
+def diag_derived():
+    d = price_job(**DIAG_IN)["total_cost"]
+    rep = price_job(**REPAIR_IN)
+    small = price_job(**SMALL_IN)["total_cost"]
+    cost = d + rep["total_cost"]
+    p = rep["price"]
+    out = {"combined cost": usd(cost)}
+    a_rev = DIAG_FEE + p
+    out["A revenue"] = usd(a_rev)
+    out["A profit"] = usd(a_rev - cost)
+    out["A margin"] = pct(a_rev - cost, a_rev)
+    out["B repair charged"] = usd(p - DIAG_FEE)
+    out["B profit"] = usd(p - cost)
+    out["B margin"] = pct(p - cost, p)
+    c_rev = a_rev - 8200
+    out["C repair charged"] = usd(p - 8200)
+    out["C revenue"] = usd(c_rev)
+    out["C profit"] = usd(c_rev - cost)
+    out["C margin"] = pct(c_rev - cost, c_rev)
+    need = js_round(cost / 0.65)
+    out["D revenue needed"] = usd(need)
+    out["D repair invoice before credit"] = usd(need)
+    out["D customer pays on repair"] = usd(need - DIAG_FEE)
+    out["D profit"] = usd(need - cost)
+    out["D margin"] = pct(need - cost, need)
+    p75 = a_rev - 7500
+    out["$75 partial revenue"] = usd(p75)
+    out["$75 partial margin"] = pct(p75 - cost, p75)
+    big_cost = d + js_round(240000 * 0.65)
+    out["$2,400 repair, keep fee, margin"] = "{:.0f}%".format((240000 + DIAG_FEE - big_cost) / (240000 + DIAG_FEE) * 100)
+    out["$2,400 repair, credit, margin"] = "{:.0f}%".format((240000 - big_cost) / 240000 * 100)
+    out["small combined cost"] = usd(d + small)
+    out["small credit loss"] = usd(d + small - 20000)
+    return out
+
+
+DERIVED[DIAG] = diag_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -439,6 +508,8 @@ STALE = {
     HVAC: ["$5,548.50", "$2,800 marked-up", "Tax % fields", "$1,530"],
     AFTER: ["~$263", "~$183"],
     CALLBACK: ["$3,200", "19.3%", "19.5%", "$469", "14.7%", "18.6%", "Gross margin", "of revenue)"],
+    DIAG: ["$845", "$678", "$129", "$1,010", "$1,043", "$878", "$713", "21.8%", "32.9%",
+           "19.8%", "$96.00", "$227", "30 min each way"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

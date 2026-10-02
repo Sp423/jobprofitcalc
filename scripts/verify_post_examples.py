@@ -654,6 +654,9 @@ STALE_EVERYWHERE = [
     # PR #47 head 86eb071 has no Material Markup field or breakdown row.
     "Material Markup", "Material markup", "0% markup", "markup (not added)", "reported in dollars",
     "reported only", "markup box", "Rate: $26", "$26 an hour",
+    # Unsourced figures replaced with sourced ones (Pulse sourcing check, Oct 2026).
+    "1,000–1,600", "1,200–1,400 hours", "$80–$130/hr", "between $75 and $150 per hour",
+    "$15–$20 extra per additional assembly", "$50,000+", "earning enough to make it worthwhile",
 ]
 # Old example figures that must be gone after the rerun.
 STALE = {

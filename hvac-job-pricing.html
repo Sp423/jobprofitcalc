@@ -108,7 +108,7 @@
        crossorigin="anonymous"></script>
 
   <!-- Cache-bust: bump ?v= after JS/CSS deploys so Cloudflare/browsers don't serve stale assets. -->
-  <link rel="stylesheet" href="/css/site.css?v=40a9750">
+  <link rel="stylesheet" href="/css/site.css?v=20261002b">
 </head>
 
 <body>
@@ -218,25 +218,32 @@
                 <div class="igroup">
                   <label class="ilabel" for="hours">Estimated Hours</label>
                   <div class="ifield has-suf">
-                    <input type="number" id="hours" min="0" step="0.5" value="4" aria-label="Estimated hours to complete the job">
+                    <input type="number" id="hours" min="0" max="1000" step="0.5" value="4" inputmode="decimal" aria-label="Estimated hours to complete the job">
                     <span class="isuf" aria-hidden="true">hrs</span>
                   </div>
+                  <p class="field-msg" id="msg-hours" role="status"></p>
                 </div>
                 <div class="igroup">
                   <label class="ilabel" for="workers">Number of Workers</label>
                   <div class="ifield">
-                    <input type="number" id="workers" min="1" step="1" value="1" aria-label="Number of workers on this job">
+                    <input type="number" id="workers" min="1" max="100" step="1" value="1" inputmode="numeric" aria-label="Number of workers on this job">
                   </div>
+                  <p class="field-msg" id="msg-workers" role="status"></p>
                 </div>
                 <div class="igroup ig-full">
-                  <label class="ilabel" for="laborRate">Hourly Labor Rate</label>
+                  <label class="ilabel" for="laborRate">
+                    Hourly Labor Rate
+                    <button type="button" class="tip" data-tip="Your COST per hour (wage + payroll taxes, workers' comp, benefits), not what you charge." aria-label="Hourly labor rate is your cost, not your charge" aria-expanded="false">?</button>
+                  </label>
                   <div class="ifield has-pre has-suf">
                     <span class="ipre" aria-hidden="true">$</span>
-                    <input type="number" id="laborRate" min="0" step="1" value="75" aria-label="Hourly labor rate in dollars per hour">
+                    <input type="number" id="laborRate" min="0" max="1000" step="1" value="75" inputmode="decimal" aria-label="Hourly labor cost in dollars per hour">
                     <span class="isuf" aria-hidden="true">/hr</span>
                   </div>
+                  <p class="field-msg" id="msg-laborRate" role="status"></p>
                 </div>
               </div>
+              <p class="field-hint">The $75 starting rate is a placeholder, not a billing rate. Pick a trade for an example loaded cost (BLS median wage times a construction benefit burden), then replace it with your own.</p>
 
               <!-- Materials -->
               <p class="field-section">Materials</p>
@@ -245,15 +252,20 @@
                   <label class="ilabel" for="materialCost">Material Cost</label>
                   <div class="ifield has-pre">
                     <span class="ipre" aria-hidden="true">$</span>
-                    <input type="number" id="materialCost" min="0" step="10" value="200" aria-label="Total material cost in dollars">
+                    <input type="number" id="materialCost" min="0" max="5000000" step="0.01" value="200" inputmode="decimal" aria-label="Material cost in dollars, before markup">
                   </div>
+                  <p class="field-msg" id="msg-materialCost" role="status"></p>
                 </div>
                 <div class="igroup">
-                  <label class="ilabel" for="materialMarkup">Material Markup</label>
+                  <label class="ilabel" for="materialMarkup">
+                    Material Markup
+                    <button type="button" class="tip tip-lg" data-tip="Shown as dollars only. Not added to the cost and not added on top of the price. Overhead and margin use materials at cost. Adding this markup on top of the margin would charge profit twice." aria-label="Material markup is not added to the price" aria-expanded="false">?</button>
+                  </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="materialMarkup" min="0" max="200" step="1" value="20" aria-label="Material markup percentage">
+                    <input type="number" id="materialMarkup" min="0" max="200" step="1" value="20" inputmode="decimal" aria-label="Material markup percentage, not added to the price">
                     <span class="isuf" aria-hidden="true">%</span>
                   </div>
+                  <p class="field-msg" id="msg-materialMarkup" role="status"></p>
                 </div>
               </div>
 
@@ -262,69 +274,52 @@
               <div class="igrid" style="margin-bottom:26px">
                 <div class="igroup">
                   <label class="ilabel" for="overhead">
-                    Overhead &amp; Burden
-                    <button type="button" class="tip" data-tip="Covers insurance, tools, truck depreciation, software, marketing, and admin time. Applied as a % of total labor + materials." aria-label="What is overhead and burden" aria-expanded="false">?</button>
+                    Overhead %
+                    <button type="button" class="tip tip-lg" data-tip="Overhead ÷ direct job costs (labor + materials). Exclude payroll taxes/workers' comp if already in your labor rate." aria-label="How to set overhead percent" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="overhead" min="0" max="100" step="1" value="15" aria-label="Overhead and burden percentage">
+                    <input type="number" id="overhead" min="0" max="100" step="1" value="15" inputmode="decimal" aria-label="Overhead percent of direct job costs">
                     <span class="isuf" aria-hidden="true">%</span>
                   </div>
+                  <p class="field-msg" id="msg-overhead" role="status"></p>
                 </div>
                 <div class="igroup">
                   <label class="ilabel" for="driveTime">
                     Drive Time
-                    <button type="button" class="tip" data-tip="Billed once at the hourly labor rate, plus the fuel/travel amount. Not multiplied by Number of Workers — a 2-person crew does not double drive time." aria-label="How drive time is billed" aria-expanded="false">?</button>
+                    <button type="button" class="tip tip-lg" data-tip="Drive time × number of workers × your hourly labor cost. A 2-person crew doubles drive labor. Overhead applies to that drive labor. Fuel is its own line and is not in the overhead base." aria-label="How drive time is costed" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="driveTime" min="0" step="0.25" value="0.5" aria-label="Drive time in hours">
+                    <input type="number" id="driveTime" min="0" max="100" step="0.25" value="0.5" inputmode="decimal" aria-label="Drive time in hours">
                     <span class="isuf" aria-hidden="true">hrs</span>
                   </div>
+                  <p class="field-msg" id="msg-driveTime" role="status"></p>
                 </div>
                 <div class="igroup ig-full">
                   <label class="ilabel" for="fuelCost">Fuel / Travel Cost</label>
                   <div class="ifield has-pre">
                     <span class="ipre" aria-hidden="true">$</span>
-                    <input type="number" id="fuelCost" min="0" step="1" value="10" aria-label="Fuel and travel cost in dollars">
+                    <input type="number" id="fuelCost" min="0" max="50000" step="0.01" value="10" inputmode="decimal" aria-label="Fuel and travel cost in dollars">
                   </div>
+                  <p class="field-msg" id="msg-fuelCost" role="status"></p>
                 </div>
               </div>
 
-              <!-- Profit & Taxes -->
-              <p class="field-section">Profit &amp; Taxes</p>
+              <!-- Profit -->
+              <p class="field-section">Profit</p>
               <div class="igrid cols-3" style="margin-bottom:8px">
                 <div class="igroup">
                   <label class="ilabel" for="profitMargin">
                     Desired Profit Margin
-                    <button type="button" class="tip tip-lg" data-tip="Markup vs margin&#10;&#10;Markup is added on top of your costs. Margin is what you keep as a percent of what you charge. They're not the same number.&#10;&#10;A 25% markup → 20% margin&#10;A 33% markup → 25% margin&#10;&#10;This field uses margin (1–89%). A 100% margin would make the suggested price infinite, so the field and the math both cap at 89%." aria-label="Markup vs margin explained" aria-expanded="false">?</button>
+                    <button type="button" class="tip tip-lg" data-tip="Markup vs margin&#10;&#10;Markup is added on top of cost. Margin is profit as a percent of the price.&#10;&#10;A 25% markup → 20% margin&#10;A 33% markup → 25% margin&#10;&#10;Price = total cost ÷ (1 − margin). Margin must be under 95%. Above 60% shows a warning." aria-label="Markup vs margin explained" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="profitMargin" min="1" max="89" step="1" value="20" aria-label="Desired profit margin percentage, capped at 89">
+                    <input type="number" id="profitMargin" min="0" max="94.99" step="0.1" value="20" inputmode="decimal" aria-label="Desired profit margin percentage, must be under 95">
                     <span class="isuf" aria-hidden="true">%</span>
                   </div>
-                </div>
-                <div class="igroup">
-                  <label class="ilabel" for="seTax">
-                    SE Tax (on costs)
-                    <button type="button" class="tip" data-tip="Applied to your cost subtotal (labor + marked-up materials + overhead + travel), not to profit or the final charge. Default 15.3% is Social Security (12.4%) + Medicare (2.9%). This is a pricing allowance so the quote covers that burden — not a tax-return calculation." aria-label="About self-employment tax basis" aria-expanded="false">?</button>
-                  </label>
-                  <div class="ifield has-suf">
-                    <input type="number" id="seTax" min="0" max="50" step="0.1" value="15.3" aria-label="Self-employment tax rate percentage applied to cost subtotal">
-                    <span class="isuf" aria-hidden="true">%</span>
-                  </div>
-                </div>
-                <div class="igroup">
-                  <label class="ilabel" for="stateTax">
-                    State Tax (on costs)
-                    <button type="button" class="tip" data-tip="Applied to the same cost subtotal as SE tax (labor + marked-up materials + overhead + travel), not to earnings or the final charge. TX, FL, WA = 0%. CA is often 9.3%+. Enter your effective rate as a pricing allowance." aria-label="About state tax basis" aria-expanded="false">?</button>
-                  </label>
-                  <div class="ifield has-suf">
-                    <input type="number" id="stateTax" min="0" max="20" step="0.1" value="5" aria-label="State tax rate percentage applied to cost subtotal">
-                    <span class="isuf" aria-hidden="true">%</span>
-                  </div>
+                  <p class="field-msg" id="msg-profitMargin" role="status"></p>
                 </div>
               </div>
-              <p class="field-hint">Desired profit margin is capped at 89% to match the math — 100% would make the suggested price infinite.</p>
-              <p class="field-hint">SE and state tax % apply to your cost subtotal (labor + marked-up materials + overhead + travel), not to earnings or the suggested charge.</p>
+              <p class="field-hint">Margin must be under 95%. Above 60% shows a warning. Owner self-employment tax is estimated on profit in the breakdown and is not added to the price.</p>
 
               <!-- Quote Settings (collapsed — used by Customer Quote / Customer PDF) -->
               <div class="qs-accordion">
@@ -391,11 +386,15 @@
                   </div>
                   <div class="igrid cols-2" style="margin-bottom:4px">
                     <div class="igroup">
-                      <label class="ilabel" for="salesTaxRate">Sales Tax on Materials (%)</label>
+                      <label class="ilabel" for="salesTaxRate">
+                        Sales Tax on Materials (%)
+                        <button type="button" class="tip tip-lg" data-tip="Sales-tax rules vary by state. In many states (for example MN, WI, KS, TN), contractors improving real property pay tax on materials and don't charge it to the customer — include the tax you paid in material cost. Turn this on only if you charge sales tax on the quote." aria-label="Sales tax rules vary by state" aria-expanded="false">?</button>
+                      </label>
                       <div class="ifield has-suf">
                         <input type="number" id="salesTaxRate" min="0" max="20" step="0.1" value="0" aria-label="Sales tax rate applied to materials">
                         <span class="isuf" aria-hidden="true">%</span>
                       </div>
+                      <p class="field-msg" id="msg-salesTaxRate" role="status"></p>
                     </div>
                     <label class="qs-inline-check" for="includeSalesTax">
                       <input type="checkbox" id="includeSalesTax">
@@ -437,18 +436,18 @@
               <div class="metrics" role="region" aria-label="Key performance metrics">
                 <div class="metric">
                   <div class="metric-lbl">Net Profit</div>
-                  <div class="metric-val c-white" id="netProfit" aria-label="Net profit">$0</div>
+                  <div class="metric-val c-white" id="netProfit" aria-label="Net profit">$0.00</div>
                 </div>
                 <div class="metric">
                   <div class="metric-lbl">Profit Margin</div>
-                  <div class="metric-val c-white" id="marginDisplay" aria-label="Profit margin percentage">0%</div>
+                  <div class="metric-val c-white" id="marginDisplay" aria-label="Profit margin percentage">0.0%</div>
                 </div>
                 <div class="metric">
                   <div class="metric-lbl">
-                    Effective $/hr
-                    <button type="button" class="tip" data-tip="Net profit ÷ job hours (hours × workers). Drive time is not included in those hours — only time on the job." aria-label="What effective dollars per hour includes" aria-expanded="false">?</button>
+                    Profit per labor hour
+                    <button type="button" class="tip" data-tip="Profit ÷ total labor hours (estimated hours × workers). Drive time is not included in those hours." aria-label="What profit per labor hour includes" aria-expanded="false">?</button>
                   </div>
-                  <div class="metric-val c-white" id="effRate" aria-label="Effective hourly rate on job hours only">$0/hr</div>
+                  <div class="metric-val c-white" id="effRate" aria-label="Profit per labor hour">$0.00/hr</div>
                 </div>
               </div>
 
@@ -458,33 +457,63 @@
               </button>
               <div class="bk-body" id="bkBody" role="region" aria-label="Cost breakdown">
                 <div class="bk-row">
-                  <span class="bk-rowlbl">Total Labor Cost</span>
+                  <span class="bk-rowlbl">Labor</span>
                   <span class="bk-rowval" id="bd-labor">$0.00</span>
                 </div>
                 <div class="bk-row">
-                  <span class="bk-rowlbl">Materials (incl. markup)</span>
+                  <span class="bk-rowlbl">Drive labor</span>
+                  <span class="bk-rowval" id="bd-drive">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Fuel</span>
+                  <span class="bk-rowval" id="bd-fuel">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Materials (at cost)</span>
                   <span class="bk-rowval" id="bd-mat">$0.00</span>
                 </div>
                 <div class="bk-row">
-                  <span class="bk-rowlbl">Overhead &amp; Burden</span>
+                  <span class="bk-rowlbl">Overhead</span>
                   <span class="bk-rowval" id="bd-oh">$0.00</span>
                 </div>
-                <div class="bk-row">
-                  <span class="bk-rowlbl">Travel Cost</span>
-                  <span class="bk-rowval" id="bd-travel">$0.00</span>
-                </div>
-                <div class="bk-row">
-                  <span class="bk-rowlbl">SE Tax (on cost subtotal)</span>
-                  <span class="bk-rowval" id="bd-se">$0.00</span>
-                </div>
-                <div class="bk-row">
-                  <span class="bk-rowlbl">State Tax (on cost subtotal)</span>
-                  <span class="bk-rowval" id="bd-state">$0.00</span>
-                </div>
                 <div class="bk-total">
-                  <span class="bk-totallbl">Total Cost (before profit)</span>
+                  <span class="bk-totallbl">Total cost (before profit)</span>
                   <span class="bk-totalval" id="bd-total">$0.00</span>
                 </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Materials markup (not added)</span>
+                  <span class="bk-rowval" id="bd-markup">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">
+                    Estimated owner tax set-aside
+                    <button type="button" class="tip tip-lg" data-tip="Estimate only. Not added to the price. Self-employment tax ≈ profit × 92.35% × 15.3%. IRS: https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax — no income-tax rate is included." aria-label="About the estimated owner tax set-aside" aria-expanded="false">?</button>
+                  </span>
+                  <span class="bk-rowval" id="bd-setaside">$0.00</span>
+                </div>
+                <p class="bk-note">Not added to the price. Profit × 92.35% × 15.3%, from the <a href="https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax" rel="noopener noreferrer" target="_blank">IRS self-employment tax</a> page. No income-tax rate is included.</p>
+                <p class="bk-subhead">Customer quote</p>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Labor</span>
+                  <span class="bk-rowval" id="q-labor">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Materials</span>
+                  <span class="bk-rowval" id="q-mat">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Drive labor</span>
+                  <span class="bk-rowval" id="q-drive">$0.00</span>
+                </div>
+                <div class="bk-row">
+                  <span class="bk-rowlbl">Fuel</span>
+                  <span class="bk-rowval" id="q-fuel">$0.00</span>
+                </div>
+                <div class="bk-total">
+                  <span class="bk-totallbl">Quote total</span>
+                  <span class="bk-totalval" id="q-total">$0.00</span>
+                </div>
+                <p class="bk-note">Quote lines include each item's share of overhead and profit and add up to the suggested charge. Fuel is not in the overhead base.</p>
               </div>
 
             </div><!-- /results -->
@@ -520,10 +549,10 @@
                 <p class="action-group-lbl">For You</p>
                 <div class="action-btns">
                   <button class="btn btn-primary" id="copyBtn"
-                    data-tip="Copies your full internal job breakdown to your clipboard — labor rate, overhead, markup, taxes, and profit margin. For your records, not for customers."
+                    data-tip="Copies your full internal job breakdown — labor, drive, fuel, materials at cost, overhead, and profit. For your records, not for customers."
                     aria-label="Copy internal job quote to clipboard">📋 Copy Internal Quote</button>
                   <button class="btn btn-ghost" id="pdfBtn"
-                    data-tip="Saves a full internal job summary as a PDF — labor rate, overhead, markup, taxes, and profit margin included. For your records only, not for customers."
+                    data-tip="Saves a full internal job summary as a PDF — labor, drive, fuel, materials at cost, overhead, and profit. For your records only."
                     aria-label="Save internal results as PDF">🖨 Internal PDF</button>
                 </div>
               </div>
@@ -531,10 +560,10 @@
                 <p class="action-group-lbl">For Your Customer</p>
                 <div class="action-btns">
                   <button class="btn btn-ghost" id="custBtn"
-                    data-tip="Copies a customer quote to your clipboard. Labor is loaded (includes overhead, taxes, and profit); materials include markup."
+                    data-tip="Copies a customer quote. Labor, materials, and drive include their share of overhead and profit. Materials markup is not added on top."
                     aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
                   <button class="btn btn-ghost" id="custPdfBtn"
-                    data-tip="Saves a printable customer quote as a PDF. Labor is loaded (includes overhead, taxes, and profit); materials include markup. Includes your business info and any options set in Quote Settings."
+                    data-tip="Saves a printable customer quote as a PDF. Line items add up to the total. Includes your business info and any options set in Quote Settings."
                     aria-label="Save customer quote as PDF">📄 Customer PDF</button>
                 </div>
               </div>
@@ -571,7 +600,7 @@
                 <li>Mark up equipment 30–50%; warranty handling is not free</li>
                 <li>Flat-rate service work rewards speed; T&amp;M punishes it</li>
                 <li>Warranty callbacks are unpaid labor unless your written policy says otherwise</li>
-                <li>SE tax is 15.3% — price it in or you're giving it away</li>
+                <li>Owner SE tax is estimated on profit and is not added to the price</li>
                 <li>Use Copy Quote to paste a customer total into a text or invoice</li>
               </ul>
             </div>
@@ -587,8 +616,8 @@
         <p class="sec-eyebrow">For HVAC Techs</p>
         <h2 class="sec-h2" id="intro-h2">A Calculator Built Around the HVAC Bid</h2>
         <div class="prose">
-          <p>HVAC is already selected so you are not starting from a generic trade default. Swap the hours, crew, parts, and refrigerant for this call or this install. The math is the same <a href="/calculator">job profit calculator</a> used across JobProfitCalc — suggested charge, net profit, margin, and effective hourly rate after overhead and taxes.</p>
-          <p>Use it to build a flat rate, check an install margin, or see what a recharge actually leaves you after SE tax. The HVAC pricing guide below is the same material as our written article, <a href="/blog/how-to-price-hvac-job.html">How to Price an HVAC Job</a>, kept here so you can price and read on one page.</p>
+          <p>HVAC is already selected. The labor rate is an example loaded cost, not a billing rate — replace it. The math is the same <a href="/calculator">job profit calculator</a>: suggested charge, net profit, margin, and profit per labor hour. Drive labor is multiplied by crew size.</p>
+          <p>Use it to check a service call or an install. The HVAC pricing guide below is the same material as our written article, <a href="/blog/how-to-price-hvac-job.html">How to Price an HVAC Job</a>, kept here so you can price and read on one page.</p>
         </div>
       </div>
     </section>
@@ -1065,7 +1094,8 @@
 <!-- Toast notification -->
 <div id="toast" role="alert" aria-live="assertive"></div>
 
-<script src="/js/calculator.js?v=40a9750"></script>
+<script src="/js/pricing.js?v=20261002b"></script>
+<script src="/js/calculator.js?v=20261002b"></script>
 <script src="/js/site-ui.js?v=40a9750"></script>
 <script>
 (function () {

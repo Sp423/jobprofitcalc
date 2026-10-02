@@ -81,7 +81,7 @@
         "name": "How do I price refrigerant after the R-410A phaseout?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Price refrigerant at a minimum of 2× your current wholesale cost per pound, with many contractors charging 2.5–3× given price volatility. Never pass refrigerant at cost. Enter the marked-up refrigerant total in the materials field so it is in the suggested charge."
+          "text": "Enter refrigerant at the current invoice cost in Material Cost. Price volatility, handling, and certification are reasons to keep that cost current. Your margin covers profit on that cost."
         }
       },
       {
@@ -108,7 +108,7 @@
        crossorigin="anonymous"></script>
 
   <!-- Cache-bust: bump ?v= after JS/CSS deploys so Cloudflare/browsers don't serve stale assets. -->
-  <link rel="stylesheet" href="/css/site.css?v=20261002b">
+  <link rel="stylesheet" href="/css/site.css?v=20261002d">
 </head>
 
 <body>
@@ -233,7 +233,7 @@
                 <div class="igroup ig-full">
                   <label class="ilabel" for="laborRate">
                     Hourly Labor Rate
-                    <button type="button" class="tip" data-tip="Your COST per hour (wage + payroll taxes, workers' comp, benefits), not what you charge." aria-label="Hourly labor rate is your cost, not your charge" aria-expanded="false">?</button>
+                    <button type="button" class="tip" data-tip="Your COST per hour (wage + payroll taxes, workers' comp, benefits), not what you charge. Example loaded cost: BLS OEWS May 2025 median wage x BLS ECEC construction burden (June 2026)." aria-label="Hourly labor rate is your cost, not your charge" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-pre has-suf">
                     <span class="ipre" aria-hidden="true">$</span>
@@ -243,29 +243,18 @@
                   <p class="field-msg" id="msg-laborRate" role="status"></p>
                 </div>
               </div>
-              <p class="field-hint">The $75 starting rate is a placeholder, not a billing rate. Pick a trade for an example loaded cost (BLS median wage times a construction benefit burden), then replace it with your own.</p>
+              <p class="field-hint">The $75 starting rate is a placeholder, not a billing rate. Pick a trade for an example loaded cost: BLS OEWS May 2025 median wage x BLS ECEC construction burden (June 2026), then replace it with your own.</p>
 
               <!-- Materials -->
               <p class="field-section">Materials</p>
               <div class="igrid" style="margin-bottom:26px">
-                <div class="igroup">
+                <div class="igroup ig-full">
                   <label class="ilabel" for="materialCost">Material Cost</label>
                   <div class="ifield has-pre">
                     <span class="ipre" aria-hidden="true">$</span>
-                    <input type="number" id="materialCost" min="0" max="5000000" step="0.01" value="200" inputmode="decimal" aria-label="Material cost in dollars, before markup">
+                    <input type="number" id="materialCost" min="0" max="5000000" step="0.01" value="200" inputmode="decimal" aria-label="Material cost in dollars">
                   </div>
                   <p class="field-msg" id="msg-materialCost" role="status"></p>
-                </div>
-                <div class="igroup">
-                  <label class="ilabel" for="materialMarkup">
-                    Material Markup
-                    <button type="button" class="tip tip-lg" data-tip="Shown as dollars only. Not added to the cost and not added on top of the price. Overhead and margin use materials at cost. Adding this markup on top of the margin would charge profit twice." aria-label="Material markup is not added to the price" aria-expanded="false">?</button>
-                  </label>
-                  <div class="ifield has-suf">
-                    <input type="number" id="materialMarkup" min="0" max="200" step="1" value="20" inputmode="decimal" aria-label="Material markup percentage, not added to the price">
-                    <span class="isuf" aria-hidden="true">%</span>
-                  </div>
-                  <p class="field-msg" id="msg-materialMarkup" role="status"></p>
                 </div>
               </div>
 
@@ -275,7 +264,7 @@
                 <div class="igroup">
                   <label class="ilabel" for="overhead">
                     Overhead %
-                    <button type="button" class="tip tip-lg" data-tip="Overhead ÷ direct job costs (labor + materials). Exclude payroll taxes/workers' comp if already in your labor rate." aria-label="How to set overhead percent" aria-expanded="false">?</button>
+                    <button type="button" class="tip tip-lg" data-tip="Overhead ÷ direct job costs (labor + drive labor + materials at cost (fuel excluded)). Exclude payroll taxes/workers' comp if already in your labor rate." aria-label="How to set overhead percent" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
                     <input type="number" id="overhead" min="0" max="100" step="1" value="15" inputmode="decimal" aria-label="Overhead percent of direct job costs">
@@ -310,7 +299,7 @@
                 <div class="igroup">
                   <label class="ilabel" for="profitMargin">
                     Desired Profit Margin
-                    <button type="button" class="tip tip-lg" data-tip="Markup vs margin&#10;&#10;Markup is added on top of cost. Margin is profit as a percent of the price.&#10;&#10;A 25% markup → 20% margin&#10;A 33% markup → 25% margin&#10;&#10;Price = total cost ÷ (1 − margin). Margin must be under 95%. Above 60% shows a warning." aria-label="Markup vs margin explained" aria-expanded="false">?</button>
+                    <button type="button" class="tip tip-lg" data-tip="Your margin covers profit on materials too. No separate markup needed." aria-label="Margin covers profit on materials" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
                     <input type="number" id="profitMargin" min="0" max="94.99" step="0.1" value="20" inputmode="decimal" aria-label="Desired profit margin percentage, must be under 95">
@@ -481,10 +470,6 @@
                   <span class="bk-totalval" id="bd-total">$0.00</span>
                 </div>
                 <div class="bk-row">
-                  <span class="bk-rowlbl">Materials markup (not added)</span>
-                  <span class="bk-rowval" id="bd-markup">$0.00</span>
-                </div>
-                <div class="bk-row">
                   <span class="bk-rowlbl">
                     Estimated owner tax set-aside
                     <button type="button" class="tip tip-lg" data-tip="Estimate only. Not added to the price. Self-employment tax ≈ profit × 92.35% × 15.3%. IRS: https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax — no income-tax rate is included." aria-label="About the estimated owner tax set-aside" aria-expanded="false">?</button>
@@ -560,7 +545,7 @@
                 <p class="action-group-lbl">For Your Customer</p>
                 <div class="action-btns">
                   <button class="btn btn-ghost" id="custBtn"
-                    data-tip="Copies a customer quote. Labor, materials, and drive include their share of overhead and profit. Materials markup is not added on top."
+                    data-tip="Copies a customer quote. Labor, materials, and drive include their share of overhead and profit."
                     aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
                   <button class="btn btn-ghost" id="custPdfBtn"
                     data-tip="Saves a printable customer quote as a PDF. Line items add up to the total. Includes your business info and any options set in Quote Settings."
@@ -670,7 +655,7 @@
 
             <h3>Time and Materials (T&amp;M)</h3>
 
-            <p>You charge your hourly labor rate for actual time spent plus your <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">marked-up material costs</a>. Simple in concept. In practice, T&amp;M has two significant problems for HVAC service work:</p>
+            <p>You charge your hourly labor rate for actual time spent plus <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">materials at cost</a>. Your margin covers profit on those materials. Simple in concept. In practice, T&amp;M has two significant problems for HVAC service work:</p>
 
             <p>First, experienced technicians are penalized for efficiency. A tech who can replace a capacitor in 20 minutes earns less on T&amp;M than one who takes 45 minutes. Expertise and speed — your most valuable assets — reduce your revenue rather than rewarding it.</p>
 
@@ -767,7 +752,7 @@
 
             <h3>How to Price Refrigerant Correctly in 2026</h3>
 
-            <p>Refrigerant should never be passed to the customer at your cost. It is a material with carrying cost, handling risk, handling certification requirements, and now significant price volatility. Treat it like any other specialty material and apply an appropriate markup.</p>
+            <p>Enter refrigerant at the current invoice cost in Material Cost. It has carrying cost, handling risk, certification requirements, and price volatility. Your margin covers profit on that cost.</p>
 
             <p><strong>Current pricing reality for R-410A:</strong> Prices vary significantly by region and supplier, but R-410A wholesale costs in many markets have risen from pre-phaseout levels of $35–$55/lb to $65–$120+/lb or higher depending on supply conditions in your area. Monitor your supplier pricing actively — this is not a set-and-forget line item right now.</p>
 
@@ -775,11 +760,11 @@
 
             <p>Structure your refrigerant charge in one of two ways:</p>
 
-            <p><em>Option 1 — Per-pound pricing:</em> Charge a flat per-pound rate that covers your wholesale cost plus a significant markup to account for price volatility, recovery, handling, and the replacement cost if a cylinder is damaged or stolen. A minimum of <strong>2× your current wholesale cost per pound</strong> is a reasonable starting floor, with many contractors charging 2.5–3× given current volatility.</p>
+            <p><em>Option 1 — Per-pound pricing:</em> Enter the current wholesale cost per pound in Material Cost. Recovery, handling, and replacement risk belong in the job margin.</p>
 
             <p><em>Option 2 — Refrigerant line item at market rate:</em> Present refrigerant as a separate line item priced at "current market rate" rather than a fixed per-pound price. This is particularly appropriate when your supplier cost is fluctuating monthly. State in your <a href="/blog/how-to-write-contractor-estimate.html">estimate</a>: <em>"Refrigerant charged at current market rate at time of service."</em></p>
 
-            <p><strong>For new R-454B and R-32 systems:</strong> Apply the same markup discipline. These refrigerants are not yet commodity-priced and availability constraints exist in many markets. Don't price new refrigerants at old R-410A rates.</p>
+            <p><strong>For new R-454B and R-32 systems:</strong> Enter the current invoice cost. These refrigerants are not yet commodity-priced and availability constraints exist in many markets. Don't enter an old R-410A cost.</p>
 
             <div class="callout">
               <p><strong>The leak finding rule:</strong> Before adding refrigerant to any system, find and repair the leak. This is both an EPA requirement and sound business practice. A recharge without leak repair is a temporary fix that will bring the customer back — but potentially with a dispute about why it needed recharging again so soon. Price the leak search and repair separately from the refrigerant charge.</p>
@@ -791,9 +776,9 @@
 
             <h3>The Components of an HVAC Installation Price</h3>
 
-            <p><strong>Equipment cost with markup:</strong> The unit itself — air handler, condenser, coil, furnace, heat pump, or mini-split — is your largest cost line. <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">Mark up equipment</a> 20–40% above your wholesale cost. The exact markup depends on the equipment tier (entry-level, mid-grade, premium) and competitive pressure in your market.</p>
+            <p><strong>Equipment at cost:</strong> The unit itself — air handler, condenser, coil, furnace, heat pump, or mini-split — is your largest cost line. Enter the wholesale cost in Material Cost. Your margin covers profit on that equipment.</p>
 
-            <p>Do not pass equipment at cost. Equipment sourcing, storage, delivery logistics, warranty handling, and the risk of damaged or defective units are all real costs that the markup covers. A contractor who passes equipment at wholesale is essentially providing free logistics and warranty services.</p>
+            <p>Sourcing, storage, delivery, warranty handling, and the risk of a damaged unit are real. They are covered by the job margin.</p>
 
             <p><strong>Installation labor:</strong> Priced by system type and complexity. Rough benchmarks for residential installation labor in 2026:</p>
 
@@ -846,7 +831,7 @@
 
             <p>These are labor estimates only — your actual billable labor depends on site conditions, access difficulty, ductwork modifications, and crew size.</p>
 
-            <p><strong>Associated materials and supplies:</strong> Line sets, disconnect boxes, pad or bracket, drain lines, flue pipe, electrical connections, refrigerant for initial charge, filter, thermostat (if included). These should be itemized and marked up 20–30%.</p>
+            <p><strong>Associated materials and supplies:</strong> Line sets, disconnect boxes, pad or bracket, drain lines, flue pipe, electrical connections, refrigerant for initial charge, filter, thermostat (if included). Enter each at what you pay. Your margin covers profit on materials too.</p>
 
             <p><strong>Permit and inspection fees:</strong> Where required, permits are typically passed through to the customer at cost — or with a modest handling fee for your time administering the permit process. Never absorb permit costs. They are a job cost that belongs on the customer's invoice.</p>
 
@@ -868,12 +853,12 @@
                 <tr>
                   <td class="row-label">Condenser unit (4-ton, mid-grade)</td>
                   <td>$1,800</td>
-                  <td>$2,700 (50% markup)</td>
+                  <td>$2,700</td>
                 </tr>
                 <tr>
                   <td class="row-label">Air handler / coil</td>
                   <td>$900</td>
-                  <td>$1,350 (50% markup)</td>
+                  <td>$1,350</td>
                 </tr>
                 <tr>
                   <td class="row-label">Installation labor (10 hrs × $110)</td>
@@ -883,12 +868,12 @@
                 <tr>
                   <td class="row-label">Refrigerant (initial charge, 8 lbs R-454B)</td>
                   <td>$240</td>
-                  <td>$480 (2× markup)</td>
+                  <td>$480</td>
                 </tr>
                 <tr>
                   <td class="row-label">Line set, materials, supplies</td>
                   <td>$180</td>
-                  <td>$270 (50% markup)</td>
+                  <td>$270</td>
                 </tr>
                 <tr>
                   <td class="row-label">Disposal and haul-off</td>
@@ -912,58 +897,9 @@
 
             <p>This is a legitimate range for a well-priced installation. If you're pricing the same job significantly below this, you're almost certainly underselling equipment or underpricing labor. Run the numbers through the <a href="#calculator">Job Profit Calculator</a> to check your margin before sending the estimate.</p>
 
-            <h2 id="parts-markup">Markup on HVAC Parts and Equipment</h2>
+            <h2 id="parts-markup">Materials on HVAC Parts and Equipment</h2>
 
-            <p>Parts and equipment markup is where HVAC businesses consistently leave money on the table. The common mistake is treating markup as fixed across all materials rather than scaling it to match part type, availability, and the effort involved in sourcing and handling it.</p>
-
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Markup Range</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="row-label">Major equipment (units, air handlers)</td>
-                  <td>30% – 50%</td>
-                  <td>Higher on premium tiers</td>
-                </tr>
-                <tr>
-                  <td class="row-label">Replacement motors</td>
-                  <td>50% – 80%</td>
-                  <td>Moderate availability risk</td>
-                </tr>
-                <tr>
-                  <td class="row-label">Electronic components (boards, controls)</td>
-                  <td>75% – 100%+</td>
-                  <td>Higher risk, diagnostic skill required</td>
-                </tr>
-                <tr>
-                  <td class="row-label">Capacitors, contactors, relays</td>
-                  <td>100% – 200%+</td>
-                  <td>Small cost, high convenience value</td>
-                </tr>
-                <tr>
-                  <td class="row-label">Thermostats</td>
-                  <td>50% – 100%</td>
-                  <td>Depends on brand and tier</td>
-                </tr>
-                <tr>
-                  <td class="row-label">Refrigerant</td>
-                  <td>100% – 200%+ of cost</td>
-                  <td>Price volatility justifies premium</td>
-                </tr>
-                <tr>
-                  <td class="row-label">Filters, UV bulbs, consumables</td>
-                  <td>75% – 150%</td>
-                  <td>Convenience + carrying cost</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <p>Small, inexpensive parts warrant the highest percentage markup precisely because the absolute dollar amount is still modest. A capacitor that costs you $12 wholesale and is billed at $55 is a 358% markup in percentage terms — but $55 for a part that solves the customer's immediate problem is completely reasonable and not one most customers will contest.</p>
+            <p>Enter parts and equipment at what you pay. Your margin covers profit on materials too. A small part and a condenser both go in at cost.</p>
 
             <h2 id="warranty">Warranty Callbacks: What You're Obligated to Do (And What You're Not)</h2>
 
@@ -994,10 +930,10 @@
             <p>In most U.S. markets in 2026, experienced residential HVAC technicians should charge $95–$150 per hour for service labor. Commercial and specialty work supports the top of that range and above. Most HVAC service work is better priced on a flat-rate basis — where your effective hourly rate can exceed your stated rate when jobs run efficiently.</p>
 
             <h3>How do I price refrigerant now that R-410A costs have increased?</h3>
-            <p>Price refrigerant at a minimum of 2× your current wholesale cost per pound, with many contractors charging 2.5–3× given current price volatility and supply uncertainty. Never pass refrigerant at cost. Price volatility, handling requirements, EPA certification requirements, and replacement cost all justify a significant markup. Consider presenting refrigerant as a separate line item at "current market rate" rather than a fixed price, to protect you when your wholesale cost changes.</p>
+            <p>Enter refrigerant at the current wholesale cost per pound. Price volatility, handling, EPA certification, and replacement risk are reasons to keep the invoice cost current and to hold your margin. Consider listing refrigerant on its own quote line so a cost change is easy to see.</p>
 
-            <h3>What's a fair markup on HVAC equipment and parts?</h3>
-            <p>Major equipment (condensers, air handlers, furnaces): 30–50%. Replacement components (motors, controls, boards): 50–100%+. Small parts (capacitors, contactors): 100–200%+. Refrigerant: 100–200%+ of cost. The markup covers not just profit but also parts sourcing effort, storage, warranty handling, and the risk of callbacks on installed components.</p>
+            <h3>How should I enter HVAC equipment and parts?</h3>
+            <p>Enter equipment, parts, and refrigerant at what you pay in Material Cost. Your margin covers profit on materials too.</p>
 
             <h3>Should I use flat rate or time and materials for HVAC service?</h3>
             <p>Flat rate is the stronger choice for most HVAC service work. It rewards technician efficiency, eliminates per-minute labor disputes, gives customers a clear price upfront, and typically produces higher effective hourly rates than T&amp;M billing. Time and materials is appropriate for diagnostic work where the scope is unknown before investigation begins — present it as a diagnostic fee, then transition to flat rate once the repair is identified.</p>
@@ -1029,7 +965,7 @@
           <a href="/blog/how-to-price-hvac-job.html">How to price an HVAC job<span>The original long-form guide — service calls, installs, and refrigerant.</span></a>
           <a href="/calculator">Job profit calculator<span>Same tool, any trade — plumber, electrician, HVAC, and more.</span></a>
           <a href="/blog/contractor-profit-margins-by-trade.html">Contractor profit margins by trade<span>Where HVAC margins typically land versus other trades.</span></a>
-          <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">How to mark up materials<span>Equipment, parts, and refrigerant markup without guessing.</span></a>
+          <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">Materials at cost<span>Enter equipment, parts, and refrigerant at what you pay.</span></a>
         </div>
       </div>
     </section>
@@ -1094,8 +1030,8 @@
 <!-- Toast notification -->
 <div id="toast" role="alert" aria-live="assertive"></div>
 
-<script src="/js/pricing.js?v=20261002b"></script>
-<script src="/js/calculator.js?v=20261002b"></script>
+<script src="/js/pricing.js?v=20261002d"></script>
+<script src="/js/calculator.js?v=20261002d"></script>
 <script src="/js/site-ui.js?v=40a9750"></script>
 <script>
 (function () {

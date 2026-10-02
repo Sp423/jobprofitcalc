@@ -13,8 +13,7 @@
      price        = roundCents(totalCost / (1 − margin))
    No self-employment tax and no state income tax in the cost or the price.
 
-   Material markup is reported only. It is not a cost and it is not added
-   on top of the margin (that would charge profit twice).
+   There is no material markup. A leftover markup value on the input is ignored.
 */
 (function (root, factory) {
   var api = factory();
@@ -35,10 +34,9 @@
 
   var LIMITS = {
     hours:          { min: 0, max: 1000,    label: 'Estimated hours' },
-    workers:        { min: 1, max: 100,     label: 'Number of workers' },
+    workers:        { min: 1, max: 100, integer: true, label: 'Number of workers' },
     laborRate:      { min: 0, max: 1000,    label: 'Hourly labor rate' },
     materialCost:   { min: 0, max: 5000000, label: 'Material cost' },
-    materialMarkup: { min: 0, max: 200,     label: 'Material markup' },
     overhead:       { min: 0, max: 100,     label: 'Overhead' },
     driveTime:      { min: 0, max: 100,     label: 'Drive time' },
     fuelCost:       { min: 0, max: 50000,   label: 'Fuel' },
@@ -47,44 +45,52 @@
   };
 
   /* Trade labor rates are example loaded costs, not billing rates.
-     Median hourly wage: BLS OEWS May 2024, Table 1 of the April 2, 2025
-     news release (https://www.bls.gov/news.release/archives/ocwage_04022025.htm).
-     Burden: BLS ECEC, construction industry, September 2024
-     (https://www.bls.gov/news.release/archives/ecec_12172024.htm):
-     total compensation $47.54 / wages and salaries $33.14.
-     Loaded default = round(median × 47.54 / 33.14).
-     Hours, materials, markup, overhead, drive, and fuel below are example
+     Median hourly wage: BLS OEWS May 2025, Table 1 of the May 15, 2026
+     news release (https://www.bls.gov/news.release/archives/ocwage_05152026.htm).
+     Burden: BLS ECEC, private industry, construction, June 2026, Table 4 of the
+     September 9, 2026 release
+     (https://www.bls.gov/news.release/archives/ecec_09092026.htm):
+     total compensation $51.96 / wages and salaries $36.13.
+     Loaded default = round(median × 51.96 / 36.13).
+     Hours, materials, overhead, drive, and fuel below are example
      job shapes carried forward — replace them. */
-  var BURDEN = 47.54 / 33.14;
+  var OEWS_URL = 'https://www.bls.gov/news.release/archives/ocwage_05152026.htm';
+  var ECEC_URL = 'https://www.bls.gov/news.release/archives/ecec_09092026.htm';
+  var BURDEN = 51.96 / 36.13;
   function loaded(median) { return Math.round(median * BURDEN); }
 
   var TRADE_DEFAULTS = {
-    plumber:     { hours: 3,  workers: 1, laborRate: loaded(30.27), materialCost: 150, materialMarkup: 25, overhead: 18, driveTime: 0.5, fuelCost: 10 },
-    electrician: { hours: 4,  workers: 1, laborRate: loaded(29.98), materialCost: 200, materialMarkup: 20, overhead: 18, driveTime: 0.5, fuelCost: 10 },
-    hvac:        { hours: 4,  workers: 2, laborRate: loaded(28.75), materialCost: 350, materialMarkup: 20, overhead: 20, driveTime: 1.0, fuelCost: 15 },
-    roofer:      { hours: 8,  workers: 3, laborRate: loaded(24.51), materialCost: 800, materialMarkup: 15, overhead: 22, driveTime: 1.0, fuelCost: 20 },
-    painter_int: { hours: 6,  workers: 2, laborRate: loaded(23.40), materialCost: 120, materialMarkup: 20, overhead: 15, driveTime: 0.5, fuelCost: 10 },
-    painter_ext: { hours: 10, workers: 2, laborRate: loaded(23.40), materialCost: 250, materialMarkup: 20, overhead: 15, driveTime: 1.0, fuelCost: 15 },
-    landscaper:  { hours: 5,  workers: 2, laborRate: loaded(18.31), materialCost: 100, materialMarkup: 20, overhead: 15, driveTime: 1.0, fuelCost: 20 },
-    // First-line supervisors of construction trades (47-1011), median $37.83 — a field crew cost, not the salaried construction-manager occupation.
-    gc:          { hours: 8,  workers: 2, laborRate: loaded(37.83), materialCost: 500, materialMarkup: 15, overhead: 20, driveTime: 1.0, fuelCost: 20 },
-    carpenter:   { hours: 6,  workers: 1, laborRate: loaded(28.51), materialCost: 200, materialMarkup: 20, overhead: 15, driveTime: 0.5, fuelCost: 10 },
-    flooring:    { hours: 6,  workers: 2, laborRate: loaded(26.13), materialCost: 400, materialMarkup: 15, overhead: 15, driveTime: 0.5, fuelCost: 10 },
-    concrete:    { hours: 8,  workers: 2, laborRate: loaded(26.28), materialCost: 300, materialMarkup: 15, overhead: 20, driveTime: 1.0, fuelCost: 20 },
-    drywall:     { hours: 6,  workers: 2, laborRate: loaded(27.95), materialCost: 150, materialMarkup: 20, overhead: 15, driveTime: 0.5, fuelCost: 10 },
-    // No OEWS "handyman" occupation. Proxy: Maintenance and Repair Workers, General (49-9071), median $23.38.
-    handyman:    { hours: 2,  workers: 1, laborRate: loaded(23.38), materialCost: 50,  materialMarkup: 20, overhead: 15, driveTime: 0.5, fuelCost: 10 }
+    plumber:     { hours: 3,  workers: 1, laborRate: loaded(30.67), medianWage: 30.67, soc: '47-2152', materialCost: 150, overhead: 18, driveTime: 0.5, fuelCost: 10 },
+    electrician: { hours: 4,  workers: 1, laborRate: loaded(30.38), medianWage: 30.38, soc: '47-2111', materialCost: 200, overhead: 18, driveTime: 0.5, fuelCost: 10 },
+    hvac:        { hours: 4,  workers: 2, laborRate: loaded(29.33), medianWage: 29.33, soc: '49-9021', materialCost: 350, overhead: 20, driveTime: 1.0, fuelCost: 15 },
+    roofer:      { hours: 8,  workers: 3, laborRate: loaded(26.65), medianWage: 26.65, soc: '47-2181', materialCost: 800, overhead: 22, driveTime: 1.0, fuelCost: 20 },
+    painter_int: { hours: 6,  workers: 2, laborRate: loaded(23.75), medianWage: 23.75, soc: '47-2141', materialCost: 120, overhead: 15, driveTime: 0.5, fuelCost: 10 },
+    painter_ext: { hours: 10, workers: 2, laborRate: loaded(23.75), medianWage: 23.75, soc: '47-2141', materialCost: 250, overhead: 15, driveTime: 1.0, fuelCost: 15 },
+    landscaper:  { hours: 5,  workers: 2, laborRate: loaded(18.82), medianWage: 18.82, soc: '37-3011', materialCost: 100, overhead: 15, driveTime: 1.0, fuelCost: 20 },
+    // First-line supervisors of construction trades (47-1011), median $38.42 — a field crew cost, not the salaried construction-manager occupation.
+    gc:          { hours: 8,  workers: 2, laborRate: loaded(38.42), medianWage: 38.42, soc: '47-1011', materialCost: 500, overhead: 20, driveTime: 1.0, fuelCost: 20 },
+    carpenter:   { hours: 6,  workers: 1, laborRate: loaded(29.12), medianWage: 29.12, soc: '47-2031', materialCost: 200, overhead: 15, driveTime: 0.5, fuelCost: 10 },
+    flooring:    { hours: 6,  workers: 2, laborRate: loaded(27.15), medianWage: 27.15, soc: '47-2042', materialCost: 400, overhead: 15, driveTime: 0.5, fuelCost: 10 },
+    concrete:    { hours: 8,  workers: 2, laborRate: loaded(27.41), medianWage: 27.41, soc: '47-2051', materialCost: 300, overhead: 20, driveTime: 1.0, fuelCost: 20 },
+    drywall:     { hours: 6,  workers: 2, laborRate: loaded(28.33), medianWage: 28.33, soc: '47-2081', materialCost: 150, overhead: 15, driveTime: 0.5, fuelCost: 10 },
+    // No OEWS "handyman" occupation. Proxy: Maintenance and Repair Workers, General (49-9071), median $23.84.
+    handyman:    { hours: 2,  workers: 1, laborRate: loaded(23.84), medianWage: 23.84, soc: '49-9071', materialCost: 50,  overhead: 15, driveTime: 0.5, fuelCost: 10 }
   };
 
   // Blank-form values in the HTML. $75 is a placeholder, not a BLS figure.
   var PAGE_DEFAULTS = {
-    hours: 4, workers: 1, laborRate: 75, materialCost: 200, materialMarkup: 20,
+    hours: 4, workers: 1, laborRate: 75, materialCost: 200,
     overhead: 15, driveTime: 0.5, fuelCost: 10, margin: 20
   };
 
+  // Round half up in cents. toPrecision(15) keeps a true .5 from falling to .4999… in binary floats.
+  function rc(x) {
+    return Math.round(Number(x.toPrecision(15)));
+  }
+
   function roundCentsFromDollars(dollars) {
     if (!Number.isFinite(dollars)) return null;
-    return Math.round(dollars * 100);
+    return rc(dollars * 100);
   }
 
   function fromCents(cents) {
@@ -143,7 +149,14 @@
 
   function formatPercent(ratio) {
     if (!Number.isFinite(ratio)) return '0.0%';
-    return (ratio * 100).toFixed(1) + '%';
+    var pct = ratio * 100;
+    var shown = Number(pct.toFixed(1));
+    // 94.9999 must not display as 95.0%. Ordinary 19.999…% still shows as 20.0%.
+    if (shown >= 95 && pct < 95) {
+      var floored = Math.floor(pct * 10 + 1e-9) / 10;
+      return floored.toFixed(1) + '%';
+    }
+    return pct.toFixed(1) + '%';
   }
 
   function priceJob(input) {
@@ -151,21 +164,20 @@
     var workers = +input.workers;
     var laborRate = +input.laborRate;
     var materialCost = +input.materialCost;
-    var materialMarkup = +input.materialMarkup;
     var overheadPct = +input.overhead;
     var driveTime = +input.driveTime;
     var fuelCost = +input.fuelCost;
     var marginPct = +input.margin;
     var salesTaxPct = input.salesTaxRate == null ? 0 : +input.salesTaxRate;
 
-    var nums = [hours, workers, laborRate, materialCost, materialMarkup, overheadPct, driveTime, fuelCost, marginPct, salesTaxPct];
+    var nums = [hours, workers, laborRate, materialCost, overheadPct, driveTime, fuelCost, marginPct, salesTaxPct];
     var i;
     for (i = 0; i < nums.length; i++) {
       if (!Number.isFinite(nums[i])) return { ok: false, error: 'Invalid input.' };
     }
-    if (hours < 0 || workers < 1 || laborRate < 0 || materialCost < 0 || materialMarkup < 0 ||
+    if (hours < 0 || workers < 1 || workers % 1 !== 0 || laborRate < 0 || materialCost < 0 ||
         overheadPct < 0 || driveTime < 0 || fuelCost < 0 || marginPct < 0 || salesTaxPct < 0 ||
-        marginPct >= MARGIN_CAP || overheadPct > 100 || materialMarkup > 200) {
+        marginPct >= MARGIN_CAP || overheadPct > 100) {
       return { ok: false, error: 'Invalid input.' };
     }
 
@@ -173,12 +185,10 @@
     var driveLabor = roundCentsFromDollars(driveTime * workers * laborRate);
     var materials = roundCentsFromDollars(materialCost);
     var fuel = roundCentsFromDollars(fuelCost);
-    var markup = roundCentsFromDollars(fromCents(materials) * (materialMarkup / 100));
     var direct = labor + driveLabor + materials;
-    var overhead = Math.round(direct * (overheadPct / 100));
+    var overhead = rc(direct * overheadPct / 100);
     var totalCost = direct + overhead + fuel;
-    var margin = marginPct / 100;
-    var price = margin === 0 ? totalCost : Math.round(totalCost / (1 - margin));
+    var price = marginPct === 0 ? totalCost : rc(totalCost * 100 / (100 - marginPct));
     if (price < 0 || totalCost < 0) return { ok: false, error: 'Invalid input.' };
     var profit = price - totalCost;
 
@@ -194,10 +204,10 @@
       fuel: fuel + profitParts[3]
     };
 
-    var salesTax = Math.round(quote.materials * (salesTaxPct / 100));
+    var salesTax = rc(quote.materials * salesTaxPct / 100);
     var customerTotal = price + salesTax;
     var laborHours = hours * workers;
-    var setAside = Math.round(profit * SE_NET_FACTOR * SE_RATE);
+    var setAside = rc(profit * SE_NET_FACTOR * SE_RATE);
 
     return {
       ok: true,
@@ -205,7 +215,6 @@
       driveLabor: fromCents(driveLabor),
       fuel: fromCents(fuel),
       materials: fromCents(materials),
-      markup: fromCents(markup),
       directCost: fromCents(direct),
       overhead: fromCents(overhead),
       totalCost: fromCents(totalCost),
@@ -231,7 +240,6 @@
         driveLabor: driveLabor,
         fuel: fuel,
         materials: materials,
-        markup: markup,
         directCost: direct,
         overhead: overhead,
         totalCost: totalCost,
@@ -259,12 +267,15 @@
     if (n < spec.min) {
       return { level: 'error', message: spec.min === 1 ? 'Enter at least 1.' : 'Minimum is ' + spec.min + '.' };
     }
+    if (spec.integer && Math.floor(n) !== n) {
+      return { level: 'error', message: 'Enter a whole number.' };
+    }
     if (spec.exclusiveMax ? n >= spec.max : n > spec.max) {
       if (spec.exclusiveMax) return { level: 'error', message: 'Margin must be under ' + spec.max + '%.' };
       return { level: 'error', message: 'Maximum is ' + spec.max.toLocaleString('en-US') + '.' };
     }
     if (spec.warnAbove != null && n > spec.warnAbove) {
-      return { level: 'warn', message: 'Margins above ' + spec.warnAbove + '% are unusual. Check that this is margin, not markup.', value: n };
+      return { level: 'warn', message: 'Margins above ' + spec.warnAbove + '% are unusual. Check that this is the share of the price you want to keep.', value: n };
     }
     if (n === 0 && spec.min === 0) {
       var zeroMsg = spec.warnAbove != null
@@ -276,7 +287,7 @@
   }
 
   function validateJob(raw) {
-    var keys = ['hours', 'workers', 'laborRate', 'materialCost', 'materialMarkup', 'overhead', 'driveTime', 'fuelCost', 'margin'];
+    var keys = ['hours', 'workers', 'laborRate', 'materialCost', 'overhead', 'driveTime', 'fuelCost', 'margin'];
     if (Object.prototype.hasOwnProperty.call(raw, 'salesTaxRate')) keys.push('salesTaxRate');
     var messages = {};
     var values = {};
@@ -298,6 +309,7 @@
     classifyRaw: classifyRaw,
     allocateCents: allocateCents,
     roundCents: roundCents,
+    rc: rc,
     formatDollars: formatDollars,
     formatPercent: formatPercent,
     fromCents: fromCents,
@@ -308,6 +320,8 @@
     PAGE_DEFAULTS: PAGE_DEFAULTS,
     SE_NET_FACTOR: SE_NET_FACTOR,
     SE_RATE: SE_RATE,
-    BURDEN: BURDEN
+    BURDEN: BURDEN,
+    OEWS_URL: OEWS_URL,
+    ECEC_URL: ECEC_URL
   };
 });

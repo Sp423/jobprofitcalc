@@ -78,7 +78,7 @@ function table(title, input) {
     '| --- | ---: | ---: |',
     row('Labor', money(before.labor), money(after.labor)),
     row('Materials', money(before.materialsAtCost), money(after.materials)),
-    row('Materials markup', money(before.markup), money(after.markup) + ' (not in price)'),
+    row('Materials markup', money(before.markup) + ' (inside old cost)', 'removed'),
     row('Overhead', money(before.overhead), money(after.overhead)),
     row('Drive labor', money(before.drive - input.fuelCost), money(after.driveLabor)),
     row('Fuel', money(input.fuelCost), money(after.fuel)),

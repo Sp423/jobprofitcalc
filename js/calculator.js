@@ -10,7 +10,6 @@ const $ = {
   workers:  G('workers'),
   labor:    G('laborRate'),
   matCost:  G('materialCost'),
-  matMark:  G('materialMarkup'),
   overhead: G('overhead'),
   drive:    G('driveTime'),
   fuel:     G('fuelCost'),
@@ -29,7 +28,6 @@ const $ = {
   bdDrive:  G('bd-drive'),
   bdFuel:   G('bd-fuel'),
   bdMat:    G('bd-mat'),
-  bdMarkup: G('bd-markup'),
   bdOH:     G('bd-oh'),
   bdTotal:  G('bd-total'),
   bdSet:    G('bd-setaside'),
@@ -64,7 +62,6 @@ const FIELD_IDS = {
   workers: 'workers',
   laborRate: 'laborRate',
   materialCost: 'materialCost',
-  materialMarkup: 'materialMarkup',
   overhead: 'overhead',
   driveTime: 'driveTime',
   fuelCost: 'fuelCost',
@@ -73,10 +70,15 @@ const FIELD_IDS = {
 };
 
 // Job inputs are not stored and are not read from the URL.
-// Drop leftover tax keys from any older build.
-['jpc_seTax', 'jpc_stateTax', 'jpc_qs_seTax', 'jpc_qs_stateTax'].forEach(function (key) {
-  try { localStorage.removeItem(key); } catch (e) { /* private mode */ }
-});
+// Drop leftover keys from older builds, including a saved material markup.
+try {
+  ['jpc_seTax', 'jpc_stateTax', 'jpc_qs_seTax', 'jpc_qs_stateTax', 'jpc_materialMarkup', 'jpc_qs_materialMarkup'].forEach(function (key) {
+    localStorage.removeItem(key);
+  });
+  Object.keys(localStorage).forEach(function (key) {
+    if (/materialMarkup/i.test(key)) localStorage.removeItem(key);
+  });
+} catch (e) { /* private mode */ }
 
 function fmtD(n, dec) {
   if (!Number.isFinite(n)) return dec === 0 ? '$0' : '$0.00';
@@ -105,7 +107,6 @@ function readRaw() {
     workers: $.workers.value,
     laborRate: $.labor.value,
     materialCost: $.matCost.value,
-    materialMarkup: $.matMark.value,
     overhead: $.overhead.value,
     driveTime: $.drive.value,
     fuelCost: $.fuel.value,
@@ -139,7 +140,7 @@ function blankMoney() {
   $.netP.className = 'metric-val c-white';
   $.margin.className = 'metric-val c-white';
   $.eff.className = 'metric-val c-white';
-  [$.bdLabor, $.bdDrive, $.bdFuel, $.bdMat, $.bdMarkup, $.bdOH, $.bdTotal, $.bdSet,
+  [$.bdLabor, $.bdDrive, $.bdFuel, $.bdMat, $.bdOH, $.bdTotal, $.bdSet,
    $.qLabor, $.qMat, $.qDrive, $.qFuel, $.qTotal].forEach(function (el) {
     if (el) el.textContent = '$0.00';
   });
@@ -238,7 +239,6 @@ function update() {
   $.bdDrive.textContent = fmtD(r.driveLabor, 2);
   $.bdFuel.textContent = fmtD(r.fuel, 2);
   $.bdMat.textContent = fmtD(r.materials, 2);
-  $.bdMarkup.textContent = fmtD(r.markup, 2);
   $.bdOH.textContent = fmtD(r.overhead, 2);
   $.bdTotal.textContent = fmtD(r.totalCost, 2);
   $.bdSet.textContent = fmtD(r.setAside, 2);
@@ -259,7 +259,6 @@ function applyTrade(d) {
   $.workers.value = d.workers;
   $.labor.value = d.laborRate;
   $.matCost.value = d.materialCost;
-  $.matMark.value = d.materialMarkup;
   $.overhead.value = d.overhead;
   $.drive.value = d.driveTime;
   $.fuel.value = d.fuelCost;
@@ -280,7 +279,7 @@ $.reset.addEventListener('click', function () {
   update();
 });
 
-const CUST_BUILD_NOTE = 'Labor, materials, and drive each include that line\'s share of overhead and profit. Fuel includes its share of profit only. Materials markup is not added on top.';
+const CUST_BUILD_NOTE = 'Labor, materials, and drive each include that line\'s share of overhead and profit. Fuel includes its share of profit only.';
 
 function quoteText(r) {
   const lbl = $.jobLabel.value || 'Job';
@@ -301,7 +300,6 @@ function quoteText(r) {
     '  Fuel:                 ' + fmtD(r.fuel, 2),
     '  Materials (at cost):  ' + fmtD(r.materials, 2),
     '  Overhead:             ' + fmtD(r.overhead, 2),
-    '  Materials markup:     ' + fmtD(r.markup, 2) + '  (not in cost or price)',
     '  ──────────────────────────────',
     '  Total Cost:           ' + fmtD(r.totalCost, 2),
     '',
@@ -410,8 +408,16 @@ $.custPdf.addEventListener('click', function () {
     G('custValidNote').textContent = dateLong;
   }
 
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
   function mkRow(label, val) {
-    return '<div class="bk-row"><span class="bk-rowlbl">' + label + '</span><span class="bk-rowval">' + fmtD(val, 2) + '</span></div>';
+    return '<div class="bk-row"><span class="bk-rowlbl">' + escapeHtml(label) + '</span><span class="bk-rowval">' + escapeHtml(fmtD(val, 2)) + '</span></div>';
   }
   let itemsHtml = mkRow('Labor', r.quote.labor);
   itemsHtml += mkRow('Materials', r.quote.materials);
@@ -423,7 +429,7 @@ $.custPdf.addEventListener('click', function () {
 
   let footerHtml = '<div class="bk-total"><span class="bk-totallbl">Total Due</span><span class="bk-totalval">' + fmtD(r.customerTotal, 2) + '</span></div>';
   if ($.inclTerms.checked && $.payTerms.value.trim()) {
-    footerHtml += '<div class="bk-row" style="border-top:1px solid var(--border);padding:12px 20px"><span class="bk-rowlbl">Payment Terms</span><span class="bk-rowval" style="font-size:13px;text-align:right">' + $.payTerms.value.trim() + '</span></div>';
+    footerHtml += '<div class="bk-row" style="border-top:1px solid var(--border);padding:12px 20px"><span class="bk-rowlbl">Payment Terms</span><span class="bk-rowval" style="font-size:13px;text-align:right">' + escapeHtml($.payTerms.value.trim()) + '</span></div>';
   }
   G('custFooterRows').innerHTML = footerHtml;
 
@@ -608,7 +614,7 @@ G('stickyResultsBtn').addEventListener('click', function () {
 });
 updateStickyBar();
 
-[$.hours, $.workers, $.labor, $.matCost, $.matMark, $.overhead, $.drive, $.fuel, $.profit].forEach(function (el) {
+[$.hours, $.workers, $.labor, $.matCost, $.overhead, $.drive, $.fuel, $.profit].forEach(function (el) {
   el.addEventListener('input', update);
   el.addEventListener('change', update);
 });

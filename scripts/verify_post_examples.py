@@ -545,6 +545,54 @@ def hourly_derived():
 DERIVED[HOURLY] = hourly_derived
 
 
+SETAX = "self-employment-tax-for-contractors.html"
+# 2026 federal figures, single filer (IRS Rev. Proc. 2025-32).
+STD_DEDUCTION_2026 = 16100
+BRACKETS_2026 = [(12400, 0.10), (50400, 0.12), (105700, 0.22)]
+
+
+def setax_derived():
+    net = 78000
+    se_base = js_round(net * SE_NET_FACTOR)
+    se = js_round(net * SE_NET_FACTOR * SE_RATE)
+    half = js_round(se / 2)
+    taxable = net - half - STD_DEDUCTION_2026
+    fed, lower, rows = 0, 0, {}
+    for upper, rate in BRACKETS_2026:
+        portion = max(0, min(taxable, upper) - lower)
+        tax = js_round(portion * rate)
+        rows["{:.0f}% bracket tax".format(rate * 100)] = "${:,}".format(tax)
+        rows["{:.0f}% bracket portion".format(rate * 100)] = "${:,}".format(portion)
+        fed += portion * rate
+        lower = upper
+    fed = js_round(fed)
+    state = js_round(net * 0.053)
+    burden = se + fed + state
+    eff = burden / net
+    out = {
+        "net x 92.35%": "${:,}".format(se_base),
+        "SE tax": "${:,}".format(se),
+        "half SE deduction": "${:,}".format(half),
+        "2026 standard deduction": "${:,}".format(STD_DEDUCTION_2026),
+        "federal taxable income": "${:,}".format(taxable),
+    }
+    out.update(rows)
+    out.update({
+        "federal income tax": "${:,}".format(fed),
+        "Idaho 5.3% on net (simplified)": "${:,}".format(state),
+        "total tax burden": "${:,}".format(burden),
+        "take-home": "${:,}".format(net - burden),
+        "effective rate": "~{:.1f}%".format(eff * 100),
+        "after-tax on $1,000 profit": "${:,}".format(js_round(1000 * (1 - eff))),
+        "after-tax on $500 profit": "${:,}".format(js_round(500 * (1 - eff))),
+        "cents kept per profit dollar": "about {:.0f} cents".format((1 - eff) * 100),
+    })
+    return out
+
+
+DERIVED[SETAX] = setax_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -581,6 +629,9 @@ STALE = {
     HOURLY: ["$11,016", "5.8%", "$4,176", "$107,992", "$108,000", "$77.14", "$77/hr",
              "rate you should be quoting for your direct labor", "Self-employment and state income tax",
              "typically 15–30% above your cost"],
+    SETAX: ["$14,600", "$57,889", "$7,788", "$2,362", "$23,209", "$54,791", "29.8%", "5.8%",
+            "2024", "$160,000–$170,000", "full tax burden", "gross payments", "Enter your SE tax rate",
+            "price it into every job"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

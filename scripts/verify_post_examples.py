@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 """Recompute every worked example in the blog posts under the PR #47 engine.
 
-Port of priceJob() in js/pricing.js (PR #47):
-  labor       = round_cents(hours * workers * rate)
-  drive_labor = round_cents(drive_hours * workers * rate)
-  materials   = round_cents(material cost)              at cost, no markup
+Port of priceJob() in js/pricing.js at PR #47 head 86eb071:
+  labor       = rc(hours * workers * rate * 100)
+  drive_labor = rc(drive_hours * workers * rate * 100)
+  materials   = rc(material cost * 100)                 at cost; there is no markup
   direct      = labor + drive_labor + materials         overhead base, fuel excluded
-  overhead    = round(direct * overhead%)
+  overhead    = rc(direct * overhead% / 100)
   total_cost  = direct + overhead + fuel
-  price       = round(total_cost / (1 - margin))
+  price       = rc(total_cost * 100 / (100 - margin%))  clamped so margin stays under 95%
   profit      = price - total_cost
-  set_aside   = round(profit * 0.9235 * 0.153)          informational, not in price
+  set_aside   = rc(profit * 0.9235 * 0.153)             SE tax only, informational, not in price
 
-Amounts are integer cents. Rounding is JavaScript Math.round (half up), so the
-results match the browser to the cent.
+Amounts are integer cents. rc() is JavaScript Math.round (half up) applied after
+toPrecision(15), the same as the browser, so results match to the cent.
 
 For each example the script prints the computed lines and checks that every
-figure listed under "expect" appears in the post's HTML. Exit code 1 if any
-figure is missing.
+figure it returns appears verbatim in the post's HTML, then checks that no
+stale strings from the old engine remain. Exit code 1 on any problem.
 
 Usage: python3 scripts/verify_post_examples.py [--summary]
   --summary  print one count per example instead of every figure
@@ -40,20 +40,30 @@ def js_round(x):
     return f + 1 if x - f >= 0.5 else f
 
 
+def rc(x):
+    """pricing.js rc(): Math.round(Number(x.toPrecision(15)))."""
+    return js_round(float("{:.15g}".format(x)))
+
+
 def cents(dollars):
-    return js_round(dollars * 100)
+    return rc(dollars * 100)
+
+
+MARGIN_CAP = 95
 
 
 def price_job(hours, workers, rate, materials, overhead, drive, fuel, margin):
+    assert 0 <= margin < MARGIN_CAP
     labor = cents(hours * workers * rate)
     drive_labor = cents(drive * workers * rate)
     mat = cents(materials)
     fuel_c = cents(fuel)
     direct = labor + drive_labor + mat
-    oh = js_round(direct * (overhead / 100))
+    oh = rc(direct * overhead / 100)
     total = direct + oh + fuel_c
-    m = margin / 100
-    price = total if m == 0 else js_round(total / (1 - m))
+    price = rc(total * 100 / float("{:.12g}".format(100 - margin)))
+    if total > 0 and price >= total * 20:
+        price = total * 20 - 1
     profit = price - total
     labor_hours = hours * workers
     return {
@@ -67,8 +77,8 @@ def price_job(hours, workers, rate, materials, overhead, drive, fuel, margin):
         "price": price,
         "profit": profit,
         "margin_pct": (profit / price * 100) if price else 0.0,
-        "profit_per_labor_hour": js_round(profit / labor_hours) if labor_hours else None,
-        "set_aside": js_round(profit * SE_NET_FACTOR * SE_RATE),
+        "profit_per_labor_hour": rc(profit / labor_hours) if labor_hours else None,
+        "set_aside": rc(profit * SE_NET_FACTOR * SE_RATE),
     }
 
 

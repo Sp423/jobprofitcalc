@@ -78,11 +78,20 @@ scout_lock: LOCKED
 
   <blockquote>"This policy does not create or remove any rights or duties and does not affect any other aspect of EPCA or DOE regulations, including the EPCA preemption provisions at 42 U.S.C. § 6297. This policy statement is not a final agency action, has no legally binding effect on persons or entities outside the federal government, and may be rescinded or modified in the Department's complete discretion."</blockquote>
 
-  <p>So the rule date is Oct 6, 2026, fines are on hold for units built through Oct 5, 2027, and DOE can change or withdraw that hold whenever it wants. If a supplier page headlines October 2027, read that as the end of the penalty window. For pricing, the useful takeaway is narrower than the news: whether you can quote a non-condensing unit now depends on what manufacturers keep building and what your supply house has on the shelf.</p>
+  <p>So the rule date is Oct 6, 2026, fines are on hold for units built through Oct 5, 2027, and DOE can change or withdraw that hold whenever it wants. If a supplier page headlines Oct 2027, read that as the end of the penalty window. For pricing, the useful takeaway is narrower than the news: whether you can quote a non-condensing unit now depends on what manufacturers keep building and what your supply house has on the shelf.</p>
 
   <h3>Where the court case stands</h3>
 
-  <p>The rule is also being fought over in court and at DOE. In an <a href="https://www.supremecourt.gov/DocketPDF/25/25-879/405546/20260428153159320_25-879%20American%20Gas%20Response.pdf">Apr 28, 2026 brief filed by the Solicitor General for DOE</a>, the government agreed with the challengers that the rules rest on an "atextual and unsound" reading of "performance characteristics" and said DOE "is considering a new rulemaking." On Jun 8, 2026, the <a href="https://www.supremecourt.gov/docket/docketfiles/html/public/25-879.html">Supreme Court vacated the D.C. Circuit decision that had upheld the rule</a> and sent the case back for further consideration in light of that position. On Jul 10, 2026, <a href="https://storage.courtlistener.com/recap/gov.uscourts.cadc.38458/gov.uscourts.cadc.38458.01208868246.0.pdf">DOE asked the D.C. Circuit to hold the case in abeyance</a> "pending administrative proceedings to revisit the challenged rules." On Sept. 17, 2026, a D.C. Circuit panel <a href="https://www.apga.org/viewdocument/furnace-rule-challenge-d-c-circuit-remand-after-vacatur-abeyance-proceedings">granted DOE's motion and placed the challenges in abeyance "pending further order of the court,"</a> with DOE status reports due every 90 days starting Dec. 16, 2026. The order does not vacate or remand the commercial water heater rule and says nothing about its Oct. 6, 2026 compliance date. Sen. Mike Lee's Energy Efficiency Reform Act of 2026 (<a href="https://www.congress.gov/bill/119th-congress/senate-bill/5338">S. 5338</a>, introduced Aug. 6) would declare the rule "null and void"; as of Oct 1 it has no cosponsors and no markup after a Sept. 16 committee hearing. Separately, <a href="https://www.federalregister.gov/documents/2026/04/27/2026-08145/energy-conservation-program-notification-of-petition-for-rulemaking">gas industry groups (AGA, APGA and NPGA) petitioned DOE</a> to move the compliance date to Jan 1, 2030 "at a minimum"; DOE took comments through May 27, 2026.</p>
+  <p>The rule is also being fought over in court and at DOE:</p>
+
+  <ul>
+    <li>Apr 28, 2026: in a <a href="https://www.supremecourt.gov/DocketPDF/25/25-879/405546/20260428153159320_25-879%20American%20Gas%20Response.pdf">brief filed by the Solicitor General for DOE</a>, the government agreed with the challengers that the rules rest on an "atextual and unsound" reading of "performance characteristics" and said DOE "is considering a new rulemaking."</li>
+    <li>May 27, 2026: DOE closed comments on a <a href="https://www.federalregister.gov/documents/2026/04/27/2026-08145/energy-conservation-program-notification-of-petition-for-rulemaking">petition from gas industry groups (AGA, APGA and NPGA)</a> to move the compliance date to Jan 1, 2030 "at a minimum."</li>
+    <li>Jun 8, 2026: the <a href="https://www.supremecourt.gov/docket/docketfiles/html/public/25-879.html">Supreme Court vacated the D.C. Circuit decision that had upheld the rule</a> and sent the case back for further consideration in light of the Solicitor General's position.</li>
+    <li>Jul 10, 2026: <a href="https://storage.courtlistener.com/recap/gov.uscourts.cadc.38458/gov.uscourts.cadc.38458.01208868246.0.pdf">DOE asked the D.C. Circuit to hold the case in abeyance</a> "pending administrative proceedings to revisit the challenged rules."</li>
+    <li>Aug 6, 2026: Sen. Mike Lee introduced the Energy Efficiency Reform Act of 2026 (<a href="https://www.congress.gov/bill/119th-congress/senate-bill/5338">S. 5338</a>), which would declare the rule "null and void." As of Oct 1 it has no cosponsors and no markup after a Sep 16 committee hearing.</li>
+    <li>Sep 17, 2026: a D.C. Circuit panel <a href="https://www.apga.org/viewdocument/furnace-rule-challenge-d-c-circuit-remand-after-vacatur-abeyance-proceedings">granted DOE's motion and placed the challenges in abeyance "pending further order of the court,"</a> with DOE status reports due every 90 days starting Dec 16, 2026. The order does not vacate or remand the commercial water heater rule and says nothing about its Oct 6, 2026 compliance date.</li>
+  </ul>
 
   <p>For your quotes, that means the rule's future is unsettled, which is one more reason to quote both options and keep the quote tied to a specific unit.</p>
   </section>
@@ -233,15 +242,14 @@ scout_lock: LOCKED
       <tr><td>Number of Workers</td><td>2</td><td>2</td></tr>
       <tr><td>Hourly Labor Rate (your loaded cost, not your billing rate)</td><td>$45</td><td>$45</td></tr>
       <tr><td>Material Cost</td><td>$5,432.54</td><td>$9,571.95</td></tr>
-      <tr><td>Material Markup</td><td>0%</td><td>0%</td></tr>
-      <tr><td>Overhead &amp; Burden</td><td>17%</td><td>17%</td></tr>
+      <tr><td>Overhead %</td><td>17%</td><td>17%</td></tr>
       <tr><td>Drive Time</td><td>1 hr</td><td>1 hr</td></tr>
       <tr><td>Fuel / Travel Cost</td><td>$18</td><td>$18</td></tr>
       <tr><td>Desired Profit Margin</td><td>20%</td><td>20%</td></tr>
     </tbody>
   </table>
 
-  <p>Material Markup stays at 0% here because this example earns margin on the box; Step 5 covers the other way to do it. Fuel stays out of the overhead base, so overhead is figured on labor, drive labor, and materials only. Leave any field not listed at zero so the result lines up with the table above. Plumbing shops can start from the <a href="/plumber-job-pricing">plumber pricing page</a> or go straight to the <a href="/calculator">calculator</a>. For the general walkthrough of pricing any job this way, see <a href="/blog/how-to-price-a-contractor-job.html">how to price a contractor job</a>.</p>
+  <p>Fuel stays out of the overhead base, so overhead is figured on labor, drive labor, and materials only. Leave any field not listed at zero so the result lines up with the table above. Plumbing shops can start from the <a href="/plumber-job-pricing">plumber pricing page</a> or go straight to the <a href="/calculator">calculator</a>. For the general walkthrough of pricing any job this way, see <a href="/blog/how-to-price-a-contractor-job.html">how to price a contractor job</a>.</p>
   </section>
 
   <!-- Ad Zone D: In-content --><!-- End Ad Zone D -->
@@ -275,7 +283,7 @@ scout_lock: LOCKED
   <section id="step-6-validity">
   <h2>Step 6: Tie the quote to the unit you priced</h2>
 
-  <p>Equipment prices moved several times this year. Trade press (Supply House Times, Feb 27, 2026) reported A.O. Smith increases effective Feb 6, 2026 of 7% on standard commercial gas, 9% on single and multi-flue and all other commercial gas, and 3% on residential-duty commercial gas. A Bradford White letter dated Jan 29, 2026 announced 5% on commercial gas and electric tank units for orders on or after Mar 16, 2026. A June 15, 2026 article in The Hardwire News reported a 7% A.O. Smith water heater increase effective Jun 22, 2026, without saying whether commercial lines were included.</p>
+  <p>Equipment prices moved several times this year. Trade press (Supply House Times, Feb 27, 2026) reported A.O. Smith increases effective Feb 6, 2026 of 7% on standard commercial gas, 9% on single and multi-flue and all other commercial gas, and 3% on residential-duty commercial gas. A Bradford White letter dated Jan 29, 2026 announced 5% on commercial gas and electric tank units for orders on or after Mar 16, 2026. A Jun 15, 2026 article in The Hardwire News reported a 7% A.O. Smith water heater increase effective Jun 22, 2026, without saying whether commercial lines were included.</p>
 
   <p>Your usual validity window still applies (the <a href="/blog/how-long-is-a-contractor-quote-good-for.html">quote validity post</a> covers how to set it). What this job adds is an availability clause on the specific unit, because a non-condensing unit you quoted may simply be gone when the customer calls back. Something like:</p>
 

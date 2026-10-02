@@ -593,6 +593,25 @@ def setax_derived():
 DERIVED[SETAX] = setax_derived
 
 
+ESTIMATE = "how-to-write-contractor-estimate.html"
+OVERHEAD = "contractor-overhead-percentage.html"
+
+
+# $500 labor (10 hrs x 1 worker x $50 example cost) + $800 materials, 20% overhead.
+@example(OVERHEAD, "Apply overhead to a bid", hours=10, workers=1, rate=50, materials=800,
+         overhead=20, drive=0, fuel=0, margin=0)
+def _(r):
+    return {"labor": usd0(r["labor"]), "materials": usd0(r["materials"]), "direct": usd0(r["direct"]),
+            "overhead": usd0(r["overhead"]), "cost basis before profit": usd0(r["total_cost"])}
+
+
+def overhead_derived():
+    return {"overhead rate from the books": "{:.1f}%".format(12500 / (38000 + 22000) * 100)}
+
+
+DERIVED[OVERHEAD] = overhead_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -632,6 +651,9 @@ STALE = {
     SETAX: ["$14,600", "$57,889", "$7,788", "$2,362", "$23,209", "$54,791", "29.8%", "5.8%",
             "2024", "$160,000–$170,000", "full tax burden", "gross payments", "Enter your SE tax rate",
             "price it into every job"],
+    ESTIMATE: ["and tax rates"],
+    OVERHEAD: ["before profit and taxes", "(labor + materials) on every job", "5–8 percentage points",
+               "5–8 points", "Studies of trade contractor", "3–5 points", "a healthy range is"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
 

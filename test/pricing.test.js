@@ -615,3 +615,21 @@ test('margin inputs keep at most 2 decimal places, and the cap stays under 95%',
   underCap(penny);
   assert.notEqual(penny.price, 0.2);
 });
+
+test('trailing zeros on a margin do not count as extra decimal places', () => {
+  const base = {
+    hours: '1', workers: '1', laborRate: '40', materialCost: '0',
+    overhead: '0', driveTime: '0', fuelCost: '0'
+  };
+  const zeros = P.validateJob(Object.assign({}, base, { margin: '20.000' }));
+  assert.equal(zeros.ok, true);
+  assert.equal(zeros.messages.margin.level, 'ok');
+  assert.equal(zeros.values.margin, 20);
+  const trailingDot = P.validateJob(Object.assign({}, base, { margin: '20.' }));
+  assert.equal(trailingDot.ok, true);
+  assert.equal(trailingDot.messages.margin.level, 'ok');
+  assert.equal(trailingDot.values.margin, 20);
+  const extra = P.validateJob(Object.assign({}, base, { margin: '20.001' }));
+  assert.equal(extra.ok, false);
+  assert.match(extra.messages.margin.message, /2 decimal places/);
+});

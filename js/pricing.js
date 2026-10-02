@@ -278,8 +278,10 @@
       return { level: 'error', message: 'Enter a whole number.' };
     }
     if (spec.maxDecimals != null) {
-      var dot = s.indexOf('.');
-      var places = dot === -1 ? 0 : s.length - dot - 1;
+      var counted = s;
+      if (counted.indexOf('.') !== -1) counted = counted.replace(/0+$/, '').replace(/\.$/, '');
+      var dot = counted.indexOf('.');
+      var places = dot === -1 ? 0 : counted.length - dot - 1;
       if (places > spec.maxDecimals) {
         return { level: 'error', message: 'Use at most ' + spec.maxDecimals + ' decimal places.' };
       }

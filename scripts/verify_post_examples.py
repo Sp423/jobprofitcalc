@@ -358,7 +358,6 @@ def after_derived():
         "safe method $37.00 x 1.5": "${:.2f}".format(37 * 1.5),
         "precise method": "${:.2f}".format((28 + 4.30) * 1.5 + 4.70),
         "weighted rate (6 ST + 2 OT)": "${:.2f}".format(js_round((6 * 37 + 2 * 55.5) / 8 * 100) / 100),
-        "markup reported (35% of $32)": "$11.20",
         "daytime price minus real cost": usd(profit),
         "resulting margin": "{:.1f}%".format(profit / day["price"] * 100),
     }

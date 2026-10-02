@@ -374,7 +374,7 @@
 
             <h2 id="solo-example">The solo cleanup, run through the calculator</h2>
 
-            <p>Open the <a href="/calculator">calculator</a>, pick the Landscaper preset, and then overwrite every field. The preset loads 5 hours, 2 workers, $26 an hour, $100 of material at 20% markup, and a full hour of drive, which describes a different job entirely. Here are the example inputs and what the calculator returns.</p>
+            <p>Open the <a href="/calculator">calculator</a>, pick the Landscaper preset, and then overwrite every field. The preset loads 5 hours, 2 workers, $27 an hour, $100 of material, and a full hour of drive, which describes a different job entirely. Here are the example inputs and what the calculator returns.</p>
 
             <div class="calc-example" role="table" aria-label="Solo dry leaf cleanup, example numbers only">
               <div class="calc-example-header">Solo Operator, Dry Leaves, Hauled to Yard-Waste Site (example numbers)</div>
@@ -383,7 +383,6 @@
               <div class="calc-row"><span>Number of Workers</span><span class="calc-val">1</span></div>
               <div class="calc-row"><span>Hourly Labor Rate (burdened)</span><span class="calc-val">$40</span></div>
               <div class="calc-row"><span>Material Cost (yard-waste load fee)</span><span class="calc-val">$30</span></div>
-              <div class="calc-row"><span>Material Markup</span><span class="calc-val">0%</span></div>
               <div class="calc-row"><span>Overhead %</span><span class="calc-val">15%</span></div>
               <div class="calc-row"><span>Drive Time (round trip plus dump detour)</span><span class="calc-val">0.75 hr</span></div>
               <div class="calc-row"><span>Fuel / Travel Cost</span><span class="calc-val">$12</span></div>
@@ -410,7 +409,7 @@
 
             <p>Showing disposal as its own line on the quote has a different advantage. When a customer compares your $273.75 to a competitor's lower number, a visible disposal line shows you are including something the other quote may leave out. Some shops do both: they run disposal through the calculator to set the total, then split the total into a labor line and a disposal line on the written quote. The customer sees the breakdown and you still get your full price.</p>
 
-            <p>Set Material Markup to 0% for dump fees. The field is reported in dollars only and does not change the price, and overhead and margin already apply to that dollar, so a markup there would only show markup you aren't charging. If you buy paper yard-waste bags, the same logic applies, and the bag count comes from your supply receipts divided by the bags used last season.</p>
+            <p>There is no separate markup field, so dump fees go in at cost. The margin covers profit on materials, and overhead applies to that dollar too. If you buy paper yard-waste bags, the same logic applies, and the bag count comes from your supply receipts divided by the bags used last season.</p>
 
             <h3>Curbside municipal pickup versus hauling it yourself</h3>
 
@@ -431,7 +430,7 @@
               <div class="calc-row"><span>Estimated Hours</span><span class="calc-val">1.75 hr</span></div>
               <div class="calc-row"><span>Number of Workers</span><span class="calc-val">2</span></div>
               <div class="calc-row"><span>Hourly Labor Rate (burdened)</span><span class="calc-val">$40</span></div>
-              <div class="calc-row"><span>Material Cost (yard-waste load fee), 0% markup</span><span class="calc-val">$30</span></div>
+              <div class="calc-row"><span>Material Cost (yard-waste load fee)</span><span class="calc-val">$30</span></div>
               <div class="calc-row"><span>Overhead %</span><span class="calc-val">15%</span></div>
               <div class="calc-row"><span>Drive Time (round trip plus dump detour)</span><span class="calc-val">0.75 hr</span></div>
               <div class="calc-row"><span>Fuel / Travel Cost</span><span class="calc-val">$12</span></div>
@@ -501,7 +500,7 @@
               <div class="calc-row"><span>Estimated Hours</span><span class="calc-val">4.25 hr</span></div>
               <div class="calc-row"><span>Number of Workers</span><span class="calc-val">1</span></div>
               <div class="calc-row"><span>Hourly Labor Rate (burdened)</span><span class="calc-val">$40</span></div>
-              <div class="calc-row"><span>Material Cost (weight-based dump fee, wet load), 0% markup</span><span class="calc-val">$55</span></div>
+              <div class="calc-row"><span>Material Cost (weight-based dump fee, wet load)</span><span class="calc-val">$55</span></div>
               <div class="calc-row"><span>Overhead %</span><span class="calc-val">15%</span></div>
               <div class="calc-row"><span>Drive Time</span><span class="calc-val">0.75 hr</span></div>
               <div class="calc-row"><span>Fuel / Travel Cost</span><span class="calc-val">$12</span></div>
@@ -533,7 +532,7 @@
               <div class="calc-example-header">Solo Operator, Dry Leaves, Overtime Hours (example numbers)</div>
               <div class="calc-row"><span>Estimated Hours</span><span class="calc-val">3 hr</span></div>
               <div class="calc-row"><span>Hourly Labor Rate (overtime, burdened)</span><span class="calc-val">$55</span></div>
-              <div class="calc-row"><span>Material Cost, 0% markup</span><span class="calc-val">$30</span></div>
+              <div class="calc-row"><span>Material Cost</span><span class="calc-val">$30</span></div>
               <div class="calc-row"><span>Drive Time / Fuel</span><span class="calc-val">0.75 hr / $12</span></div>
               <div class="calc-row"><span>Labor ($55 x 3 hr x 1 worker)</span><span class="calc-val">$165.00</span></div>
               <div class="calc-row"><span>Drive labor ($55 x 0.75 hr x 1 worker)</span><span class="calc-val">$41.25</span></div>
@@ -562,7 +561,7 @@
               <div class="calc-row"><span>Estimated Hours</span><span class="calc-val">1.5 hr</span></div>
               <div class="calc-row"><span>Number of Workers</span><span class="calc-val">1</span></div>
               <div class="calc-row"><span>Hourly Labor Rate (burdened)</span><span class="calc-val">$40</span></div>
-              <div class="calc-row"><span>Material Cost (lighter load), 0% markup</span><span class="calc-val">$15</span></div>
+              <div class="calc-row"><span>Material Cost (lighter load)</span><span class="calc-val">$15</span></div>
               <div class="calc-row"><span>Overhead %</span><span class="calc-val">15%</span></div>
               <div class="calc-row"><span>Drive Time (routed share)</span><span class="calc-val">0.25 hr</span></div>
               <div class="calc-row"><span>Fuel / Travel Cost (routed share)</span><span class="calc-val">$5</span></div>
@@ -615,7 +614,6 @@
               <li>Check that Number of Workers matches the crew in the truck and that Drive Time is entered once, not pre-multiplied by the crew.</li>
               <li>Confirm the dump fee reflects wet weight if the site charges by weight and the job is late in the season.</li>
               <li>Compare the quote to your own minimum charge. Nothing should go out below it.</li>
-              <li>Set the Material Markup field to 0% if you put the dump fee there. It no longer changes the price, but a leftover 20% from the Landscaper preset still shows a markup figure that isn't in the quote.</li>
             </ul>
 
             <h2 id="mistakes">Mistakes that quietly lower your price, and the fix for each</h2>

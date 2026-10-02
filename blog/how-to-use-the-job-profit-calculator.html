@@ -62,11 +62,11 @@
     "name": "How to Use the Job Profit Calculator",
     "description": "Enter your job details into the free Job Profit Calculator to get an accurate price and see your real pre-tax profit after every job cost.",
     "step": [
-      { "@type": "HowToStep", "position": 1, "name": "Select your trade", "text": "Choose your trade from the dropdown to auto-fill realistic default values for labor, materials, markup, and overhead." },
+      { "@type": "HowToStep", "position": 1, "name": "Select your trade", "text": "Choose your trade from the dropdown to auto-fill realistic default values for labor, materials, and overhead." },
       { "@type": "HowToStep", "position": 2, "name": "Name the job", "text": "Enter a job description or label so the quote is easy to identify later." },
       { "@type": "HowToStep", "position": 3, "name": "Enter your labor", "text": "Enter estimated hours, number of workers, and your hourly labor rate. The rate is your loaded cost per hour, not what you charge." },
-      { "@type": "HowToStep", "position": 4, "name": "Add materials and markup", "text": "Enter your material cost. The material markup field is reported in dollars only and is not added to the price." },
-      { "@type": "HowToStep", "position": 5, "name": "Set overhead", "text": "Enter your Overhead % to cover vehicle, insurance, tools, and admin costs. It is applied to direct job costs: labor, drive labor, and materials at cost." },
+      { "@type": "HowToStep", "position": 4, "name": "Add materials", "text": "Enter your material cost at what you paid. There is no separate markup field. The margin covers profit on materials." },
+      { "@type": "HowToStep", "position": 5, "name": "Set overhead", "text": "Enter your Overhead % to cover vehicle, insurance, tools, and admin costs. Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded)." },
       { "@type": "HowToStep", "position": 6, "name": "Add travel", "text": "Enter drive time and fuel or travel cost for the job. Drive time is multiplied by the number of workers." },
       { "@type": "HowToStep", "position": 7, "name": "Set your profit margin", "text": "Enter your desired profit margin. The price is total cost divided by (1 minus margin). No tax is added to the price." },
       { "@type": "HowToStep", "position": 8, "name": "Read your results and send the quote", "text": "Review the suggested charge, your pre-tax profit, and profit per labor hour, then copy or save a customer-facing quote." }
@@ -97,7 +97,7 @@
       {
         "@type": "Question",
         "name": "Do I have to select a trade to use the calculator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No, but it helps. Selecting a trade pre-fills realistic default values for hours, labor rate, material markup, and overhead, which you can then adjust. You can also skip the trade dropdown and enter every value manually." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No, but it helps. Selecting a trade pre-fills realistic default values for hours, labor rate, material cost, and overhead, which you can then adjust. You can also skip the trade dropdown and enter every value manually." }
       },
       {
         "@type": "Question",
@@ -338,7 +338,7 @@
 
             <h2 id="step-1">Step 1: Select Your Trade</h2>
 
-            <p>Choose your trade from the dropdown — <a href="/plumber-job-pricing">plumber</a>, <a href="/electrician-job-pricing">electrician</a>, <a href="/hvac-job-pricing">HVAC</a>, roofer, painter, landscaper, general contractor, carpenter, flooring, concrete, drywall, or handyman. The moment you pick one, the calculator <strong>auto-fills example values</strong> for hours, labor rate, material cost, markup, overhead, and drive time. The labor rate is an example loaded cost (the BLS median wage for that trade times a construction benefit burden), not a billing rate. The other fields are example job shapes.</p>
+            <p>Choose your trade from the dropdown — <a href="/plumber-job-pricing">plumber</a>, <a href="/electrician-job-pricing">electrician</a>, <a href="/hvac-job-pricing">HVAC</a>, roofer, painter, landscaper, general contractor, carpenter, flooring, concrete, drywall, or handyman. The moment you pick one, the calculator <strong>auto-fills example values</strong> for hours, labor rate, material cost, overhead, and drive time. The labor rate is an example loaded cost (the BLS median wage for that trade times a construction benefit burden), not a billing rate. The other fields are example job shapes.</p>
 
             <p>These defaults are a starting point, not a final answer. Every field stays fully editable — adjust each one to match the specific job in front of you. If you'd rather start from scratch, you can skip the dropdown and type every value manually.</p>
 
@@ -361,15 +361,15 @@
 
             <p>Your total labor cost is hours × workers × rate. Entering your billing rate here would count your profit as a cost and inflate the price. If you're not sure what an hour of labor costs you, our <a href="/blog/how-to-calculate-contractor-hourly-rate.html">guide to calculating your hourly rate</a> walks through the exact formula.</p>
 
-            <h2 id="step-4">Step 4: Add Materials and Markup</h2>
+            <h2 id="step-4">Step 4: Add Materials</h2>
 
             <p>In the <strong>Materials</strong> section, enter your <strong>Material Cost</strong> (what you pay for parts and supplies, including any sales tax you paid on them). Overhead and margin are applied to materials at cost.</p>
 
-            <p>The <strong>Material Markup</strong> field is for reference only. The calculator shows the markup in dollars, but it does not add it to your cost or to the price. Your margin already puts profit on the materials, so stacking a markup on top would charge profit twice. For more on how markup and margin relate, see our <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">guide to marking up materials</a>.</p>
+            <p>There is no separate markup field. Your margin covers profit on materials, so a markup on top would charge profit twice. For more on how markup and margin relate, see our <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">guide to marking up materials</a>.</p>
 
             <h2 id="step-5">Step 5: Set Your Overhead</h2>
 
-            <p>The <strong>Overhead %</strong> field is a percentage applied to your direct job costs: labor, drive labor, and materials at cost. Fuel is not in that base. It covers everything that keeps your business running but isn't tied to one job: vehicle, insurance, tools, software, marketing, and admin time. Work it out as your annual overhead divided by your annual direct job costs, and leave out payroll taxes and workers' comp if they're already in your hourly labor rate. If you're not sure of your number, our <a href="/blog/contractor-overhead-percentage.html">overhead percentage guide</a> shows you how to calculate it from your own expenses.</p>
+            <p>The <strong>Overhead %</strong> field covers everything that keeps your business running but isn't tied to one job: vehicle, insurance, tools, software, marketing, and admin time. Work it out as your annual overhead divided by your annual direct job costs, and leave out payroll taxes and workers' comp if they're already in your hourly labor rate. Its tooltip reads: "Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded)." If you're not sure of your number, our <a href="/blog/contractor-overhead-percentage.html">overhead percentage guide</a> shows you how to calculate it from your own expenses.</p>
 
             <h2 id="step-6">Step 6: Add Travel</h2>
 
@@ -387,7 +387,7 @@
             <table class="data-table" aria-label="Profit input fields">
               <thead><tr><th>Field</th><th>What to enter</th></tr></thead>
               <tbody>
-                <tr><td class="row-label">Desired Profit Margin</td><td>The percent of your final charge you want to keep as pre-tax profit. The price is total cost ÷ (1 − margin). Margin is not the same as markup, and the built-in tooltip explains the difference.</td></tr>
+                <tr><td class="row-label">Desired Profit Margin</td><td>The percent of your final charge you want to keep as pre-tax profit. The price is total cost ÷ (1 − margin). Its tooltip reads: "Your margin covers profit on materials too. No separate markup needed."</td></tr>
               </tbody>
             </table>
 
@@ -404,7 +404,7 @@
               <li><strong>Profit per labor hour</strong>: Net profit divided by labor hours (estimated hours × workers; drive time is not counted). This is the number that tells you whether a job is actually worth taking.</li>
             </ul>
 
-            <p>Click <strong>View Full Cost Breakdown</strong> to expand a line-by-line accounting of labor, drive labor, fuel, materials at cost, and overhead, which add up to total cost before profit. Below the total are two reference lines that are not part of the price: <strong>Materials markup (not added)</strong> and the <strong>Estimated owner tax set-aside</strong>.</p>
+            <p>Click <strong>View Full Cost Breakdown</strong> to expand a line-by-line accounting of labor, drive labor, fuel, materials at cost, and overhead, which add up to total cost before profit. Below the total is one reference line that is not part of the price: the <strong>Estimated owner tax set-aside</strong>.</p>
 
             <div class="callout">
               <p><strong>Watch the money badge.</strong> The colored badge at the top of the results panel — green, amber, or red — gives you an instant read on whether the job is healthily profitable, thin, or losing money at the numbers you've entered.</p>
@@ -434,7 +434,7 @@
             <h2 id="tips">Tips for Accurate Pricing</h2>
 
             <ol>
-              <li><strong>Update the defaults to your real numbers.</strong> The trade defaults are examples. Your labor rate, overhead, and markup are specific to your business — adjust them once and they'll be close every time.</li>
+              <li><strong>Update the defaults to your real numbers.</strong> The trade defaults are examples. Your labor rate, overhead, and margin are specific to your business — adjust them once and they'll be close every time.</li>
               <li><strong>Don't leave overhead at zero.</strong> It's the most commonly forgotten cost and the fastest way to quietly lose money.</li>
               <li><strong>Check the Profit per labor hour before you commit.</strong> A big suggested charge can still hide thin profit per hour if the job eats more hours than it looks.</li>
               <li><strong>Re-check your rates periodically.</strong> Insurance, fuel, and material costs change. Revisit your default inputs a couple of times a year.</li>
@@ -494,7 +494,7 @@
               <li><a href="#step-1">Step 1: Select your trade</a></li>
               <li><a href="#step-2">Step 2: Name the job</a></li>
               <li><a href="#step-3">Step 3: Enter labor</a></li>
-              <li><a href="#step-4">Step 4: Materials + markup</a></li>
+              <li><a href="#step-4">Step 4: Materials</a></li>
               <li><a href="#step-5">Step 5: Set overhead</a></li>
               <li><a href="#step-6">Step 6: Add travel</a></li>
               <li><a href="#step-7">Step 7: Profit margin</a></li>

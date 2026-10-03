@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute every worked example in the blog posts under the PR #47 engine.
+"""Recompute every worked example in the blog posts and trade landing pages under the PR #47 engine.
 
 Port of priceJob() in js/pricing.js at PR #47 head 86eb071:
   labor       = rc(hours * workers * rate * 100)
@@ -29,6 +29,12 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BLOG = os.path.join(ROOT, "blog")
+
+
+def page_path(page):
+    """Blog posts live in blog/; trade landing pages live at the site root."""
+    path = os.path.join(BLOG, page)
+    return path if os.path.exists(path) else os.path.join(ROOT, page)
 
 SE_NET_FACTOR = 0.9235
 SE_RATE = 0.153
@@ -687,6 +693,97 @@ def overhead_derived():
 DERIVED[OVERHEAD] = overhead_derived
 
 
+# ---- hvac-job-pricing.html (site root) ------------------------------------
+HVAC_PAGE = "hvac-job-pricing.html"
+# Example equipment at cost: condenser $1,945 + coil $965 + refrigerant 8 lb x $21
+# + line set and supplies $180 + permit $150.
+HVAC_MATERIALS = 1945 + 965 + 8 * 21 + 180 + 150
+HVAC_INSTALL = dict(hours=5, workers=2, rate=42, materials=HVAC_MATERIALS, overhead=20,
+                    drive=1.0, fuel=15, margin=25)
+
+
+@example(HVAC_PAGE, "4-ton split system install, equipment at cost", **HVAC_INSTALL)
+def _(r):
+    gross = r["price"] - r["direct"] - r["fuel"]
+    return {"materials input": "$" + "{:,}".format(HVAC_MATERIALS),
+            "labor": usd(r["labor"]), "drive labor": usd(r["drive_labor"]),
+            "materials": usd(r["materials"]), "direct": usd(r["direct"]),
+            "overhead": usd(r["overhead"]), "fuel": usd(r["fuel"]),
+            "total cost": usd(r["total_cost"]), "price": usd(r["price"]),
+            "profit": usd(r["profit"]), "margin": "{:.1f}% margin".format(r["margin_pct"]),
+            "gross before overhead": usd(gross),
+            "gross margin before overhead": "{:.1f}%".format(gross / r["price"] * 100)}
+
+
+def hvac_page_derived():
+    r410 = [18490 / 25, 21700 / 25, 22500 / 25]   # 25-lb cylinders, cents per lb
+    r454 = [40900 / 20, 44990 / 20]               # 20-lb cylinders, cents per lb
+    return {
+        "refrigerant 8 lb x $21": "refrigerant $" + str(8 * 21),
+        "R-410A low, per lb": "about $" + str(int(min(r410) // 100)),
+        "R-410A high, per lb": "to $" + str(js_round(max(r410) / 100)) + " a pound",
+        "R-454B low, per lb": "about $" + str(int(min(r454) // 100)),
+        "R-454B high, per lb": "to $" + str(math.ceil(max(r454) / 100)) + " a pound",
+    }
+
+
+DERIVED[HVAC_PAGE] = hvac_page_derived
+
+
+# ---- how-to-mark-up-materials-as-a-contractor.html -------------------------
+MARKUP = "how-to-mark-up-materials-as-a-contractor.html"
+
+
+@example(MARKUP, "Example job, materials at cost, 20% margin", hours=3, workers=1, rate=45,
+         materials=400, overhead=15, drive=0.5, fuel=10, margin=20)
+def _(r):
+    return std_lines(r)
+
+
+def markup_derived():
+    def m(markup):
+        return markup / (1 + markup)
+    return {
+        "25% markup on $400": usd0(js_round(40000 * 1.25)),
+        "25% markup as margin": "{:.0f}% margin".format(m(0.25) * 100),
+        "$400 at 20% margin": "$400 ÷ 0.80 = " + usd0(js_round(40000 / 0.80)),
+        "markup for 25% margin": "{:.1f}% <em>markup</em>".format(0.25 / 0.75 * 100),
+        "$400 at 25% margin": usd(js_round(40000 / 0.75)),
+        "Level 29% gross margin as markup": "About {:.0f}%".format(0.29 / 0.71 * 100),
+        "Level 34% gross margin as markup": "to {:.0f}% markup".format(0.34 / 0.66 * 100),
+    }
+
+
+DERIVED[MARKUP] = markup_derived
+
+
+# ---- contractor-profit-margins-by-trade.html -------------------------------
+MARGINS = "contractor-profit-margins-by-trade.html"
+
+
+def margins_derived():
+    before, after = 90000, 100000 * 1.05
+    return {
+        "35% gross less 20 points": "net margin is {}%".format(35 - 20),
+        "35% gross less 28 points": "net margin is {}%".format(35 - 28),
+        "20% of $150,000": "${:,}".format(150000 * 20 // 100),
+        "10% of $150,000": "${:,}".format(150000 * 10 // 100),
+        "30% of $150,000": "${:,}".format(150000 * 30 // 100),
+        "20% of $200,000": "${:,}".format(200000 * 20 // 100),
+        "8% of $400,000": "${:,}".format(400000 * 8 // 100),
+        "$900 cost on $1,000 price": "{:.1f}% margin".format((100000 - before) / 100000 * 100),
+        "price up 5%": "${:,.0f}".format(after / 100),
+        "margin after 5% raise": "becomes {:.1f}%".format((after - before) / after * 100),
+        "SE tax share of profit": "about {:.1f}% of profit".format(SE_RATE * SE_NET_FACTOR * 100),
+        "25% markup as margin": "a 25% markup produces a {:.0f}% margin".format(25 / 125 * 100),
+    }
+
+
+DERIVED[MARGINS] = margins_derived
+
+PLUMBER_PAGE = "plumber-job-pricing.html"
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -702,6 +799,10 @@ POSTS = [
     "self-employment-tax-for-contractors.html",
     "how-to-write-contractor-estimate.html",
     "contractor-overhead-percentage.html",
+    HVAC_PAGE,
+    PLUMBER_PAGE,
+    MARGINS,
+    MARKUP,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -718,6 +819,8 @@ STALE_EVERYWHERE = [
     # Final QA (Hank, Oct 2 2026): Idaho is not a flat 5.3%; first $4,811 is taxed at 0%.
     "flat 5.3%", "5.3% flat", "Idaho 5.3%",
 ]
+# The markup post teaches material markup as a pricing idea, so the old field name is a normal phrase there.
+STALE_EXEMPT = {MARKUP: {"Material Markup", "Material markup"}}
 # Old example figures that must be gone after the rerun.
 STALE = {
     LEAF: ["$322.55", "$258.04", "$402.25", "$93.98", "$452.25", "$417.29", "$152.25",
@@ -760,6 +863,34 @@ STALE = {
         "very top of the calculator", "Adjust them once", "stored anywhere", "stored on a server",
         "Revisit your default inputs", "settings and defaults are dialed in"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
+    # Pulse sourcing check, Oct 3 2026: contradicted or unsourced wording on these pages.
+    HVAC_PAGE: [
+        "$65–$120", "$35–$55", "~30% net", "25–40% net", "highest-margin", "15–22% are typical",
+        "$85 to $175", "$125 to $250", "25–50% above", "$95 to $150", "below $95", "$95–$150",
+        "$250 – $425", "$280 – $395", "$265 – $395", "$175 – $250", "$325 – $550", "$550 – $850",
+        "$600 – $950", "$450 – $750", "$150 – $275", "$250 – $375", "$650 – $1,100+",
+        "$500 – $1,200", "$375 – $750", "$375 – $900", "$750 – $1,500", "$1,000 – $2,100",
+        "$4,370", "$6,225", "$2,700", "$1,350", "10 hrs × $110", "$240</td>", "$480", "$270",
+        "marked up 30–50%", "Mark up equipment", "marked up significantly", "5–10 years",
+        "Most HVAC businesses establish", "manufactured in the U.S. can no longer",
+        "taxes already in the number", "$75–$175", "prices have increased substantially",
+        "Rough benchmarks for residential installation labor"],
+    PLUMBER_PAGE: [
+        "between $75 and $150", "$100–$200", "$75–$150", "taxes already in the quote",
+        "overhead, drive, and tax", "no material run, and no tax", "command higher margins"],
+    MARGINS: [
+        "18% – 28%", "18% – 25%", "15% – 25%", "12% – 20%", "15% – 22%", "8% – 15%",
+        "20% – 30%", "14% – 22%", "12% – 22%", "10% – 18%", "10% – 16%", "12% – 18%",
+        "Service / Repair Work", "should be the floor", "Margins below 15%",
+        "under more pressure in 2026", "18–28%", "20–25% net", "have higher margins than drywall",
+        "28–32%", "15–30% above your cost", "your tax rates", "12–18 months", "18 months ago",
+        "estimates based on industry data", "overhead, and taxes through the calculator",
+        "almost certainly underpricing"],
+    MARKUP: [
+        "15–30% markup on materials is standard", "20–35%", "20–30%", "15–25%", "15–20%",
+        "25–35%", "typically 10–15%", "set your markup percentage", "uses markup on cost",
+        "Markup and profit margin are separate things in the calculator",
+        "material cost and markup percentage", "passing materials through at cost"],
 }
 # Approved estimate copy names the optional Material Markup field.
 STALE_ALLOW = {

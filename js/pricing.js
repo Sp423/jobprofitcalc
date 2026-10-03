@@ -28,7 +28,7 @@
   'use strict';
 
   // IRS self-employment tax on net earnings: 92.35% × 15.3%.
-  // https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax
+  // https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes
   // Informational set-aside only. Not an income-tax rate. Not added to the price.
   var SE_NET_FACTOR = 0.9235;
   var SE_RATE = 0.153;

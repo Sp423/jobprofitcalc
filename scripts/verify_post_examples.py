@@ -784,6 +784,19 @@ DERIVED[MARGINS] = margins_derived
 PLUMBER_PAGE = "plumber-job-pricing.html"
 
 
+def plumber_derived():
+    # HomeGuide plumber cost (Sep 25, 2023, US national), verified in the PR #48 sourcing check.
+    return {
+        "HomeGuide plumber labor range": "roughly $45 to $150 an hour",
+        "HomeGuide service-call range": "about $50 to $200 that often cover the first hour",
+        "HomeGuide citation": "HomeGuide, Sep 25, 2023, US national",
+        "HomeGuide link": "https://homeguide.com/costs/plumber-cost",
+    }
+
+
+DERIVED[PLUMBER_PAGE] = plumber_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -877,7 +890,8 @@ STALE = {
         "Rough benchmarks for residential installation labor"],
     PLUMBER_PAGE: [
         "between $75 and $150", "$100–$200", "$75–$150", "taxes already in the quote",
-        "overhead, drive, and tax", "no material run, and no tax", "command higher margins"],
+        "overhead, drive, and tax", "no material run, and no tax", "command higher margins",
+        "this page doesn't quote one"],
     MARGINS: [
         "18% – 28%", "18% – 25%", "15% – 25%", "12% – 20%", "15% – 22%", "8% – 15%",
         "20% – 30%", "14% – 22%", "12% – 22%", "10% – 18%", "10% – 16%", "12% – 18%",

@@ -95,7 +95,9 @@ function restoreMarkup() {
     if (stored !== null) $.matMark.value = stored;
   } catch (e) { /* private mode */ }
   // A restored 600 or -5 is committed once on load. Typing is not in progress.
+  // Write the clamped 500 or 0 back so storage matches the field.
   showMarkupMessage(true);
+  saveMarkup();
 }
 
 function fmtD(n, dec) {

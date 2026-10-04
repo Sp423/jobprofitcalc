@@ -160,35 +160,75 @@
     return c == null ? NaN : fromCents(c);
   }
 
-  // Split `total` cents across weights. Largest fractional remainder first.
-  // Ties go to the lower index so the split is deterministic.
+  // Split `total` cents across weights. Largest remainder first.
+  // Remainder is (total * w[i]) % sum, computed in integers, so equal
+  // fractions stay tied. Ties go to the lower index.
+  // Number math is used only while total * w stays inside
+  // Number.MAX_SAFE_INTEGER. Larger products use BigInt.
   function allocateCents(total, weights) {
     var n = weights.length;
     var out = [];
     var i;
     for (i = 0; i < n; i++) out.push(0);
     if (!total) return out;
-    var sum = 0;
-    for (i = 0; i < n; i++) sum += weights[i];
-    if (sum <= 0) {
+
+    var safeSum = 0;
+    var weightsSafe = Number.isSafeInteger(total);
+    for (i = 0; i < n; i++) {
+      var w = weights[i];
+      if (!weightsSafe) break;
+      if (!Number.isSafeInteger(w) || safeSum > Number.MAX_SAFE_INTEGER - w) {
+        weightsSafe = false;
+        break;
+      }
+      safeSum += w;
+    }
+
+    var productSafe = weightsSafe;
+    if (productSafe && safeSum > 0) {
+      for (i = 0; i < n; i++) {
+        var weight = weights[i];
+        if (weight !== 0 && total > Math.floor(Number.MAX_SAFE_INTEGER / weight)) {
+          productSafe = false;
+          break;
+        }
+      }
+    }
+
+    var order = [];
+    var baseSum = 0;
+    if (!weightsSafe || !productSafe) {
+      var sumB = 0n;
+      for (i = 0; i < n; i++) sumB += BigInt(weights[i]);
+      if (sumB <= 0n) {
+        out[0] = total;
+        return out;
+      }
+      var totalB = BigInt(total);
+      for (i = 0; i < n; i++) {
+        var prodB = totalB * BigInt(weights[i]);
+        out[i] = Number(prodB / sumB);
+        baseSum += out[i];
+        order.push({ i: i, rem: prodB % sumB });
+      }
+    } else if (safeSum <= 0) {
       out[0] = total;
       return out;
+    } else {
+      for (i = 0; i < n; i++) {
+        var prod = total * weights[i];
+        var rem = prod % safeSum;
+        out[i] = (prod - rem) / safeSum;
+        baseSum += out[i];
+        order.push({ i: i, rem: rem });
+      }
     }
-    var exact = [];
-    var baseSum = 0;
-    for (i = 0; i < n; i++) {
-      exact.push((total * weights[i]) / sum);
-      out[i] = Math.floor(exact[i]);
-      baseSum += out[i];
-    }
-    var left = total - baseSum;
-    var order = exact.map(function (x, idx) {
-      return { i: idx, frac: x - Math.floor(x) };
-    });
+
     order.sort(function (a, b) {
-      if (b.frac !== a.frac) return b.frac - a.frac;
-      return a.i - b.i;
+      if (a.rem === b.rem) return a.i - b.i;
+      return a.rem > b.rem ? -1 : 1;
     });
+    var left = total - baseSum;
     for (i = 0; i < left; i++) out[order[i].i] += 1;
     return out;
   }

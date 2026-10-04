@@ -707,6 +707,7 @@ STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
     "Overhead &amp; Burden", "Overhead & Burden", "Effective $/hr", "effective $/hr", "20.3%",
     # PR #47 head 86eb071 has no Material Markup field or breakdown row.
+    # The estimate post may name the optional field that is coming back.
     "Material Markup", "Material markup", "0% markup", "markup (not added)", "reported in dollars",
     "reported only", "markup box", "Rate: $26", "$26 an hour",
     # Unsourced figures replaced with sourced ones (Pulse sourcing check, Oct 2026).
@@ -760,6 +761,10 @@ STALE = {
         "Revisit your default inputs", "settings and defaults are dialed in"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
+# Approved estimate copy names the optional Material Markup field.
+STALE_ALLOW = {
+    ESTIMATE: ["Material Markup"],
+}
 
 
 def main():
@@ -811,7 +816,8 @@ def main():
     stale_found = 0
     for post in POSTS:
         html = open(os.path.join(BLOG, post), encoding="utf-8").read()
-        hits = [t for t in STALE_EVERYWHERE + STALE.get(post, []) if t in html]
+        allow = STALE_ALLOW.get(post, [])
+        hits = [t for t in STALE_EVERYWHERE + STALE.get(post, []) if t in html and t not in allow]
         stale_found += len(hits)
         print("  [{}] {}{}".format("ok" if not hits else "STALE", post,
                                     "" if not hits else ": " + ", ".join(hits)))

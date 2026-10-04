@@ -548,7 +548,10 @@ def se_tax(net_dollars):
 # 2026 federal figures, single filer (IRS Rev. Proc. 2025-32).
 STD_DEDUCTION_2026 = 16100
 BRACKETS_2026 = [(12400, 0.10), (50400, 0.12), (105700, 0.22)]
-# Idaho TY2025 schedule (latest posted): first $4,811 at 0%, the rest at 5.3% (tax.idaho.gov rate schedule).
+# Idaho Form 40 TY2025 (latest posted, EFO00089 03-02-2026): federal AGI, minus
+# the $15,750 single standard deduction, minus federal QBI, then the TY2025
+# schedule (first $4,811 at 0%, the rest at 5.3%).
+IDAHO_STD_DEDUCTION = 15750
 IDAHO_ZERO_BRACKET = 4811
 IDAHO_RATE = 0.053
 QBI_RATE = 0.20
@@ -567,8 +570,12 @@ def federal_tax_2026(taxable):
     return js_round(tax)
 
 
-def idaho_tax(income):
-    return js_round(max(0, income - IDAHO_ZERO_BRACKET) * IDAHO_RATE)
+def idaho_taxable_income(agi, qbi_ded):
+    return max(0, agi - IDAHO_STD_DEDUCTION - qbi_ded)
+
+
+def idaho_tax(idaho_ti):
+    return js_round(max(0, idaho_ti - IDAHO_ZERO_BRACKET) * IDAHO_RATE)
 
 
 def hourly_derived():
@@ -580,7 +587,8 @@ def hourly_derived():
     qbi_ded = qbi_deduction(agi, taxable_before)
     taxable = taxable_before - qbi_ded
     fed = federal_tax_2026(taxable)
-    state = idaho_tax(target)
+    idaho_ti = idaho_taxable_income(agi, qbi_ded)
+    state = idaho_tax(idaho_ti)
     need = target + se + fed + state + 7200 + 3600
     working = -(-need // 1000) * 1000  # post rounds the need up to the next $1,000
     floor = cents(working / 1400)
@@ -591,7 +599,9 @@ def hourly_derived():
         "QBI deduction": "${:,}".format(qbi_ded),
         "federal taxable income": "${:,}".format(taxable),
         "federal income tax (2026, single)": "${:,}".format(fed),
-        "Idaho tax on $72,000 (simplified)": "${:,}".format(state),
+        "Idaho standard deduction (single)": "${:,}".format(IDAHO_STD_DEDUCTION),
+        "Idaho taxable income": "${:,}".format(idaho_ti),
+        "Idaho tax (Form 40)": "${:,}".format(state),
         "total annual need": "${:,}".format(need),
         "rounded working number": "${:,}".format(working),
         "minimum hourly rate": usd(floor) + "/hr",
@@ -626,7 +636,8 @@ def setax_derived():
         fed += portion * rate
         lower = upper
     fed = js_round(fed)
-    state = idaho_tax(net)
+    idaho_ti = idaho_taxable_income(agi, qbi_ded)
+    state = idaho_tax(idaho_ti)
     burden = se + fed + state
     eff = burden / net
     out = {
@@ -641,7 +652,9 @@ def setax_derived():
     out.update(rows)
     out.update({
         "federal income tax": "${:,}".format(fed),
-        "Idaho tax on net (simplified)": "${:,}".format(state),
+        "Idaho standard deduction (single)": "${:,}".format(IDAHO_STD_DEDUCTION),
+        "Idaho taxable income": "${:,}".format(idaho_ti),
+        "Idaho tax (Form 40)": "${:,}".format(state),
         "total tax burden": "${:,}".format(burden),
         "take-home": "${:,}".format(net - burden),
         "effective rate": "~{:.1f}%".format(eff * 100),
@@ -731,12 +744,14 @@ STALE = {
              "$8,000–$12,000", "22% federal bracket", "$75 – $150", "$80 – $130", "$85 – $150",
              "Roofer", "General Contractor", "Carpenter (finish)", "Flooring Installer", "Painter",
              "Landscaper</td>", "$55 – $90", "rough illustrations",
-             "$5,891", "$102,425", "$103,000", "$73.57", "$88.28"],
+             "$5,891", "$102,425", "$103,000", "$73.57", "$88.28",
+             "$3,561", "$101,164", "$102,000", "$72.86", "$87.43"],
     SETAX: ["$14,600", "$57,889", "$7,788", "$2,362", "$23,209", "$54,791", "29.8%", "5.8%",
             "2024", "$160,000–$170,000", "full tax burden", "gross payments", "Enter your SE tax rate",
             "price it into every job", "$4,134", "$22,273", "$55,727", "$55,700", "28.6%",
             "71 cents", "about $71", "$0.71", "$714", "$357",
-            "$7,118", "$22,018", "$55,982", "28.2%", "$718", "$359"],
+            "$7,118", "$22,018", "$55,982", "28.2%", "$718", "$359",
+            "$3,879", "$20,065", "$57,935", "25.7%", "$743", "$371", "$0.74"],
     ESTIMATE: ["and tax rates"],
     OVERHEAD: ["before profit and taxes", "(labor + materials) on every job", "5–8 percentage points",
                "5–8 points", "Studies of trade contractor", "3–5 points", "a healthy range is"],

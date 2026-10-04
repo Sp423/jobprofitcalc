@@ -815,6 +815,82 @@ test('half-up markup cents stay on the materials quote line', () => {
   assert.equal(r.cents.quoteLabor + r.cents.quoteMaterials + r.cents.quoteDrive + r.cents.quoteFuel, r.cents.price);
 });
 
+test('allocateCents ranks integer remainders and breaks ties toward the lower index', () => {
+  // 33,330 cents over 39,647 / 59,531 / 812. Each remainder is 66,660,
+  // so the two leftover cents belong to indexes 0 and 1.
+  // Float fractions are .6667 but not equal, and the old sort handed
+  // those cents to indexes 1 and 2: [13215, 19844, 271].
+  assert.deepEqual(P.allocateCents(33330, [39647, 59531, 812]), [13216, 19844, 270]);
+
+  // Equal weights. Leftover cents walk the lower indexes.
+  assert.deepEqual(P.allocateCents(2, [1, 1, 1]), [1, 1, 0]);
+  assert.deepEqual(P.allocateCents(4, [1, 1, 1]), [2, 1, 1]);
+  assert.deepEqual(P.allocateCents(1, [1, 1, 1]), [1, 0, 0]);
+  assert.deepEqual(P.allocateCents(5, [1, 1]), [3, 2]);
+
+  // Unequal remainders: 10 * [1, 2, 3] / 6 leaves remainders 4, 2, 0.
+  // The extra cent goes to index 0, the largest remainder.
+  assert.deepEqual(P.allocateCents(10, [1, 2, 3]), [2, 3, 5]);
+
+  assert.deepEqual(P.allocateCents(0, [1, 2, 3]), [0, 0, 0]);
+  assert.deepEqual(P.allocateCents(8, [0, 0, 0]), [8, 0, 0]);
+
+  function assertSplit(total, weights) {
+    const parts = P.allocateCents(total, weights);
+    assert.equal(parts.reduce((sum, n) => sum + n, 0), total);
+    return parts;
+  }
+
+  // 3e9 * 4e9 = 1.2e19, past Number.MAX_SAFE_INTEGER, and it divides evenly.
+  assert.deepEqual(
+    assertSplit(3000000000, [4000000000, 4000000000, 2000000000]),
+    [1200000000, 1200000000, 600000000]
+  );
+
+  // Odd total duplicated. The product does not fit in a safe integer,
+  // both remainders match, and the leftover cent goes to index 0.
+  const odd = 1000000000001;
+  assert.deepEqual(assertSplit(odd, [odd, odd]), [500000000001, 500000000000]);
+
+  // Three equal weights, two leftover cents, still on the BigInt path.
+  assert.deepEqual(
+    assertSplit(odd, [odd, odd, odd]),
+    [333333333334, 333333333334, 333333333333]
+  );
+});
+
+test('tied overhead at a 94.99% margin keeps the price and moves quote cents', () => {
+  // labor 39,647 cents, drive 59,531, materials 812, overhead exactly 1/3.
+  // Float tie-break quoted labor 1,055,130 and materials 21,617.
+  // Integer ties quote labor 1,055,150 and materials 21,597.
+  // Drive stays 1,584,331. The price stays 2,661,078.
+  const r = P.priceJob(job({
+    hours: 6.56,
+    workers: 1,
+    laborRate: 60.4375,
+    materialCost: 8.12,
+    overhead: 100 / 3,
+    driveTime: 9.85,
+    fuelCost: 0,
+    margin: 94.99
+  }));
+  assert.equal(r.ok, true);
+  assert.equal(r.cents.labor, 39647);
+  assert.equal(r.cents.driveLabor, 59531);
+  assert.equal(r.cents.materials, 812);
+  assert.equal(r.cents.overhead, 33330);
+  assert.equal(r.cents.price, 2661078);
+  assert.equal(r.cents.profit, 2527758);
+  assert.equal(r.cents.quoteLabor, 1055150);
+  assert.equal(r.cents.quoteDrive, 1584331);
+  assert.equal(r.cents.quoteMaterials, 21597);
+  assert.equal(r.cents.quoteFuel, 0);
+  assert.equal(
+    r.cents.quoteLabor + r.cents.quoteDrive + r.cents.quoteMaterials + r.cents.quoteFuel,
+    r.cents.price
+  );
+});
+
 test('quote remainder cents are assigned to materials', () => {
   const up = { labor: 100, driveLabor: 40, materials: 200, fuel: 10 };
   P.settleQuoteRemainder(up, 353);

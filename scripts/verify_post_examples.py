@@ -706,8 +706,9 @@ POSTS = [
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
     "Overhead &amp; Burden", "Overhead & Burden", "Effective $/hr", "effective $/hr", "20.3%",
-    # PR #47 head 86eb071 has no Material Markup field or breakdown row.
-    "Material Markup", "Material markup", "0% markup", "markup (not added)", "reported in dollars",
+    # "Material Markup" removed: the optional Material Markup field is coming back,
+    # and posts in this PR now name that field.
+    "Material markup", "0% markup", "markup (not added)", "reported in dollars",
     "reported only", "markup box", "Rate: $26", "$26 an hour",
     # Unsourced figures replaced with sourced ones (Pulse sourcing check, Oct 2026).
     "1,000–1,600", "1,200–1,400 hours", "$80–$130/hr", "between $75 and $150 per hour",
@@ -760,6 +761,15 @@ STALE = {
         "Revisit your default inputs", "settings and defaults are dialed in"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
 }
+# Approved estimate copy names the optional Material Markup field.
+STALE_ALLOW = {
+    ESTIMATE: ["Material Markup"],
+    JOB: ["Material Markup"],
+    DIAG: ["Material Markup"],
+}
+# #52 defines STALE_EXEMPT and page_path; they are not on this branch yet.
+if 'STALE_EXEMPT' not in globals():
+    STALE_EXEMPT = {}
 
 
 def main():
@@ -772,7 +782,7 @@ def main():
         if post in DERIVED:
             ordered.append((post, "Derived figures", None, DERIVED[post]))
     for post, name, inputs, fn in ordered:
-        path = os.path.join(BLOG, post)
+        path = page_path(post) if 'page_path' in globals() else os.path.join(BLOG, post)
         html = open(path, encoding="utf-8").read()
         if post != current_post:
             print("=" * 72)
@@ -810,8 +820,9 @@ def main():
     print("=" * 72)
     stale_found = 0
     for post in POSTS:
-        html = open(os.path.join(BLOG, post), encoding="utf-8").read()
-        hits = [t for t in STALE_EVERYWHERE + STALE.get(post, []) if t in html]
+        html = open(page_path(post) if 'page_path' in globals() else os.path.join(BLOG, post), encoding="utf-8").read()
+        allow = set(STALE_EXEMPT.get(post, ())) | set(STALE_ALLOW.get(post, []))
+        hits = [t for t in STALE_EVERYWHERE + STALE.get(post, []) if t in html and t not in allow]
         stale_found += len(hits)
         print("  [{}] {}{}".format("ok" if not hits else "STALE", post,
                                     "" if not hits else ": " + ", ".join(hits)))

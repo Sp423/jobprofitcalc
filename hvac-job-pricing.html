@@ -62,14 +62,6 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How do I price an HVAC job with this calculator?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "HVAC is preselected so labor, materials, overhead, and drive time start from typical HVAC defaults. Replace every field with the actual service call or install — parts, refrigerant, crew hours — and the tool returns a suggested charge, net profit, and margin."
-        }
-      },
-      {
-        "@type": "Question",
         "name": "How much should an HVAC technician charge per hour?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -86,10 +78,26 @@
       },
       {
         "@type": "Question",
-        "name": "Is this the same calculator as /calculator?",
+        "name": "Should I use flat rate or time and materials for HVAC service?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. This page embeds the same JobProfitCalc job profit calculator. The difference is HVAC-specific framing, HVAC defaults preselected, and the HVAC pricing guide on the same page."
+          "text": "Flat rate is the stronger choice for most HVAC service work. It rewards technician efficiency, eliminates per-minute labor disputes, gives customers a clear price upfront, and typically produces higher effective hourly rates than T&M billing. Time and materials is appropriate for diagnostic work where the scope is unknown before investigation begins. Present it as a diagnostic fee, then transition to flat rate once the repair is identified."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I price a warranty callback, and am I obligated to do it free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not unless your written warranty says so. Put a written same-issue labor warranty on repairs, for example 30 days, and state it on every invoice. This covers legitimate callbacks on your work without creating an open-ended obligation for unrelated failures. Stand behind what you did, and don't absorb what you didn't."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the R-410A phaseout affect pricing on new installations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "New equipment using R-454B, R-32, or other low-GWP refrigerants may carry slightly different equipment costs than equivalent R-410A systems. Some new refrigerant types require updated tooling and handling procedures. Factor both into your installation pricing. Do not price new refrigerant types at old R-410A rates."
         }
       }
     ]
@@ -492,11 +500,11 @@
                 <div class="bk-row">
                   <span class="bk-rowlbl">
                     Estimated owner tax set-aside
-                    <button type="button" class="tip tip-lg" data-tip="Estimate only. Not added to the price. Self-employment tax ≈ profit × 92.35% × 15.3%. IRS: https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax — no income-tax rate is included." aria-label="About the estimated owner tax set-aside" aria-expanded="false">?</button>
+                    <button type="button" class="tip tip-lg" data-tip="Estimate only. Not added to the price. Self-employment tax ≈ profit × 92.35% × 15.3%. IRS: https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes — no income-tax rate is included." aria-label="About the estimated owner tax set-aside" aria-expanded="false">?</button>
                   </span>
                   <span class="bk-rowval" id="bd-setaside">$0.00</span>
                 </div>
-                <p class="bk-note">Not added to the price. Profit × 92.35% × 15.3%, from the <a href="https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax" rel="noopener noreferrer" target="_blank">IRS self-employment tax</a> page. No income-tax rate is included.</p>
+                <p class="bk-note">Not added to the price. Profit × 92.35% × 15.3%, from the <a href="https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes" rel="noopener noreferrer" target="_blank">IRS self-employment tax</a> page. No income-tax rate is included.</p>
                 <p class="bk-subhead">Customer quote</p>
                 <div class="bk-row">
                   <span class="bk-rowlbl">Labor</span>
@@ -602,7 +610,7 @@
               <h3>HVAC Pricing Tips</h3>
               <ul>
                 <li>Enter refrigerant at your current invoice cost. Last year's number can sink a quote.</li>
-                <li>Enter equipment at cost. Your margin covers profit on equipment too, so don't add a separate markup.</li>
+                <li>Enter equipment at cost. Don't add a separate markup.</li>
                 <li>Flat-rate service work rewards speed; T&amp;M punishes it</li>
                 <li>Warranty callbacks are unpaid labor unless your written policy says otherwise</li>
                 <li>Owner SE tax is estimated on profit and is not added to the price</li>
@@ -621,8 +629,8 @@
         <p class="sec-eyebrow">For HVAC Techs</p>
         <h2 class="sec-h2" id="intro-h2">A Calculator Built Around the HVAC Bid</h2>
         <div class="prose">
-          <p>HVAC is already selected. The labor rate is an example loaded cost, not a billing rate — replace it. The math is the same <a href="/calculator">job profit calculator</a>: suggested charge, net profit, margin, and profit per labor hour. Drive labor is multiplied by crew size.</p>
-          <p>Use it to check a service call or an install. The HVAC pricing guide below is the same material as our written article, <a href="/blog/how-to-price-hvac-job.html">How to Price an HVAC Job</a>, kept here so you can price and read on one page.</p>
+          <p>HVAC is already selected. The labor rate is an example loaded cost, not a billing rate, so replace it. The math is the same <a href="/calculator">job profit calculator</a>: suggested charge, net profit, margin, and profit per labor hour. Drive labor is multiplied by crew size.</p>
+          <p>Use it to check a service call or an install. Price from the job cost: a diagnostic fee plus flat rate for service, and equipment at cost.</p>
         </div>
       </div>
     </section>
@@ -634,16 +642,12 @@
         <div class="guide-body">
 <figure>
               <img src="/images/hvac-technician-refrigerant-gauges.jpg" alt="HVAC technician checking refrigerant pressure gauges on outdoor condensing units" width="1280" height="640" fetchpriority="high">
-              <figcaption>Checking refrigerant pressures — a routine service call that should always be priced to cover your time, expertise, and materials.</figcaption>
+              <figcaption>Checking refrigerant pressures: a routine service call that should always be priced to cover your time, expertise, and materials.</figcaption>
             </figure>
 
-            <p>HVAC has big-ticket work and emergency demand, but the average shop doesn't keep much of it. The ACCA's 2025 study of about 1,000 HVACR contractors found an average net profit of 6%, and the researchers treat 10% as the level that funds growth (<a href="https://www.contractingbusiness.com/industry-news/news/55336587/hvac-study-reveals-key-drivers-of-contractor-profitability-and-growth" rel="noopener noreferrer" target="_blank">ACCA and Farmington Consulting Group, reported by Contracting Business</a>, Dec 5, 2025, US). IRS data put plumbing and HVAC corporations at 4.8% net income on receipts, below electrical at 5.0% (<a href="https://www.irs.gov/pub/irs-soi/22co51ccr.xlsx" rel="noopener noreferrer" target="_blank">IRS SOI Corporation Complete Report, Table 5.1</a>, tax year 2022, US). Thin margins on big tickets are why pricing from your actual job cost matters more than pricing from habit.</p>
+            <p>Price HVAC work from the job in front of you: a diagnostic fee plus flat rate for service, equipment at cost, and your margin on the whole ticket. HVAC has big-ticket work and emergency demand, but the average shop doesn't keep much of it. The ACCA's 2025 study of about 1,000 HVACR contractors found an average net profit of 6%, and the researchers treat 10% as the level that funds growth (<a href="https://www.contractingbusiness.com/industry-news/news/55336587/hvac-study-reveals-key-drivers-of-contractor-profitability-and-growth" rel="noopener noreferrer" target="_blank">ACCA and Farmington Consulting Group, reported by Contracting Business</a>, Dec 5, 2025, US). IRS data put plumbing and HVAC corporations at 4.8% net income on receipts, below electrical at 5.0% (<a href="https://www.irs.gov/pub/irs-soi/22co51ccr.xlsx" rel="noopener noreferrer" target="_blank">IRS SOI Corporation Complete Report, Table 5.1</a>, tax year 2022, US). Thin margins on big tickets are why pricing from your actual job cost matters more than pricing from habit.</p>
 
-            <p>This guide covers the full HVAC pricing picture: how to structure service calls, how to price common repairs using flat rate or time and materials, what's happening with refrigerant costs in 2026 and how to charge for it correctly, how to price equipment installations profitably, and what your warranty callback obligations actually are.</p>
-
-            <h2 id="three-types">The Three Types of HVAC Work — And Why They Price Differently</h2>
-
-            <p>Before getting into specific numbers, the pricing structure for HVAC work breaks cleanly into three categories that each carry different cost profiles, risk levels, and margin opportunities.</p>
+            <h2 id="three-types">The Three Types of HVAC Work, and Why They Price Differently</h2>
 
             <p><strong>Service and repair calls:</strong> Diagnostic work, component replacements, minor repairs. Typically short-duration jobs with high labor-to-material ratios. Service calls reward technical expertise and speed. Residential service work can carry 48–58% <em>gross</em> margins before overhead, according to <a href="https://levelcfo.com/benchmarks/hvac/" rel="noopener noreferrer" target="_blank">Level</a>, a contractor CFO firm that calls the figure directional (vendor benchmark, updated Sep 3, 2026, US). <a href="/blog/contractor-profit-margins-by-trade.html">Net margin</a> is far lower once overhead is paid: the 6% ACCA average above covers the whole shop.</p>
 
@@ -651,7 +655,7 @@
 
             <p><strong>Maintenance and preventive contracts:</strong> Seasonal tune-ups, filter replacements, inspections. Lower per-visit revenue but predictable, recurring income that smooths out the seasonal swings that plague HVAC businesses.</p>
 
-            <p>Most HVAC businesses run all three simultaneously. Pricing each correctly requires understanding what it actually costs to deliver each type of work — which is a job cost calculation, not an industry average lookup.</p>
+            <p>Most HVAC businesses run all three simultaneously. Pricing each correctly requires understanding what it actually costs to deliver each type of work, which is a job cost calculation, not an industry average lookup.</p>
 
             <h2 id="service-call">How to Price an HVAC Service Call</h2>
 
@@ -659,11 +663,11 @@
 
             <p><strong>The diagnostic/trip charge:</strong> The fee for showing up, diagnosing the problem, and providing a repair recommendation. This covers your travel time, fuel, truck cost, and the skilled diagnostic labor before any repair work begins.</p>
 
-            <p>Published residential service-call fees we found run from about <strong>$50 to $210</strong>, and most fall between <strong>$85 and $125</strong>. That comes from 13 contractor price pages in CA, AZ, NJ, TX, NV, FL, OH, MN, CO, NY, and OK, listed under the flat-rate table below. Most of those pages are undated, so the prices are as posted when we captured them in October 2026. Several waive or credit the fee when the customer goes ahead with the repair. Commercial diagnostics we found ranged from <strong>$99 to $389</strong>: Comfort Time $99 (Whittier, CA), MG HVAC $150 (Manalapan, NJ), Scottish-Tom $275 (Orange County, CA), and Hartzell's $389 for light commercial up to 15 tons (Kingfisher, OK).</p>
+            <p>Published residential service-call fees we found run from about <strong>$50 to $210</strong>, and most fall between <strong>$85 and $125</strong>. That comes from 13 contractor price pages in CA, AZ, NJ, TX, NV, FL, OH, MN, CO, NY, and OK, listed under the flat-rate table below. Most of those pages are undated, so the prices are as posted when we captured them in October 2026. Several waive or credit the fee when the customer goes ahead with the repair. Commercial diagnostics we found ranged from <strong>$99 to $389</strong>: Comfort Time $99 (Santa Fe Springs, CA), MG HVAC $150 (Manalapan, NJ), Scottish-Tom $275 (Orange County, CA), and Hartzell's $389 for light commercial up to 15 tons (Kingfisher, OK).</p>
 
             <p>After-hours premiums vary widely. We found everything from no upcharge (Smart Home Air &amp; Heat, Orlando, FL) to 1.5 to 2 times standard rates on evenings and 2.5 to 3 times on holidays (A-Class Heating &amp; Air, Sacramento, CA, Sep 4, 2026). Hartzell's posts $309 after hours against $210 standard (OK), and Vinco Mechanical posts a $499 after-hours diagnostic against $199 (Brooklyn, NY). Many shops present it as a flat fee. For example: <em>"After-hours service call fee: $225."</em></p>
 
-            <p>If the customer proceeds with the repair, many HVAC businesses credit some or all of the diagnostic fee toward the repair total. This is a customer-friendly policy that reduces friction at the decision point. If the customer declines the repair, the diagnostic fee stands — you've provided skilled labor and expertise regardless of what they decide to do with the information.</p>
+            <p>If the customer proceeds with the repair, many HVAC businesses credit some or all of the diagnostic fee toward the repair total. This is a customer-friendly policy that reduces friction at the decision point. If the customer declines the repair, the diagnostic fee stands. You've provided skilled labor and expertise regardless of what they decide to do with the information.</p>
 
             <p><strong>The repair labor charge:</strong> Time and expertise applied to actually fixing the problem, beyond the diagnostic. This is billed either at your hourly rate or as a flat rate per repair type. Flat rate pricing is the industry standard for HVAC repair work and is covered in the next section.</p>
 
@@ -673,11 +677,9 @@
 
             <h2 id="flat-rate-vs-tm">Flat Rate vs. Time and Materials for HVAC Repairs</h2>
 
-            <p>This is the pricing structure decision with the biggest impact on your profitability per service call, and it's worth understanding both options clearly.</p>
-
             <h3>Time and Materials (T&amp;M)</h3>
 
-            <p>You charge your hourly labor rate for actual time spent plus <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">materials at cost</a>. Your margin covers profit on those materials. Simple in concept. In practice, T&amp;M has two significant problems for HVAC service work:</p>
+            <p>You charge your hourly labor rate for actual time spent plus <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">materials at cost</a>. In practice, T&amp;M has two significant problems for HVAC service work:</p>
 
             <p>First, experienced technicians are penalized for efficiency. For example, a tech who can replace a capacitor in 20 minutes earns less on T&amp;M than one who takes 45 minutes. Expertise and speed, your most valuable assets, reduce your revenue instead of rewarding it.</p>
 
@@ -687,7 +689,7 @@
 
             <p>You charge a predetermined price per repair type regardless of how long it takes. For example: capacitor replacement $285, contactor replacement $320, standard thermostat replacement $295, blower motor replacement $585 to $750 for a PSC motor. ECM blower motors run much higher: one Minnesota shop quotes $900 to $2,500 (<a href="https://northernonehour.com/blog/furnace-blower-motor-failure-signs-cost-minnesota/" rel="noopener noreferrer" target="_blank">Northern One Hour</a>, Aug 4, 2026).</p>
 
-            <p>The flat rate includes parts and labor bundled. The customer knows the cost before you begin. You have no incentive to stretch the job — you're paid the same either way. Your efficiency directly improves your effective hourly rate.</p>
+            <p>The flat rate includes parts and labor bundled. The customer knows the cost before you begin. You have no incentive to stretch the job: you're paid the same either way. Your efficiency directly improves your effective hourly rate.</p>
 
             <p><strong>Why flat rate wins for HVAC service work:</strong></p>
 
@@ -729,13 +731,13 @@
                 </tr>
                 <tr>
                   <td class="row-label">Smart thermostat (customer-supplied)</td>
-                  <td>$100 to $325 (labor only)</td>
-                  <td>HomeGuide (US); NJ</td>
+                  <td>$100 to $430 (labor only)</td>
+                  <td>HomeGuide (US); NJ, GA</td>
                 </tr>
                 <tr>
                   <td class="row-label">Smart thermostat (contractor-supplied)</td>
-                  <td>$200 to $675</td>
-                  <td>HomeGuide (US); NJ, NV</td>
+                  <td>$200 to $1,035</td>
+                  <td>HomeGuide (US); NJ, NV, GA</td>
                 </tr>
                 <tr>
                   <td class="row-label">Blower motor replacement, PSC</td>
@@ -780,27 +782,27 @@
               </tbody>
             </table>
 
-            <p>Sources. Contractor price pages, captured Oct 1 to 3, 2026; prices as posted, pages undated unless a date is shown: <a href="https://www.absolutebestair.com/repair-pricing" rel="noopener noreferrer" target="_blank">Absolute Best Air</a> (McDonough, GA), <a href="https://www.acamericanair.pro/price-book" rel="noopener noreferrer" target="_blank">AC American Air</a> (Austin and San Antonio, TX), <a href="https://vegasac.com/pricing/" rel="noopener noreferrer" target="_blank">Orange Air</a> (Las Vegas, NV), <a href="https://renewmechanical.net/pricing-and-guarantees" rel="noopener noreferrer" target="_blank">Renew Mechanical</a> (Cincinnati, OH), <a href="https://northernonehour.com/blog/furnace-blower-motor-failure-signs-cost-minnesota/" rel="noopener noreferrer" target="_blank">Northern One Hour</a> (MN, Aug 4, 2026), <a href="https://www.mg-hvac.com/hvac-repair-price" rel="noopener noreferrer" target="_blank">MG HVAC</a> (Manalapan, NJ), <a href="https://www.frostyshvac.com/blog/why-flat-rate-hvac-pricing-is-better" rel="noopener noreferrer" target="_blank">Frosty's</a> (Coppell, TX, Mar 29, 2026), <a href="https://smarthomeairheat.com/lake-nona-ac-repair/" rel="noopener noreferrer" target="_blank">Smart Home Air &amp; Heat</a> (Orlando, FL), <a href="https://unicolorado.com/pricing/ac-repair-cost/" rel="noopener noreferrer" target="_blank">UniColorado</a> (Denver, CO, Feb 28, 2026), <a href="https://rushhvacservices.com/faq" rel="noopener noreferrer" target="_blank">Rush HVAC</a> (East Valley, AZ), <a href="https://www.vincomechanical.com/rates-and-financing" rel="noopener noreferrer" target="_blank">Vinco Mechanical</a> (Brooklyn, NY), <a href="https://a-classhvac.com/blog/emergency-hvac-cost-sacramento/" rel="noopener noreferrer" target="_blank">A-Class Heating &amp; Air</a> (Sacramento, CA, Sep 4, 2026), <a href="https://scottish-tom.com/commercial-service" rel="noopener noreferrer" target="_blank">Scottish-Tom</a> (Orange County, CA), <a href="https://hartzellsheatair.com/hvac-pricing-oklahoma/" rel="noopener noreferrer" target="_blank">Hartzell's</a> (Kingfisher, OK), <a href="https://www.fastacservice.com/comfort-time-heating-cooling/commercial-hvacr-service/commercial-air-conditioning-service/" rel="noopener noreferrer" target="_blank">Comfort Time</a> (Whittier, CA). Consumer guide: <a href="https://homeguide.com/costs/thermostat-installation-cost" rel="noopener noreferrer" target="_blank">HomeGuide thermostat</a> (Aug 29, 2025, US).</p>
+            <p>Sources. Contractor price pages, captured Oct 1 to 3, 2026; prices as posted, pages undated unless a date is shown: <a href="https://www.absolutebestair.com/repair-pricing" rel="noopener noreferrer" target="_blank">Absolute Best Air</a> (McDonough, GA), <a href="https://www.acamericanair.pro/price-book" rel="noopener noreferrer" target="_blank">AC American Air</a> (Austin and San Antonio, TX), <a href="https://vegasac.com/pricing/" rel="noopener noreferrer" target="_blank">Orange Air</a> (Las Vegas, NV), <a href="https://renewmechanical.net/pricing-and-guarantees" rel="noopener noreferrer" target="_blank">Renew Mechanical</a> (Cincinnati, OH), <a href="https://northernonehour.com/blog/furnace-blower-motor-failure-signs-cost-minnesota/" rel="noopener noreferrer" target="_blank">Northern One Hour</a> (MN, Aug 4, 2026), <a href="https://www.mg-hvac.com/hvac-repair-price" rel="noopener noreferrer" target="_blank">MG HVAC</a> (Manalapan, NJ), <a href="https://www.frostyshvac.com/blog/why-flat-rate-hvac-pricing-is-better" rel="noopener noreferrer" target="_blank">Frosty's</a> (Coppell, TX, Mar 29, 2026), <a href="https://smarthomeairheat.com/lake-nona-ac-repair/" rel="noopener noreferrer" target="_blank">Smart Home Air &amp; Heat</a> (Orlando, FL), <a href="https://unicolorado.com/pricing/ac-repair-cost/" rel="noopener noreferrer" target="_blank">UniColorado</a> (Denver, CO, Feb 28, 2026), <a href="https://rushhvacservices.com/faq" rel="noopener noreferrer" target="_blank">Rush HVAC</a> (East Valley, AZ), <a href="https://www.vincomechanical.com/rates-and-financing" rel="noopener noreferrer" target="_blank">Vinco Mechanical</a> (Brooklyn, NY), <a href="https://a-classhvac.com/blog/emergency-hvac-cost-sacramento/" rel="noopener noreferrer" target="_blank">A-Class Heating &amp; Air</a> (Sacramento, CA, Sep 4, 2026), <a href="https://scottish-tom.com/commercial-service" rel="noopener noreferrer" target="_blank">Scottish-Tom</a> (Orange County, CA), <a href="https://hartzellsheatair.com/hvac-pricing-oklahoma/" rel="noopener noreferrer" target="_blank">Hartzell's</a> (Kingfisher, OK), <a href="https://www.fastacservice.com/comfort-time-heating-cooling/commercial-hvacr-service/commercial-air-conditioning-service/" rel="noopener noreferrer" target="_blank">Comfort Time</a> (Santa Fe Springs, CA). Consumer guide: <a href="https://homeguide.com/costs/thermostat-installation-cost" rel="noopener noreferrer" target="_blank">HomeGuide thermostat</a> (Aug 29, 2025, US).</p>
 
             <p>Your own flat rate should come from your parts cost, your overhead, and your target margin. Use the observed ranges to sanity-check the result, not to set it.</p>
 
             <div class="callout">
-              <p><strong>Build your own flat rates:</strong> The <a href="#calculator">Job Profit Calculator</a> can help — enter the parts cost as materials, your estimated time as labor, and set your margin target to see what price produces your desired profit on each repair type.</p>
+              <p><strong>Build your own flat rates:</strong> The <a href="#calculator">Job Profit Calculator</a> can help. Enter the parts cost as materials, your estimated time as labor, and set your margin target to see what price produces your desired profit on each repair type.</p>
             </div>
 
-            <h2 id="refrigerant">Refrigerant Pricing in 2026 — The R-410A Phaseout Impact</h2>
+            <h2 id="refrigerant">Refrigerant Pricing in 2026: The R-410A Phaseout Impact</h2>
 
             <p>This is the issue every HVAC business needs to price correctly in 2026, because the refrigerant landscape has shifted significantly and many contractors are still pricing refrigerant the way they did three years ago.</p>
 
             <h3>What Happened to R-410A</h3>
 
-            <p>The EPA's AIM Act mandated the phasedown of high-GWP refrigerants including R-410A. Under the EPA's Technology Transitions rule, residential and light-commercial air conditioning and heat pump systems manufactured or imported in the U.S. from January 1, 2025 can't use refrigerants with a GWP of 700 or more, which includes R-410A (<a href="https://www.govinfo.gov/content/pkg/FR-2023-12-26/html/2023-28500.htm" rel="noopener noreferrer" target="_blank">Federal Register 2023-28500</a>, Dec 26, 2023). A rule effective July 27, 2026 removed the deadline for installing systems built from pre-2025 components (<a href="https://www.federalregister.gov/documents/2026/05/26/2026-10387/" rel="noopener noreferrer" target="_blank">Federal Register 2026-10387</a>). New residential systems mostly use lower-GWP alternatives: <strong>R-454B</strong> (sold under names like Puron Advance) and <strong>R-32</strong>, with R-466A emerging for specific applications.</p>
+            <p>The EPA's AIM Act mandated the phasedown of high-GWP refrigerants including R-410A. From January 1, 2025, new residential and light-commercial air conditioning and heat pump systems can't be installed with a refrigerant of GWP 700 or more, which includes R-410A (<a href="https://www.govinfo.gov/content/pkg/FR-2023-10-24/html/2023-22529.htm" rel="noopener noreferrer" target="_blank">88 FR 73098</a>, Oct 24, 2023; 40 CFR 84.54(c)(1)). A rule effective July 27, 2026 lets systems whose major components were all made or imported before 2025 keep being installed (<a href="https://www.federalregister.gov/documents/2026/05/26/2026-10387/" rel="noopener noreferrer" target="_blank">FR 2026-10387</a>, May 26, 2026). New residential systems mostly use lower-GWP alternatives: <strong>R-454B</strong> (sold under names like Puron Advance) and <strong>R-32</strong>, with R-466A emerging for specific applications.</p>
 
             <p><strong>R-410A is not banned for service use.</strong> Existing systems running R-410A can still be serviced and recharged with R-410A. Supply is not tight right now: in August 2026 ACHR News reported "a significant glut of virgin R-410A" (<a href="https://www.achrnews.com/articles/166543-theres-plenty-of-r-410a-to-be-found-for-now" rel="noopener noreferrer" target="_blank">ACHR News</a>, Aug 12, 2026, US).</p>
 
             <h3>How to Price Refrigerant Correctly in 2026</h3>
 
-            <p>Enter refrigerant at the current invoice cost in Material Cost. It has carrying cost, handling risk, certification requirements, and price volatility. Your margin covers profit on that cost.</p>
+            <p>Enter refrigerant at the current invoice cost in Material Cost. It has carrying cost, handling risk, certification requirements, and price volatility.</p>
 
             <p><strong>What R-410A costs right now:</strong> A 25-lb cylinder of R-410A sold for about $185 to $225 online on October 3, 2026, which is about $7 to $9 a pound (<a href="https://aaarefrigerant.com/r410a.html" rel="noopener noreferrer" target="_blank">AAA Refrigerant</a> $184.90, <a href="https://refrigerantscenter.com/products/r410a-refrigerants-25-lbs" rel="noopener noreferrer" target="_blank">Refrigerants Center</a> $217, <a href="https://supplyshop.com/products/r410a-refrigerant-25lb-cylinder" rel="noopener noreferrer" target="_blank">SupplyShop</a> $225; US). Your supplier price may differ, so check your last invoice. What contractors charge customers is a different number: Absolute Best Air posts $60 to $115 a pound (GA) and MG HVAC posts $150 a pound (NJ). Put your cost in the calculator, not the customer price.</p>
 
@@ -808,23 +810,23 @@
 
             <p>Structure your refrigerant charge in one of two ways:</p>
 
-            <p><em>Option 1 — Per-pound pricing:</em> Enter the current wholesale cost per pound in Material Cost. Recovery, handling, and replacement risk belong in the job margin.</p>
+            <p><em>Option 1, per-pound pricing:</em> Enter the current wholesale cost per pound in Material Cost. Recovery, handling, and replacement risk belong in the job margin.</p>
 
-            <p><em>Option 2 — Refrigerant line item at market rate:</em> Present refrigerant as a separate line item priced at "current market rate" rather than a fixed per-pound price. This is particularly appropriate when your supplier cost is fluctuating monthly. State in your <a href="/blog/how-to-write-contractor-estimate.html">estimate</a>: <em>"Refrigerant charged at current market rate at time of service."</em></p>
+            <p><em>Option 2, refrigerant on its own line:</em> List refrigerant on its own quote line, entered at your current invoice cost, and state 'Refrigerant billed at current cost at time of service.' This suits months when supplier cost moves. Put that sentence in your <a href="/blog/how-to-write-contractor-estimate.html">estimate</a>.</p>
 
             <p><strong>For new R-454B and R-32 systems:</strong> Enter the current invoice cost, not an old R-410A cost. R-454B costs more per pound: 20-lb cylinders listed at $409 and $449.90 online on October 3, 2026, about $20 to $23 a pound (<a href="https://refrigerantscenter.com/products/r-454b-refrigerant-20lb" rel="noopener noreferrer" target="_blank">Refrigerants Center</a>, <a href="https://twistedrefrigerant.com/products/r-454b" rel="noopener noreferrer" target="_blank">Twisted Refrigerant</a>; US).</p>
 
             <div class="callout">
-              <p><strong>The leak finding rule:</strong> Before adding refrigerant to any system, find and repair the leak. This is both an EPA requirement and sound business practice. A recharge without leak repair is a temporary fix that will bring the customer back — but potentially with a dispute about why it needed recharging again so soon. Price the leak search and repair separately from the refrigerant charge.</p>
+              <p><strong>The leak finding rule:</strong> Before adding refrigerant to any system, find and repair the leak. This is both an EPA requirement and sound business practice. A recharge without leak repair is a temporary fix that will bring the customer back, but potentially with a dispute about why it needed recharging again so soon. Price the leak search and repair separately from the refrigerant charge.</p>
             </div>
 
             <h2 id="installation">How to Price an HVAC Installation</h2>
 
-            <p>Equipment installations — full system replacements, new installs, mini-splits — are higher-ticket jobs with a different cost and pricing structure than service work.</p>
+            <p>Equipment installations (full system replacements, new installs, mini-splits) are higher-ticket jobs with a different cost and pricing structure than service work.</p>
 
             <h3>The Components of an HVAC Installation Price</h3>
 
-            <p><strong>Equipment at cost:</strong> The unit itself — air handler, condenser, coil, furnace, heat pump, or mini-split — is your largest cost line. Enter the wholesale cost in Material Cost. Your margin covers profit on that equipment.</p>
+            <p><strong>Equipment at cost:</strong> The unit itself (air handler, condenser, coil, furnace, heat pump, or mini-split) is your largest cost line. Enter the wholesale cost in Material Cost. Your margin covers profit on that equipment.</p>
 
             <p>Sourcing, storage, delivery, warranty handling, and the risk of a damaged unit are real. They are covered by the job margin.</p>
 
@@ -875,7 +877,7 @@
 
             <p>We found no published figure for air handler or coil replacement labor on its own, or for each added mini-split zone. Your actual hours depend on site conditions, access, ductwork changes, and crew size. In the calculator, enter your hours and your loaded labor cost, not these customer prices.</p>
 
-            <p><strong>Associated materials and supplies:</strong> Line sets, disconnect boxes, pad or bracket, drain lines, flue pipe, electrical connections, refrigerant for initial charge, filter, thermostat (if included). Enter each at what you pay. Your margin covers profit on materials too.</p>
+            <p><strong>Associated materials and supplies:</strong> Line sets, disconnect boxes, pad or bracket, drain lines, flue pipe, electrical connections, refrigerant for initial charge, filter, thermostat (if included). Enter each at what you pay.</p>
 
             <p><strong>Permit and inspection fees:</strong> Never absorb permit costs. Enter the fee you pay in Material Cost so the price carries it. HomeGuide puts HVAC permits at $25 to $300 depending on the job and the city (<a href="https://homeguide.com/costs/ac-condenser-replacement-cost" rel="noopener noreferrer" target="_blank">condenser</a>, Aug 18, 2025; <a href="https://homeguide.com/costs/hvac-cost" rel="noopener noreferrer" target="_blank">HVAC replacement</a>, Aug 27, 2025; <a href="https://homeguide.com/costs/new-furnace-replacement-cost" rel="noopener noreferrer" target="_blank">furnace</a>, Dec 31, 2025; US).</p>
 
@@ -951,17 +953,13 @@
               <li>Net profit: $1,569.80, a 25.0% margin after overhead</li>
             </ul>
 
-            <p>Before overhead, the same job shows a gross margin of 37.5% ($2,352.20 on $6,279.20). That is gross margin, not net. Net is what's left after overhead, and the 25% here holds only if the example's 20% overhead is your real number. If your overhead is higher, enter it and the price goes up.</p>
+            <p>Before overhead, the same job shows a gross margin of 37.5% ($2,352.20 on $6,279.20, after labor, materials and fuel). That is gross margin, not net. Net is what's left after overhead, and the 25% here holds only if the example's 20% overhead is your real number. If your overhead is higher, enter it and the price goes up.</p>
 
             <p>The equipment, refrigerant, and supplies all go in at cost, with no separate markup. The 25% margin applies to the whole job, materials included.</p>
 
-            <h2 id="parts-markup">Materials on HVAC Parts and Equipment</h2>
-
-            <p>Enter parts and equipment at what you pay. Your margin covers profit on materials too. A small part and a condenser both go in at cost.</p>
-
             <h2 id="warranty">Warranty Callbacks: What You're Obligated to Do (And What You're Not)</h2>
 
-            <p>This is a topic HVAC techs and business owners get wrong in both directions — either giving away too much free labor out of misplaced obligation, or damaging customer relationships by refusing to stand behind legitimate work.</p>
+            <p>This is a topic HVAC techs and business owners get wrong in both directions: either giving away too much free labor out of misplaced obligation, or damaging customer relationships by refusing to stand behind legitimate work.</p>
 
             <p><strong>Your actual legal obligations are limited.</strong> Unless your written contract or written warranty states specific callback terms, you are generally not legally required to return free of charge for any issue that arises after a job is complete. Your professional license requirements may impose some minimum standard of workmanship, but they do not typically mandate free callbacks.</p>
 
@@ -978,7 +976,7 @@
               <li>Refrigerant loss from a leak that was not repaired (if customer declined leak repair at time of service)</li>
             </ul>
 
-            <p><strong>When a manufacturer warranty applies:</strong> Carrier, for example, gives 10 years of parts coverage when the equipment is registered within 90 days and 5 years if it isn't. Registered owners can instead choose 5 years of parts plus 3 years of labor (<a href="https://www.carrier.com/us/en/residential/homeowner-resources/warranty/" rel="noopener noreferrer" target="_blank">Carrier warranty</a>, US, captured Oct 3, 2026). Unless the customer has a labor option like that, or you sell an extended labor warranty, labor usually isn't covered. Be clear with customers about the difference between the parts warranty (the manufacturer's) and the labor warranty (yours).</p>
+            <p><strong>When a manufacturer warranty applies:</strong> Carrier, for example, gives 10 years of parts coverage when the equipment is registered within 90 days and 5 years if it isn't. Where registration can't legally be required, the 10-year parts warranty is automatic. Registered owners can instead choose 5 years of parts plus 3 years of labor if the installing dealer participates (not available on new construction) (<a href="https://www.carrier.com/us/en/residential/homeowner-resources/warranty/" rel="noopener noreferrer" target="_blank">Carrier warranty</a>, US, captured Oct 3, 2026). Unless the customer has a labor option like that, or you sell an extended labor warranty, labor usually isn't covered. Be clear with customers about the difference between the parts warranty (the manufacturer's) and the labor warranty (yours).</p>
 
             <p>Put your warranty policy in writing on every invoice and <a href="/blog/how-to-write-contractor-estimate.html">estimate</a>. Verbal warranty commitments are unenforceable and unlimited in scope. A written warranty is professional, bounded, and protects both sides.</p>
 
@@ -990,14 +988,11 @@
             <h3>How do I price refrigerant now that R-410A costs have changed?</h3>
             <p>Enter refrigerant at your current cost per pound times the pounds used. In October 2026, 25-lb R-410A cylinders sold online for about $7 to $9 a pound, and R-454B for about $20 to $23. Price volatility, handling, EPA certification, and replacement risk are reasons to keep the invoice cost current and to hold your margin. Consider listing refrigerant on its own quote line so a cost change is easy to see.</p>
 
-            <h3>How should I enter HVAC equipment and parts?</h3>
-            <p>Enter equipment, parts, and refrigerant at what you pay in Material Cost. Your margin covers profit on materials too.</p>
-
             <h3>Should I use flat rate or time and materials for HVAC service?</h3>
-            <p>Flat rate is the stronger choice for most HVAC service work. It rewards technician efficiency, eliminates per-minute labor disputes, gives customers a clear price upfront, and typically produces higher effective hourly rates than T&amp;M billing. Time and materials is appropriate for diagnostic work where the scope is unknown before investigation begins — present it as a diagnostic fee, then transition to flat rate once the repair is identified.</p>
+            <p>Flat rate is the stronger choice for most HVAC service work. It rewards technician efficiency, eliminates per-minute labor disputes, gives customers a clear price upfront, and typically produces higher effective hourly rates than T&amp;M billing. Time and materials is appropriate for diagnostic work where the scope is unknown before investigation begins. Present it as a diagnostic fee, then transition to flat rate once the repair is identified.</p>
 
-            <h3>How should I price a warranty callback — am I obligated to do it free?</h3>
-            <p>Not unless your written warranty says so. Put a written same-issue labor warranty on repairs, for example 30 days, and state it on every invoice. This covers legitimate callbacks on your work without creating an open-ended obligation for unrelated failures. Stand behind what you did. Don't absorb what you didn't.</p>
+            <h3>How should I price a warranty callback, and am I obligated to do it free?</h3>
+            <p>Not unless your written warranty says so. Put a written same-issue labor warranty on repairs, for example 30 days, and state it on every invoice. This covers legitimate callbacks on your work without creating an open-ended obligation for unrelated failures. Stand behind what you did, and don't absorb what you didn't.</p>
 
             <h3>How does the R-410A phaseout affect pricing on new installations?</h3>
             <p>New equipment using R-454B, R-32, or other low-GWP refrigerants may carry slightly different equipment costs than equivalent R-410A systems. Some new refrigerant types require updated tooling and handling procedures. Factor both into your installation pricing. Do not price new refrigerant types at old R-410A rates.</p>
@@ -1006,7 +1001,7 @@
 
             <p>The average HVAC shop nets about 6% (ACCA, 2025), so there is little room for guesswork. Build the price on actual job costs, not on what the last tech charged or what the customer expects. Service calls should carry a diagnostic fee plus flat-rate repair pricing. Enter equipment, parts, and refrigerant at your current cost and let the margin cover profit on them. Define warranty obligations in writing before the job begins.</p>
 
-            <p>Before your next HVAC quote, run the job numbers through the <a href="#calculator">Job Profit Calculator</a>. Enter your labor, parts, equipment, and refrigerant costs — and your target margin. The calculator tells you what to charge the customer to hit that margin, not just to cover your costs.</p>
+            <p>Before your next HVAC quote, run the job numbers through the <a href="#calculator">Job Profit Calculator</a>. Enter your labor, parts, equipment, and refrigerant costs, and your target margin. The calculator tells you what to charge the customer to hit that margin, not just to cover your costs.</p>
 
             <p>That number is the one that goes on the estimate.</p>
 
@@ -1020,8 +1015,7 @@
         <p class="sec-eyebrow">Keep Learning</p>
         <h2 class="sec-h2" id="more-h2">More HVAC and Pricing Guides</h2>
         <div class="guide-list">
-          <a href="/blog/how-to-price-hvac-job.html">How to price an HVAC job<span>The original long-form guide — service calls, installs, and refrigerant.</span></a>
-          <a href="/calculator">Job profit calculator<span>Same tool, any trade — plumber, electrician, HVAC, and more.</span></a>
+          <a href="/calculator">Job profit calculator<span>Same tool, any trade: plumber, electrician, HVAC, and more.</span></a>
           <a href="/blog/contractor-profit-margins-by-trade.html">Contractor profit margins by trade<span>Where HVAC margins typically land versus other trades.</span></a>
           <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">Materials at cost<span>Enter equipment, parts, and refrigerant at what you pay.</span></a>
         </div>

@@ -887,7 +887,12 @@ STALE = {
         "marked up 30–50%", "Mark up equipment", "marked up significantly", "5–10 years",
         "Most HVAC businesses establish", "manufactured in the U.S. can no longer",
         "taxes already in the number", "$75–$175", "prices have increased substantially",
-        "Rough benchmarks for residential installation labor"],
+        "Rough benchmarks for residential installation labor",
+        "manufactured or imported in the U.S. from January 1, 2025",
+        "current market rate",
+        "Comfort Time</a> (Whittier",
+        "$200 to $675",
+        "$100 to $325"],
     PLUMBER_PAGE: [
         "between $75 and $150", "$100–$200", "$75–$150", "taxes already in the quote",
         "overhead, drive, and tax", "no material run, and no tax", "command higher margins",
@@ -899,12 +904,14 @@ STALE = {
         "under more pressure in 2026", "18–28%", "20–25% net", "have higher margins than drywall",
         "28–32%", "15–30% above your cost", "your tax rates", "12–18 months", "18 months ago",
         "estimates based on industry data", "overhead, and taxes through the calculator",
-        "almost certainly underpricing"],
+        "almost certainly underpricing",
+        "7.9% to 8.4%"],
     MARKUP: [
         "15–30% markup on materials is standard", "20–35%", "20–30%", "15–25%", "15–20%",
         "25–35%", "typically 10–15%", "set your markup percentage", "uses markup on cost",
         "Markup and profit margin are separate things in the calculator",
-        "material cost and markup percentage", "passing materials through at cost"],
+        "material cost and markup percentage", "passing materials through at cost",
+        "72% average", "every source we found runs higher", "about 15% to 20% on bid work"],
 }
 # Approved estimate copy names the optional Material Markup field.
 STALE_ALLOW = {

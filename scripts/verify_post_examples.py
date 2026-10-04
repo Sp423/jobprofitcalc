@@ -832,8 +832,14 @@ STALE_EVERYWHERE = [
     # Final QA (Hank, Oct 2 2026): Idaho is not a flat 5.3%; first $4,811 is taxed at 0%.
     "flat 5.3%", "5.3% flat", "Idaho 5.3%",
 ]
-# The markup post teaches material markup as a pricing idea, so the old field name is a normal phrase there.
-STALE_EXEMPT = {MARKUP: {"Material Markup", "Material markup"}}
+# Approved copy names the optional Material Markup field on these four pages.
+_MATERIAL_MARKUP_FIELD = {"Material Markup", "Material markup"}
+STALE_EXEMPT = {
+    MARKUP: _MATERIAL_MARKUP_FIELD,
+    HVAC_PAGE: _MATERIAL_MARKUP_FIELD,
+    PLUMBER_PAGE: _MATERIAL_MARKUP_FIELD,
+    MARGINS: _MATERIAL_MARKUP_FIELD,
+}
 # Old example figures that must be gone after the rerun.
 STALE = {
     LEAF: ["$322.55", "$258.04", "$402.25", "$93.98", "$452.25", "$417.29", "$152.25",

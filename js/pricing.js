@@ -293,6 +293,8 @@
     if (totalCost > 0 && basePrice >= totalCost * 20) basePrice = totalCost * 20 - 1;
     if (basePrice < 0 || totalCost < 0) return { ok: false, error: 'Invalid input.' };
     var price = basePrice + markup;
+    // Past MAX_SAFE_INTEGER, cent allocation can throw or miss the price.
+    if (![labor, driveLabor, materials, markup, fuel, overhead, totalCost, basePrice, price].every(Number.isSafeInteger)) return { ok: false, error: 'Invalid input.' };
     var baseProfit = basePrice - totalCost;
     var profit = price - totalCost;
 

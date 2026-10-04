@@ -991,3 +991,71 @@ test('material markup persists under jpc_materialMarkup_v2', () => {
   assert.doesNotMatch(src, /jpc_qs_materialMarkup/);
   assert.doesNotMatch(src, /materialMarkup\/i/);
 });
+
+test('hours of 1e9 are rejected without throwing', () => {
+  // 1e9 hours × $1e6/hr is 1e17 cents, past Number.MAX_SAFE_INTEGER.
+  let result;
+  assert.doesNotThrow(() => {
+    result = P.priceJob(job({ hours: 1e9, workers: 1, laborRate: 1e6, margin: 20 }));
+  });
+  assert.equal(result.ok, false);
+  assert.equal(result.error, 'Invalid input.');
+});
+
+test('huge inputs never throw, and quote lines match the price when priced', () => {
+  let seed = 20261004;
+  function rnd() {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+  function pick(min, max) {
+    return min + rnd() * (max - min);
+  }
+  for (let i = 0; i < 2000; i++) {
+    const input = job({
+      hours: pick(0, 1e12),
+      workers: 1 + Math.floor(rnd() * 100),
+      laborRate: pick(0, 1e6),
+      materialCost: pick(0, 1e15),
+      overhead: pick(0, 100),
+      driveTime: pick(0, 1e6),
+      fuelCost: pick(0, 1e12),
+      margin: pick(0, 94.99),
+      materialMarkup: pick(0, 500),
+      salesTaxRate: pick(0, 20)
+    });
+    let result;
+    assert.doesNotThrow(() => {
+      result = P.priceJob(input);
+    }, JSON.stringify(input));
+    if (result.ok) {
+      const c = result.cents;
+      assert.equal(
+        c.quoteLabor + c.quoteMaterials + c.quoteDrive + c.quoteFuel,
+        c.price,
+        JSON.stringify(input)
+      );
+    } else {
+      assert.equal(result.ok, false);
+      assert.equal(result.error, 'Invalid input.');
+    }
+  }
+});
+
+test('UI-max inputs still price', () => {
+  const r = P.priceJob(job({
+    hours: 1000,
+    workers: 100,
+    laborRate: 1000,
+    materialCost: 5000000,
+    overhead: 100,
+    driveTime: 100,
+    fuelCost: 50000,
+    margin: 94.99,
+    materialMarkup: 500,
+    salesTaxRate: 20
+  }));
+  assert.equal(r.ok, true);
+  const c = r.cents;
+  assert.equal(c.quoteLabor + c.quoteMaterials + c.quoteDrive + c.quoteFuel, c.price);
+});

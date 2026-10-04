@@ -764,6 +764,8 @@ STALE = {
 # Approved estimate copy names the optional Material Markup field.
 STALE_ALLOW = {
     ESTIMATE: ["Material Markup"],
+    JOB: ["Material Markup"],
+    DIAG: ["Material Markup"],
 }
 
 

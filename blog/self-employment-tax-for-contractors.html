@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://jobprofitcalc.com/blog/self-employment-tax-for-contractors.html">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-06-03T00:00:00Z">
-  <meta property="article:modified_time"  content="2026-10-02T00:00:00Z">
+  <meta property="article:modified_time"  content="2026-10-04T00:00:00Z">
   <meta property="article:author"          content="JobProfitCalc.com">
   <meta property="article:section"         content="Contractor Pricing">
   <meta property="og:image" content="https://jobprofitcalc.com/images/contractor-self-employment-tax-form.jpg">
@@ -36,7 +36,7 @@
     "url": "https://jobprofitcalc.com/blog/self-employment-tax-for-contractors.html",
     "image": "https://jobprofitcalc.com/images/contractor-self-employment-tax-form.jpg",
     "datePublished": "2026-06-03",
-    "dateModified": "2026-10-02",
+    "dateModified": "2026-10-04",
     "author": { "@type": "Organization", "name": "JobProfitCalc.com" },
     "publisher": { "@type": "Organization", "name": "JobProfitCalc.com", "url": "https://jobprofitcalc.com", "logo": { "@type": "ImageObject", "url": "https://jobprofitcalc.com/og-image.png" } },
     "mainEntityOfPage": "https://jobprofitcalc.com/blog/self-employment-tax-for-contractors.html"
@@ -63,7 +63,7 @@
       {
         "@type": "Question",
         "name": "How much should I set aside for taxes as a 1099 contractor?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A 30% reserve on your net profit, meaning each payment minus that job's materials and other costs, is a reasonable starting point for many solo contractors. In this article's example, SE tax, federal income tax, and state income tax came to 28.2% of net profit. If you're in a high-tax state or earning above $150,000, increase the reserve to 33–35%." }
+        "acceptedAnswer": { "@type": "Answer", "text": "A 30% reserve on your net profit, meaning each payment minus that job's materials and other costs, is a reasonable rule of thumb for many solo contractors, not an IRS figure. In this article's example, SE tax, federal income tax, and state income tax came to 25.7% of net profit. If you're in a high-tax state or earning above $150,000, 33–35% is a common rule of thumb, not an IRS figure." }
       },
       {
         "@type": "Question",
@@ -88,7 +88,7 @@
       {
         "@type": "Question",
         "name": "How does self-employment tax affect my actual profit on a job?",
-        "acceptedAnswer": { "@type": "Answer", "text": "For every dollar of profit on a job, roughly $0.14 goes to SE tax alone, before income tax. At the 28.2% combined effective rate in this article's example, about $0.72 of each profit dollar reaches your pocket. The Job Profit Calculator at JobProfitCalc.com keeps taxes out of the Suggested Charge, because tax is owed on profit, and shows an estimated SE tax set-aside on the job's profit for planning. Income tax is not included in that set-aside." }
+        "acceptedAnswer": { "@type": "Answer", "text": "For every dollar of profit on a job, roughly $0.14 goes to SE tax alone, before income tax. At the 25.7% combined effective rate in this article's example, about $0.74 of each profit dollar reaches your pocket. The Job Profit Calculator at JobProfitCalc.com keeps taxes out of the Suggested Charge, because tax is owed on profit, and shows an estimated SE tax set-aside on the job's profit for planning. Income tax is not included in that set-aside." }
       }
     ]
   }
@@ -370,7 +370,9 @@
 
             <h2 id="income-tax">Federal and State Income Tax on Top</h2>
 
-            <p>After subtracting the half-SE-tax deduction and the standard deduction, the remaining income is taxed at your ordinary federal income tax rate — and most states add their own income tax on top of that.</p>
+            <p>Example only: a single filer with $78,000 of net profit, the 2026 standard deduction, no other income.</p>
+
+            <p>After subtracting the half-SE-tax deduction and the standard deduction, this example applies the qualified business income deduction, then taxes what is left at ordinary federal rates. Most states add their own income tax on top of that.</p>
 
             <table class="data-table" aria-label="Federal taxable income calculation">
               <thead><tr><th>Item</th><th>Amount</th></tr></thead>
@@ -378,47 +380,50 @@
                 <tr><td class="row-label">Net profit (Schedule C)</td><td>$78,000</td></tr>
                 <tr class="row-neg"><td class="row-label">Less: half SE tax deduction</td><td>−$5,511</td></tr>
                 <tr class="row-neg"><td class="row-label">Less: 2026 standard deduction (single)</td><td>−$16,100</td></tr>
-                <tr class="row-total"><td class="row-label">Federal taxable income</td><td>$56,389</td></tr>
+                <tr><td class="row-label">Taxable income before QBI</td><td>$56,389</td></tr>
+                <tr class="row-neg"><td class="row-label">Less: QBI deduction (20%, limited to 20% of taxable income)</td><td>−$11,278</td></tr>
+                <tr class="row-total"><td class="row-label">Federal taxable income</td><td>$45,111</td></tr>
               </tbody>
             </table>
 
-            <p>Federal income tax on $56,389 (2026 brackets per the <a href="https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill" rel="noopener noreferrer" target="_blank">IRS</a>, single filer). This simplified example leaves out the qualified business income deduction, which many sole proprietors can take and which would lower the income tax figure; ask a tax professional whether it applies to you.</p>
+            <p>QBI in this example is net profit minus the deductible half of SE tax: $78,000 − $5,511 = $72,489. 20% of QBI is $14,498 ($14,497.80). The taxable-income limit is 20% × $56,389 = $11,278 ($11,277.80). The deduction is the smaller figure, so it is $11,278. Federal taxable income is $56,389 − $11,278 = $45,111. That follows the simplified computation in the <a href="https://www.irs.gov/instructions/i8995" rel="noopener noreferrer" target="_blank">IRS Instructions for Form 8995</a> (2025, the latest posted). Tax rules change and your situation will differ. Confirm these numbers with your tax preparer before you rely on them.</p>
+
+            <p>Federal income tax on $45,111 (2026 brackets per the <a href="https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill" rel="noopener noreferrer" target="_blank">IRS</a>, single filer): 10% × $12,400 = $1,240; 12% × ($45,111 − $12,400 = $32,711) = $3,925; total $5,165 ($5,165.32). The 22% bracket does not apply.</p>
 
             <table class="data-table" aria-label="Federal income tax bracket calculation">
               <thead><tr><th>Bracket</th><th>On This Portion</th><th>Tax</th></tr></thead>
               <tbody>
                 <tr><td class="row-label">10% on first $12,400</td><td>$12,400</td><td>$1,240</td></tr>
-                <tr><td class="row-label">12% on $12,401–$50,400</td><td>$38,000</td><td>$4,560</td></tr>
-                <tr><td class="row-label">22% on $50,401–$56,389</td><td>$5,989</td><td>$1,318</td></tr>
-                <tr class="row-total"><td class="row-label">Total federal income tax</td><td></td><td>$7,118</td></tr>
+                <tr><td class="row-label">12% on $12,401–$50,400</td><td>$32,711</td><td>$3,925</td></tr>
+                <tr class="row-total"><td class="row-label">Total federal income tax</td><td></td><td>$5,165</td></tr>
               </tbody>
             </table>
 
-            <p>State income tax varies by state. Idaho, for example, taxes the first $4,811 of a single filer's taxable income at 0% and the rest at 5.3%, per the <a href="https://tax.idaho.gov/taxes/income-tax/individual-income/individual-income-tax-rate-schedule/" rel="noopener noreferrer" target="_blank">Idaho State Tax Commission's rate schedule</a>. A simplified estimate applies that schedule to the full $78,000 net profit: ($78,000 − $4,811) × 5.3% = $3,879. Idaho's own deductions would bring the real bill lower.</p>
+            <p>State income tax varies by state. Idaho, for example, taxes the first $4,811 of a single filer's taxable income at 0% and the rest at 5.3%, per the <a href="https://tax.idaho.gov/taxes/income-tax/individual-income/individual-income-tax-rate-schedule/" rel="noopener noreferrer" target="_blank">Idaho State Tax Commission's Idaho TY2025 rate schedule (latest posted)</a>. A simplified estimate applies that schedule to the full $78,000 net profit: ($78,000 − $4,811) × 5.3% = $3,879. Idaho's own deductions would bring the real bill lower.</p>
 
             <h2 id="full-picture">The Full Picture: What You Actually Keep</h2>
 
-            <p>Here is the complete tax picture on $78,000 in net profit for a solo trade contractor in a mid-rate state:</p>
+            <p>Here is the complete tax picture on $78,000 in net profit for a solo trade contractor in a mid-rate state. Example only: a single filer with $78,000 of net profit, the 2026 standard deduction, no other income. Idaho figures use the Idaho TY2025 rate schedule (latest posted).</p>
 
             <table class="data-table" aria-label="Complete tax burden and take-home calculation">
               <thead><tr><th>Tax</th><th>Amount</th></tr></thead>
               <tbody>
                 <tr><td class="row-label">Self-employment tax (15.3%)</td><td class="accent-val">$11,021</td></tr>
-                <tr><td class="row-label">Federal income tax</td><td>$7,118</td></tr>
-                <tr><td class="row-label">State income tax (simplified, Idaho)</td><td>$3,879</td></tr>
-                <tr class="row-total"><td class="row-label">Total tax burden</td><td>$22,018</td></tr>
-                <tr><td class="row-label">Estimated take-home</td><td class="green-val">$55,982</td></tr>
-                <tr><td class="row-label">Effective total tax rate</td><td>~28.2%</td></tr>
+                <tr><td class="row-label">Federal income tax</td><td>$5,165</td></tr>
+                <tr><td class="row-label">State income tax (simplified, Idaho TY2025 rate schedule, latest posted)</td><td>$3,879</td></tr>
+                <tr class="row-total"><td class="row-label">Total tax burden</td><td>$20,065</td></tr>
+                <tr><td class="row-label">Estimated take-home</td><td class="green-val">$57,935</td></tr>
+                <tr><td class="row-label">Effective total tax rate</td><td>~25.7%</td></tr>
               </tbody>
             </table>
 
-            <p>A contractor netting $78,000 keeps roughly $56,000 after taxes, about 72 cents on every dollar of profit.</p>
+            <p>A contractor netting $78,000 keeps roughly $58,000 after taxes, about 74 cents on every dollar of profit.</p>
 
             <p>That gap is not a flaw in the tax code. It is simply the actual cost of being self-employed in America, and it must be factored into how you price every job. If it isn't built into your pricing, it comes straight out of your standard of living.</p>
 
             <h2 id="set-aside">The Number to Tattoo on Your Brain: Set Aside 30%</h2>
 
-            <p>The simplest and most reliable rule for contractors who don't want a tax surprise: <strong>set aside 30% of the net profit in every payment you receive, immediately, into a separate savings account.</strong> Net profit is the payment minus what that job's materials and other costs took out. In the example above, the total tax burden was 28.2% of net profit, so a 30% reserve covers it.</p>
+            <p>The simplest and most reliable rule of thumb for contractors who don't want a tax surprise (not an IRS figure): <strong>set aside 30% of the net profit in every payment you receive, immediately, into a separate savings account.</strong> Net profit is the payment minus what that job's materials and other costs took out. In the example above, the total tax burden was 25.7% of net profit, so a 30% reserve covers it.</p>
 
             <p>At the end of a good year, that 30% reserve may be more than you owe — you'll have a small windfall at tax time. At the end of an average year, it covers the bill cleanly. It is never wrong to have saved more than you needed.</p>
 
@@ -435,17 +440,18 @@
             <table class="data-table" aria-label="Quarterly estimated tax payment schedule">
               <thead><tr><th>Period</th><th>Covers Income Earned</th><th>Payment Due</th></tr></thead>
               <tbody>
-                <tr><td class="row-label">Q1</td><td>January 1 – March 31</td><td>Mid-April</td></tr>
-                <tr><td class="row-label">Q2</td><td>April 1 – May 31</td><td>Mid-June</td></tr>
-                <tr><td class="row-label">Q3</td><td>June 1 – August 31</td><td>Mid-September</td></tr>
-                <tr><td class="row-label">Q4</td><td>September 1 – December 31</td><td>Mid-January (next year)</td></tr>
+                <tr><td class="row-label">Q1</td><td>January 1 – March 31</td><td>April 15, 2026</td></tr>
+                <tr><td class="row-label">Q2</td><td>April 1 – May 31</td><td>June 15, 2026</td></tr>
+                <tr><td class="row-label">Q3</td><td>June 1 – August 31</td><td>September 15, 2026</td></tr>
+                <tr><td class="row-label">Q4</td><td>September 1 – December 31</td><td>January 15, 2027</td></tr>
               </tbody>
             </table>
+            <p>Those 2026 due dates come from <a href="https://www.irs.gov/publications/p505" rel="noopener noreferrer" target="_blank">IRS Publication 505 (2026)</a>.</p>
 
             <h3>How Much to Pay Each Quarter</h3>
             <p>The cleanest approach is to divide your estimated annual tax by four and pay that amount each quarter. If your income is uneven — slow winters, busy summers — you can pay based on actual income earned that quarter rather than one-quarter of your annual estimate.</p>
 
-            <p><strong>Safe harbor rule:</strong> The IRS won't penalize you for underpayment if you pay at least 100% of what you owed in the prior tax year (or 110% if your prior year AGI exceeded $150,000). This means if you had a good year last year, paying the same total amount in quarterly installments this year protects you from penalties regardless of what you earn this year.</p>
+            <p><strong>Safe harbor rule:</strong> The IRS will not penalize you for underpayment if you pay at least 100% of what you owed in the prior tax year (or 110% if your prior year AGI exceeded $150,000), or 90% of this year's tax, whichever is smaller (<a href="https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes" rel="noopener noreferrer" target="_blank">IRS Estimated Taxes</a> and <a href="https://www.irs.gov/publications/p505" rel="noopener noreferrer" target="_blank">Publication 505 (2026)</a>). This means if you had a good year last year, paying the same total amount in quarterly installments this year protects you from penalties regardless of what you earn this year.</p>
 
             <p><strong>How to pay:</strong> IRS Direct Pay at irs.gov/payments is the fastest and free method. You can also pay by check made out to "United States Treasury." Most states have their own equivalent quarterly payment systems.</p>
 
@@ -453,11 +459,11 @@
 
             <p>This is where the tax discussion becomes practical.</p>
 
-            <p>Every dollar of profit you earn on a job is subject to SE tax at roughly 14% (the effective rate after the 92.35% adjustment), plus federal income tax, plus state income tax. In the example above, at $78,000 net profit, the combined effective tax rate came to about 28.2%.</p>
+            <p>Every dollar of profit you earn on a job is subject to SE tax at roughly 14% (the effective rate after the 92.35% adjustment), plus federal income tax, plus state income tax. In the example above, at $78,000 net profit, the combined effective tax rate came to about 25.7%.</p>
 
-            <p>Which means: for every $100 of profit margin on a job, only about $72 actually reaches your bank account as spendable income.</p>
+            <p>Which means: for every $100 of profit margin on a job, only about $74 actually reaches your bank account as spendable income.</p>
 
-            <p>If you're targeting a 20% net profit margin on a $5,000 job ($1,000 in profit), your after-tax take from that profit is approximately $718. If you've priced the job with a 10% margin instead, you're keeping roughly $359 in after-tax income from that job.</p>
+            <p>If you're targeting a 20% net profit margin on a $5,000 job ($1,000 in profit), your after-tax take from that profit is approximately $743 ($1,000 × (1 − 0.2572) = $742.76). If you've priced the job with a 10% margin instead, you're keeping roughly $371 in after-tax income from that job ($500 × 0.7428 = $371.38).</p>
 
             <div class="callout">
               <p><strong>The difference between correct and careless pricing is not $500 per job. It's $500 compounded across every job you run all year.</strong></p>
@@ -477,7 +483,7 @@
               <li><strong>Vehicle and transportation:</strong> You can deduct actual vehicle expenses (gas, insurance, maintenance, loan interest, registration) or take the IRS standard mileage rate. Keep a mileage log.</li>
               <li><strong>Tools and equipment:</strong> Purchased tools used for business are deductible. Larger equipment may be deducted in full the year of purchase using Section 179 expensing.</li>
               <li><strong>General liability and professional insurance:</strong> Fully deductible.</li>
-              <li><strong>Cell phone:</strong> The business-use portion is deductible. If your phone is 70% business use, 70% of the bill is deductible.</li>
+              <li><strong>Cell phone:</strong> The business-use portion is deductible. Say your phone is 70% business use: 70% of the bill is deductible.</li>
               <li><strong>Software and subscriptions:</strong> Estimating software, accounting tools, CRM, job management platforms — all deductible.</li>
               <li><strong>Business licenses and continuing education:</strong> Deductible.</li>
               <li><strong>Home office:</strong> If you use a dedicated space in your home exclusively for business, a proportional share of rent or mortgage interest and utilities may be deductible.</li>
@@ -488,7 +494,7 @@
             <h2 id="faq">Frequently Asked Questions</h2>
 
             <h3>How much should I set aside for taxes as a 1099 contractor?</h3>
-            <p>A 30% reserve on your net profit, meaning each payment minus that job's materials and other costs, is a reasonable starting point for many solo contractors. In this article's example, SE tax, federal income tax, and state income tax came to 28.2% of net profit. If you're in a high-tax state or earning above $150,000, increase the reserve to 33–35%.</p>
+            <p>A 30% reserve on your net profit, meaning each payment minus that job's materials and other costs, is a reasonable rule of thumb for many solo contractors, not an IRS figure. In this article's example, SE tax, federal income tax, and state income tax came to 25.7% of net profit. If you're in a high-tax state or earning above $150,000, 33–35% is a common rule of thumb, not an IRS figure.</p>
 
             <h3>What is self-employment tax and why do I owe 15.3%?</h3>
             <p>SE tax is your contribution to Social Security and Medicare. Employees pay 7.65% and their employer pays the other 7.65%. When you're self-employed, you pay both halves yourself — hence the full 15.3%. It is not a penalty for working for yourself; it is the same total contribution every worker makes, just without an employer splitting it.</p>
@@ -503,7 +509,7 @@
             <p>A single-member LLC taxed as a sole proprietor pays the same SE tax as a sole proprietor. However, electing S-corporation tax treatment can reduce SE tax by allowing you to take a portion of income as distributions rather than wages. The IRS sets no income threshold, but you must pay yourself a reasonable salary first (<a href="https://www.irs.gov/pub/irs-news/fs-08-25.pdf" rel="noopener noreferrer" target="_blank">IRS Fact Sheet 2008-25</a>). Accounting firms put the breakeven anywhere from about $40,000 (<a href="https://gusto.com/resources/articles/taxes/s-corp-tax-savings-calculator" rel="noopener noreferrer" target="_blank">Gusto</a>) to $100,000 (<a href="https://reedcorp.tax/helpful-guides/llc-vs-s-corp/" rel="noopener noreferrer" target="_blank">Reed Corporation CPA</a>) of steady net profit, and $50,000 is often cited as the point to start the conversation with a CPA (<a href="https://www.sdocpa.com/s-corp-election-guide/" rel="noopener noreferrer" target="_blank">SDO CPA</a> puts breakeven at roughly $50,000 to $60,000). This is a legitimate strategy, but it requires proper payroll setup and a qualified accountant. Do not attempt S-corp election without professional guidance.</p>
 
             <h3>How does self-employment tax affect my actual profit on a job?</h3>
-            <p>Directly. For every dollar of profit on a job, roughly $0.14 goes to SE tax alone, before income tax. At the 28.2% combined effective rate in this article's example, about $0.72 of each profit dollar reaches your pocket. The <a href="/calculator">Job Profit Calculator</a> keeps taxes out of the Suggested Charge, because tax is owed on profit, and shows an estimated SE tax set-aside on the job's profit for planning. Income tax is not included in that set-aside.</p>
+            <p>Directly. For every dollar of profit on a job, roughly $0.14 goes to SE tax alone, before income tax. At the 25.7% combined effective rate in this article's example, about $0.74 of each profit dollar reaches your pocket. The <a href="/calculator">Job Profit Calculator</a> keeps taxes out of the Suggested Charge, because tax is owed on profit, and shows an estimated SE tax set-aside on the job's profit for planning. Income tax is not included in that set-aside.</p>
 
             <h2 id="bottom-line">The Bottom Line</h2>
 

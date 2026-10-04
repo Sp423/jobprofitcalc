@@ -548,9 +548,15 @@ def se_tax(net_dollars):
 # 2026 federal figures, single filer (IRS Rev. Proc. 2025-32).
 STD_DEDUCTION_2026 = 16100
 BRACKETS_2026 = [(12400, 0.10), (50400, 0.12), (105700, 0.22)]
-# Idaho 2026 single filer: first $4,811 at 0%, the rest at 5.3% (tax.idaho.gov rate schedule).
+# Idaho TY2025 schedule (latest posted): first $4,811 at 0%, the rest at 5.3% (tax.idaho.gov rate schedule).
 IDAHO_ZERO_BRACKET = 4811
 IDAHO_RATE = 0.053
+QBI_RATE = 0.20
+
+
+def qbi_deduction(qbi, taxable_before):
+    """Lesser of 20% of QBI or 20% of taxable income before the QBI deduction."""
+    return min(js_round(qbi * QBI_RATE), js_round(taxable_before * QBI_RATE))
 
 
 def federal_tax_2026(taxable):
@@ -569,7 +575,10 @@ def hourly_derived():
     target = 72000
     se = js_round(se_tax(target) / 100)
     half = js_round(se / 2)
-    taxable = target - half - STD_DEDUCTION_2026
+    agi = target - half
+    taxable_before = agi - STD_DEDUCTION_2026
+    qbi_ded = qbi_deduction(agi, taxable_before)
+    taxable = taxable_before - qbi_ded
     fed = federal_tax_2026(taxable)
     state = idaho_tax(target)
     need = target + se + fed + state + 7200 + 3600
@@ -578,6 +587,8 @@ def hourly_derived():
     return {
         "SE tax on $72,000 (whole dollars)": "${:,}".format(se),
         "half SE deduction": "${:,}".format(half),
+        "taxable income before QBI": "${:,}".format(taxable_before),
+        "QBI deduction": "${:,}".format(qbi_ded),
         "federal taxable income": "${:,}".format(taxable),
         "federal income tax (2026, single)": "${:,}".format(fed),
         "Idaho tax on $72,000 (simplified)": "${:,}".format(state),
@@ -599,10 +610,16 @@ def setax_derived():
     se_base = js_round(net * SE_NET_FACTOR)
     se = js_round(net * SE_NET_FACTOR * SE_RATE)
     half = js_round(se / 2)
-    taxable = net - half - STD_DEDUCTION_2026
+    agi = net - half
+    taxable_before = agi - STD_DEDUCTION_2026
+    qbi_ded = qbi_deduction(agi, taxable_before)
+    taxable = taxable_before - qbi_ded
     fed, lower, rows = 0, 0, {}
     for upper, rate in BRACKETS_2026:
         portion = max(0, min(taxable, upper) - lower)
+        if portion <= 0:
+            lower = upper
+            continue
         tax = js_round(portion * rate)
         rows["{:.0f}% bracket tax".format(rate * 100)] = "${:,}".format(tax)
         rows["{:.0f}% bracket portion".format(rate * 100)] = "${:,}".format(portion)
@@ -617,6 +634,8 @@ def setax_derived():
         "SE tax": "${:,}".format(se),
         "half SE deduction": "${:,}".format(half),
         "2026 standard deduction": "${:,}".format(STD_DEDUCTION_2026),
+        "taxable income before QBI": "${:,}".format(taxable_before),
+        "QBI deduction": "${:,}".format(qbi_ded),
         "federal taxable income": "${:,}".format(taxable),
     }
     out.update(rows)
@@ -711,11 +730,13 @@ STALE = {
              "$91.72", "about $92", "$92 as the labor rate", "Federal income tax (est.)",
              "$8,000–$12,000", "22% federal bracket", "$75 – $150", "$80 – $130", "$85 – $150",
              "Roofer", "General Contractor", "Carpenter (finish)", "Flooring Installer", "Painter",
-             "Landscaper</td>", "$55 – $90", "rough illustrations"],
+             "Landscaper</td>", "$55 – $90", "rough illustrations",
+             "$5,891", "$102,425", "$103,000", "$73.57", "$88.28"],
     SETAX: ["$14,600", "$57,889", "$7,788", "$2,362", "$23,209", "$54,791", "29.8%", "5.8%",
             "2024", "$160,000–$170,000", "full tax burden", "gross payments", "Enter your SE tax rate",
             "price it into every job", "$4,134", "$22,273", "$55,727", "$55,700", "28.6%",
-            "71 cents", "about $71", "$0.71", "$714", "$357"],
+            "71 cents", "about $71", "$0.71", "$714", "$357",
+            "$7,118", "$22,018", "$55,982", "28.2%", "$718", "$359"],
     ESTIMATE: ["and tax rates"],
     OVERHEAD: ["before profit and taxes", "(labor + materials) on every job", "5–8 percentage points",
                "5–8 points", "Studies of trade contractor", "3–5 points", "a healthy range is"],

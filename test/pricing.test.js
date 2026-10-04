@@ -1035,11 +1035,30 @@ test('huge inputs never throw, and quote lines match the price when priced', () 
         c.price,
         JSON.stringify(input)
       );
+      for (const key of Object.keys(c)) {
+        assert.equal(Number.isSafeInteger(c[key]), true, key + ' ' + JSON.stringify(input));
+      }
     } else {
       assert.equal(result.ok, false);
       assert.equal(result.error, 'Invalid input.');
     }
   }
+});
+
+test('sales tax on huge materials is rejected', () => {
+  const r = P.priceJob({
+    hours: 0,
+    workers: 1,
+    laborRate: 0,
+    materialCost: 80000000000000,
+    overhead: 0,
+    driveTime: 0,
+    fuelCost: 0,
+    margin: 0,
+    salesTaxRate: 20
+  });
+  assert.equal(r.ok, false);
+  assert.equal(r.error, 'Invalid input.');
 });
 
 test('UI-max inputs still price', () => {

@@ -314,6 +314,7 @@
 
     var salesTax = rc(quote.materials * salesTaxPct / 100);
     var customerTotal = price + salesTax;
+    if (!Number.isSafeInteger(salesTax) || !Number.isSafeInteger(customerTotal)) return { ok: false, error: 'Invalid input.' };
     var laborHours = hours * workers;
     var setAside = rc(profit * SE_NET_FACTOR * SE_RATE);
 

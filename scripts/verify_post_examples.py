@@ -222,7 +222,7 @@ def _(r):
     return {"price": usd(r["price"])}
 
 
-@example(SPRINK, "Scenario C, no compressor cost", **sprink(materials=0))
+@example(SPRINK, "Scenario C, owned compressor cost", **sprink(materials=5))
 def _(r):
     return {"price": usd(r["price"])}
 
@@ -691,7 +691,7 @@ STALE = {
            "$456.76", "$39.85", "$264.66", "$214.50"],
     SPRINK: ["$98.16", "$123.84", "$134.47", "$61.84", "$75.23", "$127.86", "$84.93",
              "$153.98", "$117.61", "$484.35", "$387.48", "$79.79", "$177.95", "$3.21",
-             "the Workers field"],
+             "the Workers field", "$53.51", "fully amortized"],
     HVAC: ["$5,548.50", "$2,800 marked-up", "Tax % fields", "$1,530"],
     AFTER: ["~$263", "~$183", "This matches two separate runs"],
     CALLBACK: ["$3,200", "19.3%", "19.5%", "$469", "14.7%", "18.6%", "Gross margin", "of revenue)",

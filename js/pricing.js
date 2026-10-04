@@ -42,7 +42,7 @@
   var MARGIN_WARN = 60;
   // Material markup is optional profit on top of the margin. 500% is the ceiling.
   var MARKUP_MAX = 500;
-  var MARKUP_STORAGE_KEY = 'jpc_materialMarkup';
+  var MARKUP_STORAGE_KEY = 'jpc_materialMarkup_v2';
 
   var LIMITS = {
     hours:          { min: 0, max: 1000,    label: 'Estimated hours' },
@@ -110,17 +110,10 @@
   }
 
   // Blank, non-numeric, or negative markup is 0. Values above 500% clamp to 500%.
+  // Text is parsed with Number so scientific notation such as "1e3" clamps instead of becoming 0.
   function coerceMarkup(raw) {
     if (raw == null || typeof raw === 'boolean') return 0;
-    var n;
-    if (typeof raw === 'number') {
-      n = raw;
-    } else {
-      var s = String(raw).trim();
-      if (s === '') return 0;
-      if (!/^-?(?:\d+\.?\d*|\.\d+)$/.test(s)) return 0;
-      n = Number(s);
-    }
+    var n = typeof raw === 'number' ? raw : Number(String(raw).trim());
     if (!Number.isFinite(n) || n < 0) return 0;
     if (n > MARKUP_MAX) return MARKUP_MAX;
     return n;

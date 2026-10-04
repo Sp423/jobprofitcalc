@@ -92,6 +92,29 @@ test('HVAC changeout on desktop and mobile', async ({ page }) => {
   await page.screenshot({ path: path.join(shotDir, 'hvac-mobile.png'), fullPage: true });
 });
 
+test('material markup storage ignores the old key and explains caps', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/calculator.html');
+  await page.evaluate(() => localStorage.setItem('jpc_materialMarkup', '40'));
+  await page.reload();
+  await expect(page.locator('#materialMarkup')).toHaveValue('0');
+  expect(await page.evaluate(() => localStorage.getItem('jpc_materialMarkup'))).toBeNull();
+  await expect(page.locator('#msg-materialMarkup')).toHaveText('');
+
+  await page.locator('#materialMarkup').fill('600');
+  await expect(page.locator('#materialMarkup')).toHaveValue('500');
+  await expect(page.locator('#msg-materialMarkup')).toHaveText('Capped at 500%.');
+
+  await page.locator('#materialMarkup').fill('-5');
+  await expect(page.locator('#materialMarkup')).toHaveValue('0');
+  await expect(page.locator('#msg-materialMarkup')).toHaveText('Enter 0 or more. Using 0.');
+
+  await page.locator('#materialMarkup').fill('25');
+  await expect(page.locator('#msg-materialMarkup')).toHaveText('');
+  expect(await page.evaluate(() => localStorage.getItem('jpc_materialMarkup_v2'))).toBe('25');
+  expect(page.errors).toEqual([]);
+});
+
 test('invalid input shows a message and no NaN', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/index.html');

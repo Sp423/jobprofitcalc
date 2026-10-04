@@ -75,9 +75,10 @@ const FIELD_IDS = {
 };
 
 // Job inputs other than material markup are not stored and are not read from the URL.
-// Drop leftover tax keys from older builds. Material markup is saved and restored.
+// Drop leftover tax keys from older builds. Drop the old markup key so a saved
+// value from before jpc_materialMarkup_v2 cannot come back. The new key is restored below.
 try {
-  ['jpc_seTax', 'jpc_stateTax', 'jpc_qs_seTax', 'jpc_qs_stateTax'].forEach(function (key) {
+  ['jpc_seTax', 'jpc_stateTax', 'jpc_qs_seTax', 'jpc_qs_stateTax', 'jpc_materialMarkup'].forEach(function (key) {
     localStorage.removeItem(key);
   });
 } catch (e) { /* private mode */ }
@@ -186,7 +187,28 @@ function currentResult() {
   return { ok: true, messages: checked.messages, result: priced, values: values };
 }
 
+function showMarkupMessage() {
+  if (!$.matMark) return;
+  var msg = G('msg-materialMarkup');
+  var s = String($.matMark.value).trim();
+  var text = '';
+  if (s !== '') {
+    var n = Number(s);
+    if (!Number.isFinite(n) || n < 0) {
+      text = 'Enter 0 or more. Using 0.';
+      $.matMark.value = '0';
+    } else if (n > P.MARKUP_MAX) {
+      text = 'Capped at 500%.';
+      $.matMark.value = String(P.MARKUP_MAX);
+    }
+  }
+  if (!msg) return;
+  msg.textContent = text;
+  msg.className = 'field-msg' + (text ? ' is-warn' : '');
+}
+
 function update() {
+  showMarkupMessage();
   const state = currentResult();
   const resultsEl = G('resultsPanel');
   lastResult = state.ok ? state.result : null;

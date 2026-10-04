@@ -873,18 +873,29 @@ test('marked-up quote lines sum to the price', () => {
   }
 });
 
-test('material markup persists under jpc_materialMarkup', () => {
+test('coerceMarkup parses scientific notation and clamps', () => {
+  assert.equal(P.coerceMarkup('1e3'), 500);
+  assert.equal(P.coerceMarkup('abc'), 0);
+  assert.equal(P.coerceMarkup('-5'), 0);
+  assert.equal(P.coerceMarkup(''), 0);
+  assert.equal(P.coerceMarkup('600'), 500);
+  assert.equal(P.coerceMarkup('25'), 25);
+});
+
+test('material markup persists under jpc_materialMarkup_v2', () => {
   const fs = require('fs');
   const path = require('path');
   const mem = new Map();
   const storage = {
     getItem(key) { return mem.has(key) ? mem.get(key) : null; },
-    setItem(key, value) { mem.set(key, String(value)); }
+    setItem(key, value) { mem.set(key, String(value)); },
+    removeItem(key) { mem.delete(key); }
   };
-  assert.equal(P.MARKUP_STORAGE_KEY, 'jpc_materialMarkup');
+  assert.equal(P.MARKUP_STORAGE_KEY, 'jpc_materialMarkup_v2');
   assert.equal(P.readStoredMarkup(storage), null);
   P.writeStoredMarkup(storage, '25');
-  assert.equal(storage.getItem('jpc_materialMarkup'), '25');
+  assert.equal(storage.getItem('jpc_materialMarkup_v2'), '25');
+  assert.equal(storage.getItem('jpc_materialMarkup'), null);
   assert.equal(P.readStoredMarkup(storage), '25');
   P.writeStoredMarkup(storage, '0');
   assert.equal(P.readStoredMarkup(storage), '0');
@@ -892,7 +903,8 @@ test('material markup persists under jpc_materialMarkup', () => {
   const src = fs.readFileSync(path.join(__dirname, '../js/calculator.js'), 'utf8');
   assert.match(src, /writeStoredMarkup/);
   assert.match(src, /readStoredMarkup/);
-  assert.doesNotMatch(src, /removeItem\(\s*['"]jpc_materialMarkup['"]\s*\)/);
+  assert.match(src, /['"]jpc_materialMarkup['"]/);
+  assert.doesNotMatch(src, /removeItem\(\s*['"]jpc_materialMarkup_v2['"]\s*\)/);
   assert.doesNotMatch(src, /jpc_qs_materialMarkup/);
   assert.doesNotMatch(src, /materialMarkup\/i/);
 });

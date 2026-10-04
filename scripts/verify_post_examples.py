@@ -676,6 +676,57 @@ DERIVED[SETAX] = setax_derived
 
 ESTIMATE = "how-to-write-contractor-estimate.html"
 OVERHEAD = "contractor-overhead-percentage.html"
+QUOTE = "how-long-is-a-contractor-quote-good-for.html"
+PROFIT = "contractor-job-profitability.html"
+MARKUPVM = "contractor-markup-vs-margin.html"
+
+
+# Panel-upgrade example holds overhead and drive/fuel flat. It is not a
+# calculator run (price_job would apply Overhead % to the new materials).
+def quote_derived():
+    labor, mat0, oh, drive = 95000, 116000, 21000, 4500
+    cost0 = labor + mat0 + oh + drive
+    price0 = rc(cost0 * 100 / 80)
+    mat1 = 117680
+    cost1 = labor + mat1 + oh + drive
+    price1 = rc(cost1 * 100 / 80)
+    return {
+        "original total cost": usd(cost0),
+        "original price": usd(price0),
+        "updated materials": usd(mat1),
+        "wire increase": usd(mat1 - mat0),
+        "re-run total cost": usd(cost1),
+        "revised price": usd(price1),
+        "delta": usd(price1 - price0),
+        "materials share": "49%",
+        "materials share math": "$1,160 ÷ $2,365 = 49.0%",
+        "copper spike on $10k": "$84",
+        "copper 50% wire": "$580",
+        "copper 50% cost move": "$20.30",
+        "copper 50% price move": "$25.38",
+        "6k wire price swing": "$262.50",
+    }
+
+
+DERIVED[QUOTE] = quote_derived
+
+
+def profit_derived():
+    labor, materials, overhead, drive = 70000, 50000, 25000, 7000
+    revenue = 200000
+    cost = labor + materials + overhead + drive
+    profit = revenue - cost
+    set_aside = rc(profit * SE_NET_FACTOR * SE_RATE)
+    return {
+        "total costs": usd0(cost),
+        "job profit": usd0(profit),
+        "job profitability": "24%",
+        "SE set-aside": usd(set_aside),
+        "SE set-aside math": "$480 × 92.35% × 15.3% = $67.82",
+    }
+
+
+DERIVED[PROFIT] = profit_derived
 
 
 # $500 labor (10 hrs x 1 worker x $50 example cost) + $800 materials, 20% overhead.
@@ -816,6 +867,8 @@ POSTS = [
     PLUMBER_PAGE,
     MARGINS,
     MARKUP,
+    "how-long-is-a-contractor-quote-good-for.html",
+    "contractor-job-profitability.html",
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -878,6 +931,9 @@ STALE = {
     ESTIMATE: ["and tax rates"],
     OVERHEAD: ["before profit and taxes", "(labor + materials) on every job", "5–8 percentage points",
                "5–8 points", "Studies of trade contractor", "3–5 points", "a healthy range is"],
+    QUOTE: ["Material markup (35%)", "$1,566 marked up", "+$29", "three to four times larger",
+            "$168 of margin", "about 55% of total job cost", "Keep the same markup"],
+    PROFIT: ["Taxes set aside on this job"],
     "how-to-use-the-job-profit-calculator.html": [
         "very top of the calculator", "Adjust them once", "stored anywhere", "stored on a server",
         "Revisit your default inputs", "settings and defaults are dialed in"],
@@ -928,6 +984,13 @@ STALE_ALLOW = {
 # #52 defines STALE_EXEMPT and page_path; they are not on this branch yet.
 if 'STALE_EXEMPT' not in globals():
     STALE_EXEMPT = {}
+
+# Files that are not full engine posts. Check only these strings (not STALE_EVERYWHERE).
+EXTRA_STALE = {
+    os.path.join(ROOT, "index.html"): ["Mark up plants 25–35%"],
+    os.path.join(BLOG, "index.html"): ["15–30% material markup is standard"],
+    os.path.join(BLOG, MARKUPVM): ["type 25% into a markup field", "Two fields, two jobs"],
+}
 
 
 def main():
@@ -983,6 +1046,13 @@ def main():
         hits = [t for t in STALE_EVERYWHERE + STALE.get(post, []) if t in html and t not in allow]
         stale_found += len(hits)
         print("  [{}] {}{}".format("ok" if not hits else "STALE", post,
+                                    "" if not hits else ": " + ", ".join(hits)))
+    for path, strings in EXTRA_STALE.items():
+        html = open(path, encoding="utf-8").read()
+        hits = [t for t in strings if t in html]
+        stale_found += len(hits)
+        label = os.path.relpath(path, ROOT)
+        print("  [{}] {}{}".format("ok" if not hits else "STALE", label,
                                     "" if not hits else ": " + ", ".join(hits)))
     print()
     missing += stale_found

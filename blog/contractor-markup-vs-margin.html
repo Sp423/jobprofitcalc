@@ -14,7 +14,7 @@
   <meta property="og:url" content="https://jobprofitcalc.com/blog/contractor-markup-vs-margin.html">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-09-01T00:00:00Z">
-  <meta property="article:modified_time"  content="2026-09-01T00:00:00Z">
+  <meta property="article:modified_time"  content="2026-10-03T00:00:00Z">
   <meta property="article:author"          content="JobProfitCalc.com">
   <meta property="article:section"         content="Contractor Pricing">
   <meta property="og:image" content="https://jobprofitcalc.com/images/contractor-markup-vs-margin.jpg">
@@ -37,7 +37,7 @@
     "url": "https://jobprofitcalc.com/blog/contractor-markup-vs-margin.html",
     "image": "https://jobprofitcalc.com/images/contractor-markup-vs-margin.jpg",
     "datePublished": "2026-09-01",
-    "dateModified": "2026-09-01",
+    "dateModified": "2026-10-03",
     "author": { "@type": "Organization", "name": "JobProfitCalc.com" },
     "publisher": { "@type": "Organization", "name": "JobProfitCalc.com", "url": "https://jobprofitcalc.com", "logo": { "@type": "ImageObject", "url": "https://jobprofitcalc.com/og-image.png" } },
     "mainEntityOfPage": "https://jobprofitcalc.com/blog/contractor-markup-vs-margin.html"
@@ -79,12 +79,12 @@
       {
         "@type": "Question",
         "name": "Is the markup on materials the same as job profit?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Material markup pays you for sourcing, handling, storage, and the risk of buying the product. Job profit is what remains on the whole ticket after labor, materials, overhead, and the rest of the cost stack." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Job profit is what remains on the whole ticket after labor, materials, overhead, and the rest of the cost stack. In the calculator, materials go in at cost and the margin carries their profit. How markup converts to margin is in how to mark up materials as a contractor. Job-level context is in contractor profit margins by trade." }
       },
       {
         "@type": "Question",
         "name": "Should I set my price from markup or from margin?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Build cost from the job (labor, materials, overhead). Set the selling price from the margin you want to keep, which means converting that margin into the markup that produces it. Then confirm: profit ÷ price." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Build cost from the job (labor, materials, overhead). Set the selling price from the margin you want to keep, which means converting that margin into the markup that produces it. Then confirm: profit ÷ price. In the calculator you enter the margin directly. If you only add a familiar markup percentage and never check margin, you will systematically overstate how much of the ticket you keep." }
       }
     ]
   }
@@ -285,7 +285,7 @@
             <div class="article-tag">Pricing Strategy</div>
             <h1>Markup vs Margin on a Real Ticket</h1>
             <div class="article-meta">
-              <span>September 1, 2026</span>
+              <span>Updated October 3, 2026</span>
               <span class="article-meta-sep">·</span>
               <span>6 min read</span>
               <span class="article-meta-sep">·</span>
@@ -319,7 +319,7 @@
             <p>Price is larger than cost (if you are not losing money), so the same profit is a smaller percentage of price than of cost. That is the whole issue. 25% of cost is not 25% of price.</p>
 
             <div class="callout">
-              <p><strong>The usual slip:</strong> you want a 25% <em>margin</em>, you type 25% into a markup field, and you quote a 20% job without noticing. Material markup and job profit margin are separate things. Use them that way.</p>
+              <p><strong>The usual slip:</strong> you want a 25% <em>margin</em>, you add 25% to cost and quote a 20% job without noticing. That slip happens on hand-built quotes and spreadsheets.</p>
             </div>
 
             <h2 id="one-ticket">One Ticket, Two Percentages</h2>
@@ -375,15 +375,17 @@
 
             <p>The $120 on this example is not a rounding error. It is the profit you thought you were putting in the price and did not. One ticket that size is easy to shrug off. The habit is the problem: every job quoted from a markup percentage you mentally labeled "margin" is priced short of the share you meant to keep.</p>
 
-            <p>The gap also stacks with other leaks. If materials go through at cost, you are not paying yourself for sourcing, handling, and the risk of buying the product. That line is <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">how to mark up materials as a contractor</a>. It is not the same as job profit. If you skip material markup <em>and</em> treat markup as margin, you cut the ticket twice.</p>
+            <p>Materials entered at cost still earn profit, because the margin applies to the whole ticket, materials included. The leak is a hand-built quote that puts materials through at cost with no margin on them. How markup converts to margin is in <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">how to mark up materials as a contractor</a>.</p>
 
             <p>Once the percentages are honest, compare the job's real margin to a healthy range for your kind of work. Those ranges live in <a href="/blog/contractor-profit-margins-by-trade.html">contractor profit margins by trade</a>. This post does not restate them. Calculate first, then compare.</p>
 
             <h2 id="convert-margin">How to Convert a Target Margin Into Markup</h2>
 
-            <p>When you know the margin you want, do not type that same percentage into a markup box. Convert it.</p>
+            <p>If you price by markup on a hand-built quote, convert it.</p>
 
             <div class="formula-block">Required markup = Target margin ÷ (1 − Target margin)</div>
+
+            <div class="formula-block">Margin = Markup ÷ (1 + Markup)</div>
 
             <div class="calc-example" role="table" aria-label="Markup to margin conversion for the same profit dollars">
               <div class="calc-example-header">Markup to margin (same profit dollars)</div>
@@ -392,14 +394,14 @@
               <div class="calc-row total"><span>33.3% markup</span><span class="calc-val">25% margin</span></div>
             </div>
 
-            <p>Then check the other direction after you have a price: profit ÷ price. If that is not the margin you meant, the quote is wrong even if the markup field looks familiar.</p>
+            <p>Example: say you're used to a 25% markup. 0.25 ÷ 1.25 = 0.20, so enter 20% as your Desired Profit Margin. If you price this way, leave Material Markup at 0. Then check the other direction after you have a price: profit ÷ price. If that is not the margin you meant, the quote is wrong even if a familiar markup percentage is what you started from.</p>
 
             <h2 id="in-the-calculator">Run the Same Ticket in the Calculator</h2>
 
-            <p>Do not walk this once on a napkin and then go back to gut feel. Put labor hours and rate, material cost, material markup, overhead, and the profit margin you actually want into the <a href="/calculator">job profit calculator</a>. The suggested charge is built from those pieces. The profit margin it shows is margin (profit ÷ price), not markup.</p>
+            <p>Do not walk this once on a napkin and then go back to gut feel. Put labor hours and rate, material cost at what you paid, overhead, and the profit margin you actually want into the <a href="/calculator">job profit calculator</a>. The suggested charge is built from those pieces. The profit margin it shows is margin (profit ÷ price), not markup.</p>
 
             <div class="callout">
-              <p><strong>Two fields, two jobs.</strong> Markup on materials recovers procurement. Profit margin is the return on the whole ticket. Open the calculator, drop in the job in front of you, and look at both. They should not be the same number just because they are both percentages.</p>
+              <p>Enter materials at your cost. Your margin already earns profit on materials. If you also want a materials markup, use the optional Material Markup field: it adds profit on top of your margin, and the calculator shows your effective margin. If you'd rather price with margin alone, convert your markup first and leave Material Markup at 0.</p>
             </div>
 
             <h2 id="faq">Frequently Asked Questions</h2>
@@ -414,10 +416,10 @@
             <p>A 33.3% markup. Price = cost ÷ 0.75. On the example, $1,440 becomes $1,920, not $1,800.</p>
 
             <h3>Is the markup on materials the same as job profit?</h3>
-            <p>No. Material markup pays you for sourcing, handling, storage, and the risk of buying the product. Job profit is what remains on the whole ticket after labor, materials, overhead, and the rest of the cost stack. The materials line is covered in <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">how to mark up materials as a contractor</a>. Job-level context is in <a href="/blog/contractor-profit-margins-by-trade.html">contractor profit margins by trade</a>.</p>
+            <p>No. Job profit is what remains on the whole ticket after labor, materials, overhead, and the rest of the cost stack. In the calculator, materials go in at cost and the margin carries their profit. How markup converts to margin is in <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">how to mark up materials as a contractor</a>. Job-level context is in <a href="/blog/contractor-profit-margins-by-trade.html">contractor profit margins by trade</a>.</p>
 
             <h3>Should I set my price from markup or from margin?</h3>
-            <p>Build cost from the job (labor, materials, overhead). Set the selling price from the margin you want to keep, which means converting that margin into the markup that produces it. Then confirm: profit ÷ price. If you only add a familiar markup percentage and never check margin, you will systematically overstate how much of the ticket you keep.</p>
+            <p>Build cost from the job (labor, materials, overhead). Set the selling price from the margin you want to keep, which means converting that margin into the markup that produces it. Then confirm: profit ÷ price. In the calculator you enter the margin directly. If you only add a familiar markup percentage and never check margin, you will systematically overstate how much of the ticket you keep.</p>
 
             <h2 id="bottom-line">The Bottom Line</h2>
 

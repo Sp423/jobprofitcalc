@@ -110,13 +110,22 @@
   }
 
   // Blank, non-numeric, or negative markup is 0. Values above 500% clamp to 500%.
-  // Text is parsed with Number so scientific notation such as "1e3" clamps instead of becoming 0.
+  // Decimal text, including an exponent such as "1e3", is parsed with Number.
+  // Other bases ("0x10", "0b1", "0o7") and "Infinity" are rejected, so a saved
+  // value cannot come back as a different number.
   function coerceMarkup(raw) {
     if (raw == null || typeof raw === 'boolean') return 0;
-    var n = typeof raw === 'number' ? raw : Number(String(raw).trim());
+    var n;
+    if (typeof raw === 'number') {
+      n = raw;
+    } else {
+      var s = String(raw).trim();
+      if (!/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(s)) return 0;
+      n = Number(s);
+    }
     if (!Number.isFinite(n) || n < 0) return 0;
     if (n > MARKUP_MAX) return MARKUP_MAX;
-    return n;
+    return n || 0;
   }
 
   // Any cent gap between the quote lines and the price goes to materials.

@@ -92,7 +92,7 @@ test('HVAC changeout on desktop and mobile', async ({ page }) => {
   await page.screenshot({ path: path.join(shotDir, 'hvac-mobile.png'), fullPage: true });
 });
 
-test('material markup storage ignores the old key and explains caps', async ({ page }) => {
+test('material markup waits to rewrite until blur', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/calculator.html');
   await page.evaluate(() => localStorage.setItem('jpc_materialMarkup', '40'));
@@ -101,17 +101,66 @@ test('material markup storage ignores the old key and explains caps', async ({ p
   expect(await page.evaluate(() => localStorage.getItem('jpc_materialMarkup'))).toBeNull();
   await expect(page.locator('#msg-materialMarkup')).toHaveText('');
 
-  await page.locator('#materialMarkup').fill('600');
-  await expect(page.locator('#materialMarkup')).toHaveValue('500');
-  await expect(page.locator('#msg-materialMarkup')).toHaveText('Capped at 500%.');
+  const defaults = {
+    hours: 4, workers: 1, laborRate: 75, materialCost: 200,
+    overhead: 15, driveTime: 0.5, fuelCost: 10, margin: 20
+  };
+  const at0 = money(P.priceJob(Object.assign({ materialMarkup: 0 }, defaults)).cents.price);
+  const at500 = money(P.priceJob(Object.assign({ materialMarkup: 500 }, defaults)).cents.price);
+  const field = page.locator('#materialMarkup');
+  const msg = page.locator('#msg-materialMarkup');
+  const price = page.locator('#suggestedPrice');
+  // What a real number input exposes while the entry is still unfinished.
+  const browserValue = (s) => /^-?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(s) ? s : '';
 
-  await page.locator('#materialMarkup').fill('-5');
-  await expect(page.locator('#materialMarkup')).toHaveValue('0');
-  await expect(page.locator('#msg-materialMarkup')).toHaveText('Enter 0 or more. Using 0.');
+  async function typeMarkup(text) {
+    await field.click();
+    await field.fill('');
+    let typed = '';
+    for (const ch of text) {
+      typed += ch;
+      await page.keyboard.type(ch);
+      await expect(field).toHaveValue(browserValue(typed));
+    }
+  }
 
-  await page.locator('#materialMarkup').fill('25');
-  await expect(page.locator('#msg-materialMarkup')).toHaveText('');
-  expect(await page.evaluate(() => localStorage.getItem('jpc_materialMarkup_v2'))).toBe('25');
+  await typeMarkup('-50');
+  await expect(field).toHaveValue('-50');
+  await expect(msg).toHaveText('Enter 0 or more. Using 0.');
+  await expect(price).toHaveText(at0);
+  await field.blur();
+  await expect(field).toHaveValue('0');
+  await expect(msg).toHaveText('Enter 0 or more. Using 0.');
+  await expect(price).toHaveText(at0);
+
+  await typeMarkup('600');
+  await expect(field).toHaveValue('600');
+  await expect(msg).toHaveText('Capped at 500%.');
+  await expect(price).toHaveText(at500);
+  await field.blur();
+  await expect(field).toHaveValue('500');
+  await expect(msg).toHaveText('Capped at 500%.');
+  await expect(price).toHaveText(at500);
+
+  await typeMarkup('1e3');
+  await expect(field).toHaveValue('1e3');
+  await expect(msg).toHaveText('Capped at 500%.');
+  await expect(price).toHaveText(at500);
+  await field.blur();
+  await expect(field).toHaveValue('500');
+  await expect(msg).toHaveText('Capped at 500%.');
+  await expect(price).toHaveText(at500);
+
+  await field.click();
+  await field.fill('');
+  await expect(field).toHaveValue('');
+  await expect(msg).toHaveText('');
+  await expect(price).toHaveText(at0);
+  await field.blur();
+  await expect(field).toHaveValue('');
+  await expect(msg).toHaveText('');
+  await expect(price).toHaveText(at0);
+  expect(await page.evaluate(() => localStorage.getItem('jpc_materialMarkup_v2'))).toBe('');
   expect(page.errors).toEqual([]);
 });
 

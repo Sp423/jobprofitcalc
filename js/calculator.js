@@ -94,6 +94,8 @@ function restoreMarkup() {
     var stored = P.readStoredMarkup(localStorage);
     if (stored !== null) $.matMark.value = stored;
   } catch (e) { /* private mode */ }
+  // A restored 600 or -5 is committed once on load. Typing is not in progress.
+  showMarkupMessage(true);
 }
 
 function fmtD(n, dec) {
@@ -187,20 +189,43 @@ function currentResult() {
   return { ok: true, messages: checked.messages, result: priced, values: values };
 }
 
-function showMarkupMessage() {
+// Set when a cap or negative entry is committed. Cleared on the next keystroke
+// in this field, so the note stays up after blur instead of vanishing with the rewrite.
+var markupNote = '';
+
+function partialMarkup(s) {
+  return s === '+' || s === '-' || s === '.' || s === '+.' || s === '-.'
+    || /^[+-]?(?:\d+\.?\d*|\.\d+)[eE][+-]?$/.test(s);
+}
+
+function decimalMarkup(s) {
+  return /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(s);
+}
+
+function showMarkupMessage(commit) {
   if (!$.matMark) return;
   var msg = G('msg-materialMarkup');
   var s = String($.matMark.value).trim();
   var text = '';
-  if (s !== '') {
+  // Blank, a lone "-", and an unfinished entry (".", "1e") stay as typed and add nothing.
+  if (s !== '' && !partialMarkup(s)) {
     var n = Number(s);
-    if (!Number.isFinite(n) || n < 0) {
+    if (!decimalMarkup(s) || !Number.isFinite(n) || n < 0) {
       text = 'Enter 0 or more. Using 0.';
-      $.matMark.value = '0';
+      if (commit) $.matMark.value = '0';
     } else if (n > P.MARKUP_MAX) {
       text = 'Capped at 500%.';
-      $.matMark.value = String(P.MARKUP_MAX);
+      if (commit) $.matMark.value = String(P.MARKUP_MAX);
     }
+  }
+  if (commit) {
+    if (text) markupNote = text;
+    else if (markupNote && ($.matMark.value === '0' || $.matMark.value === String(P.MARKUP_MAX))) {
+      // change and blur both commit. The second one sees the rewritten 0 or 500.
+      text = markupNote;
+    } else markupNote = '';
+  } else if (markupNote) {
+    text = markupNote;
   }
   if (!msg) return;
   msg.textContent = text;
@@ -208,7 +233,7 @@ function showMarkupMessage() {
 }
 
 function update() {
-  showMarkupMessage();
+  showMarkupMessage(false);
   const state = currentResult();
   const resultsEl = G('resultsPanel');
   lastResult = state.ok ? state.result : null;
@@ -319,6 +344,7 @@ $.trade.addEventListener('change', function (event) {
   // Trade pages fire change on load to apply defaults. That event is not a user
   // action, so it must not wipe a saved markup. A real trade change resets it to 0.
   if (event.isTrusted && $.matMark) {
+    markupNote = '';
     $.matMark.value = '0';
     saveMarkup();
   }
@@ -330,6 +356,7 @@ $.reset.addEventListener('click', function () {
   if (d) applyTrade(d);
   else applyTrade(P.PAGE_DEFAULTS);
   if ($.matMark) {
+    markupNote = '';
     $.matMark.value = '0';
     saveMarkup();
   }
@@ -679,14 +706,24 @@ G('stickyResultsBtn').addEventListener('click', function () {
 });
 updateStickyBar();
 
-[$.hours, $.workers, $.labor, $.matCost, $.matMark, $.overhead, $.drive, $.fuel, $.profit].forEach(function (el) {
+[$.hours, $.workers, $.labor, $.matCost, $.overhead, $.drive, $.fuel, $.profit].forEach(function (el) {
   if (!el) return;
   el.addEventListener('input', update);
   el.addEventListener('change', update);
 });
 if ($.matMark) {
-  $.matMark.addEventListener('input', saveMarkup);
-  $.matMark.addEventListener('change', saveMarkup);
+  $.matMark.addEventListener('input', function () {
+    markupNote = '';
+    update();
+    saveMarkup();
+  });
+  ['change', 'blur'].forEach(function (ev) {
+    $.matMark.addEventListener(ev, function () {
+      showMarkupMessage(true);
+      saveMarkup();
+      update();
+    });
+  });
 }
 
 restoreMarkup();

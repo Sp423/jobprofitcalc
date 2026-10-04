@@ -880,6 +880,13 @@ test('coerceMarkup parses scientific notation and clamps', () => {
   assert.equal(P.coerceMarkup(''), 0);
   assert.equal(P.coerceMarkup('600'), 500);
   assert.equal(P.coerceMarkup('25'), 25);
+  assert.equal(P.coerceMarkup('0x10'), 0);
+  assert.equal(P.coerceMarkup('0b1'), 0);
+  assert.equal(P.coerceMarkup('0o7'), 0);
+  assert.equal(P.coerceMarkup('Infinity'), 0);
+  assert.equal(P.coerceMarkup('-'), 0);
+  assert.equal(P.coerceMarkup('.'), 0);
+  assert.equal(P.coerceMarkup('1e'), 0);
 });
 
 test('material markup persists under jpc_materialMarkup_v2', () => {

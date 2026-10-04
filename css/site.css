@@ -578,6 +578,18 @@
     .price-tax-detail {
       font-size: 12px; color: var(--text-muted); margin-top: 3px;
     }
+    .eff-margin {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px;
+      margin: 0; padding: 0 20px 14px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-sec);
+    }
+    .eff-margin[hidden] { display: none !important; }
+    .eff-margin span:last-child {
+      font-family: var(--font-disp); font-weight: 700;
+      color: var(--text-pri);
+    }
 
     /* Metrics row */
     .metrics {
@@ -637,6 +649,7 @@
       padding: 8px 20px;
       transition: background 0.15s;
     }
+    .bk-row[hidden] { display: none !important; }
     .bk-row:hover { background: rgba(255,255,255,0.025); }
     .bk-rowlbl {
       font-size: 13px; color: var(--text-sec);

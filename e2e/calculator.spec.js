@@ -57,7 +57,8 @@ test('HVAC changeout on desktop and mobile', async ({ page }) => {
   await expect(page.locator('#bd-drive')).toHaveText(money(r.cents.driveLabor));
   await expect(page.locator('#bd-fuel')).toHaveText(money(r.cents.fuel));
   await expect(page.locator('#bd-mat')).toHaveText(money(r.cents.materials));
-  await expect(page.locator('#materialMarkup')).toHaveCount(0);
+  await expect(page.locator('#materialMarkup')).toHaveValue('0');
+  await expect(page.locator('#effMarginLine')).toBeHidden();
   await expect(page.locator('#bd-oh')).toHaveText(money(r.cents.overhead));
   await expect(page.locator('#bd-total')).toHaveText(money(r.cents.totalCost));
   await expect(page.locator('#bd-setaside')).toHaveText(money(r.cents.setAside));
@@ -136,7 +137,8 @@ test('blog cases on calculator.html at desktop and mobile', async ({ page }) => 
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
     await page.goto('/calculator.html');
-    await expect(page.locator('#materialMarkup')).toHaveCount(0);
+    await expect(page.locator('#materialMarkup')).toHaveValue('0');
+    await expect(page.locator('#effMarginLine')).toBeHidden();
     const tip = await page.locator('label[for="overhead"] .tip').getAttribute('data-tip');
     expect(tip).toBe('Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded).');
     for (const fields of Object.values(BLOG)) {
@@ -161,7 +163,8 @@ test('HVAC trade page matches the no-drive hand check', async ({ page }) => {
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
     await page.goto('/hvac-job-pricing.html');
-    await expect(page.locator('#materialMarkup')).toHaveCount(0);
+    await expect(page.locator('#materialMarkup')).toHaveValue('0');
+    await expect(page.locator('#effMarginLine')).toBeHidden();
     await fillJob(page, fields);
     await expect(page.locator('#suggestedPrice')).toHaveText('$9,918.75');
     await expect(page.locator('#bd-total')).toHaveText('$7,935.00');

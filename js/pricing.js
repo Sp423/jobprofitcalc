@@ -7,18 +7,22 @@
      driveLabor   = roundCents(driveHours × workers × rate)
      materials    = roundCents(material cost)          // at cost
      directCost   = labor + driveLabor + materials     // overhead base; fuel is NOT in it
-     overhead     = roundCents(directCost × overhead%)
+     overhead     = roundCents(directCost × overhead%) // markup dollars are not in this base
      fuel         = roundCents(fuel)                   // added after overhead
      totalCost    = directCost + overhead + fuel
-     price        = roundCents(totalCost × 100 / (100 − margin))
+     basePrice    = roundCents(totalCost × 100 / (100 − margin))
+     markup       = roundCents(materials × markup% / 100)
+     price        = basePrice + markup                 // markup is profit, not grossed up again
+     profit       = price − totalCost
    The (100 − margin) denominator is cleaned with toPrecision(12) before dividing,
-   so a binary float does not leave the price 1 cent low.
-   If that rounded price would make profit / price ≥ 95%, the price steps down to
-   the largest cent amount with margin under 95%. That cap clamp is the only
-   exception to price = cost / (1 − margin), to the cent.
+   so a binary float does not leave the base price 1 cent low.
+   If that rounded base price would make (basePrice − totalCost) / basePrice ≥ 95%,
+   the base price steps down to the largest cent amount with margin under 95%.
+   That cap clamp is the only exception to basePrice = cost / (1 − margin), to the cent.
+   Markup is added after the clamp. Blank, non-numeric, or negative markup counts as 0.
+   A markup above 500% is clamped to 500%. At 0%, price, profit, quote lines, and the
+   SE set-aside match the no-markup formula to the cent.
    No self-employment tax and no state income tax in the cost or the price.
-
-   There is no material markup. A leftover markup value on the input is ignored.
 */
 (function (root, factory) {
   var api = factory();
@@ -36,6 +40,9 @@
   // Hard cap is exclusive: margin must be under 95%. Warning above 60%.
   var MARGIN_CAP = 95;
   var MARGIN_WARN = 60;
+  // Material markup is optional profit on top of the margin. 500% is the ceiling.
+  var MARKUP_MAX = 500;
+  var MARKUP_STORAGE_KEY = 'jpc_materialMarkup';
 
   var LIMITS = {
     hours:          { min: 0, max: 1000,    label: 'Estimated hours' },
@@ -100,6 +107,49 @@
 
   function fromCents(cents) {
     return cents / 100;
+  }
+
+  // Blank, non-numeric, or negative markup is 0. Values above 500% clamp to 500%.
+  function coerceMarkup(raw) {
+    if (raw == null || typeof raw === 'boolean') return 0;
+    var n;
+    if (typeof raw === 'number') {
+      n = raw;
+    } else {
+      var s = String(raw).trim();
+      if (s === '') return 0;
+      if (!/^-?(?:\d+\.?\d*|\.\d+)$/.test(s)) return 0;
+      n = Number(s);
+    }
+    if (!Number.isFinite(n) || n < 0) return 0;
+    if (n > MARKUP_MAX) return MARKUP_MAX;
+    return n;
+  }
+
+  // Any cent gap between the quote lines and the price goes to materials.
+  // Ties are not spread: the markup lives on that line, so the remainder does too.
+  function settleQuoteRemainder(lines, priceCents) {
+    var sum = lines.labor + lines.driveLabor + lines.materials + lines.fuel;
+    var gap = priceCents - sum;
+    if (gap !== 0) lines.materials += gap;
+    return lines;
+  }
+
+  function readStoredMarkup(storage) {
+    if (!storage || typeof storage.getItem !== 'function') return null;
+    try {
+      var value = storage.getItem(MARKUP_STORAGE_KEY);
+      return value == null ? null : String(value);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function writeStoredMarkup(storage, value) {
+    if (!storage || typeof storage.setItem !== 'function') return;
+    try {
+      storage.setItem(MARKUP_STORAGE_KEY, value == null ? '' : String(value));
+    } catch (e) { /* private mode */ }
   }
 
   // Single rounding helper. `cents` in, or dollars via roundCents.
@@ -190,26 +240,33 @@
     var driveLabor = roundCentsFromDollars(driveTime * workers * laborRate);
     var materials = roundCentsFromDollars(materialCost);
     var fuel = roundCentsFromDollars(fuelCost);
+    var markupPct = coerceMarkup(input.materialMarkup);
+    // Percent of the at-cost materials, in cents. Overhead is not charged on this.
+    var markup = rc(materials * markupPct / 100);
     var direct = labor + driveLabor + materials;
     var overhead = rc(direct * overheadPct / 100);
     var totalCost = direct + overhead + fuel;
-    var price = rc(totalCost * 100 / Number((100 - marginPct).toPrecision(12)));
-    // Rounded price can land on exactly 95% (price === 20 × cost). Stay under the cap.
-    if (totalCost > 0 && price >= totalCost * 20) price = totalCost * 20 - 1;
-    if (price < 0 || totalCost < 0) return { ok: false, error: 'Invalid input.' };
+    var basePrice = rc(totalCost * 100 / Number((100 - marginPct).toPrecision(12)));
+    // Rounded base price can land on exactly 95% (basePrice === 20 × cost). Stay under the cap.
+    if (totalCost > 0 && basePrice >= totalCost * 20) basePrice = totalCost * 20 - 1;
+    if (basePrice < 0 || totalCost < 0) return { ok: false, error: 'Invalid input.' };
+    var price = basePrice + markup;
+    var baseProfit = basePrice - totalCost;
     var profit = price - totalCost;
 
     var ohParts = allocateCents(overhead, [labor, driveLabor, materials]);
     var laborWithOh = labor + ohParts[0];
     var driveWithOh = driveLabor + ohParts[1];
     var matWithOh = materials + ohParts[2];
-    var profitParts = allocateCents(profit, [laborWithOh, driveWithOh, matWithOh, fuel]);
+    // Spread only the margin profit. Markup is added to materials afterward.
+    var profitParts = allocateCents(baseProfit, [laborWithOh, driveWithOh, matWithOh, fuel]);
     var quote = {
       labor: laborWithOh + profitParts[0],
       driveLabor: driveWithOh + profitParts[1],
-      materials: matWithOh + profitParts[2],
+      materials: matWithOh + profitParts[2] + markup,
       fuel: fuel + profitParts[3]
     };
+    settleQuoteRemainder(quote, price);
 
     var salesTax = rc(quote.materials * salesTaxPct / 100);
     var customerTotal = price + salesTax;
@@ -222,6 +279,8 @@
       driveLabor: fromCents(driveLabor),
       fuel: fromCents(fuel),
       materials: fromCents(materials),
+      markup: fromCents(markup),
+      markupPct: markupPct,
       directCost: fromCents(direct),
       overhead: fromCents(overhead),
       totalCost: fromCents(totalCost),
@@ -247,6 +306,8 @@
         driveLabor: driveLabor,
         fuel: fuel,
         materials: materials,
+        markup: markup,
+        basePrice: basePrice,
         directCost: direct,
         overhead: overhead,
         totalCost: totalCost,
@@ -332,6 +393,12 @@
     LIMITS: LIMITS,
     MARGIN_CAP: MARGIN_CAP,
     MARGIN_WARN: MARGIN_WARN,
+    MARKUP_MAX: MARKUP_MAX,
+    MARKUP_STORAGE_KEY: MARKUP_STORAGE_KEY,
+    coerceMarkup: coerceMarkup,
+    settleQuoteRemainder: settleQuoteRemainder,
+    readStoredMarkup: readStoredMarkup,
+    writeStoredMarkup: writeStoredMarkup,
     TRADE_DEFAULTS: TRADE_DEFAULTS,
     PAGE_DEFAULTS: PAGE_DEFAULTS,
     SE_NET_FACTOR: SE_NET_FACTOR,

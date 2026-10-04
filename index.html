@@ -276,13 +276,24 @@
               <!-- Materials -->
               <p class="field-section">Materials</p>
               <div class="igrid" style="margin-bottom:26px">
-                <div class="igroup ig-full">
+                <div class="igroup">
                   <label class="ilabel" for="materialCost">Material Cost</label>
                   <div class="ifield has-pre">
                     <span class="ipre" aria-hidden="true">$</span>
                     <input type="number" id="materialCost" min="0" max="5000000" step="0.01" value="200" inputmode="decimal" aria-label="Material cost in dollars">
                   </div>
                   <p class="field-msg" id="msg-materialCost" role="status"></p>
+                </div>
+                <div class="igroup">
+                  <label class="ilabel" for="materialMarkup">
+                    Material Markup (%)
+                    <button type="button" class="tip tip-lg" data-tip="Optional. Percent of material cost added as profit on top of your margin. Leave at 0 if your margin already covers materials." aria-label="What the material markup percent does" aria-expanded="false">?</button>
+                  </label>
+                  <div class="ifield has-suf">
+                    <input type="number" id="materialMarkup" min="0" max="500" step="0.01" value="0" inputmode="decimal" aria-label="Material markup percent">
+                    <span class="isuf" aria-hidden="true">%</span>
+                  </div>
+                  <p class="field-msg" id="msg-materialMarkup" role="status"></p>
                 </div>
               </div>
 
@@ -327,7 +338,7 @@
                 <div class="igroup">
                   <label class="ilabel" for="profitMargin">
                     Desired Profit Margin
-                    <button type="button" class="tip tip-lg" data-tip="Your margin covers profit on materials too. No separate markup needed." aria-label="Margin covers profit on materials" aria-expanded="false">?</button>
+                    <button type="button" class="tip tip-lg" data-tip="Enter materials at your cost. Your margin already earns profit on materials. If you also want a materials markup, use the optional Material Markup field: it adds profit on top of your margin, and the calculator shows your effective margin." aria-label="Margin covers profit on materials" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
                     <input type="number" id="profitMargin" min="0" max="94.99" step="0.01" value="20" inputmode="decimal" aria-label="Desired profit margin percentage, must be under 95">
@@ -468,6 +479,11 @@
                 </div>
               </div>
 
+              <p class="eff-margin" id="effMarginLine" hidden>
+                <span>Effective margin</span>
+                <span id="effMargin">0.0%</span>
+              </p>
+
               <button class="bk-toggle no-print" id="bkToggle" aria-expanded="false" aria-controls="bkBody">
                 <span id="bkToggleLabel">View Full Cost Breakdown</span>
                 <span class="bk-arrow" aria-hidden="true">▼</span>
@@ -496,6 +512,10 @@
                 <div class="bk-total">
                   <span class="bk-totallbl">Total cost (before profit)</span>
                   <span class="bk-totalval" id="bd-total">$0.00</span>
+                </div>
+                <div class="bk-row" id="bd-markup-row" hidden>
+                  <span class="bk-rowlbl">Material markup</span>
+                  <span class="bk-rowval" id="bd-markup">$0.00</span>
                 </div>
                 <div class="bk-row">
                   <span class="bk-rowlbl">
@@ -610,7 +630,7 @@
               <h3>Quick Tips</h3>
               <ul>
                 <li>Drive labor is drive time × crew size × your labor cost</li>
-                <li>Enter materials at your cost. Your margin covers profit on materials too, so you don't need a separate markup.</li>
+                <li>Enter materials at your cost. Your margin already earns profit on materials. If you also want a materials markup, use the optional Material Markup field: it adds profit on top of your margin, and the calculator shows your effective margin.</li>
                 <li>Owner SE tax is estimated on profit and is not added to the price</li>
                 <li>Margins below 10% leave no room for error</li>
                 <li>Overhead grows as your business grows — track it monthly</li>
@@ -961,8 +981,8 @@
 <!-- Toast notification -->
 <div id="toast" role="alert" aria-live="assertive"></div>
 
-<script src="/js/pricing.js?v=20261003a"></script>
-<script src="/js/calculator.js?v=20261002f"></script>
+<script src="/js/pricing.js?v=20261003b"></script>
+<script src="/js/calculator.js?v=20261003b"></script>
 <script src="/js/site-ui.js?v=40a9750"></script>
 </body>
 </html>

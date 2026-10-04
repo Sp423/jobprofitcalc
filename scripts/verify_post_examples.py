@@ -706,9 +706,9 @@ POSTS = [
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
     "Overhead &amp; Burden", "Overhead & Burden", "Effective $/hr", "effective $/hr", "20.3%",
-    # "Material Markup" removed: the optional Material Markup field is coming back,
-    # and posts in this PR now name that field.
-    "Material markup", "0% markup", "markup (not added)", "reported in dollars",
+    # PR #47 removed the field. Optional Material Markup is back, added after margin.
+    # These are the old UI labels that must not return.
+    "0% markup", "markup (not added)", "reported in dollars",
     "reported only", "markup box", "Rate: $26", "$26 an hour",
     # Unsourced figures replaced with sourced ones (Pulse sourcing check, Oct 2026).
     "1,000–1,600", "1,200–1,400 hours", "$80–$130/hr", "between $75 and $150 per hour",

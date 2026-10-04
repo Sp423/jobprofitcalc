@@ -406,15 +406,75 @@ test('margin display does not round 94.9999 up to 95.0%', () => {
   assert.equal(P.formatPercent(1777.79 / 8888.96), '20.0%');
 });
 
-test('a leftover material markup value does not change the price', () => {
-  const clean = P.priceJob(job({ hours: 2, workers: 1, laborRate: 40, materialCost: 100, overhead: 10, margin: 20 }));
-  const stale = P.priceJob(job({
-    hours: 2, workers: 1, laborRate: 40, materialCost: 100, overhead: 10, margin: 20,
-    materialMarkup: 'not-a-number'
-  }));
-  assert.equal(stale.ok, true);
-  assert.equal(stale.price, clean.price);
-  assert.equal(stale.totalCost, clean.totalCost);
+test('markup 0 matches the no-markup formula on representative jobs', () => {
+  // Independent copy of the engine from before material markup was added.
+  // Overhead stays on materials at cost. Markup dollars are not in this path.
+  function legacyCents(input) {
+    const rc = P.rc;
+    const hours = +input.hours;
+    const workers = +input.workers;
+    const laborRate = +input.laborRate;
+    const materialCost = +input.materialCost;
+    const overheadPct = +input.overhead;
+    const driveTime = +input.driveTime;
+    const fuelCost = +input.fuelCost;
+    const marginPct = +input.margin;
+    const salesTaxPct = input.salesTaxRate == null ? 0 : +input.salesTaxRate;
+    const labor = rc(hours * workers * laborRate * 100);
+    const driveLabor = rc(driveTime * workers * laborRate * 100);
+    const materials = rc(materialCost * 100);
+    const fuel = rc(fuelCost * 100);
+    const direct = labor + driveLabor + materials;
+    const overhead = rc(direct * overheadPct / 100);
+    const totalCost = direct + overhead + fuel;
+    let price = rc(totalCost * 100 / Number((100 - marginPct).toPrecision(12)));
+    if (totalCost > 0 && price >= totalCost * 20) price = totalCost * 20 - 1;
+    const profit = price - totalCost;
+    const ohParts = P.allocateCents(overhead, [labor, driveLabor, materials]);
+    const laborWithOh = labor + ohParts[0];
+    const driveWithOh = driveLabor + ohParts[1];
+    const matWithOh = materials + ohParts[2];
+    const profitParts = P.allocateCents(profit, [laborWithOh, driveWithOh, matWithOh, fuel]);
+    const quoteMaterials = matWithOh + profitParts[2];
+    const salesTax = rc(quoteMaterials * salesTaxPct / 100);
+    const setAside = rc(profit * P.SE_NET_FACTOR * P.SE_RATE);
+    return {
+      labor, driveLabor, fuel, materials, directCost: direct, overhead, totalCost,
+      price, profit, setAside, salesTax, customerTotal: price + salesTax,
+      quoteLabor: laborWithOh + profitParts[0],
+      quoteMaterials,
+      quoteDrive: driveWithOh + profitParts[1],
+      quoteFuel: fuel + profitParts[3]
+    };
+  }
+
+  const samples = [
+    { hours: 4, workers: 1, laborRate: 75, materialCost: 200, overhead: 15, driveTime: 0.5, fuelCost: 10, margin: 20 },
+    { hours: 10, workers: 2, laborRate: 45, materialCost: 6000, overhead: 15, driveTime: 1, fuelCost: 40, margin: 20 },
+    { hours: 10, workers: 2, laborRate: 45, materialCost: 6000, overhead: 15, driveTime: 0, fuelCost: 0, margin: 20 },
+    { hours: 1.5, workers: 1, laborRate: 48, materialCost: 5.65, overhead: 25, driveTime: 0.5, fuelCost: 8.93, margin: 20 },
+    { hours: 6, workers: 2, laborRate: 45, materialCost: 5432.54, overhead: 17, driveTime: 1, fuelCost: 18, margin: 20 },
+    { hours: 6, workers: 2, laborRate: 45, materialCost: 9571.95, overhead: 17, driveTime: 1, fuelCost: 18, margin: 20 },
+    { hours: 0, workers: 1, laborRate: 0, materialCost: 500, overhead: 10, driveTime: 0, fuelCost: 0, margin: 15 },
+    { hours: 8, workers: 1, laborRate: 40, materialCost: 0, overhead: 10, driveTime: 0, fuelCost: 0, margin: 25 },
+    { hours: 0.75, workers: 1, laborRate: 44.62, materialCost: 12.5, overhead: 18, driveTime: 0.25, fuelCost: 4.5, margin: 33 },
+    { hours: 1, workers: 1, laborRate: 10, materialCost: 3611.04, overhead: 0, driveTime: 0, fuelCost: 0, margin: 94.88 },
+    { hours: 2, workers: 3, laborRate: 55.5, materialCost: 80.01, overhead: 12.5, driveTime: 1.25, fuelCost: 9.99, margin: 0, salesTaxRate: 8.25 },
+    { hours: 0, workers: 1, laborRate: 0, materialCost: 0, overhead: 0, driveTime: 0, fuelCost: 0, margin: 0 }
+  ];
+  const keys = ['labor', 'driveLabor', 'fuel', 'materials', 'directCost', 'overhead', 'totalCost', 'price', 'profit', 'setAside', 'salesTax', 'customerTotal', 'quoteLabor', 'quoteMaterials', 'quoteDrive', 'quoteFuel'];
+  for (const input of samples) {
+    const old = legacyCents(input);
+    for (const markup of [0, '0', '', null, undefined]) {
+      const next = P.priceJob(job(Object.assign({}, input, { materialMarkup: markup })));
+      assert.equal(next.ok, true, JSON.stringify(input));
+      for (const key of keys) {
+        assert.equal(next.cents[key], old[key], key + ' ' + JSON.stringify(input) + ' markup=' + String(markup));
+      }
+      assert.equal(next.markup, 0);
+      assert.equal(next.cents.markup, 0);
+    }
+  }
 });
 
 test('exact-decimal reference matches every line on seeded jobs', () => {
@@ -632,4 +692,226 @@ test('trailing zeros on a margin do not count as extra decimal places', () => {
   const extra = P.validateJob(Object.assign({}, base, { margin: '20.001' }));
   assert.equal(extra.ok, false);
   assert.match(extra.messages.margin.message, /2 decimal places/);
+});
+
+test('markup 25 adds profit after the margin and does not change overhead', () => {
+  // Page defaults, markup 0: total cost $628.13, price $785.16, profit $157.03.
+  // Materials at cost $200. Markup 25% = $50.00, added after the gross-up.
+  // price = 785.16 + 50.00 = 835.16
+  // profit = 157.03 + 50.00 = 207.03
+  // overhead stays $80.63 (15% of direct cost, materials still at $200)
+  const base = job({
+    hours: 4, workers: 1, laborRate: 75, materialCost: 200,
+    overhead: 15, driveTime: 0.5, fuelCost: 10, margin: 20
+  });
+  const zero = P.priceJob(base);
+  const marked = P.priceJob(Object.assign({}, base, { materialMarkup: 25 }));
+  assert.equal(zero.price, 785.16);
+  assert.equal(marked.overhead, zero.overhead);
+  assert.equal(marked.overhead, 80.63);
+  assert.equal(marked.totalCost, zero.totalCost);
+  assert.equal(marked.materials, 200);
+  assert.equal(marked.markup, 50);
+  assert.equal(marked.cents.price, zero.cents.price + marked.cents.markup);
+  assert.equal(marked.price, 835.16);
+  assert.equal(marked.profit, 207.03);
+  assert.equal(marked.cents.quoteLabor, zero.cents.quoteLabor);
+  assert.equal(marked.cents.quoteDrive, zero.cents.quoteDrive);
+  assert.equal(marked.cents.quoteFuel, zero.cents.quoteFuel);
+  assert.equal(marked.cents.quoteMaterials, zero.cents.quoteMaterials + marked.cents.markup);
+  assert.equal(
+    marked.cents.quoteLabor + marked.cents.quoteMaterials + marked.cents.quoteDrive + marked.cents.quoteFuel,
+    marked.cents.price
+  );
+});
+
+test('hand-checked markup: labor $300, materials $400, 15% overhead, $10 fuel, 20% margin, 25% markup', () => {
+  // hours 4 x 1 x $75 = $300.00 labor. Drive time is 0.
+  // materials at cost = $400.00
+  // direct = 300 + 400 = $700.00
+  // overhead = 15% x 700 = $105.00 exactly. Markup dollars are not in this base.
+  // fuel = $10.00
+  // total = 700 + 105 + 10 = $815.00
+  // base price = 815 / (1 - 0.20) = 815 / 0.80 = $1,018.75
+  // markup $ = 400 x 25 / 100 = $100.00
+  // price = 1,018.75 + 100.00 = $1,118.75
+  // profit = 1,118.75 - 815.00 = $303.75
+  // effective margin = 303.75 / 1,118.75 = 27.1508...% which displays as 27.2%
+  //
+  // Customer quote (cents), margin profit allocated first, then the $100 markup on materials:
+  // labor $431.25, materials $675.00, drive $0.00, fuel $12.50
+  // 431.25 + 675.00 + 0.00 + 12.50 = 1,118.75
+  const r = P.priceJob(job({
+    hours: 4, workers: 1, laborRate: 75, materialCost: 400,
+    overhead: 15, driveTime: 0, fuelCost: 10, margin: 20, materialMarkup: 25
+  }));
+  assert.equal(r.ok, true);
+  assert.equal(r.labor, 300);
+  assert.equal(r.materials, 400);
+  assert.equal(r.directCost, 700);
+  assert.equal(r.overhead, 105);
+  assert.equal(r.fuel, 10);
+  assert.equal(r.totalCost, 815);
+  assert.equal(r.cents.basePrice, 101875);
+  assert.equal(r.markup, 100);
+  assert.equal(r.price, 1118.75);
+  assert.equal(r.profit, 303.75);
+  assert.equal(r.cents.profit, r.cents.price - r.cents.totalCost);
+  assert.equal(r.quote.labor, 431.25);
+  assert.equal(r.quote.materials, 675);
+  assert.equal(r.quote.driveLabor, 0);
+  assert.equal(r.quote.fuel, 12.5);
+  assert.equal(r.cents.quoteLabor + r.cents.quoteMaterials + r.cents.quoteDrive + r.cents.quoteFuel, r.cents.price);
+  assert.equal(P.formatPercent(r.profit / r.price), '27.2%');
+  // SE set-aside follows the larger profit: round(30375 x 0.9235 x 0.153) = 4292 cents.
+  assert.equal(r.setAside, 42.92);
+});
+
+test('material markup guards: blank, bad, and negative are 0; huge values clamp at 500%', () => {
+  const base = {
+    hours: 2, workers: 1, laborRate: 40, materialCost: 100,
+    overhead: 10, driveTime: 0, fuelCost: 0, margin: 20
+  };
+  const clean = P.priceJob(job(base));
+  // 100 x 500% = $500 markup. Overhead stays on the $100 cost.
+  const capped = P.priceJob(job(Object.assign({}, base, { materialMarkup: 500 })));
+  assert.equal(capped.markupPct, 500);
+  assert.equal(capped.markup, 500);
+  assert.equal(capped.overhead, clean.overhead);
+  assert.equal(capped.cents.price, clean.cents.price + 50000);
+
+  for (const raw of ['', '   ', 'abc', 'not-a-number', '25%', -5, '-3', null, undefined, NaN, false]) {
+    const got = P.priceJob(job(Object.assign({}, base, { materialMarkup: raw })));
+    assert.equal(got.ok, true, String(raw));
+    assert.equal(got.markupPct, 0, String(raw));
+    assert.equal(got.price, clean.price, String(raw));
+    assert.equal(got.cents.quoteMaterials, clean.cents.quoteMaterials, String(raw));
+  }
+
+  for (const raw of [500.01, 1000, '9999', 1e6]) {
+    const got = P.priceJob(job(Object.assign({}, base, { materialMarkup: raw })));
+    assert.equal(got.markupPct, 500, String(raw));
+    assert.equal(got.price, capped.price, String(raw));
+    assert.equal(got.markup, capped.markup, String(raw));
+  }
+});
+
+test('half-up markup cents stay on the materials quote line', () => {
+  // materials $10.05 = 1005 cents. 10% = 100.5 cents, half up to 101 cents ($1.01).
+  // margin 0, so the base price is the $10.05 cost.
+  // price = 10.05 + 1.01 = $11.06
+  // the whole $1.01 lands on the materials quote line.
+  const r = P.priceJob(job({
+    hours: 0, workers: 1, laborRate: 0, materialCost: 10.05,
+    overhead: 0, driveTime: 0, fuelCost: 0, margin: 0, materialMarkup: 10
+  }));
+  assert.equal(r.materials, 10.05);
+  assert.equal(r.cents.markup, 101);
+  assert.equal(r.price, 11.06);
+  assert.equal(r.quote.materials, 11.06);
+  assert.equal(r.quote.labor, 0);
+  assert.equal(r.quote.driveLabor, 0);
+  assert.equal(r.quote.fuel, 0);
+  assert.equal(r.cents.quoteLabor + r.cents.quoteMaterials + r.cents.quoteDrive + r.cents.quoteFuel, r.cents.price);
+});
+
+test('quote remainder cents are assigned to materials', () => {
+  const up = { labor: 100, driveLabor: 40, materials: 200, fuel: 10 };
+  P.settleQuoteRemainder(up, 353);
+  assert.equal(up.materials, 203);
+  assert.equal(up.labor, 100);
+  assert.equal(up.driveLabor, 40);
+  assert.equal(up.fuel, 10);
+  assert.equal(up.labor + up.driveLabor + up.materials + up.fuel, 353);
+
+  const down = { labor: 100, driveLabor: 40, materials: 200, fuel: 10 };
+  P.settleQuoteRemainder(down, 349);
+  assert.equal(down.materials, 199);
+  assert.equal(down.labor + down.driveLabor + down.materials + down.fuel, 349);
+
+  const exact = { labor: 10, driveLabor: 0, materials: 5, fuel: 0 };
+  P.settleQuoteRemainder(exact, 15);
+  assert.equal(exact.materials, 5);
+});
+
+test('marked-up quote lines sum to the price', () => {
+  let seed = 20261003;
+  function rnd() {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+  function pick(min, max, step) {
+    const n = Math.round((min + rnd() * (max - min)) / step) * step;
+    return Math.min(max, Math.max(min, Math.round(n * 1000) / 1000));
+  }
+  for (let i = 0; i < 80; i++) {
+    const input = {
+      hours: pick(0, 20, 0.25),
+      workers: pick(1, 4, 1),
+      laborRate: pick(0, 90, 0.5),
+      materialCost: pick(0, 5000, 0.01),
+      overhead: pick(0, 30, 0.5),
+      driveTime: pick(0, 2, 0.25),
+      fuelCost: pick(0, 40, 0.01),
+      margin: pick(0, 40, 0.5),
+      materialMarkup: pick(0, 80, 0.01)
+    };
+    const r = P.priceJob(input);
+    const zero = P.priceJob(Object.assign({}, input, { materialMarkup: 0 }));
+    assert.equal(r.ok, true, JSON.stringify(input));
+    assert.equal(r.overhead, zero.overhead);
+    assert.equal(r.totalCost, zero.totalCost);
+    assert.equal(r.cents.price, zero.cents.price + r.cents.markup);
+    assert.equal(r.cents.quoteLabor, zero.cents.quoteLabor);
+    assert.equal(r.cents.quoteDrive, zero.cents.quoteDrive);
+    assert.equal(r.cents.quoteFuel, zero.cents.quoteFuel);
+    assert.equal(r.cents.quoteMaterials, zero.cents.quoteMaterials + r.cents.markup);
+    assert.equal(
+      r.cents.quoteLabor + r.cents.quoteMaterials + r.cents.quoteDrive + r.cents.quoteFuel,
+      r.cents.price
+    );
+  }
+});
+
+test('coerceMarkup parses scientific notation and clamps', () => {
+  assert.equal(P.coerceMarkup('1e3'), 500);
+  assert.equal(P.coerceMarkup('abc'), 0);
+  assert.equal(P.coerceMarkup('-5'), 0);
+  assert.equal(P.coerceMarkup(''), 0);
+  assert.equal(P.coerceMarkup('600'), 500);
+  assert.equal(P.coerceMarkup('25'), 25);
+  assert.equal(P.coerceMarkup('0x10'), 0);
+  assert.equal(P.coerceMarkup('0b1'), 0);
+  assert.equal(P.coerceMarkup('0o7'), 0);
+  assert.equal(P.coerceMarkup('Infinity'), 0);
+  assert.equal(P.coerceMarkup('-'), 0);
+  assert.equal(P.coerceMarkup('.'), 0);
+  assert.equal(P.coerceMarkup('1e'), 0);
+});
+
+test('material markup persists under jpc_materialMarkup_v2', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const mem = new Map();
+  const storage = {
+    getItem(key) { return mem.has(key) ? mem.get(key) : null; },
+    setItem(key, value) { mem.set(key, String(value)); },
+    removeItem(key) { mem.delete(key); }
+  };
+  assert.equal(P.MARKUP_STORAGE_KEY, 'jpc_materialMarkup_v2');
+  assert.equal(P.readStoredMarkup(storage), null);
+  P.writeStoredMarkup(storage, '25');
+  assert.equal(storage.getItem('jpc_materialMarkup_v2'), '25');
+  assert.equal(storage.getItem('jpc_materialMarkup'), null);
+  assert.equal(P.readStoredMarkup(storage), '25');
+  P.writeStoredMarkup(storage, '0');
+  assert.equal(P.readStoredMarkup(storage), '0');
+
+  const src = fs.readFileSync(path.join(__dirname, '../js/calculator.js'), 'utf8');
+  assert.match(src, /writeStoredMarkup/);
+  assert.match(src, /readStoredMarkup/);
+  assert.match(src, /['"]jpc_materialMarkup['"]/);
+  assert.doesNotMatch(src, /removeItem\(\s*['"]jpc_materialMarkup_v2['"]\s*\)/);
+  assert.doesNotMatch(src, /jpc_qs_materialMarkup/);
+  assert.doesNotMatch(src, /materialMarkup\/i/);
 });

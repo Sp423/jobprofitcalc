@@ -10,6 +10,7 @@ const $ = {
   workers:  G('workers'),
   labor:    G('laborRate'),
   matCost:  G('materialCost'),
+  matMark:  G('materialMarkup'),
   overhead: G('overhead'),
   drive:    G('driveTime'),
   fuel:     G('fuelCost'),
@@ -28,6 +29,10 @@ const $ = {
   bdDrive:  G('bd-drive'),
   bdFuel:   G('bd-fuel'),
   bdMat:    G('bd-mat'),
+  bdMarkup: G('bd-markup'),
+  bdMarkupRow: G('bd-markup-row'),
+  effMarginLine: G('effMarginLine'),
+  effMargin: G('effMargin'),
   bdOH:     G('bd-oh'),
   bdTotal:  G('bd-total'),
   bdSet:    G('bd-setaside'),
@@ -69,16 +74,29 @@ const FIELD_IDS = {
   salesTaxRate: 'salesTaxRate'
 };
 
-// Job inputs are not stored and are not read from the URL.
-// Drop leftover keys from older builds, including a saved material markup.
+// Job inputs other than material markup are not stored and are not read from the URL.
+// Drop leftover tax keys from older builds. Drop the old markup key so a saved
+// value from before jpc_materialMarkup_v2 cannot come back. The new key is restored below.
 try {
-  ['jpc_seTax', 'jpc_stateTax', 'jpc_qs_seTax', 'jpc_qs_stateTax', 'jpc_materialMarkup', 'jpc_qs_materialMarkup'].forEach(function (key) {
+  ['jpc_seTax', 'jpc_stateTax', 'jpc_qs_seTax', 'jpc_qs_stateTax', 'jpc_materialMarkup'].forEach(function (key) {
     localStorage.removeItem(key);
   });
-  Object.keys(localStorage).forEach(function (key) {
-    if (/materialMarkup/i.test(key)) localStorage.removeItem(key);
-  });
 } catch (e) { /* private mode */ }
+
+function saveMarkup() {
+  if (!$.matMark) return;
+  try { P.writeStoredMarkup(localStorage, $.matMark.value); } catch (e) { /* private mode */ }
+}
+
+function restoreMarkup() {
+  if (!$.matMark) return;
+  try {
+    var stored = P.readStoredMarkup(localStorage);
+    if (stored !== null) $.matMark.value = stored;
+  } catch (e) { /* private mode */ }
+  // A restored 600 or -5 is committed once on load. Typing is not in progress.
+  showMarkupMessage(true);
+}
 
 function fmtD(n, dec) {
   if (!Number.isFinite(n)) return dec === 0 ? '$0' : '$0.00';
@@ -107,6 +125,7 @@ function readRaw() {
     workers: $.workers.value,
     laborRate: $.labor.value,
     materialCost: $.matCost.value,
+    materialMarkup: $.matMark ? $.matMark.value : '0',
     overhead: $.overhead.value,
     driveTime: $.drive.value,
     fuelCost: $.fuel.value,
@@ -140,10 +159,12 @@ function blankMoney() {
   $.netP.className = 'metric-val c-white';
   $.margin.className = 'metric-val c-white';
   $.eff.className = 'metric-val c-white';
-  [$.bdLabor, $.bdDrive, $.bdFuel, $.bdMat, $.bdOH, $.bdTotal, $.bdSet,
+  [$.bdLabor, $.bdDrive, $.bdFuel, $.bdMat, $.bdMarkup, $.bdOH, $.bdTotal, $.bdSet,
    $.qLabor, $.qMat, $.qDrive, $.qFuel, $.qTotal].forEach(function (el) {
     if (el) el.textContent = '$0.00';
   });
+  if ($.bdMarkupRow) $.bdMarkupRow.hidden = true;
+  if ($.effMarginLine) $.effMarginLine.hidden = true;
   const srP = G('srPrice');
   const srM = G('srMargin');
   const srF = G('srProfit');
@@ -160,14 +181,59 @@ function currentResult() {
   if (!checked.ok) return { ok: false, messages: checked.messages };
   const chargeTax = $.inclStax && $.inclStax.checked;
   const values = Object.assign({}, checked.values, {
-    salesTaxRate: chargeTax ? checked.values.salesTaxRate : 0
+    salesTaxRate: chargeTax ? checked.values.salesTaxRate : 0,
+    materialMarkup: $.matMark ? $.matMark.value : '0'
   });
   const priced = P.priceJob(values);
   if (!priced.ok) return { ok: false, messages: checked.messages };
   return { ok: true, messages: checked.messages, result: priced, values: values };
 }
 
+// Set when a cap or negative entry is committed. Cleared on the next keystroke
+// in this field, so the note stays up after blur instead of vanishing with the rewrite.
+var markupNote = '';
+
+function partialMarkup(s) {
+  return s === '+' || s === '-' || s === '.' || s === '+.' || s === '-.'
+    || /^[+-]?(?:\d+\.?\d*|\.\d+)[eE][+-]?$/.test(s);
+}
+
+function decimalMarkup(s) {
+  return /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(s);
+}
+
+function showMarkupMessage(commit) {
+  if (!$.matMark) return;
+  var msg = G('msg-materialMarkup');
+  var s = String($.matMark.value).trim();
+  var text = '';
+  // Blank, a lone "-", and an unfinished entry (".", "1e") stay as typed and add nothing.
+  if (s !== '' && !partialMarkup(s)) {
+    var n = Number(s);
+    if (!decimalMarkup(s) || !Number.isFinite(n) || n < 0) {
+      text = 'Enter 0 or more. Using 0.';
+      if (commit) $.matMark.value = '0';
+    } else if (n > P.MARKUP_MAX) {
+      text = 'Capped at 500%.';
+      if (commit) $.matMark.value = String(P.MARKUP_MAX);
+    }
+  }
+  if (commit) {
+    if (text) markupNote = text;
+    else if (markupNote && ($.matMark.value === '0' || $.matMark.value === String(P.MARKUP_MAX))) {
+      // change and blur both commit. The second one sees the rewritten 0 or 500.
+      text = markupNote;
+    } else markupNote = '';
+  } else if (markupNote) {
+    text = markupNote;
+  }
+  if (!msg) return;
+  msg.textContent = text;
+  msg.className = 'field-msg' + (text ? ' is-warn' : '');
+}
+
 function update() {
+  showMarkupMessage(false);
   const state = currentResult();
   const resultsEl = G('resultsPanel');
   lastResult = state.ok ? state.result : null;
@@ -239,6 +305,13 @@ function update() {
   $.bdDrive.textContent = fmtD(r.driveLabor, 2);
   $.bdFuel.textContent = fmtD(r.fuel, 2);
   $.bdMat.textContent = fmtD(r.materials, 2);
+  if ($.bdMarkup) $.bdMarkup.textContent = fmtD(r.markup, 2);
+  if ($.bdMarkupRow) $.bdMarkupRow.hidden = !(r.markup > 0);
+  if ($.effMarginLine) {
+    var showEff = r.markupPct > 0;
+    $.effMarginLine.hidden = !showEff;
+    if (showEff && $.effMargin) $.effMargin.textContent = fmtP(r.marginPct);
+  }
   $.bdOH.textContent = fmtD(r.overhead, 2);
   $.bdTotal.textContent = fmtD(r.totalCost, 2);
   $.bdSet.textContent = fmtD(r.setAside, 2);
@@ -264,10 +337,17 @@ function applyTrade(d) {
   $.fuel.value = d.fuelCost;
 }
 
-$.trade.addEventListener('change', function () {
+$.trade.addEventListener('change', function (event) {
   const d = DEFAULTS[this.value];
   if (!d) return;
   applyTrade(d);
+  // Trade pages fire change on load to apply defaults. That event is not a user
+  // action, so it must not wipe a saved markup. A real trade change resets it to 0.
+  if (event.isTrusted && $.matMark) {
+    markupNote = '';
+    $.matMark.value = '0';
+    saveMarkup();
+  }
   update();
 });
 
@@ -275,6 +355,11 @@ $.reset.addEventListener('click', function () {
   const d = DEFAULTS[$.trade.value];
   if (d) applyTrade(d);
   else applyTrade(P.PAGE_DEFAULTS);
+  if ($.matMark) {
+    markupNote = '';
+    $.matMark.value = '0';
+    saveMarkup();
+  }
   $.profit.value = 20;
   update();
 });
@@ -285,7 +370,7 @@ function quoteText(r) {
   const lbl = $.jobLabel.value || 'Job';
   const trd = $.trade.options[$.trade.selectedIndex] ? $.trade.options[$.trade.selectedIndex].text : 'Contractor';
   const date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  return [
+  const lines = [
     '═══════════════════════════════════',
     '  JOB QUOTE — ' + lbl.toUpperCase(),
     '  Trade: ' + trd,
@@ -302,7 +387,13 @@ function quoteText(r) {
     '  Overhead:             ' + fmtD(r.overhead, 2),
     '  ──────────────────────────────',
     '  Total Cost:           ' + fmtD(r.totalCost, 2),
-    '',
+    ''
+  ];
+  if (r.markup > 0) {
+    lines.push('  Material markup:      ' + fmtD(r.markup, 2));
+    lines.push('');
+  }
+  lines.push(
     '  PROFIT:               ' + fmtD(r.profit, 2),
     '  PROFIT MARGIN:        ' + fmtP(r.marginPct),
     '  PROFIT PER LABOR HR:  ' + (r.profitPerLaborHour == null ? '—' : fmtD(r.profitPerLaborHour, 2) + '/hr'),
@@ -310,7 +401,8 @@ function quoteText(r) {
     '',
     '  Generated by JobProfitCalc.com',
     '═══════════════════════════════════'
-  ].join('\n');
+  );
+  return lines.join('\n');
 }
 
 function copyText(text, okMsg) {
@@ -615,9 +707,26 @@ G('stickyResultsBtn').addEventListener('click', function () {
 updateStickyBar();
 
 [$.hours, $.workers, $.labor, $.matCost, $.overhead, $.drive, $.fuel, $.profit].forEach(function (el) {
+  if (!el) return;
   el.addEventListener('input', update);
   el.addEventListener('change', update);
 });
+if ($.matMark) {
+  $.matMark.addEventListener('input', function () {
+    markupNote = '';
+    update();
+    saveMarkup();
+  });
+  ['change', 'blur'].forEach(function (ev) {
+    $.matMark.addEventListener(ev, function () {
+      showMarkupMessage(true);
+      saveMarkup();
+      update();
+    });
+  });
+}
+
+restoreMarkup();
 [$.staxRate, $.inclStax].forEach(function (el) {
   if (!el) return;
   el.addEventListener('input', update);

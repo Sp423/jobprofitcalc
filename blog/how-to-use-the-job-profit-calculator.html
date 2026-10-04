@@ -65,7 +65,7 @@
       { "@type": "HowToStep", "position": 1, "name": "Select your trade", "text": "Choose your trade from the dropdown to auto-fill realistic default values for labor, materials, and overhead." },
       { "@type": "HowToStep", "position": 2, "name": "Name the job", "text": "Enter a job description or label so the quote is easy to identify later." },
       { "@type": "HowToStep", "position": 3, "name": "Enter your labor", "text": "Enter estimated hours, number of workers, and your hourly labor rate. The rate is your loaded cost per hour, not what you charge." },
-      { "@type": "HowToStep", "position": 4, "name": "Add materials", "text": "Enter your material cost at what you paid. There is no separate markup field. The margin covers profit on materials." },
+      { "@type": "HowToStep", "position": 4, "name": "Add materials", "text": "Enter materials at your cost. Your margin already earns profit on materials. If you also want a materials markup, use the optional Material Markup field: it adds profit on top of your margin, and the calculator shows your effective margin. For more on how markup and margin relate, see our guide to marking up materials." },
       { "@type": "HowToStep", "position": 5, "name": "Set overhead", "text": "Enter your Overhead % to cover vehicle, insurance, tools, and admin costs. Overhead ÷ direct job costs: labor + drive labor + materials at cost (fuel excluded)." },
       { "@type": "HowToStep", "position": 6, "name": "Add travel", "text": "Enter drive time and fuel or travel cost for the job. Drive time is multiplied by the number of workers." },
       { "@type": "HowToStep", "position": 7, "name": "Set your profit margin", "text": "Enter your desired profit margin. The price is total cost divided by (1 minus margin). No tax is added to the price." },
@@ -365,7 +365,7 @@
 
             <p>In the <strong>Materials</strong> section, enter your <strong>Material Cost</strong> (what you pay for parts and supplies, including any sales tax you paid on them). Overhead and margin are applied to materials at cost.</p>
 
-            <p>There is no separate markup field. Your margin covers profit on materials, so a markup on top would charge profit twice. For more on how markup and margin relate, see our <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">guide to marking up materials</a>.</p>
+            <p>Enter materials at your cost. Your margin already earns profit on materials. If you also want a materials markup, use the optional Material Markup field: it adds profit on top of your margin, and the calculator shows your effective margin. For more on how markup and margin relate, see our <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">guide to marking up materials</a>.</p>
 
             <h2 id="step-5">Step 5: Set Your Overhead</h2>
 
@@ -387,7 +387,7 @@
             <table class="data-table" aria-label="Profit input fields">
               <thead><tr><th>Field</th><th>What to enter</th></tr></thead>
               <tbody>
-                <tr><td class="row-label">Desired Profit Margin</td><td>The percent of your final charge you want to keep as pre-tax profit. The price is total cost ÷ (1 − margin). Its tooltip reads: "Your margin covers profit on materials too. No separate markup needed."</td></tr>
+                <tr><td class="row-label">Desired Profit Margin</td><td>The percent of your final charge you want to keep as pre-tax profit. The price is total cost ÷ (1 − margin). Its tooltip reads: "Your margin covers profit on materials too."</td></tr>
               </tbody>
             </table>
 

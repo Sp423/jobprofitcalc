@@ -848,11 +848,88 @@ def plumber_derived():
 DERIVED[PLUMBER_PAGE] = plumber_derived
 
 
+# ---- snow-removal-contract-vs-per-push.html -------------------------------
+SNOW = "snow-removal-contract-vs-per-push.html"
+SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
+SNOW_SEASON = dict(hours=20, workers=1, rate=38, materials=400, overhead=20, drive=5, fuel=360, margin=25)
+SNOW_STRESS = dict(hours=1, workers=1, rate=38, materials=30, overhead=20, drive=0.25, fuel=27, margin=25)
+
+
+@example(SNOW, "Example 1, single push", **SNOW_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(SNOW, "Example 2, seasonal 20 visits", **SNOW_SEASON)
+def _(r):
+    return std_lines(r)
+
+
+@example(SNOW, "Stress test, salt and fuel up by half", **SNOW_STRESS)
+def _(r):
+    return {
+        "labor": usd(r["labor"]),
+        "drive labor": usd(r["drive_labor"]),
+        "materials": usd(r["materials"]),
+        "direct": usd(r["direct"]),
+        "overhead": usd(r["overhead"]),
+        "fuel": usd(r["fuel"]),
+        "total cost": usd(r["total_cost"]),
+        "price at 25%": usd(r["price"]),
+    }
+
+
+def snow_derived():
+    push = price_job(**SNOW_BASE)
+    season = price_job(**SNOW_SEASON)
+    stress = price_job(**SNOW_STRESS)
+    assert push["total_cost"] == 9900
+    assert push["price"] == 13200
+    v12 = 12 * push["total_cost"]
+    v26 = 26 * push["total_cost"]
+    v28 = 28 * push["total_cost"]
+    cap_rev = season["price"] + 4 * push["price"]
+    cap_profit = cap_rev - v28
+    at_cost_price = push["price"] + (stress["materials"] - push["materials"]) + (stress["fuel"] - push["fuel"])
+    at_cost_profit = at_cost_price - stress["total_cost"]
+    return {
+        "per acre": usd(js_round(season["price"] / 0.5)),
+        "breakeven visits": "{:.2f} visits".format(season["price"] / push["total_cost"]),
+        "12-visit cost": usd(v12),
+        "12-visit profit": usd(season["price"] - v12),
+        "26-visit cost": usd(v26),
+        "26-visit profit": usd(season["price"] - v26),
+        "28-visit cost": usd(v28),
+        "28-visit profit": usd(season["price"] - v28),
+        "12 per-push revenue": usd(12 * push["price"]),
+        "12 seasonal minus per-push": usd(season["price"] - 12 * push["price"]),
+        "28 per-push revenue": usd(28 * push["price"]),
+        "implied visit count": usd(season["price"]) + " / " + usd(push["price"]) + " = 20",
+        "cap revenue at 28": usd(cap_rev),
+        "cap profit at 28": usd(cap_profit),
+        "stress profit at signed price": usd(push["price"] - stress["total_cost"]),
+        "stress seasonal cost": usd(20 * stress["total_cost"]),
+        "stress seasonal profit": usd(season["price"] - 20 * stress["total_cost"]),
+        "at-cost pass-through price": usd(at_cost_price),
+        "at-cost pass-through profit": usd(at_cost_profit),
+        "full-margin recovery price": usd(js_round(stress["total_cost"] * 100 / 75)),
+        "late 5% step": usd(js_round(season["price"] * 0.05)),
+        "late 10% step": usd(js_round(season["price"] * 0.10)),
+        "late 5% price": usd(season["price"] + js_round(season["price"] * 0.05)),
+        "late 10% price": usd(season["price"] + js_round(season["price"] * 0.10)),
+        "fuel surcharge 10%": usd(js_round(push["fuel"] * 0.10)),
+    }
+
+
+DERIVED[SNOW] = snow_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
     "how-to-price-leaf-cleanup.html",
     "how-to-price-sprinkler-blowouts.html",
+    SNOW,
     "how-to-price-a-contractor-job.html",
     "hvac-component-swap-vs-changeout.html",
     "after-hours-rate-for-contractors.html",
@@ -892,6 +969,7 @@ STALE_EXEMPT = {
     HVAC_PAGE: _MATERIAL_MARKUP_FIELD,
     PLUMBER_PAGE: _MATERIAL_MARKUP_FIELD,
     MARGINS: _MATERIAL_MARKUP_FIELD,
+    SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.
 STALE = {
@@ -938,6 +1016,11 @@ STALE = {
         "very top of the calculator", "Adjust them once", "stored anywhere", "stored on a server",
         "Revisit your default inputs", "settings and defaults are dialed in"],
     JOB: ["$1,933.28", "$1,546.62", "$386.66", "$208.12", "$812.50", "$85/hr", "$25,500"],
+    SNOW: ["$102.60", "$136.80", "$34.20", "$85.50", "$17.10", "$1,710.00", "$342.00",
+           "$2,052.00", "$2,736.00", "$684.00", "$5,472.00", "$1,231.20", "$1,504.80",
+           "$2,667.60", "$68.40", "$2,872.80", "$1,641.60", "$1,094.40", "$3,830.40",
+           "$3,283.20", "$410.40", "$125.40", "$11.40", "$8.33%", "$2,508.00", "$228.00",
+           "$155.80", "$30.40", "$19.51%", "$167.20", "$3,009.60", "$273.60"],
     # Pulse sourcing check, Oct 3 2026: contradicted or unsourced wording on these pages.
     HVAC_PAGE: [
         "$65–$120", "$35–$55", "~30% net", "25–40% net", "highest-margin", "15–22% are typical",
@@ -980,6 +1063,7 @@ STALE_ALLOW = {
     ESTIMATE: ["Material Markup"],
     JOB: ["Material Markup"],
     DIAG: ["Material Markup"],
+    SNOW: ["Material Markup"],
 }
 # #52 defines STALE_EXEMPT and page_path; they are not on this branch yet.
 if 'STALE_EXEMPT' not in globals():

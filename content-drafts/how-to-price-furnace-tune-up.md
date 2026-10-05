@@ -114,9 +114,9 @@ scout_lock: LOCKED
 
   <p>This is an example, and every input below is an assumption you should replace. Say your loaded cost is $48 per hour for one tech. Say your overhead runs 25% and you want a 20% margin. Those three numbers are example inputs, not benchmarks.</p>
 
-  <p>The visit uses Reliable's published 1.5-hour average and an assumed half-hour drive. The filter is a Mann+Hummel 16x25x1 MERV 8, which HVACFilters.com listed at $67.85 for a case of 12 on Oct 1, 2026, or $67.85 / 12 = $5.65 each.</p>
+  <p>The visit uses Reliable's published 1.5-hour average and an assumed half-hour drive. The filter is a Mann+Hummel 16x25x1 MERV 8, which HVACFilters.com listed at $67.85 for a case of 12 on Oct 5, 2026, or $67.85 / 12 = $5.65 each.</p>
 
-  <p>For fuel, the example uses a 30-mile round trip in a truck that gets 15 mpg. Both of those are example figures; use your own miles and your own truck's mpg. The gas price is EIA's U.S. average for regular gasoline, $4.465 a gallon for the week of 9/28/2026 (EIA weekly retail, released Sep 29, 2026). <!-- REFRESH after EIA Oct 5 update --> That gives 30 / 15 x $4.465 = $8.93. Regional prices that same week ran from $3.924 on the Gulf Coast to $5.724 on the West Coast (EIA weekly retail, week of 9/28/2026), so use the figure for your area. <!-- REFRESH after EIA Oct 5 update --></p>
+  <p>For fuel, the example uses a 30-mile round trip in a truck that gets 15 mpg. Both of those are example figures; use your own miles and your own truck's mpg. The gas price is EIA's U.S. average for regular gasoline, $4.465 a gallon for the week of 9/28/2026 (EIA weekly retail, released Sep 29, 2026). <!-- REFRESH after EIA Oct 6 release --> That gives 30 / 15 x $4.465 = $8.93. Regional prices that same week ran from $3.924 on the Gulf Coast to $5.724 on the West Coast (EIA weekly retail, week of 9/28/2026), so use the figure for your area. <!-- REFRESH after EIA Oct 6 release --></p>
 
   <table class="data-table">
     <thead>
@@ -129,7 +129,7 @@ scout_lock: LOCKED
       <tr><td class="row-label">Material Cost</td><td>$5.65, the filter at cost</td></tr>
       <tr><td class="row-label">Overhead %</td><td>25%, applied to labor, drive labor, and materials at cost</td></tr>
       <tr><td class="row-label">Drive Time</td><td>0.5 hr</td></tr>
-      <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.93, kept out of the overhead base <!-- REFRESH after EIA Oct 5 update --></td></tr>
+      <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.93, kept out of the overhead base <!-- REFRESH after EIA Oct 6 release --></td></tr>
       <tr><td class="row-label">Desired Profit Margin</td><td>20%</td></tr>
     </tbody>
   </table>
@@ -143,8 +143,8 @@ scout_lock: LOCKED
     <tbody>
       <tr><td class="row-label">Labor on site</td><td>1.5 hr x 1 tech x $48</td><td>$72.00</td></tr>
       <tr><td class="row-label">Drive labor</td><td>0.5 hr x 1 tech x $48</td><td>$24.00</td></tr>
-      <tr><td class="row-label">Fuel</td><td>30 mi / 15 mpg x $4.465 (EIA U.S. regular, week of 9/28/2026) <!-- REFRESH after EIA Oct 5 update --></td><td>$8.93</td></tr>
-      <tr><td class="row-label">Filter at cost</td><td>$67.85 / 12 (Mann+Hummel case, HVACFilters.com, Oct 1, 2026)</td><td>$5.65</td></tr>
+      <tr><td class="row-label">Fuel</td><td>30 mi / 15 mpg x $4.465 (EIA U.S. regular, week of 9/28/2026) <!-- REFRESH after EIA Oct 6 release --></td><td>$8.93</td></tr>
+      <tr><td class="row-label">Filter at cost</td><td>$67.85 / 12 (Mann+Hummel case, HVACFilters.com, Oct 5, 2026)</td><td>$5.65</td></tr>
       <tr><td class="row-label">Overhead</td><td>25% x ($72.00 + $24.00 + $5.65) = 25% x $101.65</td><td>$25.41</td></tr>
       <tr class="row-total"><td class="row-label">Total cost</td><td>$72.00 + $24.00 + $8.93 + $5.65 + $25.41</td><td>$135.99</td></tr>
       <tr class="row-total"><td class="row-label">Price at 20% margin</td><td>$135.99 / (1 - 0.20) = $135.99 / 0.80</td><td>$169.99</td></tr>
@@ -158,7 +158,7 @@ scout_lock: LOCKED
   <section id="compare-specials">
   <h2>Step 3: Compare your cost with the specials around you</h2>
 
-  <p>Now run the same example with a shorter visit, a longer drive, and a condensing furnace, so you can see how far the cost moves. All inputs not listed are the same as Example B ($48 loaded rate, 25% overhead, 20% margin, one tech, $5.65 filter). Example C assumes a 60-mile round trip at the same 15 mpg, so fuel is 60 / 15 x $4.465 = $17.86. <!-- REFRESH after EIA Oct 5 update --></p>
+  <p>Now run the same example with a shorter visit, a longer drive, and a condensing furnace, so you can see how far the cost moves. All inputs not listed are the same as Example B ($48 loaded rate, 25% overhead, 20% margin, one tech, $5.65 filter). Example C assumes a 60-mile round trip at the same 15 mpg, so fuel is 60 / 15 x $4.465 = $17.86. <!-- REFRESH after EIA Oct 6 release --></p>
 
   <table class="data-table">
     <thead>
@@ -210,7 +210,7 @@ scout_lock: LOCKED
   <section id="add-on-parts">
   <h2>Step 5: Price the parts your tech swaps on the visit</h2>
 
-  <p>The parts a tech commonly replaces on a tune-up are cheap at supplier prices. SupplyHouse.com listed the White-Rodgers 790-751A1 flame sensor (a Carrier/ICP replacement) at $13.48 and the Goodman 10735201 flame sensor at $12.28, while the OEM Carrier LH680534 was $49.51, all on Oct 1, 2026. The White-Rodgers 768A-845 hot surface igniter was $48.47 at SIM Supply and $47.45 at New England Supply House the same day. United Filter listed a case of 12 16x25x1 MERV 8 filters at $61.00.</p>
+  <p>The parts a tech commonly replaces on a tune-up are cheap at supplier prices. SupplyHouse.com listed the White-Rodgers 790-751A1 flame sensor (a Carrier/ICP replacement) at $13.48 and the Goodman 10735201 flame sensor at $12.28, while the OEM Carrier LH680534 was $49.51, all on Oct 1, 2026. The White-Rodgers 768A-845 hot surface igniter was $48.47 at SIM Supply and $47.45 at New England Supply House on Oct 5, 2026. United Filter listed a case of 12 16x25x1 MERV 8 filters at $61.00 the same day.</p>
 
   <p>The part is the small piece. The time to swap it and the return trip it saves are worth more. Price an add-on as extra time on the same visit plus the part at cost, with overhead and margin on top, exactly as you priced the visit.</p>
 
@@ -234,7 +234,7 @@ scout_lock: LOCKED
 
   <p>Every example above puts parts in at cost and lets the margin produce the profit. Some shops prefer to mark up the parts line instead. That's fine as long as the parts line gets one or the other. Putting a markup on the part and then dividing the whole ticket by one minus the margin charges profit twice on the same box.</p>
 
-  <p>Here's the difference on a bigger part, shown once. Little Giant's VCMA-20ULS condensate pump, a common add-on on condensing furnaces, was $73.44 at Big Frog Supply on Oct 1, 2026. With the example 25% overhead, the pump line carries $73.44 + (25% x $73.44 = $18.36) = $91.80 of cost. Priced with the example 20% margin, that line bills $91.80 / 0.80 = $114.75. Priced with a 20% markup on that line instead of the margin, it bills $91.80 x 1.20 = $110.16. The markup method brings in $114.75 - $110.16 = $4.59 less on the same pump, because a 20% markup only works out to about a 16.7% margin. Pick one method for the parts line and keep it. <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">How much to mark up materials</a> covers choosing a markup if you go that way.</p>
+  <p>Here's the difference on a bigger part, shown once. Little Giant's VCMA-20ULS condensate pump, a common add-on on condensing furnaces, was $73.44 at Big Frog Supply on Oct 5, 2026. With the example 25% overhead, the pump line carries $73.44 + (25% x $73.44 = $18.36) = $91.80 of cost. Priced with the example 20% margin, that line bills $91.80 / 0.80 = $114.75. Priced with a 20% markup on that line instead of the margin, it bills $91.80 x 1.20 = $110.16. The markup method brings in $114.75 - $110.16 = $4.59 less on the same pump, because a 20% markup only works out to about a 16.7% margin. Pick one method for the parts line and keep it. <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">How much to mark up materials</a> covers choosing a markup if you go that way.</p>
 
   <p>Filters are where bundling makes sense. Hytek prices its tune-up in tiers as of Oct 1, 2026: $100 standard, $100 to $109 with a 1" filter, and $129 to $149 with a 4" media filter. A tiered menu lets the homeowner pick, and it keeps an expensive media filter from quietly coming out of a flat price.</p>
   </section>

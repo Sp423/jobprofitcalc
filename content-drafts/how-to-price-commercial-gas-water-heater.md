@@ -62,7 +62,7 @@ scout_lock: LOCKED
   <section id="rule-basics">
   <h2>What the rule actually changes for your quote</h2>
 
-  <p class="legal-status">Legal status as of Oct 1, 2026. This section summarizes the federal documents named or linked below and isn't legal advice.</p>
+  <p class="legal-status">Legal status as of Oct 5, 2026. This section summarizes the federal documents named or linked below and isn't legal advice.</p>
 
   <p>The DOE efficiency standard for commercial gas water heaters takes effect today. It applies to covered units manufactured on or after Oct 6, 2026 (10 CFR 431.110, as amended by the final rule published at 88 FR 69686 on Oct 6, 2023). For gas storage heaters, minimum thermal efficiency goes from 80% to 95%. For gas instantaneous heaters and hot water supply boilers, it goes from 80% to 96%. Residential-duty commercial gas storage units get higher UEF requirements too. Oil-fired and electric commercial water heaters did not change.</p>
 
@@ -89,7 +89,7 @@ scout_lock: LOCKED
     <li>May 27, 2026: DOE closed comments on a <a href="https://www.federalregister.gov/documents/2026/04/27/2026-08145/energy-conservation-program-notification-of-petition-for-rulemaking">petition from gas industry groups (AGA, APGA and NPGA)</a> to move the compliance date to Jan 1, 2030 "at a minimum."</li>
     <li>Jun 8, 2026: the <a href="https://www.supremecourt.gov/docket/docketfiles/html/public/25-879.html">Supreme Court vacated the D.C. Circuit decision that had upheld the rule</a> and sent the case back for further consideration in light of the Solicitor General's position.</li>
     <li>Jul 10, 2026: <a href="https://storage.courtlistener.com/recap/gov.uscourts.cadc.38458/gov.uscourts.cadc.38458.01208868246.0.pdf">DOE asked the D.C. Circuit to hold the case in abeyance</a> "pending administrative proceedings to revisit the challenged rules."</li>
-    <li>Aug 6, 2026: Sen. Mike Lee introduced the Energy Efficiency Reform Act of 2026 (<a href="https://www.congress.gov/bill/119th-congress/senate-bill/5338">S. 5338</a>), which would declare the rule "null and void." As of Oct 1 it has no cosponsors and no markup after a Sep 16 committee hearing.</li>
+    <li>Aug 6, 2026: Sen. Mike Lee introduced the Energy Efficiency Reform Act of 2026 (<a href="https://www.congress.gov/bill/119th-congress/senate-bill/5338">S. 5338</a>), which would declare the rule "null and void." As of Oct 5, 2026 it has no cosponsors and no markup after a Sep 16 committee hearing.</li>
     <li>Sep 17, 2026: a D.C. Circuit panel <a href="https://www.apga.org/viewdocument/furnace-rule-challenge-d-c-circuit-remand-after-vacatur-abeyance-proceedings">granted DOE's motion and placed the challenges in abeyance "pending further order of the court,"</a> with DOE status reports due every 90 days starting Dec 16, 2026. The order does not vacate or remand the commercial water heater rule and says nothing about its Oct 6, 2026 compliance date.</li>
   </ul>
 

@@ -230,11 +230,11 @@ scout_lock: LOCKED
 
   <p>If that same sensor needed its own trip next week, you'd be pricing a full service call with drive time attached. The add-on price is cheap for the homeowner and still pays you, because the drive was already covered.</p>
 
-  <h3>Markup or margin on a bigger part, but never both</h3>
+  <h3>Adding a markup when the part is a bigger one</h3>
 
-  <p>Every example above puts parts in at cost and lets the margin produce the profit. Some shops prefer to mark up the parts line instead. That's fine as long as the parts line gets one or the other. Putting a markup on the part and then dividing the whole ticket by one minus the margin charges profit twice on the same box.</p>
+  <p>Enter materials at your cost. Your margin already earns profit on materials. If you also want a materials markup, use the optional Material Markup field: it adds profit on top of your margin, and the calculator shows your effective margin. On a filter the extra is pocket change. On a condensate pump it is real money, so run the numbers before you quote.</p>
 
-  <p>Here's the difference on a bigger part, shown once. Little Giant's VCMA-20ULS condensate pump, a common add-on on condensing furnaces, was $73.44 at Big Frog Supply on Oct 5, 2026. With the example 25% overhead, the pump line carries $73.44 + (25% x $73.44 = $18.36) = $91.80 of cost. Priced with the example 20% margin, that line bills $91.80 / 0.80 = $114.75. Priced with a 20% markup on that line instead of the margin, it bills $91.80 x 1.20 = $110.16. The markup method brings in $114.75 - $110.16 = $4.59 less on the same pump, because a 20% markup only works out to about a 16.7% margin. Pick one method for the parts line and keep it. <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">How much to mark up materials</a> covers choosing a markup if you go that way.</p>
+  <p>Example: a Little Giant VCMA-20ULS condensate pump was $73.44 at Big Frog Supply on Oct 5, 2026. Overhead at 25% is $73.44 x 25% = $18.36, so the pump line costs you $91.80. At a 20% margin with markup at 0, the price is $91.80 / 0.80 = $114.75 and your profit is $22.95. Add a 20% material markup and you get $73.44 x 20% = $14.69, which brings the line to $114.75 + $14.69 = $129.44. Profit is now $129.44 - $91.80 = $37.64, an effective margin of $37.64 / $129.44 = 29.1%. Check that number against what your market will pay for a pump swap. For help choosing a percentage, see <a href="/blog/how-to-mark-up-materials-as-a-contractor.html">How much to mark up materials</a>.</p>
 
   <p>Filters are where bundling makes sense. Hytek prices its tune-up in tiers as of Oct 1, 2026: $100 standard, $100 to $109 with a 1" filter, and $129 to $149 with a 4" media filter. A tiered menu lets the homeowner pick, and it keeps an expensive media filter from quietly coming out of a flat price.</p>
   </section>
@@ -303,7 +303,7 @@ scout_lock: LOCKED
     <li>Using the ad copy's time. A 60-minute claim on a website doesn't match your tech's arrival-to-departure average. Use your own timestamps.</li>
     <li>Leaving out the drive. In Example B the drive and fuel are $24.00 + $8.93 = $32.93 of the $135.99 cost. Enter both every time.</li>
     <li>Putting overhead on marked-up parts. Apply overhead to parts at cost, along with labor and drive labor.</li>
-    <li>Stacking markup on top of margin. Choose one for the parts line. Using both double-charges profit on the part.</li>
+    <li>Using the Material Markup field as a substitute for margin. If you drop margin to 0 and rely on markup alone, your labor, drive time, fuel, and overhead earn no profit. Set your margin first, then add markup on top if you want more on parts.</li>
     <li>Copying a competitor's special price. Their loaded rate, routes, and overhead aren't yours. Run your own numbers and pick a discount on purpose.</li>
     <li>Quoting from old prices. Fuel and supplier prices move every week. Recheck them before you print anything.</li>
   </ul>

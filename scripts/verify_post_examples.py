@@ -848,6 +848,45 @@ def plumber_derived():
 DERIVED[PLUMBER_PAGE] = plumber_derived
 
 
+# ---- ppi-release-day-refresh-open-quotes.html -----------------------------
+PPI = "ppi-release-day-refresh-open-quotes.html"
+PPI_BASE = dict(hours=16, workers=2, rate=42, overhead=15, drive=1.5, fuel=35, margin=20)
+
+
+@example(PPI, "Original quote, copper feeder run", materials=2400, **PPI_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(PPI, "Refreshed quote, today's distributor sheet", materials=2760, **PPI_BASE)
+def _(r):
+    out = std_lines(r)
+    del out["profit"]
+    return out
+
+
+def ppi_derived():
+    old = price_job(materials=2400, **PPI_BASE)
+    new = price_job(materials=2760, **PPI_BASE)
+    honor_profit = old["price"] - new["total_cost"]
+    return {
+        "price gap": usd(new["price"] - old["price"]),
+        "material increase": usd(new["materials"] - old["materials"]),
+        "honor-old profit": usd(honor_profit),
+        "honor-old margin": "{:.1f}%".format(honor_profit / old["price"] * 100),
+        "profit gone": usd(old["profit"] - honor_profit),
+        "enr 27.2% on old materials": usd(js_round(old["materials"] * 0.272)),
+        "price per extra material dollar": "1.4375",
+        "feeder material share": "42.8%",
+        "repipe material share": "37.8%",
+        "rtu material share": "20.0%",
+        "troubleshoot material share": "10.0%",
+    }
+
+
+DERIVED[PPI] = ppi_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -869,6 +908,7 @@ POSTS = [
     MARKUP,
     "how-long-is-a-contractor-quote-good-for.html",
     "contractor-job-profitability.html",
+    PPI,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -892,6 +932,7 @@ STALE_EXEMPT = {
     HVAC_PAGE: _MATERIAL_MARKUP_FIELD,
     PLUMBER_PAGE: _MATERIAL_MARKUP_FIELD,
     MARGINS: _MATERIAL_MARKUP_FIELD,
+    PPI: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.
 STALE = {

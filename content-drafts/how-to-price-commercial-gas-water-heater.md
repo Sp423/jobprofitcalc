@@ -101,7 +101,7 @@ scout_lock: LOCKED
   <section id="step-1-supply">
   <h2>Step 1: Find out what you can actually buy</h2>
 
-  <p>Before you price anything, call the supply house. Manufacturers are making different choices. A.O. Smith's DOE page says it "will continue to manufacture, sell, and ship non-condensing commercial gas water heaters" during the enforcement period and that order cutoff dates have been removed. Bradford White's FAQ says it "will have limited non-condensing production" during the window and lists its current 55, 75, and 100 gallon power vent, atmospheric, and power direct vent commercial models as not meeting the new standard. On Oct 1, 2026, AF Supply listed A.O. Smith's atmospheric BTR-197 (100 gal, 199,000 Btu) at $9,495 and showed it out of stock.</p>
+  <p>Before you price anything, call the supply house. Manufacturers are making different choices. A.O. Smith's DOE page says it "will continue to manufacture, sell, and ship non-condensing commercial gas water heaters" during the enforcement period and that order cutoff dates have been removed. Bradford White's FAQ says it "will have limited non-condensing production" during the window and lists its current 55, 75, and 100 gallon power vent, atmospheric, and power direct vent commercial models as not meeting the new standard. On Oct 5, 2026, AF Supply listed A.O. Smith's atmospheric BTR-197 (100 gal, 199,000 Btu) at $9,495 and showed it out of stock.</p>
 
   <ol>
     <li>Ask for the exact model in stock. Write down model number, quantity, and the counter person's name. If they can't confirm stock, don't quote that unit as Option A.</li>
@@ -110,9 +110,9 @@ scout_lock: LOCKED
     <li>Get the price in writing. Your supplier quote or invoice is the source for the equipment line. If all you have is a website price, use it, but note the date you saw it, because these prices moved several times in 2026.</li>
   </ol>
 
-  <p>Don't assume non-condensing is always the cheap box. On Oct 1, 2026, Wholesale Water Heater listed Rheem's atmospheric G100-200 at $5,350 and its condensing GHE100SU-200 at $8,745, both 100 gal and 199,900 Btu. That same day, AF Supply's out-of-stock A.O. Smith atmospheric BTR-197 at $9,495 was listed higher than Wholesale Water Heater's Rheem condensing unit. Bradford White's condensing EF100T199E3N2 was listed at $12,552 by APEX Supply Co. Brand and seller swing the box price by thousands, so price the unit you can actually get.</p>
+  <p>Don't assume non-condensing is always the cheap box. On Oct 5, 2026, Wholesale Water Heater listed Rheem's atmospheric G100-200 at $5,350 and its condensing GHE100SU-200 at $8,745, both 100 gal and 199,900 Btu. That same day, AF Supply's out-of-stock A.O. Smith atmospheric BTR-197 at $9,495 was listed higher than Wholesale Water Heater's Rheem condensing unit. Bradford White's condensing EF100T199E3N2 was listed at $12,552 by APEX Supply Co. Brand and seller swing the box price by thousands, so price the unit you can actually get.</p>
 
-  <p>One more edge case: if the job is in an area with ultra-low NOx rules, the box changes. Wholesale Water Heater listed the Rheem GNU100-200 ultra low NOx atmospheric unit, marketed as California, Utah, and Colorado compliant, at $6,525 on Oct 1, 2026.</p>
+  <p>One more edge case: if the job is in an area with ultra-low NOx rules, the box changes. Wholesale Water Heater listed the Rheem GNU100-200 ultra low NOx atmospheric unit, marketed as California, Utah, and Colorado compliant, at $6,525 on Oct 5, 2026.</p>
   </section>
 
   <section id="step-2-two-tickets">
@@ -146,11 +146,11 @@ scout_lock: LOCKED
   <section id="step-3-parts">
   <h2>Step 3: Price the parts that only show up on a condensing job</h2>
 
-  <p>These are the lines shops forget when they're used to dropping a tank onto an existing flue. Here's what the parts used in the worked example below cost at the listed suppliers on Oct 1, 2026. Your supplier invoice replaces every one of these.</p>
+  <p>These are the lines shops forget when they're used to dropping a tank onto an existing flue. Here's what the parts used in the worked example below cost at the listed suppliers on Oct 5, 2026. Your supplier invoice replaces every one of these.</p>
 
   <table>
     <thead>
-      <tr><th>Part</th><th>Price (as listed on Oct 1, 2026)</th><th>Source</th></tr>
+      <tr><th>Part</th><th>Price (as listed on Oct 5, 2026)</th><th>Source</th></tr>
     </thead>
     <tbody>
       <tr><td>DuraVent 6BV36 Type B vent, 6" x 36" (Option A)</td><td>$41.27 each</td><td>Hardware World (backordered)</td></tr>
@@ -190,7 +190,7 @@ scout_lock: LOCKED
   <section id="worked-example">
   <h2>A worked example, line by line</h2>
 
-  <p>This is an example. The equipment and parts prices are the Oct 1, 2026 listings above. The 6 hours is the top of Retrofit Plumbing's published 3 to 6 hour like-for-like range. Everything else is an assumed example input: say your loaded cost is $45/hr, you run a 2-person crew, the round trip is 1 hour (half an hour each way), fuel for the trip is $18, your overhead is 17%, and you want a 20% margin. Both options use the same 6 hours so the comparison isolates the box and the parts. A real conversion will usually take longer, which we'll get to.</p>
+  <p>This is an example. The equipment and parts prices are the Oct 5, 2026 listings above. The 6 hours is the top of Retrofit Plumbing's published 3 to 6 hour like-for-like range. Everything else is an assumed example input: say your loaded cost is $45/hr, you run a 2-person crew, the round trip is 1 hour (half an hour each way), fuel for the trip is $18, your overhead is 17%, and you want a 20% margin. Both options use the same 6 hours so the comparison isolates the box and the parts. A real conversion will usually take longer, which we'll get to.</p>
 
   <p>The method, used for both options:</p>
   <ul>
@@ -267,7 +267,7 @@ scout_lock: LOCKED
 
   <p>If your price sits far outside a range from a shop in a similar market, recheck your hours and your loaded rate first. Those are the inputs people get wrong most often.</p>
 
-  <p>DOE's own model is another cross-check. In the 2023 final rule (Table V.4, 2022 dollars, national average), the installed cost of an 80% thermal efficiency gas storage heater was $6,083 and a 95% unit was $7,593, a gap of $7,593 - $6,083 = $1,510. Shelf prices in these listings show a bigger equipment-only gap than that: $8,745 - $5,350 = $3,395 for the Rheem pair at Wholesale Water Heater, and $7,559 - $4,390 = $3,169 for the same Rheem pair on sale at commercialwaterheatersales.com, both as listed on Oct 1, 2026. That doesn't make either number wrong. It means a customer who read a DOE estimate may expect a smaller difference than the one on your quote, so be ready to show the box prices.</p>
+  <p>DOE's own model is another cross-check. In the 2023 final rule (Table V.4, 2022 dollars, national average), the installed cost of an 80% thermal efficiency gas storage heater was $6,083 and a 95% unit was $7,593, a gap of $7,593 - $6,083 = $1,510. Shelf prices in these listings show a bigger equipment-only gap than that: $8,745 - $5,350 = $3,395 for the Rheem pair at Wholesale Water Heater, and $7,559 - $4,390 = $3,169 for the same Rheem pair on sale at commercialwaterheatersales.com, both as listed on Oct 5, 2026. That doesn't make either number wrong. It means a customer who read a DOE estimate may expect a smaller difference than the one on your quote, so be ready to show the box prices.</p>
   </section>
 
   <section id="step-5-markup">
@@ -329,7 +329,7 @@ scout_lock: LOCKED
 
   <p>Put your real hours, loaded rate, and supplier prices into the <a href="/hvac-job-pricing">job pricing calculator</a>, once for each option, before the quote goes out.</p>
 
-  <p class="disclaimer">This article is for educational purposes only and is not legal, financial, or tax advice. The legal summary is dated at the top of that section. Equipment and parts prices are as listed by the named suppliers on Oct 1, 2026 and change often. Worked-example inputs (loaded labor rate, crew size, drive time, fuel, overhead, margin, markup, and vent quantities) are assumptions for illustration. Check local codes and your own supplier pricing before quoting.</p>
+  <p class="disclaimer">This article is for educational purposes only and is not legal, financial, or tax advice. The legal summary is dated at the top of that section. Equipment and parts prices are as listed by the named suppliers on Oct 5, 2026 and change often. Worked-example inputs (loaded labor rate, crew size, drive time, fuel, overhead, margin, markup, and vent quantities) are assumptions for illustration. Check local codes and your own supplier pricing before quoting.</p>
 
 </div><!-- /article-body -->
 

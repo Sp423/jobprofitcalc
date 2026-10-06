@@ -49,7 +49,7 @@ scout_lock: LOCKED
 
 <div class="article-body">
 
-  <p>Charge for a furnace tune-up by pricing one real visit from your own costs: tech time on site, the drive there and back, the filter, overhead, and a margin. In the worked example below, a 1.5-hour visit with a half-hour drive costs the shop $135.99 to run and prices out at $169.99, so an $89 special (the price One Hour Heating &amp; Air of St. Charles, IL and 911 Mechanical in Macomb, MI advertised as of Oct 1, 2026) loses $46.99 on every visit in that example. That loss can be a fair price for a new customer, but only if you decide in advance what it is supposed to buy and then check whether it did.</p>
+  <p>Charge for a furnace tune-up by pricing one real visit from your own costs: tech time on site, the drive there and back, the filter, overhead, and a margin. In the worked example below, a 1.5-hour visit with a half-hour drive costs the shop $135.77 to run and prices out at $169.71, so an $89 special (the price One Hour Heating &amp; Air of St. Charles, IL and 911 Mechanical in Macomb, MI advertised as of Oct 1, 2026) loses $46.77 on every visit in that example. That loss can be a fair price for a new customer, but only if you decide in advance what it is supposed to buy and then check whether it did.</p>
 
   <p>This guide covers the furnace tune-up cost from the contractor side. You'll time a real visit, put it into the <a href="/hvac-job-pricing">HVAC job pricing calculator</a>, compare the result with the specials around you, price the parts your tech swaps, check whether a maintenance plan covers its visits, and decide how many discounted slots October can afford. Every shop cost below is an example input. Replace each one with your own number before you quote anything.</p>
 
@@ -116,7 +116,7 @@ scout_lock: LOCKED
 
   <p>The visit uses Reliable's published 1.5-hour average and an assumed half-hour drive. The filter is a Mann+Hummel 16x25x1 MERV 8, which HVACFilters.com listed at $67.85 for a case of 12 on Oct 5, 2026, or $67.85 / 12 = $5.65 each.</p>
 
-  <p>For fuel, the example uses a 30-mile round trip in a truck that gets 15 mpg. Both of those are example figures; use your own miles and your own truck's mpg. The gas price is EIA's U.S. average for regular gasoline, $4.465 a gallon for the week of 9/28/2026 (EIA weekly retail, released Sep 29, 2026). <!-- REFRESH after EIA Oct 6 release --> That gives 30 / 15 x $4.465 = $8.93. Regional prices that same week ran from $3.924 on the Gulf Coast to $5.724 on the West Coast (EIA weekly retail, week of 9/28/2026), so use the figure for your area. <!-- REFRESH after EIA Oct 6 release --></p>
+  <p>For fuel, the example uses a 30-mile round trip in a truck that gets 15 mpg. Both of those are example figures; use your own miles and your own truck's mpg. The gas price is EIA's U.S. average for regular gasoline, $4.354 a gallon for the week of 10/5/2026 (EIA weekly retail, released Oct 6, 2026). <!-- REFRESH after EIA Oct 14 release if not yet shipped --> That gives 30 / 15 x $4.354 = $8.71. Regional prices that same week ran from $3.911 on the Gulf Coast to $5.727 on the West Coast (EIA weekly retail, week of 10/5/2026), so use the figure for your area. <!-- REFRESH after EIA Oct 14 release if not yet shipped --></p>
 
   <table class="data-table">
     <thead>
@@ -129,7 +129,7 @@ scout_lock: LOCKED
       <tr><td class="row-label">Material Cost</td><td>$5.65, the filter at cost</td></tr>
       <tr><td class="row-label">Overhead %</td><td>25%, applied to labor, drive labor, and materials at cost</td></tr>
       <tr><td class="row-label">Drive Time</td><td>0.5 hr</td></tr>
-      <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.93, kept out of the overhead base <!-- REFRESH after EIA Oct 6 release --></td></tr>
+      <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.71, kept out of the overhead base <!-- REFRESH after EIA Oct 14 release if not yet shipped --></td></tr>
       <tr><td class="row-label">Desired Profit Margin</td><td>20%</td></tr>
     </tbody>
   </table>
@@ -143,40 +143,40 @@ scout_lock: LOCKED
     <tbody>
       <tr><td class="row-label">Labor on site</td><td>1.5 hr x 1 tech x $48</td><td>$72.00</td></tr>
       <tr><td class="row-label">Drive labor</td><td>0.5 hr x 1 tech x $48</td><td>$24.00</td></tr>
-      <tr><td class="row-label">Fuel</td><td>30 mi / 15 mpg x $4.465 (EIA U.S. regular, week of 9/28/2026) <!-- REFRESH after EIA Oct 6 release --></td><td>$8.93</td></tr>
+      <tr><td class="row-label">Fuel</td><td>30 mi / 15 mpg x $4.354 (EIA U.S. regular, week of 10/5/2026) <!-- REFRESH after EIA Oct 14 release if not yet shipped --></td><td>$8.71</td></tr>
       <tr><td class="row-label">Filter at cost</td><td>$67.85 / 12 (Mann+Hummel case, HVACFilters.com, Oct 5, 2026)</td><td>$5.65</td></tr>
       <tr><td class="row-label">Overhead</td><td>25% x ($72.00 + $24.00 + $5.65) = 25% x $101.65</td><td>$25.41</td></tr>
-      <tr class="row-total"><td class="row-label">Total cost</td><td>$72.00 + $24.00 + $8.93 + $5.65 + $25.41</td><td>$135.99</td></tr>
-      <tr class="row-total"><td class="row-label">Price at 20% margin</td><td>$135.99 / (1 - 0.20) = $135.99 / 0.80</td><td>$169.99</td></tr>
-      <tr><td class="row-label">Profit on the visit</td><td>$169.99 - $135.99</td><td>$34.00</td></tr>
+      <tr class="row-total"><td class="row-label">Total cost</td><td>$72.00 + $24.00 + $8.71 + $5.65 + $25.41</td><td>$135.77</td></tr>
+      <tr class="row-total"><td class="row-label">Price at 20% margin</td><td>$135.77 / (1 - 0.20) = $135.77 / 0.80</td><td>$169.71</td></tr>
+      <tr><td class="row-label">Profit on the visit</td><td>$169.71 - $135.77</td><td>$33.94</td></tr>
     </tbody>
   </table>
 
-  <p>Notice where the money goes. The filter is $5.65 of a $135.99 cost. Time on site and in the truck is $96.00 of it. That's why the clock in Step 1 matters more than any part price.</p>
+  <p>Notice where the money goes. The filter is $5.65 of a $135.77 cost. Time on site and in the truck is $96.00 of it. That's why the clock in Step 1 matters more than any part price.</p>
   </section>
 
   <section id="compare-specials">
   <h2>Step 3: Compare your cost with the specials around you</h2>
 
-  <p>Now run the same example with a shorter visit, a longer drive, and a condensing furnace, so you can see how far the cost moves. All inputs not listed are the same as Example B ($48 loaded rate, 25% overhead, 20% margin, one tech, $5.65 filter). Example C assumes a 60-mile round trip at the same 15 mpg, so fuel is 60 / 15 x $4.465 = $17.86. <!-- REFRESH after EIA Oct 6 release --></p>
+  <p>Now run the same example with a shorter visit, a longer drive, and a condensing furnace, so you can see how far the cost moves. All inputs not listed are the same as Example B ($48 loaded rate, 25% overhead, 20% margin, one tech, $5.65 filter). Example C assumes a 60-mile round trip at the same 15 mpg, so fuel is 60 / 15 x $4.354 = $17.42. <!-- REFRESH after EIA Oct 14 release if not yet shipped --></p>
 
   <table class="data-table">
     <thead>
       <tr><th>Example</th><th>Labor</th><th>Drive labor</th><th>Fuel</th><th>Filter</th><th>Overhead (25%)</th><th>Total cost</th><th>Price at 20% margin</th><th>Gap vs $89 special</th></tr>
     </thead>
     <tbody>
-      <tr><td class="row-label">A: 1.0 hr on site (low end of Hytek and Kodiak's 60 to 90 min), 0.5 hr drive</td><td>1.0 x 1 x $48 = $48.00</td><td>0.5 x 1 x $48 = $24.00</td><td>$8.93</td><td>$5.65</td><td>25% x $77.65 = $19.41</td><td>$105.99</td><td>$105.99 / 0.80 = $132.49</td><td>$105.99 - $89 = $16.99 below cost</td></tr>
-      <tr><td class="row-label">B: 1.5 hr on site (Reliable's average), 0.5 hr drive</td><td>1.5 x 1 x $48 = $72.00</td><td>0.5 x 1 x $48 = $24.00</td><td>$8.93</td><td>$5.65</td><td>25% x $101.65 = $25.41</td><td>$135.99</td><td>$135.99 / 0.80 = $169.99</td><td>$135.99 - $89 = $46.99 below cost</td></tr>
-      <tr><td class="row-label">B plus condensing: 1.75 hr on site (Reliable's 1.5 hr plus the low end of JC Energy's 15 to 20 min), 0.5 hr drive</td><td>1.75 x 1 x $48 = $84.00</td><td>0.5 x 1 x $48 = $24.00</td><td>$8.93</td><td>$5.65</td><td>25% x $113.65 = $28.41</td><td>$150.99</td><td>$150.99 / 0.80 = $188.74</td><td>$150.99 - $89 = $61.99 below cost</td></tr>
-      <tr><td class="row-label">C: 1.5 hr on site, 1.0 hr drive (60-mile example round trip)</td><td>1.5 x 1 x $48 = $72.00</td><td>1.0 x 1 x $48 = $48.00</td><td>$17.86</td><td>$5.65</td><td>25% x $125.65 = $31.41</td><td>$174.92</td><td>$174.92 / 0.80 = $218.65</td><td>$174.92 - $89 = $85.92 below cost</td></tr>
+      <tr><td class="row-label">A: 1.0 hr on site (low end of Hytek and Kodiak's 60 to 90 min), 0.5 hr drive</td><td>1.0 x 1 x $48 = $48.00</td><td>0.5 x 1 x $48 = $24.00</td><td>$8.71</td><td>$5.65</td><td>25% x $77.65 = $19.41</td><td>$105.77</td><td>$105.77 / 0.80 = $132.21</td><td>$105.77 - $89 = $16.77 below cost</td></tr>
+      <tr><td class="row-label">B: 1.5 hr on site (Reliable's average), 0.5 hr drive</td><td>1.5 x 1 x $48 = $72.00</td><td>0.5 x 1 x $48 = $24.00</td><td>$8.71</td><td>$5.65</td><td>25% x $101.65 = $25.41</td><td>$135.77</td><td>$135.77 / 0.80 = $169.71</td><td>$135.77 - $89 = $46.77 below cost</td></tr>
+      <tr><td class="row-label">B plus condensing: 1.75 hr on site (Reliable's 1.5 hr plus the low end of JC Energy's 15 to 20 min), 0.5 hr drive</td><td>1.75 x 1 x $48 = $84.00</td><td>0.5 x 1 x $48 = $24.00</td><td>$8.71</td><td>$5.65</td><td>25% x $113.65 = $28.41</td><td>$150.77</td><td>$150.77 / 0.80 = $188.46</td><td>$150.77 - $89 = $61.77 below cost</td></tr>
+      <tr><td class="row-label">C: 1.5 hr on site, 1.0 hr drive (60-mile example round trip)</td><td>1.5 x 1 x $48 = $72.00</td><td>1.0 x 1 x $48 = $48.00</td><td>$17.42</td><td>$5.65</td><td>25% x $125.65 = $31.41</td><td>$174.48</td><td>$174.48 / 0.80 = $218.10</td><td>$174.48 - $89 = $85.48 below cost</td></tr>
     </tbody>
   </table>
 
-  <p>The $89 in the last column is the price One Hour Heating &amp; Air of St. Charles (via the Fox Valley Values coupon site, valid 9/8/2026 to 10/31/2026), 911 Mechanical (page dated Sep 14, 2026), and HB Home Service Team in Harrisburg, PA (expires Oct 31, 2026) advertised for a fall tune-up. Lower specials exist too. Element Service Group in Apex, NC listed $49 (page modified Sep 30, 2026), MSP Plumbing, Heating &amp; Air in Minneapolis listed $49, and PV Heating, Cooling &amp; Plumbing in Atlanta listed $79 with a filter change included, all as listed on Oct 1, 2026. At $49, Example B's $135.99 cost leaves a gap of $135.99 - $49 = $86.99 per visit.</p>
+  <p>The $89 in the last column is the price One Hour Heating &amp; Air of St. Charles (via the Fox Valley Values coupon site, valid 9/8/2026 to 10/31/2026), 911 Mechanical (page dated Sep 14, 2026), and HB Home Service Team in Harrisburg, PA (expires Oct 31, 2026) advertised for a fall tune-up. Lower specials exist too. Element Service Group in Apex, NC listed $49 (page modified Sep 30, 2026), MSP Plumbing, Heating &amp; Air in Minneapolis listed $49, and PV Heating, Cooling &amp; Plumbing in Atlanta listed $79 with a filter change included, all as listed on Oct 1, 2026. At $49, Example B's $135.77 cost leaves a gap of $135.77 - $49 = $86.77 per visit.</p>
 
   <h3>One check on the raw wage</h3>
 
-  <p>Some owners price from the wage alone. As a floor check, rerun Example B with the BLS median wage of $29.33 (May 2025) in place of a loaded rate, with every other input unchanged. Labor is 1.5 x $29.33 = $44.00 (rounded from $43.995). Drive labor is 0.5 x $29.33 = $14.67 (rounded from $14.665). Overhead is 25% x ($44.00 + $14.67 + $5.65) = 25% x $64.32 = $16.08. Total cost is $44.00 + $14.67 + $8.93 + $5.65 + $16.08 = $89.33. That is still above $89, before payroll taxes, comp, benefits, or any profit. Nobody should price with an unburdened wage; the check just shows how little room an $89 price leaves for a 1.5-hour visit with a half-hour drive.</p>
+  <p>Some owners price from the wage alone. As a floor check, rerun Example B with the BLS median wage of $29.33 (May 2025) in place of a loaded rate, with every other input unchanged. Labor is 1.5 x $29.33 = $44.00 (rounded from $43.995). Drive labor is 0.5 x $29.33 = $14.67 (rounded from $14.665). Overhead is 25% x ($44.00 + $14.67 + $5.65) = 25% x $64.32 = $16.08. Total cost is $44.00 + $14.67 + $8.71 + $5.65 + $16.08 = $89.11. That is still above $89, before payroll taxes, comp, benefits, or any profit. Nobody should price with an unburdened wage; the check just shows how little room an $89 price leaves for a 1.5-hour visit with a half-hour drive.</p>
 
   <h3>Set a regular price first, then decide on the discount</h3>
 
@@ -184,13 +184,13 @@ scout_lock: LOCKED
 
   <p>Homeowner cost guides land in a similar band. Angi, a homeowner cost guide, puts a furnace tune-up at $130 to $200 (updated Jul 9, 2026). HomeGuide, another homeowner guide whose page dates from 2024, gives $70 to $200. Fixr, also written for homeowners, gives an average of $275 for an annual HVAC tune-up (Jan 30, 2026). These sites describe what homeowners pay. They say nothing about what the work costs a shop, so use them only as a check on how customers will react to your price.</p>
 
-  <p>Your regular price comes from your own Example B, run with your own inputs. In the example, that's $169.99. Publish it. Then pick the special as a deliberate discount from it, and write down the gap per visit. The next step decides whether that gap is worth paying.</p>
+  <p>Your regular price comes from your own Example B, run with your own inputs. In the example, that's $169.71. Publish it. Then pick the special as a deliberate discount from it, and write down the gap per visit. The next step decides whether that gap is worth paying.</p>
   </section>
 
   <section id="what-the-special-buys">
   <h2>Step 4: Decide what the special is supposed to buy</h2>
 
-  <p>The gap between your cost and the special price is what you pay to get through the door. In Example B, that's $46.99 a visit at $89. Say you sell 100 of them, an example count: the shop has spent 100 x $46.99 = $4,699.00 on access to 100 furnaces. That's a marketing expense, and it should be judged like one.</p>
+  <p>The gap between your cost and the special price is what you pay to get through the door. In Example B, that's $46.77 a visit at $89. Say you sell 100 of them, an example count: the shop has spent 100 x $46.77 = $4,677.00 on access to 100 furnaces. That's a marketing expense, and it should be judged like one.</p>
 
   <p>Decide before the postcards go out what you expect those visits to produce. There are three usual answers:</p>
 
@@ -260,7 +260,7 @@ scout_lock: LOCKED
 
   <p>Reliable lists a tune-up plan at $26.99 a month (Oct 1, 2026), which is $26.99 x 12 = $323.88 a year. Divide that by the visits a plan like it includes and you have the same per-visit check.</p>
 
-  <p>Against Example B's cost of $135.99, every per-visit figure in the table is lower. That does not mean those plans lose money. Those shops' real rates, drive times, and overhead aren't public, and a shop with short routes and a lower loaded rate may run well under the example cost. What the table shows is how to run the check on your own plan. Put your plan's per-visit revenue next to your own cost per visit. If it's below cost before anything else, the plan is a loss leader just like the special, and it needs the same tracking.</p>
+  <p>Against Example B's cost of $135.77, every per-visit figure in the table is lower. That does not mean those plans lose money. Those shops' real rates, drive times, and overhead aren't public, and a shop with short routes and a lower loaded rate may run well under the example cost. What the table shows is how to run the check on your own plan. Put your plan's per-visit revenue next to your own cost per visit. If it's below cost before anything else, the plan is a loss leader just like the special, and it needs the same tracking.</p>
 
   <p>Then take off what the plan gives away. Most plans include a repair discount: Comfort Land lists 10% (page May 2026), Kodiak 15%, and AirLux 20% (both Oct 1, 2026). Multiply the discount by what members spent on repairs last year to get the dollar cost. Many plans also waive the trip or diagnostic fee, and <a href="/blog/should-contractors-waive-diagnostic-fee.html">the diagnostic fee guide</a> covers what waiving that fee costs.</p>
 
@@ -292,7 +292,7 @@ scout_lock: LOCKED
   <p>If the visit runs well past your average because the unit hasn't been touched in years, the special price doesn't cover the extra time. Say in the offer what the price includes, and quote extra cleaning as additional work before the tech starts it.</p>
 
   <h3>Long drives</h3>
-  <p>Example C shows a one-hour drive adding $24.00 of drive labor and $8.93 of fuel over Example B. Draw a service radius for the special, or quote outlying addresses at the regular price.</p>
+  <p>Example C shows a one-hour drive adding $24.00 of drive labor and $8.71 of fuel over Example B. Draw a service radius for the special, or quote outlying addresses at the regular price.</p>
   </section>
 
   <section id="mistakes">
@@ -301,7 +301,7 @@ scout_lock: LOCKED
   <ul>
     <li>Pricing from the wage. The raw $29.33 BLS median (May 2025) leaves out payroll taxes, comp, and benefits. Use your loaded cost from payroll and benefits invoices.</li>
     <li>Using the ad copy's time. A 60-minute claim on a website doesn't match your tech's arrival-to-departure average. Use your own timestamps.</li>
-    <li>Leaving out the drive. In Example B the drive and fuel are $24.00 + $8.93 = $32.93 of the $135.99 cost. Enter both every time.</li>
+    <li>Leaving out the drive. In Example B the drive and fuel are $24.00 + $8.71 = $32.71 of the $135.77 cost. Enter both every time.</li>
     <li>Putting overhead on marked-up parts. Apply overhead to parts at cost, along with labor and drive labor.</li>
     <li>Using the Material Markup field as a substitute for margin. If you drop margin to 0 and rely on markup alone, your labor, drive time, fuel, and overhead earn no profit. Set your margin first, then add markup on top if you want more on parts.</li>
     <li>Copying a competitor's special price. Their loaded rate, routes, and overhead aren't yours. Run your own numbers and pick a discount on purpose.</li>

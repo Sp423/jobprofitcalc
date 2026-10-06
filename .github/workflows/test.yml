@@ -1,0 +1,33 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  unit:
+    name: Pricing engine
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test
+
+  ui:
+    name: Calculator display
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: calculator-screenshots
+          path: artifacts/screenshots/

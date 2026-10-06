@@ -1,0 +1,11 @@
+{
+  "name": "jobprofitcalc",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "test:ui": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.1"
+  }
+}

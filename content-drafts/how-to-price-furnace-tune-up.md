@@ -116,7 +116,7 @@ scout_lock: LOCKED
 
   <p>The visit uses Reliable's published 1.5-hour average and an assumed half-hour drive. The filter is a Mann+Hummel 16x25x1 MERV 8, which HVACFilters.com listed at $67.85 for a case of 12 on Oct 5, 2026, or $67.85 / 12 = $5.65 each.</p>
 
-  <p>For fuel, the example uses a 30-mile round trip in a truck that gets 15 mpg. Both of those are example figures; use your own miles and your own truck's mpg. The gas price is EIA's U.S. average for regular gasoline, $4.354 a gallon for the week of 10/5/2026 (EIA weekly retail, released Oct 6, 2026). <!-- REFRESH after EIA Oct 14 release if not yet shipped --> That gives 30 / 15 x $4.354 = $8.71. Regional prices that same week ran from $3.911 on the Gulf Coast to $5.727 on the West Coast (EIA weekly retail, week of 10/5/2026), so use the figure for your area. <!-- REFRESH after EIA Oct 14 release if not yet shipped --></p>
+  <p>For fuel, the example uses a 30-mile round trip in a truck that gets 15 mpg. Both of those are example figures; use your own miles and your own truck's mpg. The gas price is EIA's U.S. average for regular gasoline, $4.354 a gallon for the week of 10/5/2026 (<a href="https://www.eia.gov/petroleum/gasdiesel/">EIA weekly retail</a>, released Oct 6, 2026). That gives 30 / 15 x $4.354 = $8.71. Regional prices that same week ran from $3.911 on the Gulf Coast to $5.727 on the West Coast (EIA weekly retail, week of 10/5/2026), so use the figure for your area.</p>
 
   <table class="data-table">
     <thead>
@@ -129,7 +129,7 @@ scout_lock: LOCKED
       <tr><td class="row-label">Material Cost</td><td>$5.65, the filter at cost</td></tr>
       <tr><td class="row-label">Overhead %</td><td>25%, applied to labor, drive labor, and materials at cost</td></tr>
       <tr><td class="row-label">Drive Time</td><td>0.5 hr</td></tr>
-      <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.71, kept out of the overhead base <!-- REFRESH after EIA Oct 14 release if not yet shipped --></td></tr>
+      <tr><td class="row-label">Fuel / Travel Cost</td><td>$8.71, kept out of the overhead base</td></tr>
       <tr><td class="row-label">Desired Profit Margin</td><td>20%</td></tr>
     </tbody>
   </table>
@@ -143,7 +143,7 @@ scout_lock: LOCKED
     <tbody>
       <tr><td class="row-label">Labor on site</td><td>1.5 hr x 1 tech x $48</td><td>$72.00</td></tr>
       <tr><td class="row-label">Drive labor</td><td>0.5 hr x 1 tech x $48</td><td>$24.00</td></tr>
-      <tr><td class="row-label">Fuel</td><td>30 mi / 15 mpg x $4.354 (EIA U.S. regular, week of 10/5/2026) <!-- REFRESH after EIA Oct 14 release if not yet shipped --></td><td>$8.71</td></tr>
+      <tr><td class="row-label">Fuel</td><td>30 mi / 15 mpg x $4.354 (EIA U.S. regular, week of 10/5/2026)</td><td>$8.71</td></tr>
       <tr><td class="row-label">Filter at cost</td><td>$67.85 / 12 (Mann+Hummel case, HVACFilters.com, Oct 5, 2026)</td><td>$5.65</td></tr>
       <tr><td class="row-label">Overhead</td><td>25% x ($72.00 + $24.00 + $5.65) = 25% x $101.65</td><td>$25.41</td></tr>
       <tr class="row-total"><td class="row-label">Total cost</td><td>$72.00 + $24.00 + $8.71 + $5.65 + $25.41</td><td>$135.77</td></tr>
@@ -158,7 +158,7 @@ scout_lock: LOCKED
   <section id="compare-specials">
   <h2>Step 3: Compare your cost with the specials around you</h2>
 
-  <p>Now run the same example with a shorter visit, a longer drive, and a condensing furnace, so you can see how far the cost moves. All inputs not listed are the same as Example B ($48 loaded rate, 25% overhead, 20% margin, one tech, $5.65 filter). Example C assumes a 60-mile round trip at the same 15 mpg, so fuel is 60 / 15 x $4.354 = $17.42. <!-- REFRESH after EIA Oct 14 release if not yet shipped --></p>
+  <p>Now run the same example with a shorter visit, a longer drive, and a condensing furnace, so you can see how far the cost moves. All inputs not listed are the same as Example B ($48 loaded rate, 25% overhead, 20% margin, one tech, $5.65 filter). Example C assumes a 60-mile round trip at the same 15 mpg, so fuel is 60 / 15 x $4.354 = $17.42.</p>
 
   <table class="data-table">
     <thead>

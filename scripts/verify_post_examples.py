@@ -848,6 +848,84 @@ def plumber_derived():
 DERIVED[PLUMBER_PAGE] = plumber_derived
 
 
+# ---- how-to-price-furnace-tune-up.html ------------------------------------
+# Fuel stays outside the overhead base: overhead is 25% of labor + drive labor + materials.
+FURNACE = "how-to-price-furnace-tune-up.html"
+FURNACE_VISIT = dict(workers=1, rate=48, materials=5.65, overhead=25, drive=0.5, fuel=8.71, margin=20)
+
+
+def furnace_lines(r, profit=False):
+    out = {
+        "labor": usd(r["labor"]),
+        "drive labor": usd(r["drive_labor"]),
+        "materials": usd(r["materials"]),
+        "direct": usd(r["direct"]),
+        "overhead": usd(r["overhead"]),
+        "fuel": usd(r["fuel"]),
+        "total cost": usd(r["total_cost"]),
+        "price": usd(r["price"]),
+    }
+    if profit:
+        out["profit"] = usd(r["profit"])
+    return out
+
+
+@example(FURNACE, "Example A", hours=1.0, **FURNACE_VISIT)
+def _(r):
+    return furnace_lines(r)
+
+
+@example(FURNACE, "Example B", hours=1.5, **FURNACE_VISIT)
+def _(r):
+    return furnace_lines(r, profit=True)
+
+
+@example(FURNACE, "B plus condensing", hours=1.75, **FURNACE_VISIT)
+def _(r):
+    return furnace_lines(r)
+
+
+@example(FURNACE, "Example C", hours=1.5, workers=1, rate=48, materials=5.65,
+         overhead=25, drive=1.0, fuel=17.42, margin=20)
+def _(r):
+    return furnace_lines(r)
+
+
+@example(FURNACE, "Example B at the BLS wage", hours=1.5, workers=1, rate=29.33,
+         materials=5.65, overhead=25, drive=0.5, fuel=8.71, margin=20)
+def _(r):
+    return {"labor": usd(r["labor"]), "drive labor": usd(r["drive_labor"]),
+            "direct": usd(r["direct"]), "overhead": usd(r["overhead"]),
+            "total cost": usd(r["total_cost"])}
+
+
+@example(FURNACE, "Example F, flame sensor", hours=0.25, workers=1, rate=48,
+         materials=13.48, overhead=25, drive=0, fuel=0, margin=20)
+def _(r):
+    return furnace_lines(r)
+
+
+@example(FURNACE, "Condensate pump, margin only", hours=0, workers=1, rate=48,
+         materials=73.44, overhead=25, drive=0, fuel=0, margin=20)
+def _(r):
+    return {"materials": usd(r["materials"]), "overhead": usd(r["overhead"]),
+            "total cost": usd(r["total_cost"]), "price": usd(r["price"]),
+            "profit": usd(r["profit"])}
+
+
+def furnace_derived():
+    base = price_job(hours=0, workers=1, rate=48, materials=73.44, overhead=25,
+                     drive=0, fuel=0, margin=20)
+    markup = rc(base["materials"] * 20 / 100)
+    return {
+        "pump markup dollars": usd(markup),
+        "pump price with 20% markup": usd(base["price"] + markup),
+    }
+
+
+DERIVED[FURNACE] = furnace_derived
+
+
 # Strings from the old engine that must not appear in any post in scope.
 POSTS = [
     "how-to-use-the-job-profit-calculator.html",
@@ -869,6 +947,7 @@ POSTS = [
     MARKUP,
     "how-long-is-a-contractor-quote-good-for.html",
     "contractor-job-profitability.html",
+    FURNACE,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -980,6 +1059,9 @@ STALE_ALLOW = {
     ESTIMATE: ["Material Markup"],
     JOB: ["Material Markup"],
     DIAG: ["Material Markup"],
+    # The related card says "20% markup", which contains the old label "0% markup".
+    # The pump example says "markup at 0", not that label.
+    FURNACE: ["0% markup"],
 }
 # #52 defines STALE_EXEMPT and page_path; they are not on this branch yet.
 if 'STALE_EXEMPT' not in globals():

@@ -887,6 +887,121 @@ def ppi_derived():
 DERIVED[PPI] = ppi_derived
 
 
+# ---- how-to-price-diesel-into-jobs.html -----------------------------------
+# Fuel stays outside the overhead base. Overhead is 20% of labor + drive labor + materials.
+DIESEL = "how-to-price-diesel-into-jobs.html"
+DIESEL_BASE = dict(hours=16, workers=2, rate=38, materials=900, overhead=20, drive=3, margin=20)
+DIESEL_EIA_NOW = 6.179  # week of Oct 12, 2026
+DIESEL_EIA_OLD = 3.665  # week of Oct 13, 2025
+DIESEL_GALLONS = 52
+
+
+@example(DIESEL, "Worked example, dump truck and skid steer",
+         fuel=DIESEL_GALLONS * DIESEL_EIA_NOW, **DIESEL_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(DIESEL, "Fuel field left blank", fuel=0, **DIESEL_BASE)
+def _(r):
+    return {
+        "quoted cost, no fuel": usd(r["total_cost"]),
+        "quoted price": usd(r["price"]),
+    }
+
+
+@example(DIESEL, "Fuel at last year's price",
+         fuel=DIESEL_GALLONS * DIESEL_EIA_OLD, **DIESEL_BASE)
+def _(r):
+    return {
+        "fuel at the old price": usd(r["fuel"]),
+        "quoted cost": usd(r["total_cost"]),
+        "quoted price": usd(r["price"]),
+    }
+
+
+def diesel_derived():
+    full = price_job(fuel=DIESEL_GALLONS * DIESEL_EIA_NOW, **DIESEL_BASE)
+    blank = price_job(fuel=0, **DIESEL_BASE)
+    old = price_job(fuel=DIESEL_GALLONS * DIESEL_EIA_OLD, **DIESEL_BASE)
+    assert full["labor"] == 121600
+    assert full["drive_labor"] == 22800
+    assert full["materials"] == 90000
+    assert full["direct"] == 234400
+    assert full["overhead"] == 46880
+    assert full["fuel"] == 32131
+    assert full["total_cost"] == 313411
+    assert full["price"] == 391764
+    assert full["profit"] == 78353
+    assert blank["total_cost"] == 281280
+    assert blank["price"] == 351600
+    assert old["fuel"] == 19058
+    assert old["total_cost"] == 300338
+    assert old["price"] == 375423
+
+    miles = 60 * 2
+    truck_gal = miles / 7.5
+    machine_hours = 6 * 2
+    machine_gal = machine_hours * 3.0
+    gallons = truck_gal + machine_gal
+    assert gallons == DIESEL_GALLONS
+
+    fuel_thousandths = DIESEL_GALLONS * 6179  # $321.308 before cent rounding
+    assert fuel_thousandths == 321308
+    price_whole, price_rem = divmod(full["total_cost"], 100 - DIESEL_BASE["margin"])
+    assert price_rem * 10000 % (100 - DIESEL_BASE["margin"]) == 0
+    unrounded_price = "${:,}.{:04d}".format(
+        price_whole, price_rem * 10000 // (100 - DIESEL_BASE["margin"]))
+    old_whole, old_rem = divmod(old["total_cost"], 100 - DIESEL_BASE["margin"])
+    assert old_rem * 1000 % (100 - DIESEL_BASE["margin"]) == 0
+    unrounded_old = "${:,}.{:03d}".format(
+        old_whole, old_rem * 1000 // (100 - DIESEL_BASE["margin"]))
+
+    real_blank_profit = blank["price"] - full["total_cost"]
+    real_old_profit = old["price"] - full["total_cost"]
+    yoy = (DIESEL_EIA_NOW - DIESEL_EIA_OLD) / DIESEL_EIA_OLD * 100
+    buried = (full["price"] - blank["total_cost"]) / full["price"] * 100
+    share = full["fuel"] / full["price"] * 100
+    blank_margin = real_blank_profit / blank["price"] * 100
+    old_margin = real_old_profit / old["price"] * 100
+    full_margin = full["profit"] / full["price"] * 100
+    points_tenths = js_round(full_margin * 10) - js_round(old_margin * 10)
+
+    up_thousandths = DIESEL_GALLONS * (6500 - 6179)    # assumed $6.50 reference
+    down_thousandths = DIESEL_GALLONS * (6179 - 5900)  # assumed $5.90 reference
+    svc_thousandths = 2 * 6179                         # 24 miles / 12 mpg
+    return {
+        "truck gallons": "{:.1f}".format(truck_gal),
+        "machine gallons": "{:.1f}".format(machine_gal),
+        "total gallons": "{:.1f}".format(gallons),
+        "unrounded fuel": "$%d.%03d" % (fuel_thousandths // 1000, fuel_thousandths % 1000),
+        "unrounded price": unrounded_price,
+        "unrounded old price": unrounded_old,
+        "year over year": "{:.1f}%".format(yoy),
+        "fuel share of price": "{:.1f}%".format(share),
+        "blank real profit": usd(real_blank_profit),
+        "blank real margin": "{:.1f}%".format(blank_margin),
+        "collected less": usd(full["price"] - blank["price"]),
+        "kept less": usd(full["profit"] - real_blank_profit),
+        "old real profit": usd(real_old_profit),
+        "old real margin": "{:.1f}%".format(old_margin),
+        "fuel line short": usd(full["fuel"] - old["fuel"]),
+        "quote low": usd(full["price"] - old["price"]),
+        "profit drop": usd(full["profit"] - real_old_profit),
+        "margin points given up": "{:.1f} points".format(points_tenths / 10),
+        "buried margin": "{:.1f}%".format(buried),
+        "surcharge up per gallon": "$%d.%03d" % (0, 6500 - 6179),
+        "surcharge added": usd(js_round(up_thousandths / 10)),
+        "surcharge down per gallon": "$%d.%03d" % (0, 6179 - 5900),
+        "surcharge credited": usd(js_round(down_thousandths / 10)),
+        "service call fuel": usd(js_round(svc_thousandths / 10)),
+        "margin earned": "{:.1f}%".format(full_margin),
+    }
+
+
+DERIVED[DIESEL] = diesel_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1066,6 +1181,7 @@ POSTS = [
     "contractor-job-profitability.html",
     FURNACE,
     PPI,
+    DIESEL,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1090,6 +1206,7 @@ STALE_EXEMPT = {
     PLUMBER_PAGE: _MATERIAL_MARKUP_FIELD,
     MARGINS: _MATERIAL_MARKUP_FIELD,
     PPI: _MATERIAL_MARKUP_FIELD,
+    DIESEL: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

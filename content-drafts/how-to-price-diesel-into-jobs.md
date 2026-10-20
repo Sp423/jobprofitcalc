@@ -13,7 +13,7 @@ card_file: "/images/how-to-price-diesel-into-jobs.jpg"
 card_dimensions: "1280x640"
 card_class: "post-thumb"
 card_scene: "Illustrated contractor fueling a diesel work truck towing an equipment trailer at a fuel island, clipboard in hand, pump display with no readable numbers, no logos or company names."
-card_alt: "Illustrated contractor with a clipboard fueling a diesel work truck and equipment trailer at a fuel island."
+card_alt: "Contractor in a hi-vis vest fueling a pickup through the bed-side fuel door, with a compact excavator on a trailer in the background."
 internal_links:
   - "/calculator"
   - "/blog/should-contractors-charge-for-drive-time.html"

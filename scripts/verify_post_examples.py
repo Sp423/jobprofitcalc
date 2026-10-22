@@ -1002,6 +1002,116 @@ def diesel_derived():
 DERIVED[DIESEL] = diesel_derived
 
 
+# ---- how-to-price-christmas-light-installation.html -----------------------
+# Fuel stays outside the overhead base. Overhead is 15% of labor + drive labor + materials.
+LIGHTS = "how-to-price-christmas-light-installation.html"
+LIGHTS_BASE = dict(workers=2, rate=38, overhead=15, drive=1, fuel=20, margin=30)
+
+
+@example(LIGHTS, "Example 1, labor only on the customer's strands",
+         hours=4, materials=30, **LIGHTS_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(LIGHTS, "Example 2, supplied LEDs, install",
+         hours=4, materials=210, **LIGHTS_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(LIGHTS, "Example 2, takedown and storage",
+         hours=1.5, materials=40, **LIGHTS_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(LIGHTS, "One wreath under the minimum",
+         hours=1, workers=1, rate=38, materials=0, overhead=15, drive=0.5, fuel=10, margin=30)
+def _(r):
+    return {
+        "labor": usd(r["labor"]),
+        "drive labor": usd(r["drive_labor"]),
+        "direct": usd(r["direct"]),
+        "overhead": usd(r["overhead"]),
+        "fuel": usd(r["fuel"]),
+        "total cost": usd(r["total_cost"]),
+        "price": usd(r["price"]),
+        "profit": usd(r["profit"]),
+    }
+
+
+def lights_trunc(numer, den, places):
+    """Truncate numer/den to `places` decimals. numer/den is already in dollars."""
+    scale = 10 ** places
+    scaled = numer * scale // den
+    whole, frac = divmod(scaled, scale)
+    if whole >= 1000:
+        return "${:,}.{:0{}d}".format(whole, frac, places)
+    return "${}.{:0{}d}".format(whole, frac, places)
+
+
+def lights_derived():
+    labor_only = price_job(hours=4, materials=30, **LIGHTS_BASE)
+    install = price_job(hours=4, materials=210, **LIGHTS_BASE)
+    takedown = price_job(hours=1.5, materials=40, **LIGHTS_BASE)
+    wreath = price_job(hours=1, workers=1, rate=38, materials=0, overhead=15,
+                       drive=0.5, fuel=10, margin=30)
+    assert labor_only["labor"] == 30400
+    assert labor_only["drive_labor"] == 7600
+    assert labor_only["materials"] == 3000
+    assert labor_only["direct"] == 41000
+    assert labor_only["overhead"] == 6150
+    assert labor_only["fuel"] == 2000
+    assert labor_only["total_cost"] == 49150
+    assert labor_only["price"] == 70214
+    assert labor_only["profit"] == 21064
+    assert install["materials"] == 21000
+    assert install["direct"] == 59000
+    assert install["overhead"] == 8850
+    assert install["total_cost"] == 69850
+    assert install["price"] == 99786
+    assert install["profit"] == 29936
+    assert takedown["labor"] == 11400
+    assert takedown["direct"] == 23000
+    assert takedown["overhead"] == 3450
+    assert takedown["total_cost"] == 28450
+    assert takedown["price"] == 40643
+    assert takedown["profit"] == 12193
+    assert wreath["labor"] == 3800
+    assert wreath["drive_labor"] == 1900
+    assert wreath["direct"] == 5700
+    assert wreath["overhead"] == 855
+    assert wreath["total_cost"] == 7555
+    assert wreath["price"] == 10793
+    assert wreath["profit"] == 3238
+    season = install["price"] + takedown["price"]
+    assert season == 140429
+    assert 900 // 5 == 180
+
+    den = 100 - LIGHTS_BASE["margin"]
+    share = takedown["price"] / install["price"] * 100
+    return {
+        "unrounded labor-only price": lights_trunc(labor_only["total_cost"], den, 6),
+        "unrounded install price": lights_trunc(install["total_cost"], den, 6),
+        "unrounded takedown price": lights_trunc(takedown["total_cost"], den, 6),
+        "unrounded wreath price": lights_trunc(wreath["total_cost"], den, 6),
+        "labor-only per foot": lights_trunc(labor_only["price"], 15000, 4),
+        "labor-only per foot rounded": usd(js_round(labor_only["price"] / 150)),
+        "install per foot": lights_trunc(install["price"], 15000, 4),
+        "install per foot rounded": usd(js_round(install["price"] / 150)),
+        "season total": usd(season),
+        "season per foot": lights_trunc(season, 15000, 4),
+        "season per foot rounded": usd(js_round(season / 150)),
+        "takedown share": "about {:.0f}%".format(share),
+        "light cost per season": "$%d" % (900 // 5),
+        "margin earned": "{:.1f}%".format(labor_only["margin_pct"]),
+    }
+
+
+DERIVED[LIGHTS] = lights_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1182,6 +1292,7 @@ POSTS = [
     FURNACE,
     PPI,
     DIESEL,
+    LIGHTS,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1207,6 +1318,7 @@ STALE_EXEMPT = {
     MARGINS: _MATERIAL_MARKUP_FIELD,
     PPI: _MATERIAL_MARKUP_FIELD,
     DIESEL: _MATERIAL_MARKUP_FIELD,
+    LIGHTS: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

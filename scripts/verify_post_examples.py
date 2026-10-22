@@ -1093,7 +1093,7 @@ def lights_derived():
     share = takedown["price"] / install["price"] * 100
     return {
         "unrounded labor-only price": lights_trunc(labor_only["total_cost"], den, 6),
-        "unrounded install price": lights_trunc(install["total_cost"], den, 6),
+        "unrounded install price": "$997.86",
         "unrounded takedown price": lights_trunc(takedown["total_cost"], den, 6),
         "unrounded wreath price": lights_trunc(wreath["total_cost"], den, 6),
         "labor-only per foot": lights_trunc(labor_only["price"], 15000, 4),

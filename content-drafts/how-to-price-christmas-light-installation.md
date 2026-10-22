@@ -8,7 +8,7 @@ robots: "index, follow"
 date: "October 22, 2026"
 slot: "Thu Oct 22, 2026"
 tag: "Job Pricing"
-read_time: "16 min read"
+read_time: "14 min read"
 card_file: "/images/how-to-price-christmas-light-installation.jpg"
 card_dimensions: "1280x640"
 card_class: "post-thumb"
@@ -33,7 +33,7 @@ scout_lock: LOCKED
   <div class="article-meta">
     <span>October 22, 2026</span>
     <span class="article-meta-sep">·</span>
-    <span>16 min read</span>
+    <span>14 min read</span>
     <span class="article-meta-sep">·</span>
     <span>JobProfitCalc.com</span>
   </div>
@@ -208,6 +208,7 @@ scout_lock: LOCKED
     <tr><td>Hourly Labor Rate</td><td>Your loaded cost per hour: wages plus payroll taxes, insurance, and other employment costs. It is a cost, not your billing rate. <a href="/blog/burdened-labor-rate-for-contractors.html">How to calculate a burdened labor rate</a> walks through building that number.</td></tr>
     <tr><td>Material Cost</td><td>Lights, clips, cords, and any lift rental, all at your cost. For shop-owned strands, enter the purchase cost divided by the seasons you expect them to last.</td></tr>
     <tr><td>Material Markup</td><td>Optional. The examples below leave it at 0.</td></tr>
+    <tr><td>Drive Time</td><td>The round-trip drive hours for the job, billed at the labor rate, as in both examples.</td></tr>
     <tr><td>Fuel / Travel Cost</td><td>Fuel for the trips.</td></tr>
     <tr><td>Overhead</td><td>Your overhead percentage. If you have not set one, <a href="/blog/contractor-overhead-percentage.html">contractor overhead percentage</a> shows how.</td></tr>
     <tr><td>Desired Profit Margin</td><td>The margin you want on the final price.</td></tr>
@@ -264,7 +265,7 @@ scout_lock: LOCKED
       <tr><td>Overhead</td><td>15% x $590.00</td><td>$88.50</td></tr>
       <tr><td>Fuel</td><td>assumed, added after overhead</td><td>$20.00</td></tr>
       <tr><td>Total cost</td><td>$304.00 + $76.00 + $210.00 + $88.50 + $20.00</td><td>$698.50</td></tr>
-      <tr><td>Price</td><td>$698.50 / (1 minus 0.30) = $997.857142, rounded</td><td>$997.86</td></tr>
+      <tr><td>Price</td><td>$698.50 / (1 minus 0.30) = $997.86, rounded</td><td>$997.86</td></tr>
       <tr><td>Profit</td><td>$997.86 minus $698.50</td><td>$299.36</td></tr>
       <tr><td>Margin earned</td><td>$299.36 / $997.86</td><td>30.0%</td></tr>
       <tr><td>Effective price per foot</td><td>$997.86 / 150 feet = $6.6524, rounded</td><td>$6.65</td></tr>

@@ -1179,6 +1179,55 @@ def salt_derived():
 DERIVED[SALT] = salt_derived
 
 
+# ---- how-to-price-frost-line-digging.html ---------------------------------
+# Fuel stays outside the overhead base. Overhead is a percent of labor + drive labor + materials.
+FROST = "how-to-price-frost-line-digging.html"
+FROST_RENTED = dict(hours=10, workers=2, rate=42.50, materials=990, overhead=15, drive=1, fuel=75, margin=25)
+FROST_OWNED = dict(hours=10, workers=2, rate=42.50, materials=400, overhead=25, drive=1, fuel=75, margin=25)
+FROST_CLAY = dict(hours=14, workers=2, rate=42.50, materials=400, overhead=25, drive=2, fuel=126, margin=25)
+
+
+@example(FROST, "Example 1, rented mini excavator", **FROST_RENTED)
+def _(r):
+    return std_lines(r)
+
+
+@example(FROST, "Example 2, owned machine", **FROST_OWNED)
+def _(r):
+    return std_lines(r)
+
+
+@example(FROST, "Example 2, clay and cobbles", **FROST_CLAY)
+def _(r):
+    return std_lines(r)
+
+
+def frost_derived():
+    rented = price_job(**FROST_RENTED)
+    owned = price_job(**FROST_OWNED)
+    clay = price_job(**FROST_CLAY)
+    assert rented["total_cost"] == 228875
+    assert rented["price"] == 305167
+    assert rented["profit"] == 76292
+    assert owned["total_cost"] == 174375
+    assert owned["price"] == 232500
+    assert owned["profit"] == 58125
+    assert clay["total_cost"] == 232600
+    assert clay["price"] == 310133
+    assert clay["profit"] == 77533
+    return {
+        "price drop vs rented": usd(rented["price"] - owned["price"]),
+        "clay price increase": usd(clay["price"] - owned["price"]),
+        "rented per foot": usd(js_round(rented["price"] / 120)),
+        "owned per foot": usd(js_round(owned["price"] / 120)),
+        "clay per foot": usd(js_round(clay["price"] / 120)),
+        "margin earned": "{:.1f}%".format(owned["margin_pct"]),
+    }
+
+
+DERIVED[FROST] = frost_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1361,6 +1410,7 @@ POSTS = [
     DIESEL,
     LIGHTS,
     SALT,
+    FROST,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1388,6 +1438,7 @@ STALE_EXEMPT = {
     DIESEL: _MATERIAL_MARKUP_FIELD,
     LIGHTS: _MATERIAL_MARKUP_FIELD,
     SALT: _MATERIAL_MARKUP_FIELD,
+    FROST: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

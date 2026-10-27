@@ -1112,6 +1112,73 @@ def lights_derived():
 DERIVED[LIGHTS] = lights_derived
 
 
+# ---- how-to-price-salt-per-application.html -------------------------------
+# Fuel stays outside the overhead base. Overhead is 20% of labor + drive labor + materials.
+SALT = "how-to-price-salt-per-application.html"
+SALT_BASE = dict(workers=1, rate=40, overhead=20, drive=0.25, fuel=6, margin=30)
+# Stated reference prices, entered after rounding salt dollars to the cent.
+SALT_TON_DG = 86.68   # Downers Grove Morton via Illinois contract, Oct 13, 2026
+SALT_TON_YORK = 111.41  # Yorkville Midwest Salt, Shaw Local, Aug 13, 2026
+
+
+@example(SALT, "Example 1, one application on a small commercial lot",
+         hours=0.5, materials=0.15 * SALT_TON_DG, **SALT_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(SALT, "Example 2, higher salt cost on the same lot",
+         hours=0.5, materials=0.15 * SALT_TON_YORK, **SALT_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(SALT, "Example 2, very small lot at the higher salt cost",
+         hours=0.25, materials=0.03 * SALT_TON_YORK, **SALT_BASE)
+def _(r):
+    return std_lines(r)
+
+
+def salt_derived():
+    lot = price_job(hours=0.5, materials=0.15 * SALT_TON_DG, **SALT_BASE)
+    higher = price_job(hours=0.5, materials=0.15 * SALT_TON_YORK, **SALT_BASE)
+    small = price_job(hours=0.25, materials=0.03 * SALT_TON_YORK, **SALT_BASE)
+    assert lot["materials"] == 1300
+    assert lot["direct"] == 4300
+    assert lot["overhead"] == 860
+    assert lot["total_cost"] == 5760
+    assert lot["price"] == 8229
+    assert lot["profit"] == 2469
+    assert higher["materials"] == 1671
+    assert higher["direct"] == 4671
+    assert higher["overhead"] == 934
+    assert higher["total_cost"] == 6205
+    assert higher["price"] == 8864
+    assert higher["profit"] == 2659
+    assert small["labor"] == 1000
+    assert small["materials"] == 334
+    assert small["direct"] == 2334
+    assert small["overhead"] == 467
+    assert small["total_cost"] == 3401
+    assert small["price"] == 4859
+    assert small["profit"] == 1458
+    minimum = 7500  # assumed $75.00 per-application minimum
+    stale_profit = lot["price"] - higher["total_cost"]
+    min_profit = minimum - small["total_cost"]
+    return {
+        "price increase": usd(higher["price"] - lot["price"]),
+        "stale profit": usd(stale_profit),
+        "stale margin": "{:.1f}%".format(stale_profit / lot["price"] * 100),
+        "small lot profit": usd(small["profit"]),
+        "minimum profit": usd(min_profit),
+        "minimum margin": "{:.1f}%".format(min_profit / minimum * 100),
+        "margin earned": "{:.1f}%".format(lot["margin_pct"]),
+    }
+
+
+DERIVED[SALT] = salt_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1293,6 +1360,7 @@ POSTS = [
     PPI,
     DIESEL,
     LIGHTS,
+    SALT,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1319,6 +1387,7 @@ STALE_EXEMPT = {
     PPI: _MATERIAL_MARKUP_FIELD,
     DIESEL: _MATERIAL_MARKUP_FIELD,
     LIGHTS: _MATERIAL_MARKUP_FIELD,
+    SALT: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

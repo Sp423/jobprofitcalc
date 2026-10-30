@@ -522,7 +522,7 @@
       border: 2px solid var(--border);
       border-radius: var(--r-lg);
       overflow: hidden;
-      scroll-margin-top: 210px;
+      scroll-margin-top: 72px;
     }
 
     /* Header row */
@@ -549,6 +549,14 @@
     .money-badge.no   { background: var(--danger-dim);  color: var(--danger);  border: 1px solid var(--danger);  }
     .money-badge.idle { background: var(--bg-base);     color: var(--text-sec); border: 1px solid var(--border-hi); }
     .results.is-empty .price-note { max-width: 28em; margin-left: auto; margin-right: auto; }
+    .results-example { padding: 16px 20px 4px; }
+    .results-live[hidden],
+    .results-example[hidden],
+    .result-actions .btn[hidden],
+    .action-group[hidden],
+    .bk-toggle[hidden] {
+      display: none !important;
+    }
 
     /* Big price */
     .price-block {
@@ -930,39 +938,32 @@
     }
     #toast.show { transform: translateY(0); opacity: 1; }
 
-    /* ── Sticky result strip (stays visible while scrolling the form) ── */
-    .result-strip {
-      position: sticky; top: 62px; z-index: 80;
-      background: var(--bg-elevated);
-      border-bottom: 2px solid var(--accent);
-      padding: 16px 20px 18px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-    }
-    .strip-grid {
+    /* Example ticket shown in Live Results when the job is still blank */
+    .example-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
       gap: 16px 20px;
       align-items: end;
     }
-    .strip-charge { min-width: 0; }
-    .strip-lbl {
+    .example-charge { min-width: 0; }
+    .example-lbl {
       margin: 0 0 4px;
       font-size: 11px; font-weight: 600;
       text-transform: uppercase; letter-spacing: 1px;
       color: var(--text-muted);
     }
-    .strip-price {
+    .example-price {
       margin: 0;
       font-family: var(--font-disp); font-weight: 800;
       font-size: clamp(40px, 8vw, 58px);
       color: var(--accent); letter-spacing: -1.5px; line-height: 0.95;
     }
-    .strip-metrics {
+    .example-metrics {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
     }
-    .strip-val {
+    .example-val {
       margin: 0;
       font-family: var(--font-disp); font-weight: 800;
       font-size: clamp(22px, 4vw, 30px);
@@ -990,28 +991,23 @@
       font-size: 13px; color: var(--text-sec); line-height: 1.45;
       margin: 0 0 14px; max-width: 46em;
     }
-    .strip-actions {
+    .result-actions {
       display: flex; flex-wrap: wrap; gap: 10px;
-      margin-top: 14px;
+      padding: 14px 20px 18px;
     }
-    .strip-actions .btn { flex: 1 1 180px; }
-    .action-group[hidden],
-    .strip-live[hidden],
-    .strip-example[hidden],
-    .strip-actions .btn[hidden] {
-      display: none !important;
-    }
+    .result-actions .btn { flex: 1 1 180px; }
     @media (max-width: 720px) {
-      .strip-grid { grid-template-columns: 1fr; gap: 12px; }
-      .strip-metrics { grid-template-columns: 1fr 1fr 1fr; }
-      .strip-price { font-size: clamp(36px, 12vw, 48px); }
-      .strip-val { font-size: 22px; }
+      .example-grid { grid-template-columns: 1fr; gap: 12px; }
+      .example-metrics { grid-template-columns: 1fr 1fr 1fr; }
+      .example-price { font-size: clamp(36px, 12vw, 48px); }
+      .example-val { font-size: 22px; }
     }
     @media (max-width: 480px) {
-      .result-strip { top: 62px; padding: 12px 14px 14px; }
-      .strip-metrics { gap: 8px; }
-      .strip-lbl { font-size: 10px; letter-spacing: 0.6px; }
-      .strip-val { font-size: 18px; }
+      .results-example { padding: 12px 14px 4px; }
+      .result-actions { padding: 12px 14px 16px; }
+      .example-metrics { gap: 8px; }
+      .example-lbl { font-size: 10px; letter-spacing: 0.6px; }
+      .example-val { font-size: 18px; }
     }
 
     /* ============================================================

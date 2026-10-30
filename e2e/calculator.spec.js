@@ -70,6 +70,14 @@ test('HVAC changeout on desktop and mobile', async ({ page }) => {
   await expect(page.locator('#srPrice')).toHaveText(money(r.cents.price));
   await expect(page.locator('#srMargin')).toHaveText(P.formatPercent(r.profit / r.price));
   await expect(page.locator('#srProfit')).toHaveText(money(r.cents.profit));
+  await expect(page.locator('#srEff')).toHaveText(money(Math.round(r.profitPerLaborHour * 100)) + '/hr');
+  await expect(page.locator('#stripLive')).toBeVisible();
+  await expect(page.locator('#stripExample')).toBeHidden();
+  await expect(page.locator('#custBtn')).toBeVisible();
+  await expect(page.locator('#custBtn')).toHaveText('Copy customer quote');
+  await expect(page.locator('#seeBreakdownBtn')).toBeVisible();
+  await expect(page.locator('#exportActions')).toBeVisible();
+  await expect(page.locator('#useExampleBtn')).toBeHidden();
 
   const body = await page.locator('body').innerText();
   expect(body).not.toContain('NaN');
@@ -306,6 +314,9 @@ test('fractional workers and payment-terms HTML are handled', async ({ page }) =
   await page.locator('#workers').fill('1');
   await page.locator('#hours').fill('2');
   await page.locator('#laborRate').fill('40');
+  await page.locator('#materialCost').fill('0');
+  await page.locator('#driveTime').fill('0');
+  await page.locator('#fuelCost').fill('0');
   await page.locator('#qsToggle').click();
   await expect(page.locator('#qsPanel')).toHaveClass(/open/);
   await page.locator('#includeTerms').check();
@@ -316,5 +327,77 @@ test('fractional workers and payment-terms HTML are handled', async ({ page }) =
   expect(html).toContain('&lt;img');
   expect(html).not.toContain('<img');
   await expect(page.locator('#custFooterRows img')).toHaveCount(0);
+  expect(page.errors).toEqual([]);
+});
+
+test('empty state sells a labeled example and one tap fills the form', async ({ page }) => {
+  const example = P.priceJob({
+    hours: P.PAGE_DEFAULTS.hours,
+    workers: P.PAGE_DEFAULTS.workers,
+    laborRate: P.PAGE_DEFAULTS.laborRate,
+    materialCost: P.PAGE_DEFAULTS.materialCost,
+    overhead: P.PAGE_DEFAULTS.overhead,
+    driveTime: P.PAGE_DEFAULTS.driveTime,
+    fuelCost: P.PAGE_DEFAULTS.fuelCost,
+    margin: P.PAGE_DEFAULTS.margin
+  });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/calculator.html');
+
+  await expect(page.locator('#stripExample')).toBeVisible();
+  await expect(page.locator('#stripExample .example-badge')).toHaveText('Example');
+  await expect(page.locator('#useExampleBtn')).toBeVisible();
+  await expect(page.locator('#custBtn')).toBeHidden();
+  await expect(page.locator('#seeBreakdownBtn')).toBeHidden();
+  await expect(page.locator('#exportActions')).toBeHidden();
+  await expect(page.locator('#pdfBtn')).toBeHidden();
+  await expect(page.locator('#custPdfBtn')).toBeHidden();
+  await expect(page.locator('#exPrice')).toHaveText(money(example.cents.price));
+  await expect(page.locator('#exProfit')).toHaveText(money(example.cents.profit));
+  await expect(page.locator('#exMargin')).toHaveText(P.formatPercent(example.profit / example.price));
+  await expect(page.locator('#exEff')).toHaveText(money(Math.round(example.profitPerLaborHour * 100)) + '/hr');
+  await expect(page.locator('#suggestedPrice')).toHaveText('$0.00');
+  await expect(page.locator('#msg-hours')).toHaveText('');
+  await expect(page.locator('#resultStrip')).toHaveCSS('position', 'sticky');
+
+  await expect(page.locator('.field-section-help')).toHaveCount(4);
+  await expect(page.getByText('Hours on the job, crew size, and your loaded cost per hour, not what you bill.')).toBeVisible();
+  await expect(page.getByText('What you pay the supplier. Your margin already earns profit on this.')).toBeVisible();
+  await expect(page.getByText('Shop overhead plus the trip. Drive time and fuel sit together so unpaid drive is not missed.')).toBeVisible();
+  await expect(page.getByText('The share of the price you keep after every job cost.')).toBeVisible();
+  await expect(page.locator('p.field-section', { hasText: 'Margin' })).toBeVisible();
+  await expect(page.locator('.field-subhead')).toHaveText('Drive time and fuel');
+  const driveBox = page.locator('#driveTime');
+  const fuelBox = page.locator('#fuelCost');
+  await expect(driveBox).toBeVisible();
+  await expect(fuelBox).toBeVisible();
+  const sameGrid = await page.evaluate(() => {
+    const drive = document.getElementById('driveTime');
+    const fuel = document.getElementById('fuelCost');
+    return drive.closest('.igrid') === fuel.closest('.igrid');
+  });
+  expect(sameGrid).toBe(true);
+
+  await page.locator('#useExampleBtn').click();
+  await expect(page.locator('#hours')).toHaveValue('4');
+  await expect(page.locator('#workers')).toHaveValue('1');
+  await expect(page.locator('#laborRate')).toHaveValue('75');
+  await expect(page.locator('#materialCost')).toHaveValue('200');
+  await expect(page.locator('#driveTime')).toHaveValue('0.5');
+  await expect(page.locator('#fuelCost')).toHaveValue('10');
+  await expect(page.locator('#overhead')).toHaveValue('15');
+  await expect(page.locator('#profitMargin')).toHaveValue('20');
+  await expect(page.locator('#jobLabel')).toHaveValue('Example: 4-hour service call');
+  await expect(page.locator('#suggestedPrice')).toHaveText(money(example.cents.price));
+  await expect(page.locator('#srPrice')).toHaveText(money(example.cents.price));
+  await expect(page.locator('#srProfit')).toHaveText(money(example.cents.profit));
+  await expect(page.locator('#srMargin')).toHaveText(P.formatPercent(example.profit / example.price));
+  await expect(page.locator('#srEff')).toHaveText(money(Math.round(example.profitPerLaborHour * 100)) + '/hr');
+  await expect(page.locator('#stripExample')).toBeHidden();
+  await expect(page.locator('#stripLive')).toBeVisible();
+  await expect(page.locator('#custBtn')).toBeVisible();
+  await expect(page.locator('#seeBreakdownBtn')).toBeVisible();
+  await expect(page.locator('#exportActions')).toBeVisible();
+  await expect(page.locator('#useExampleBtn')).toBeHidden();
   expect(page.errors).toEqual([]);
 });

@@ -46,6 +46,11 @@ const $ = {
   custPdf:  G('custPdfBtn'),
   cust:     G('custBtn'),
   copy:     G('copyBtn'),
+  useExample: G('useExampleBtn'),
+  seeBk:    G('seeBreakdownBtn'),
+  exportActions: G('exportActions'),
+  stripExample: G('stripExample'),
+  stripLive: G('stripLive'),
   bkToggle: G('bkToggle'),
   bkBody:   G('bkBody'),
   bkLabel:  G('bkToggleLabel'),
@@ -170,9 +175,52 @@ function blankMoney() {
   const srP = G('srPrice');
   const srM = G('srMargin');
   const srF = G('srProfit');
+  const srE = G('srEff');
   if (srP) srP.textContent = '$0.00';
   if (srM) srM.textContent = '0.0%';
   if (srF) srF.textContent = '$0.00';
+  if (srE) srE.textContent = '$0.00/hr';
+}
+
+function isBlankJob() {
+  return [$.hours, $.workers, $.labor, $.matCost, $.overhead, $.drive, $.fuel, $.profit].every(function (el) {
+    return el && String(el.value).trim() === String(el.defaultValue).trim();
+  });
+}
+
+function exampleJob() {
+  return {
+    hours: P.PAGE_DEFAULTS.hours,
+    workers: P.PAGE_DEFAULTS.workers,
+    laborRate: P.PAGE_DEFAULTS.laborRate,
+    materialCost: P.PAGE_DEFAULTS.materialCost,
+    overhead: P.PAGE_DEFAULTS.overhead,
+    driveTime: P.PAGE_DEFAULTS.driveTime,
+    fuelCost: P.PAGE_DEFAULTS.fuelCost,
+    margin: P.PAGE_DEFAULTS.margin
+  };
+}
+
+function fillExampleTicket() {
+  const r = P.priceJob(exampleJob());
+  const set = function (id, text) {
+    const el = G(id);
+    if (el) el.textContent = text;
+  };
+  if (!r.ok) return;
+  set('exPrice', fmtD(r.price, 2));
+  set('exProfit', fmtD(r.profit, 2));
+  set('exMargin', fmtP(r.marginPct));
+  set('exEff', r.profitPerLaborHour == null ? 'n/a' : fmtD(r.profitPerLaborHour, 2) + '/hr');
+}
+
+function setStripMode(showExample) {
+  if ($.stripExample) $.stripExample.hidden = !showExample;
+  if ($.stripLive) $.stripLive.hidden = showExample;
+  if ($.useExample) $.useExample.hidden = !showExample;
+  if ($.cust) $.cust.hidden = showExample;
+  if ($.seeBk) $.seeBk.hidden = showExample;
+  if ($.exportActions) $.exportActions.hidden = showExample;
 }
 
 let lastResult = null;
@@ -236,8 +284,22 @@ function showMarkupMessage(commit) {
 
 function update() {
   showMarkupMessage(false);
-  const state = currentResult();
   const resultsEl = G('resultsPanel');
+
+  if (isBlankJob()) {
+    showMessages({});
+    lastResult = null;
+    if (resultsEl) resultsEl.classList.add('is-empty');
+    blankMoney();
+    $.note.textContent = 'Use the example ticket above, or enter the job below. The price stays blank until every field has a valid number.';
+    if ($.staxLive) $.staxLive.hidden = true;
+    $.badge.className = 'money-badge idle';
+    $.badgeTxt.textContent = 'EXAMPLE';
+    setStripMode(true);
+    return;
+  }
+
+  const state = currentResult();
   lastResult = state.ok ? state.result : null;
 
   if (!state.ok) {
@@ -247,7 +309,7 @@ function update() {
     if ($.staxLive) $.staxLive.hidden = true;
     $.badge.className = 'money-badge no';
     $.badgeTxt.textContent = 'CHECK INPUTS';
-    updateStickyBar();
+    setStripMode(true);
     return;
   }
 
@@ -258,7 +320,7 @@ function update() {
   pop($.price);
   $.price.textContent = fmtD(r.price, 2);
   $.note.textContent = isEmpty
-    ? 'Enter hours, a labor rate, or materials to see a suggested charge.'
+    ? 'Use the example ticket above, or enter hours, a labor rate, or materials to see a suggested charge.'
     : 'Total cost: ' + fmtD(r.totalCost, 2) + '  ·  Target margin: ' + state.values.margin + '%';
 
   const showStax = $.inclStax && $.inclStax.checked;
@@ -282,7 +344,7 @@ function update() {
 
   pop($.eff);
   if (r.profitPerLaborHour == null) {
-    $.eff.textContent = '—';
+    $.eff.textContent = 'n/a';
     $.eff.className = 'metric-val c-white';
   } else {
     $.eff.textContent = fmtD(r.profitPerLaborHour, 2) + '/hr';
@@ -291,7 +353,7 @@ function update() {
 
   if (isEmpty) {
     $.badge.className = 'money-badge idle';
-    $.badgeTxt.textContent = 'ENTER JOB DETAILS';
+    $.badgeTxt.textContent = 'EXAMPLE';
   } else if (r.marginPct >= 10) {
     $.badge.className = 'money-badge yes';
     $.badgeTxt.textContent = '✓ MAKING MONEY';
@@ -326,7 +388,9 @@ function update() {
   G('srPrice').textContent = fmtD(r.price, 2);
   G('srMargin').textContent = fmtP(r.marginPct);
   G('srProfit').textContent = fmtD(r.profit, 2);
-  updateStickyBar();
+  const srE = G('srEff');
+  if (srE) srE.textContent = $.eff.textContent;
+  setStripMode(isEmpty);
 }
 
 function applyTrade(d) {
@@ -337,6 +401,18 @@ function applyTrade(d) {
   $.overhead.value = d.overhead;
   $.drive.value = d.driveTime;
   $.fuel.value = d.fuelCost;
+}
+
+function useExample() {
+  applyTrade(P.PAGE_DEFAULTS);
+  $.profit.value = P.PAGE_DEFAULTS.margin;
+  if ($.matMark) {
+    markupNote = '';
+    $.matMark.value = '0';
+    saveMarkup();
+  }
+  $.jobLabel.value = 'Example: 4-hour service call';
+  update();
 }
 
 $.trade.addEventListener('change', function (event) {
@@ -352,6 +428,10 @@ $.trade.addEventListener('change', function (event) {
   }
   update();
 });
+
+if ($.useExample) {
+  $.useExample.addEventListener('click', useExample);
+}
 
 $.reset.addEventListener('click', function () {
   const d = DEFAULTS[$.trade.value];
@@ -598,12 +678,24 @@ function toast(msg) {
   toastTimer = setTimeout(function () { $.toast.classList.remove('show'); }, 3200);
 }
 
+function setBreakdownOpen(open) {
+  $.bkBody.classList.toggle('open', open);
+  $.bkToggle.classList.toggle('open', open);
+  $.bkToggle.setAttribute('aria-expanded', open);
+  $.bkLabel.textContent = open ? 'Hide Cost Breakdown' : 'See full cost breakdown';
+}
+
 $.bkToggle.addEventListener('click', function () {
-  const open = $.bkBody.classList.toggle('open');
-  this.classList.toggle('open', open);
-  this.setAttribute('aria-expanded', open);
-  $.bkLabel.textContent = open ? 'Hide Cost Breakdown' : 'View Full Cost Breakdown';
+  setBreakdownOpen(!$.bkBody.classList.contains('open'));
 });
+
+if ($.seeBk) {
+  $.seeBk.addEventListener('click', function () {
+    setBreakdownOpen(true);
+    const panel = G('resultsPanel');
+    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
 
 function closeTips(except) {
   document.querySelectorAll('.tip').forEach(function (o) {
@@ -684,29 +776,7 @@ G('qsToggle').addEventListener('click', function () {
   const open = G('qsPanel').classList.toggle('open');
   this.classList.toggle('open', open);
   this.setAttribute('aria-expanded', open);
-  updateStickyBar();
 });
-
-const stickyBar = G('stickyResults');
-const resultsPanel = G('resultsPanel');
-const calcCardEl = document.querySelector('.calc-card');
-function updateStickyBar() {
-  if (!stickyBar || !resultsPanel || !calcCardEl) return;
-  const rRect = resultsPanel.getBoundingClientRect();
-  const cRect = calcCardEl.getBoundingClientRect();
-  const resultsBelowFold = rRect.top > window.innerHeight - 40;
-  const calcOnScreen = cRect.top < window.innerHeight && cRect.bottom > 0;
-  const show = calcOnScreen && resultsBelowFold;
-  stickyBar.classList.toggle('show', show);
-  stickyBar.setAttribute('aria-hidden', String(!show));
-  document.body.classList.toggle('has-sticky-results', show);
-}
-window.addEventListener('scroll', updateStickyBar, { passive: true });
-window.addEventListener('resize', updateStickyBar, { passive: true });
-G('stickyResultsBtn').addEventListener('click', function () {
-  resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-});
-updateStickyBar();
 
 [$.hours, $.workers, $.labor, $.matCost, $.overhead, $.drive, $.fuel, $.profit].forEach(function (el) {
   if (!el) return;
@@ -735,4 +805,5 @@ restoreMarkup();
   el.addEventListener('change', update);
 });
 
+fillExampleTicket();
 update();

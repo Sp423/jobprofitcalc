@@ -108,7 +108,7 @@
        crossorigin="anonymous"></script>
 
   <!-- Cache-bust: bump ?v= after JS/CSS deploys so Cloudflare/browsers don't serve stale assets. -->
-  <link rel="stylesheet" href="/css/site.css?v=20261002d">
+  <link rel="stylesheet" href="/css/site.css?v=20261030a">
 </head>
 
 <body>
@@ -178,6 +178,65 @@
               </div>
             </div>
 
+            <div class="result-strip no-print" id="resultStrip" role="region" aria-label="Job results">
+              <div class="strip-example" id="stripExample">
+                <div class="example-ticket">
+                  <span class="example-badge">Example</span>
+                  <p class="example-title">4-hour service call</p>
+                  <p class="example-meta">1 worker, 4 hours, $75/hr loaded cost (placeholder, not a billing rate). $200 materials at cost. 0.5 hr drive and $10 fuel together so the trip is not free. 15% overhead. 20% margin.</p>
+                  <div class="strip-grid">
+                    <div class="strip-charge">
+                      <p class="strip-lbl">Suggested charge</p>
+                      <p class="strip-price" id="exPrice">$785.16</p>
+                    </div>
+                    <div class="strip-metrics">
+                      <div>
+                        <p class="strip-lbl">Net profit</p>
+                        <p class="strip-val" id="exProfit">$157.03</p>
+                      </div>
+                      <div>
+                        <p class="strip-lbl">Margin</p>
+                        <p class="strip-val" id="exMargin">20.0%</p>
+                      </div>
+                      <div>
+                        <p class="strip-lbl">Profit per labor hour</p>
+                        <p class="strip-val" id="exEff">$39.26/hr</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="strip-live" id="stripLive" hidden>
+                <div class="strip-grid">
+                  <div class="strip-charge">
+                    <p class="strip-lbl">Suggested charge</p>
+                    <p class="strip-price" id="srPrice">$0.00</p>
+                  </div>
+                  <div class="strip-metrics">
+                    <div>
+                      <p class="strip-lbl">Net profit</p>
+                      <p class="strip-val" id="srProfit">$0.00</p>
+                    </div>
+                    <div>
+                      <p class="strip-lbl">Margin</p>
+                      <p class="strip-val" id="srMargin">0.0%</p>
+                    </div>
+                    <div>
+                      <p class="strip-lbl">Profit per labor hour</p>
+                      <p class="strip-val" id="srEff">$0.00/hr</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="strip-actions">
+                <button type="button" class="btn btn-primary" id="useExampleBtn">Use this example</button>
+                <button type="button" class="btn btn-primary" id="custBtn" hidden
+                  data-tip="Copies a customer quote. Labor, materials, and drive include their share of overhead and profit."
+                  aria-label="Copy customer-friendly quote to clipboard">Copy customer quote</button>
+                <button type="button" class="btn btn-ghost" id="seeBreakdownBtn" hidden>See full cost breakdown</button>
+              </div>
+            </div>
+
             <div class="calc-body">
 
               <!-- Trade Selector -->
@@ -214,11 +273,12 @@
 
               <!-- Labor -->
               <p class="field-section">Labor</p>
+              <p class="field-section-help">Hours on the job, crew size, and your loaded cost per hour, not what you bill.</p>
               <div class="igrid" style="margin-bottom:26px">
                 <div class="igroup">
                   <label class="ilabel" for="hours">Estimated Hours</label>
                   <div class="ifield has-suf">
-                    <input type="number" id="hours" min="0" max="1000" step="0.5" value="4" inputmode="decimal" aria-label="Estimated hours to complete the job">
+                    <input type="number" id="hours" min="0" max="1000" step="0.5" value="" inputmode="decimal" aria-label="Estimated hours to complete the job">
                     <span class="isuf" aria-hidden="true">hrs</span>
                   </div>
                   <p class="field-msg" id="msg-hours" role="status"></p>
@@ -237,22 +297,23 @@
                   </label>
                   <div class="ifield has-pre has-suf">
                     <span class="ipre" aria-hidden="true">$</span>
-                    <input type="number" id="laborRate" min="0" max="1000" step="1" value="75" inputmode="decimal" aria-label="Hourly labor cost in dollars per hour">
+                    <input type="number" id="laborRate" min="0" max="1000" step="1" value="" inputmode="decimal" aria-label="Hourly labor cost in dollars per hour">
                     <span class="isuf" aria-hidden="true">/hr</span>
                   </div>
                   <p class="field-msg" id="msg-laborRate" role="status"></p>
                 </div>
               </div>
-              <p class="field-hint">The $75 starting rate is a placeholder, not a billing rate. Pick a trade for an example loaded cost: BLS OEWS May 2025 median wage x BLS ECEC construction burden (June 2026), then replace it with your own.</p>
+              <p class="field-hint">Pick a trade for an example loaded cost: BLS OEWS May 2025 median wage x BLS ECEC construction burden (June 2026), then replace it with your own. The example ticket uses $75/hr as a placeholder, not a billing rate.</p>
 
               <!-- Materials -->
               <p class="field-section">Materials</p>
+              <p class="field-section-help">What you pay the supplier. Your margin already earns profit on this.</p>
               <div class="igrid" style="margin-bottom:26px">
                 <div class="igroup">
                   <label class="ilabel" for="materialCost">Material Cost</label>
                   <div class="ifield has-pre">
                     <span class="ipre" aria-hidden="true">$</span>
-                    <input type="number" id="materialCost" min="0" max="5000000" step="0.01" value="200" inputmode="decimal" aria-label="Material cost in dollars">
+                    <input type="number" id="materialCost" min="0" max="5000000" step="0.01" value="" inputmode="decimal" aria-label="Material cost in dollars">
                   </div>
                   <p class="field-msg" id="msg-materialCost" role="status"></p>
                 </div>
@@ -269,9 +330,10 @@
                 </div>
               </div>
 
-              <!-- Overhead & Travel -->
-              <p class="field-section">Overhead &amp; Travel</p>
-              <div class="igrid" style="margin-bottom:26px">
+              <!-- Overhead & travel -->
+              <p class="field-section">Overhead &amp; travel</p>
+              <p class="field-section-help">Shop overhead plus the trip. Drive time and fuel sit together so unpaid drive is not missed.</p>
+              <div class="igrid cols-1" style="margin-bottom:14px">
                 <div class="igroup">
                   <label class="ilabel" for="overhead">
                     Overhead %
@@ -283,29 +345,33 @@
                   </div>
                   <p class="field-msg" id="msg-overhead" role="status"></p>
                 </div>
+              </div>
+              <p class="field-subhead">Drive time and fuel</p>
+              <div class="igrid" style="margin-bottom:26px">
                 <div class="igroup">
                   <label class="ilabel" for="driveTime">
                     Drive Time
                     <button type="button" class="tip tip-lg" data-tip="Drive time × number of workers × your hourly labor cost. A 2-person crew doubles drive labor. Overhead applies to that drive labor. Fuel is its own line and is not in the overhead base." aria-label="How drive time is costed" aria-expanded="false">?</button>
                   </label>
                   <div class="ifield has-suf">
-                    <input type="number" id="driveTime" min="0" max="100" step="0.25" value="0.5" inputmode="decimal" aria-label="Drive time in hours">
+                    <input type="number" id="driveTime" min="0" max="100" step="0.25" value="" inputmode="decimal" aria-label="Drive time in hours">
                     <span class="isuf" aria-hidden="true">hrs</span>
                   </div>
                   <p class="field-msg" id="msg-driveTime" role="status"></p>
                 </div>
-                <div class="igroup ig-full">
+                <div class="igroup">
                   <label class="ilabel" for="fuelCost">Fuel / Travel Cost</label>
                   <div class="ifield has-pre">
                     <span class="ipre" aria-hidden="true">$</span>
-                    <input type="number" id="fuelCost" min="0" max="50000" step="0.01" value="10" inputmode="decimal" aria-label="Fuel and travel cost in dollars">
+                    <input type="number" id="fuelCost" min="0" max="50000" step="0.01" value="" inputmode="decimal" aria-label="Fuel and travel cost in dollars">
                   </div>
                   <p class="field-msg" id="msg-fuelCost" role="status"></p>
                 </div>
               </div>
 
-              <!-- Profit -->
-              <p class="field-section">Profit</p>
+              <!-- Margin -->
+              <p class="field-section">Margin</p>
+              <p class="field-section-help">The share of the price you keep after every job cost.</p>
               <div class="igrid cols-3" style="margin-bottom:8px">
                 <div class="igroup">
                   <label class="ilabel" for="profitMargin">
@@ -417,7 +483,7 @@
               </div>
 
               <div class="results-hdr">
-                <span class="results-hdr-label">Live Results</span>
+                <span class="results-hdr-label">Cost breakdown</span>
                 <div class="money-badge warn" id="moneyBadge" aria-label="Profitability status">
                   <span id="moneyText">⚡ CALCULATING</span>
                 </div>
@@ -426,7 +492,7 @@
               <div class="price-block">
                 <p class="price-lbl">Suggested Charge to Customer</p>
                 <div class="price-num" id="suggestedPrice" aria-label="Suggested price to charge">$0.00</div>
-                <p class="price-note" id="priceNote">Enter your job details above</p>
+                <p class="price-note" id="priceNote">Use the example ticket above, or enter the job below</p>
                 <div class="price-tax" id="salesTaxLive" hidden>
                   <p class="price-tax-line">Customer total with sales tax: <span id="salesTaxTotal">$0.00</span></p>
                   <p class="price-tax-detail" id="salesTaxDetail"></p>
@@ -457,7 +523,7 @@
               </p>
 
               <button class="bk-toggle no-print" id="bkToggle" aria-expanded="false" aria-controls="bkBody">
-                <span id="bkToggleLabel">View Full Cost Breakdown</span>
+                <span id="bkToggleLabel">See full cost breakdown</span>
                 <span class="bk-arrow" aria-hidden="true">▼</span>
               </button>
               <div class="bk-body" id="bkBody" role="region" aria-label="Cost breakdown">
@@ -550,23 +616,15 @@
             <!-- End Customer PDF Panel -->
 
             <div class="calc-actions no-print">
-              <div class="action-group">
-                <p class="action-group-lbl">For You</p>
+              <div class="action-group" id="exportActions" hidden>
+                <p class="action-group-lbl">Records and PDFs</p>
                 <div class="action-btns">
-                  <button class="btn btn-primary" id="copyBtn"
+                  <button class="btn btn-ghost" id="copyBtn"
                     data-tip="Copies your full internal job breakdown — labor, drive, fuel, materials at cost, overhead, and profit. For your records, not for customers."
                     aria-label="Copy internal job quote to clipboard">📋 Copy Internal Quote</button>
                   <button class="btn btn-ghost" id="pdfBtn"
                     data-tip="Saves a full internal job summary as a PDF — labor, drive, fuel, materials at cost, overhead, and profit. For your records only."
                     aria-label="Save internal results as PDF">🖨 Internal PDF</button>
-                </div>
-              </div>
-              <div class="action-group">
-                <p class="action-group-lbl">For Your Customer</p>
-                <div class="action-btns">
-                  <button class="btn btn-ghost" id="custBtn"
-                    data-tip="Copies a customer quote. Labor, materials, and drive include their share of overhead and profit."
-                    aria-label="Copy customer-friendly quote to clipboard">📤 Customer Quote</button>
                   <button class="btn btn-ghost" id="custPdfBtn"
                     data-tip="Saves a printable customer quote as a PDF. Line items add up to the total. Includes your business info and any options set in Quote Settings."
                     aria-label="Save customer quote as PDF">📄 Customer PDF</button>
@@ -741,30 +799,11 @@
 
 </div><!-- /page-wrap -->
 
-<!-- Sticky results mini-bar -->
-<div class="sticky-results no-print" id="stickyResults" aria-hidden="true">
-  <button type="button" class="sticky-results-inner" id="stickyResultsBtn" aria-label="Jump to full results">
-    <span class="sr-cell">
-      <span class="sr-lbl">Charge</span>
-      <span class="sr-price" id="srPrice">$0.00</span>
-    </span>
-    <span class="sr-cell">
-      <span class="sr-lbl">Margin</span>
-      <span class="sr-val" id="srMargin">0%</span>
-    </span>
-    <span class="sr-cell">
-      <span class="sr-lbl">Profit</span>
-      <span class="sr-val" id="srProfit">$0</span>
-    </span>
-    <span class="sr-go" aria-hidden="true">View results ↓</span>
-  </button>
-</div>
-
 <!-- Toast notification -->
 <div id="toast" role="alert" aria-live="assertive"></div>
 
 <script src="/js/pricing.js?v=20261003e"></script>
-<script src="/js/calculator.js?v=20261003e"></script>
+<script src="/js/calculator.js?v=20261030a"></script>
 <script src="/js/site-ui.js?v=40a9750"></script>
 <script>
 (function () {

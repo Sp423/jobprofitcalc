@@ -172,14 +172,6 @@ function blankMoney() {
   });
   if ($.bdMarkupRow) $.bdMarkupRow.hidden = true;
   if ($.effMarginLine) $.effMarginLine.hidden = true;
-  const srP = G('srPrice');
-  const srM = G('srMargin');
-  const srF = G('srProfit');
-  const srE = G('srEff');
-  if (srP) srP.textContent = '$0.00';
-  if (srM) srM.textContent = '0.0%';
-  if (srF) srF.textContent = '$0.00';
-  if (srE) srE.textContent = '$0.00/hr';
 }
 
 function isBlankJob() {
@@ -214,13 +206,14 @@ function fillExampleTicket() {
   set('exEff', r.profitPerLaborHour == null ? 'n/a' : fmtD(r.profitPerLaborHour, 2) + '/hr');
 }
 
-function setStripMode(showExample) {
+function setResultMode(showExample) {
   if ($.stripExample) $.stripExample.hidden = !showExample;
   if ($.stripLive) $.stripLive.hidden = showExample;
   if ($.useExample) $.useExample.hidden = !showExample;
   if ($.cust) $.cust.hidden = showExample;
   if ($.seeBk) $.seeBk.hidden = showExample;
   if ($.exportActions) $.exportActions.hidden = showExample;
+  if (showExample) setBreakdownOpen(false);
 }
 
 let lastResult = null;
@@ -291,11 +284,11 @@ function update() {
     lastResult = null;
     if (resultsEl) resultsEl.classList.add('is-empty');
     blankMoney();
-    $.note.textContent = 'Use the example ticket above, or enter the job below. The price stays blank until every field has a valid number.';
+    $.note.textContent = 'Use this example, or enter the job above. The price stays blank until every field has a valid number.';
     if ($.staxLive) $.staxLive.hidden = true;
     $.badge.className = 'money-badge idle';
     $.badgeTxt.textContent = 'EXAMPLE';
-    setStripMode(true);
+    setResultMode(true);
     return;
   }
 
@@ -309,7 +302,7 @@ function update() {
     if ($.staxLive) $.staxLive.hidden = true;
     $.badge.className = 'money-badge no';
     $.badgeTxt.textContent = 'CHECK INPUTS';
-    setStripMode(true);
+    setResultMode(true);
     return;
   }
 
@@ -320,7 +313,7 @@ function update() {
   pop($.price);
   $.price.textContent = fmtD(r.price, 2);
   $.note.textContent = isEmpty
-    ? 'Use the example ticket above, or enter hours, a labor rate, or materials to see a suggested charge.'
+    ? 'Use this example, or enter hours, a labor rate, or materials to see a suggested charge.'
     : 'Total cost: ' + fmtD(r.totalCost, 2) + '  ·  Target margin: ' + state.values.margin + '%';
 
   const showStax = $.inclStax && $.inclStax.checked;
@@ -385,12 +378,7 @@ function update() {
   $.qFuel.textContent = fmtD(r.quote.fuel, 2);
   $.qTotal.textContent = fmtD(r.price, 2);
 
-  G('srPrice').textContent = fmtD(r.price, 2);
-  G('srMargin').textContent = fmtP(r.marginPct);
-  G('srProfit').textContent = fmtD(r.profit, 2);
-  const srE = G('srEff');
-  if (srE) srE.textContent = $.eff.textContent;
-  setStripMode(isEmpty);
+  setResultMode(isEmpty);
 }
 
 function applyTrade(d) {
@@ -680,20 +668,28 @@ function toast(msg) {
 
 function setBreakdownOpen(open) {
   $.bkBody.classList.toggle('open', open);
-  $.bkToggle.classList.toggle('open', open);
-  $.bkToggle.setAttribute('aria-expanded', open);
-  $.bkLabel.textContent = open ? 'Hide Cost Breakdown' : 'See full cost breakdown';
+  if ($.bkToggle) {
+    $.bkToggle.classList.toggle('open', open);
+    $.bkToggle.setAttribute('aria-expanded', open);
+    $.bkToggle.hidden = true;
+  }
+  if ($.bkLabel) $.bkLabel.textContent = open ? 'Hide Cost Breakdown' : 'See full cost breakdown';
+  if ($.seeBk) {
+    $.seeBk.textContent = open ? 'Hide cost breakdown' : 'See full cost breakdown';
+    $.seeBk.setAttribute('aria-expanded', String(open));
+  }
 }
 
-$.bkToggle.addEventListener('click', function () {
-  setBreakdownOpen(!$.bkBody.classList.contains('open'));
-});
+if ($.bkToggle) {
+  $.bkToggle.hidden = true;
+  $.bkToggle.addEventListener('click', function () {
+    setBreakdownOpen(!$.bkBody.classList.contains('open'));
+  });
+}
 
 if ($.seeBk) {
   $.seeBk.addEventListener('click', function () {
-    setBreakdownOpen(true);
-    const panel = G('resultsPanel');
-    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setBreakdownOpen(!$.bkBody.classList.contains('open'));
   });
 }
 

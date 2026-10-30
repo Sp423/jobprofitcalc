@@ -41,7 +41,7 @@ async function enterHvac(page) {
   await page.locator('#driveTime').fill(String(HVAC.driveTime));
   await page.locator('#fuelCost').fill(String(HVAC.fuelCost));
   await page.locator('#profitMargin').fill(String(HVAC.margin));
-  await page.locator('#bkToggle').click();
+  await page.locator('#seeBreakdownBtn').click();
 }
 
 test('HVAC changeout on desktop and mobile', async ({ page }) => {
@@ -67,12 +67,9 @@ test('HVAC changeout on desktop and mobile', async ({ page }) => {
   await expect(page.locator('#q-drive')).toHaveText(money(r.cents.quoteDrive));
   await expect(page.locator('#q-fuel')).toHaveText(money(r.cents.quoteFuel));
   await expect(page.locator('#q-total')).toHaveText(money(r.cents.price));
-  await expect(page.locator('#srPrice')).toHaveText(money(r.cents.price));
-  await expect(page.locator('#srMargin')).toHaveText(P.formatPercent(r.profit / r.price));
-  await expect(page.locator('#srProfit')).toHaveText(money(r.cents.profit));
-  await expect(page.locator('#srEff')).toHaveText(money(Math.round(r.profitPerLaborHour * 100)) + '/hr');
   await expect(page.locator('#stripLive')).toBeVisible();
   await expect(page.locator('#stripExample')).toBeHidden();
+  await expect(page.locator('#resultStrip')).toHaveCount(0);
   await expect(page.locator('#custBtn')).toBeVisible();
   await expect(page.locator('#custBtn')).toHaveText('Copy customer quote');
   await expect(page.locator('#seeBreakdownBtn')).toBeVisible();
@@ -259,7 +256,7 @@ async function fillJob(page, fields) {
   }
   const bk = page.locator('#bkBody');
   if (!/open/.test((await bk.getAttribute('class')) || '')) {
-    await page.locator('#bkToggle').click();
+    await page.locator('#seeBreakdownBtn').click();
   }
 }
 
@@ -344,9 +341,9 @@ test('empty state sells a labeled example and one tap fills the form', async ({ 
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/calculator.html');
 
-  await expect(page.locator('#stripExample')).toBeVisible();
+  await expect(page.locator('#resultsPanel #stripExample')).toBeVisible();
   await expect(page.locator('#stripExample .example-badge')).toHaveText('Example');
-  await expect(page.locator('#useExampleBtn')).toBeVisible();
+  await expect(page.locator('#resultsPanel #useExampleBtn')).toBeVisible();
   await expect(page.locator('#custBtn')).toBeHidden();
   await expect(page.locator('#seeBreakdownBtn')).toBeHidden();
   await expect(page.locator('#exportActions')).toBeHidden();
@@ -358,7 +355,10 @@ test('empty state sells a labeled example and one tap fills the form', async ({ 
   await expect(page.locator('#exEff')).toHaveText(money(Math.round(example.profitPerLaborHour * 100)) + '/hr');
   await expect(page.locator('#suggestedPrice')).toHaveText('$0.00');
   await expect(page.locator('#msg-hours')).toHaveText('');
-  await expect(page.locator('#resultStrip')).toHaveCSS('position', 'sticky');
+  await expect(page.locator('#resultStrip')).toHaveCount(0);
+  await expect(page.locator('#resultsPanel .results-hdr-label')).toHaveText('Live Results');
+  await expect(page.locator('#stripExample')).not.toHaveCSS('position', 'sticky');
+  await expect(page.locator('#resultsPanel')).not.toHaveCSS('position', 'sticky');
 
   await expect(page.locator('.field-section-help')).toHaveCount(4);
   await expect(page.getByText('Hours on the job, crew size, and your loaded cost per hour, not what you bill.')).toBeVisible();
@@ -389,10 +389,9 @@ test('empty state sells a labeled example and one tap fills the form', async ({ 
   await expect(page.locator('#profitMargin')).toHaveValue('20');
   await expect(page.locator('#jobLabel')).toHaveValue('Example: 4-hour service call');
   await expect(page.locator('#suggestedPrice')).toHaveText(money(example.cents.price));
-  await expect(page.locator('#srPrice')).toHaveText(money(example.cents.price));
-  await expect(page.locator('#srProfit')).toHaveText(money(example.cents.profit));
-  await expect(page.locator('#srMargin')).toHaveText(P.formatPercent(example.profit / example.price));
-  await expect(page.locator('#srEff')).toHaveText(money(Math.round(example.profitPerLaborHour * 100)) + '/hr');
+  await expect(page.locator('#netProfit')).toHaveText(money(example.cents.profit));
+  await expect(page.locator('#marginDisplay')).toHaveText(P.formatPercent(example.profit / example.price));
+  await expect(page.locator('#effRate')).toHaveText(money(Math.round(example.profitPerLaborHour * 100)) + '/hr');
   await expect(page.locator('#stripExample')).toBeHidden();
   await expect(page.locator('#stripLive')).toBeVisible();
   await expect(page.locator('#custBtn')).toBeVisible();

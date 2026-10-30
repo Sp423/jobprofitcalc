@@ -108,7 +108,7 @@
        crossorigin="anonymous"></script>
 
   <!-- Cache-bust: bump ?v= after JS/CSS deploys so Cloudflare/browsers don't serve stale assets. -->
-  <link rel="stylesheet" href="/css/site.css?v=20261030a">
+  <link rel="stylesheet" href="/css/site.css?v=20261030b">
 </head>
 
 <body>
@@ -175,65 +175,6 @@
               <div>
                 <h2>Job Profit Calculator</h2>
                 <p>Select your trade, fill in the job — results update instantly</p>
-              </div>
-            </div>
-
-            <div class="result-strip no-print" id="resultStrip" role="region" aria-label="Job results">
-              <div class="strip-example" id="stripExample">
-                <div class="example-ticket">
-                  <span class="example-badge">Example</span>
-                  <p class="example-title">4-hour service call</p>
-                  <p class="example-meta">1 worker, 4 hours, $75/hr loaded cost (placeholder, not a billing rate). $200 materials at cost. 0.5 hr drive and $10 fuel together so the trip is not free. 15% overhead. 20% margin.</p>
-                  <div class="strip-grid">
-                    <div class="strip-charge">
-                      <p class="strip-lbl">Suggested charge</p>
-                      <p class="strip-price" id="exPrice">$785.16</p>
-                    </div>
-                    <div class="strip-metrics">
-                      <div>
-                        <p class="strip-lbl">Net profit</p>
-                        <p class="strip-val" id="exProfit">$157.03</p>
-                      </div>
-                      <div>
-                        <p class="strip-lbl">Margin</p>
-                        <p class="strip-val" id="exMargin">20.0%</p>
-                      </div>
-                      <div>
-                        <p class="strip-lbl">Profit per labor hour</p>
-                        <p class="strip-val" id="exEff">$39.26/hr</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="strip-live" id="stripLive" hidden>
-                <div class="strip-grid">
-                  <div class="strip-charge">
-                    <p class="strip-lbl">Suggested charge</p>
-                    <p class="strip-price" id="srPrice">$0.00</p>
-                  </div>
-                  <div class="strip-metrics">
-                    <div>
-                      <p class="strip-lbl">Net profit</p>
-                      <p class="strip-val" id="srProfit">$0.00</p>
-                    </div>
-                    <div>
-                      <p class="strip-lbl">Margin</p>
-                      <p class="strip-val" id="srMargin">0.0%</p>
-                    </div>
-                    <div>
-                      <p class="strip-lbl">Profit per labor hour</p>
-                      <p class="strip-val" id="srEff">$0.00/hr</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="strip-actions">
-                <button type="button" class="btn btn-primary" id="useExampleBtn">Use this example</button>
-                <button type="button" class="btn btn-primary" id="custBtn" hidden
-                  data-tip="Copies a customer quote. Labor, materials, and drive include their share of overhead and profit."
-                  aria-label="Copy customer-friendly quote to clipboard">Copy customer quote</button>
-                <button type="button" class="btn btn-ghost" id="seeBreakdownBtn" hidden>See full cost breakdown</button>
               </div>
             </div>
 
@@ -483,46 +424,84 @@
               </div>
 
               <div class="results-hdr">
-                <span class="results-hdr-label">Cost breakdown</span>
+                <span class="results-hdr-label">Live Results</span>
                 <div class="money-badge warn" id="moneyBadge" aria-label="Profitability status">
                   <span id="moneyText">⚡ CALCULATING</span>
                 </div>
               </div>
 
-              <div class="price-block">
-                <p class="price-lbl">Suggested Charge to Customer</p>
-                <div class="price-num" id="suggestedPrice" aria-label="Suggested price to charge">$0.00</div>
-                <p class="price-note" id="priceNote">Use the example ticket above, or enter the job below</p>
-                <div class="price-tax" id="salesTaxLive" hidden>
-                  <p class="price-tax-line">Customer total with sales tax: <span id="salesTaxTotal">$0.00</span></p>
-                  <p class="price-tax-detail" id="salesTaxDetail"></p>
-                </div>
-              </div>
-
-              <div class="metrics" role="region" aria-label="Key performance metrics">
-                <div class="metric">
-                  <div class="metric-lbl">Net Profit</div>
-                  <div class="metric-val c-white" id="netProfit" aria-label="Net profit">$0.00</div>
-                </div>
-                <div class="metric">
-                  <div class="metric-lbl">Profit Margin</div>
-                  <div class="metric-val c-white" id="marginDisplay" aria-label="Profit margin percentage">0.0%</div>
-                </div>
-                <div class="metric">
-                  <div class="metric-lbl">
-                    Profit per labor hour
-                    <button type="button" class="tip" data-tip="Profit ÷ total labor hours (estimated hours × workers). Drive time is not included in those hours." aria-label="What profit per labor hour includes" aria-expanded="false">?</button>
+              <div class="results-example no-print" id="stripExample">
+                <div class="example-ticket">
+                  <span class="example-badge">Example</span>
+                  <p class="example-title">4-hour service call</p>
+                  <p class="example-meta">1 worker, 4 hours, $75/hr loaded cost (placeholder, not a billing rate). $200 materials at cost. 0.5 hr drive and $10 fuel together so the trip is not free. 15% overhead. 20% margin.</p>
+                  <div class="example-grid">
+                    <div class="example-charge">
+                      <p class="example-lbl">Suggested charge</p>
+                      <p class="example-price" id="exPrice">$785.16</p>
+                    </div>
+                    <div class="example-metrics">
+                      <div>
+                        <p class="example-lbl">Net profit</p>
+                        <p class="example-val" id="exProfit">$157.03</p>
+                      </div>
+                      <div>
+                        <p class="example-lbl">Margin</p>
+                        <p class="example-val" id="exMargin">20.0%</p>
+                      </div>
+                      <div>
+                        <p class="example-lbl">Profit per labor hour</p>
+                        <p class="example-val" id="exEff">$39.26/hr</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="metric-val c-white" id="effRate" aria-label="Profit per labor hour">$0.00/hr</div>
                 </div>
               </div>
 
-              <p class="eff-margin" id="effMarginLine" hidden>
-                <span>Effective margin</span>
-                <span id="effMargin">0.0%</span>
-              </p>
+              <div class="results-live" id="stripLive" hidden>
+                <div class="price-block">
+                  <p class="price-lbl">Suggested Charge to Customer</p>
+                  <div class="price-num" id="suggestedPrice" aria-label="Suggested price to charge">$0.00</div>
+                  <p class="price-note" id="priceNote">Use this example, or enter the job above</p>
+                  <div class="price-tax" id="salesTaxLive" hidden>
+                    <p class="price-tax-line">Customer total with sales tax: <span id="salesTaxTotal">$0.00</span></p>
+                    <p class="price-tax-detail" id="salesTaxDetail"></p>
+                  </div>
+                </div>
 
-              <button class="bk-toggle no-print" id="bkToggle" aria-expanded="false" aria-controls="bkBody">
+                <div class="metrics" role="region" aria-label="Key performance metrics">
+                  <div class="metric">
+                    <div class="metric-lbl">Net Profit</div>
+                    <div class="metric-val c-white" id="netProfit" aria-label="Net profit">$0.00</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-lbl">Profit Margin</div>
+                    <div class="metric-val c-white" id="marginDisplay" aria-label="Profit margin percentage">0.0%</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-lbl">
+                      Profit per labor hour
+                      <button type="button" class="tip" data-tip="Profit ÷ total labor hours (estimated hours × workers). Drive time is not included in those hours." aria-label="What profit per labor hour includes" aria-expanded="false">?</button>
+                    </div>
+                    <div class="metric-val c-white" id="effRate" aria-label="Profit per labor hour">$0.00/hr</div>
+                  </div>
+                </div>
+
+                <p class="eff-margin" id="effMarginLine" hidden>
+                  <span>Effective margin</span>
+                  <span id="effMargin">0.0%</span>
+                </p>
+              </div>
+
+              <div class="result-actions no-print">
+                <button type="button" class="btn btn-primary" id="useExampleBtn">Use this example</button>
+                <button type="button" class="btn btn-primary" id="custBtn" hidden
+                  data-tip="Copies a customer quote. Labor, materials, and drive include their share of overhead and profit."
+                  aria-label="Copy customer-friendly quote to clipboard">Copy customer quote</button>
+                <button type="button" class="btn btn-ghost" id="seeBreakdownBtn" hidden aria-expanded="false" aria-controls="bkBody">See full cost breakdown</button>
+              </div>
+
+              <button class="bk-toggle no-print" id="bkToggle" hidden aria-expanded="false" aria-controls="bkBody">
                 <span id="bkToggleLabel">See full cost breakdown</span>
                 <span class="bk-arrow" aria-hidden="true">▼</span>
               </button>
@@ -803,7 +782,7 @@
 <div id="toast" role="alert" aria-live="assertive"></div>
 
 <script src="/js/pricing.js?v=20261003e"></script>
-<script src="/js/calculator.js?v=20261030a"></script>
+<script src="/js/calculator.js?v=20261030b"></script>
 <script src="/js/site-ui.js?v=40a9750"></script>
 <script>
 (function () {

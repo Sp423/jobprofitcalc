@@ -1228,6 +1228,62 @@ def frost_derived():
 DERIVED[FROST] = frost_derived
 
 
+# ---- how-to-price-burst-pipe-repair.html ----------------------------------
+# Fuel stays outside the overhead base. Overhead is 20% of labor + drive labor + materials.
+# The trip fee is quoted as a separate line and is not in the calculator.
+BURST = "how-to-price-burst-pipe-repair.html"
+BURST_OPEN = dict(hours=2.5, workers=1, rate=67.50, materials=38, overhead=20,
+                  drive=0.5, fuel=12, margin=35)
+BURST_WALL = dict(hours=4.5, workers=1, rate=67.50, materials=38, overhead=20,
+                  drive=0.5, fuel=12, margin=35)
+BURST_TRIP = 15000  # assumed $150.00 trip fee, outside the calculator
+
+
+@example(BURST, "Example 1, open basement ceiling", **BURST_OPEN)
+def _(r):
+    out = std_lines(r)
+    out["material markup"] = usd(0)
+    return out
+
+
+@example(BURST, "Example 2, finished exterior wall", **BURST_WALL)
+def _(r):
+    out = std_lines(r)
+    out["material markup"] = usd(0)
+    return out
+
+
+def burst_derived():
+    open_run = price_job(**BURST_OPEN)
+    wall = price_job(**BURST_WALL)
+    assert open_run["labor"] == 16875
+    assert open_run["drive_labor"] == 3375
+    assert open_run["materials"] == 3800
+    assert open_run["direct"] == 24050
+    assert open_run["overhead"] == 4810
+    assert open_run["fuel"] == 1200
+    assert open_run["total_cost"] == 30060
+    assert open_run["price"] == 46246
+    assert open_run["profit"] == 16186
+    assert wall["labor"] == 30375
+    assert wall["direct"] == 37550
+    assert wall["overhead"] == 7510
+    assert wall["total_cost"] == 46260
+    assert wall["price"] == 71169
+    assert wall["profit"] == 24909
+    return {
+        "unrounded open price": "$462.4615",
+        "unrounded wall price": "$711.6923",
+        "open plus trip": usd(open_run["price"] + BURST_TRIP),
+        "wall plus trip": usd(wall["price"] + BURST_TRIP),
+        "access hours price difference": usd(wall["price"] - open_run["price"]),
+        "margin earned": "{:.2f}%".format(open_run["margin_pct"]),
+    }
+
+
+DERIVED[BURST] = burst_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1411,6 +1467,7 @@ POSTS = [
     LIGHTS,
     SALT,
     FROST,
+    BURST,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1439,6 +1496,7 @@ STALE_EXEMPT = {
     LIGHTS: _MATERIAL_MARKUP_FIELD,
     SALT: _MATERIAL_MARKUP_FIELD,
     FROST: _MATERIAL_MARKUP_FIELD,
+    BURST: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

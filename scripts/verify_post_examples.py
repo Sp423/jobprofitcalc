@@ -1228,6 +1228,116 @@ def frost_derived():
 DERIVED[FROST] = frost_derived
 
 
+# ---- how-to-price-snow-plowing-per-push.html ------------------------------
+# Fuel / Travel Cost carries diesel plus the per-push equipment share.
+# Overhead is 15% of labor + drive labor + materials; fuel/equipment is after overhead.
+PLOW = "how-to-price-snow-plowing-per-push.html"
+PLOW_BASE = dict(hours=0.75, workers=1, rate=40, materials=20, overhead=15,
+                 drive=0.25, margin=25)
+PLOW_EQUIP_200 = 30   # $30,000 / 5 seasons / 200 pushes
+PLOW_EQUIP_100 = 60   # same setup, 100-push winter
+PLOW_FUEL = 8
+
+
+@example(PLOW, "Example 1, one push, equipment in Fuel / Travel Cost",
+         fuel=PLOW_FUEL + PLOW_EQUIP_200, **PLOW_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(PLOW, "Example 1, equipment folded into Overhead %",
+         fuel=PLOW_FUEL, **{**PLOW_BASE, "overhead": 65})
+def _(r):
+    return {
+        "overhead": usd(r["overhead"]),
+        "fuel": usd(r["fuel"]),
+        "total cost": usd(r["total_cost"]),
+        "price": usd(r["price"]),
+    }
+
+
+@example(PLOW, "Example 1, double-counted equipment",
+         fuel=PLOW_FUEL + PLOW_EQUIP_200, **{**PLOW_BASE, "overhead": 65})
+def _(r):
+    return {"total cost": usd(r["total_cost"]), "price": usd(r["price"])}
+
+
+@example(PLOW, "Example 2, warm winter, 100 pushes",
+         fuel=PLOW_FUEL + PLOW_EQUIP_100, **PLOW_BASE)
+def _(r):
+    return std_lines(r)
+
+
+@example(PLOW, "Tiny lot, 200-push winter, no salt",
+         hours=0.25, workers=1, rate=40, materials=0, overhead=15,
+         drive=0.25, fuel=PLOW_FUEL + PLOW_EQUIP_200, margin=25)
+def _(r):
+    return std_lines(r)
+
+
+def plow_derived():
+    main = price_job(fuel=PLOW_FUEL + PLOW_EQUIP_200, **PLOW_BASE)
+    folded = price_job(fuel=PLOW_FUEL, **{**PLOW_BASE, "overhead": 65})
+    double = price_job(fuel=PLOW_FUEL + PLOW_EQUIP_200, **{**PLOW_BASE, "overhead": 65})
+    warm = price_job(fuel=PLOW_FUEL + PLOW_EQUIP_100, **PLOW_BASE)
+    tiny = price_job(hours=0.25, workers=1, rate=40, materials=0, overhead=15,
+                     drive=0.25, fuel=PLOW_FUEL + PLOW_EQUIP_200, margin=25)
+    setup = 3000000          # $30,000.00
+    seasons = 5
+    per_season = setup // seasons
+    share_200 = per_season // 200
+    share_100 = per_season // 100
+    typical_base = main["direct"]
+    season_base_200 = 200 * typical_base
+    equip_pct = per_season / season_base_200 * 100
+    season_base_100 = 100 * typical_base
+    thin_equip_pct = per_season / season_base_100 * 100
+    thin_oh_pct = 15 + thin_equip_pct
+    thin_oh = rc(typical_base * thin_oh_pct / 100)
+    tiny_share = tiny["price"] / main["price"] * 100
+    assert main["labor"] == 3000
+    assert main["drive_labor"] == 1000
+    assert main["materials"] == 2000
+    assert main["direct"] == 6000
+    assert main["overhead"] == 900
+    assert main["fuel"] == 3800
+    assert main["total_cost"] == 10700
+    assert main["price"] == 14267
+    assert main["profit"] == 3567
+    assert folded["overhead"] == 3900
+    assert folded["total_cost"] == 10700
+    assert folded["price"] == 14267
+    assert double["total_cost"] == 13700
+    assert double["price"] == 18267
+    assert warm["fuel"] == 6800
+    assert warm["total_cost"] == 13700
+    assert warm["price"] == 18267
+    assert warm["profit"] == 4567
+    assert tiny["labor"] == 1000
+    assert tiny["direct"] == 2000
+    assert tiny["overhead"] == 300
+    assert tiny["total_cost"] == 6100
+    assert tiny["price"] == 8133
+    assert tiny["profit"] == 2033
+    return {
+        "equipment per season": usd(per_season),
+        "equipment share, 200 pushes": usd(share_200),
+        "equipment share, 100 pushes": usd(share_100),
+        "season overhead base, 200 pushes": usd(season_base_200),
+        "equipment portion of overhead": "{:.0f}%".format(equip_pct),
+        "snow overhead with equipment": "{:.0f}%".format(15 + equip_pct),
+        "thin-winter equipment portion": "{:.0f}%".format(thin_equip_pct),
+        "thin-winter overhead": "{:.0f}%".format(thin_oh_pct),
+        "thin-winter overhead dollars": usd(thin_oh),
+        "double-count extra": usd(double["price"] - main["price"]),
+        "tiny vs small-lot price": "about {:.0f}%".format(tiny_share),
+        "margin earned": "{:.1f}%".format(main["margin_pct"]),
+    }
+
+
+DERIVED[PLOW] = plow_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1411,6 +1521,7 @@ POSTS = [
     LIGHTS,
     SALT,
     FROST,
+    PLOW,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1439,6 +1550,7 @@ STALE_EXEMPT = {
     LIGHTS: _MATERIAL_MARKUP_FIELD,
     SALT: _MATERIAL_MARKUP_FIELD,
     FROST: _MATERIAL_MARKUP_FIELD,
+    PLOW: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.
@@ -1534,6 +1646,7 @@ STALE_ALLOW = {
     JOB: ["Material Markup"],
     DIAG: ["Material Markup"],
     SNOW: ["Material Markup"],
+    PLOW: ["0% markup"],
     # The related card says "20% markup", which contains the old label "0% markup".
     # The pump example says "markup at 0", not that label.
     FURNACE: ["0% markup"],

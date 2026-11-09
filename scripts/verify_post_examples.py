@@ -1394,6 +1394,59 @@ def burst_derived():
 DERIVED[BURST] = burst_derived
 
 
+# ---- how-to-price-emergency-roof-tarp.html --------------------------------
+# Fuel stays outside the overhead base. Overhead is 20% of labor + drive labor + materials.
+# Visit 2 inspection fee is quoted as a separate line and is not in the calculator.
+TARP = "how-to-price-emergency-roof-tarp.html"
+TARP_VISIT1 = dict(hours=2.0, workers=2, rate=55, materials=85, overhead=20,
+                   drive=0.5, fuel=15, margin=35)
+TARP_VISIT2 = dict(hours=1.5, workers=2, rate=40, materials=45, overhead=20,
+                   drive=0.5, fuel=12, margin=25)
+TARP_INSPECT = 17500  # assumed $175.00 diagnostic/inspection fee, outside the calculator
+
+
+@example(TARP, "Example 1, small tarp after hours", **TARP_VISIT1)
+def _(r):
+    return std_lines(r)
+
+
+@example(TARP, "Example 2, daytime pipe boot find and fix", **TARP_VISIT2)
+def _(r):
+    return std_lines(r)
+
+
+def tarp_derived():
+    visit1 = price_job(**TARP_VISIT1)
+    visit2 = price_job(**TARP_VISIT2)
+    assert visit1["labor"] == 22000
+    assert visit1["drive_labor"] == 5500
+    assert visit1["materials"] == 8500
+    assert visit1["direct"] == 36000
+    assert visit1["overhead"] == 7200
+    assert visit1["fuel"] == 1500
+    assert visit1["total_cost"] == 44700
+    assert visit1["price"] == 68769
+    assert visit1["profit"] == 24069
+    assert visit2["labor"] == 12000
+    assert visit2["drive_labor"] == 4000
+    assert visit2["materials"] == 4500
+    assert visit2["direct"] == 20500
+    assert visit2["overhead"] == 4100
+    assert visit2["fuel"] == 1200
+    assert visit2["total_cost"] == 25800
+    assert visit2["price"] == 34400
+    assert visit2["profit"] == 8600
+    return {
+        "visit 2 total": usd(TARP_INSPECT + visit2["price"]),
+        "inspection fee": usd(TARP_INSPECT),
+        "visit 1 margin earned": "{:.1f}%".format(visit1["margin_pct"]),
+        "visit 2 margin earned": "{:.1f}%".format(visit2["margin_pct"]),
+    }
+
+
+DERIVED[TARP] = tarp_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1579,6 +1632,7 @@ POSTS = [
     FROST,
     PLOW,
     BURST,
+    TARP,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1609,6 +1663,7 @@ STALE_EXEMPT = {
     FROST: _MATERIAL_MARKUP_FIELD,
     PLOW: _MATERIAL_MARKUP_FIELD,
     BURST: _MATERIAL_MARKUP_FIELD,
+    TARP: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

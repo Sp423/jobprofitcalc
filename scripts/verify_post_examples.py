@@ -1394,6 +1394,138 @@ def burst_derived():
 DERIVED[BURST] = burst_derived
 
 
+# ---- how-to-price-sidewalk-snow-removal.html ------------------------------
+# Fuel stays outside the overhead base. Overhead is a percent of labor + drive labor + materials.
+WALK = "how-to-price-sidewalk-snow-removal.html"
+WALK_STOREFRONT = dict(hours=1.0, workers=1, rate=34, materials=8, overhead=20,
+                       drive=0.25, fuel=6, margin=25)
+WALK_VISIT = dict(hours=0.2, workers=1, rate=34, materials=0, overhead=20,
+                  drive=0.25, fuel=6, margin=25)
+WALK_CLEARING = dict(hours=0.8, workers=1, rate=34, materials=0, overhead=20,
+                     drive=0, fuel=0, margin=25)
+WALK_MELT = dict(hours=0, workers=1, rate=34, materials=8, overhead=20,
+                 drive=0, fuel=0, margin=25)
+WALK_SHORT = dict(hours=0.33, workers=1, rate=34, materials=3, overhead=20,
+                  drive=0.25, fuel=6, margin=25)
+WALK_STORM = dict(hours=1.4, workers=2, rate=42, materials=18, overhead=25,
+                  drive=0.5, fuel=14, margin=30)
+WALK_MINIMUM = 4500  # assumed $45.00 per-visit minimum
+
+
+@example(WALK, "Example 1, one storefront walk visit", **WALK_STOREFRONT)
+def _(r):
+    out = std_lines(r)
+    out["margin earned"] = "{:.2f}%".format(r["margin_pct"])
+    return out
+
+
+@example(WALK, "Example 1, per-visit charge", **WALK_VISIT)
+def _(r):
+    return {
+        "labor": usd(r["labor"]),
+        "drive labor": usd(r["drive_labor"]),
+        "overhead": usd(r["overhead"]),
+        "fuel": usd(r["fuel"]),
+        "total cost": usd(r["total_cost"]),
+        "price": usd(r["price"]),
+    }
+
+
+@example(WALK, "Example 1, walk clearing", **WALK_CLEARING)
+def _(r):
+    return {
+        "labor": usd(r["labor"]),
+        "overhead": usd(r["overhead"]),
+        "total cost": usd(r["total_cost"]),
+        "price": usd(r["price"]),
+    }
+
+
+@example(WALK, "Example 1, ice melt line", **WALK_MELT)
+def _(r):
+    return {
+        "materials": usd(r["materials"]),
+        "overhead": usd(r["overhead"]),
+        "total cost": usd(r["total_cost"]),
+        "price": usd(r["price"]),
+    }
+
+
+@example(WALK, "Example 2 Part A, short walk", **WALK_SHORT)
+def _(r):
+    out = std_lines(r)
+    del out["profit"]
+    return out
+
+
+@example(WALK, "Example 2 Part B, storm-night second pass", **WALK_STORM)
+def _(r):
+    return std_lines(r)
+
+
+def walk_derived():
+    storefront = price_job(**WALK_STOREFRONT)
+    visit = price_job(**WALK_VISIT)
+    clearing = price_job(**WALK_CLEARING)
+    melt = price_job(**WALK_MELT)
+    short = price_job(**WALK_SHORT)
+    storm = price_job(**WALK_STORM)
+    assert storefront["labor"] == 3400
+    assert storefront["drive_labor"] == 850
+    assert storefront["materials"] == 800
+    assert storefront["direct"] == 5050
+    assert storefront["overhead"] == 1010
+    assert storefront["fuel"] == 600
+    assert storefront["total_cost"] == 6660
+    assert storefront["price"] == 8880
+    assert storefront["profit"] == 2220
+    assert visit["labor"] == 680
+    assert visit["drive_labor"] == 850
+    assert visit["overhead"] == 306
+    assert visit["total_cost"] == 2436
+    assert visit["price"] == 3248
+    assert clearing["labor"] == 2720
+    assert clearing["overhead"] == 544
+    assert clearing["total_cost"] == 3264
+    assert clearing["price"] == 4352
+    assert melt["materials"] == 800
+    assert melt["overhead"] == 160
+    assert melt["total_cost"] == 960
+    assert melt["price"] == 1280
+    assert visit["price"] + clearing["price"] + melt["price"] == storefront["price"]
+    assert short["labor"] == 1122
+    assert short["direct"] == 2272
+    assert short["overhead"] == 454
+    assert short["total_cost"] == 3326
+    assert short["price"] == 4435
+    assert storm["labor"] == 11760
+    assert storm["drive_labor"] == 4200
+    assert storm["materials"] == 1800
+    assert storm["direct"] == 17760
+    assert storm["overhead"] == 4440
+    assert storm["fuel"] == 1400
+    assert storm["total_cost"] == 23600
+    assert storm["price"] == 33714
+    assert storm["profit"] == 10114
+    rounded_walk = 725  # $7.25 per 100 feet
+    rounded_quote = visit["price"] + 6 * rounded_walk + melt["price"]
+    min_profit = WALK_MINIMUM - short["total_cost"]
+    drive_and_fuel = short["drive_labor"] + short["fuel"]
+    return {
+        "esticube 600 ft": usd(cents(600 * 0.55)),
+        "three lines add back": usd(visit["price"] + clearing["price"] + melt["price"]),
+        "per 100 feet": usd(js_round(clearing["price"] / 6)),
+        "rounded walk 6 x $7.25": usd(6 * rounded_walk),
+        "rounded quote": usd(rounded_quote),
+        "minimum profit": usd(min_profit),
+        "drive labor plus fuel": usd(drive_and_fuel),
+        "margin earned": "{:.2f}%".format(storefront["margin_pct"]),
+    }
+
+
+DERIVED[WALK] = walk_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1579,6 +1711,7 @@ POSTS = [
     FROST,
     PLOW,
     BURST,
+    WALK,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1609,6 +1742,7 @@ STALE_EXEMPT = {
     FROST: _MATERIAL_MARKUP_FIELD,
     PLOW: _MATERIAL_MARKUP_FIELD,
     BURST: _MATERIAL_MARKUP_FIELD,
+    WALK: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

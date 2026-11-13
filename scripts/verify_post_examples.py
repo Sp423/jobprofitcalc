@@ -1526,6 +1526,114 @@ def walk_derived():
 DERIVED[WALK] = walk_derived
 
 
+# ---- how-to-raise-your-rates-for-2027.html --------------------------------
+# Fuel stays outside the overhead base. Overhead is 20% of labor + drive labor + materials.
+# Material Markup is 0. The 2027 raise is the new price minus the 2026 price.
+RATES = "how-to-raise-your-rates-for-2027.html"
+RATES_2026 = dict(hours=6, workers=2, rate=40, materials=850, overhead=20,
+                  drive=1.0, fuel=30, margin=25)
+RATES_2027 = dict(hours=6, workers=2, rate=41.60, materials=901, overhead=20,
+                  drive=1.0, fuel=32, margin=25)
+RATES_WA_2026 = dict(hours=4, workers=1, rate=59.41, materials=120, overhead=20,
+                     drive=0.5, fuel=15, margin=25)
+RATES_WA_2027 = dict(hours=4, workers=1, rate=60.91, materials=120, overhead=20,
+                     drive=0.5, fuel=15, margin=25)
+
+
+def rates_lines(r, direct=True):
+    out = std_lines(r)
+    if not direct:
+        del out["direct"]
+    return out
+
+
+@example(RATES, "Example 1, typical 2026 job", **RATES_2026)
+def _(r):
+    return rates_lines(r)
+
+
+@example(RATES, "Example 1, same job rerun for 2027", **RATES_2027)
+def _(r):
+    return rates_lines(r)
+
+
+@example(RATES, "Example 2, Washington mixed crew 2026", **RATES_WA_2026)
+def _(r):
+    return rates_lines(r, direct=False)
+
+
+@example(RATES, "Example 2, Washington mixed crew 2027", **RATES_WA_2027)
+def _(r):
+    return rates_lines(r, direct=False)
+
+
+def rates_derived():
+    old = price_job(**RATES_2026)
+    new = price_job(**RATES_2027)
+    wa_old = price_job(**RATES_WA_2026)
+    wa_new = price_job(**RATES_WA_2027)
+    helper_2026 = cents(17.13 * 1.25)
+    helper_2027 = cents(17.73 * 1.25)
+    raise_c = new["price"] - old["price"]
+    honor = old["price"] - new["total_cost"]
+    price3 = old["price"] * 103 // 100
+    profit3 = price3 - new["total_cost"]
+    wa_honor = wa_old["price"] - wa_new["total_cost"]
+    assert old["labor"] == 48000
+    assert old["drive_labor"] == 8000
+    assert old["materials"] == 85000
+    assert old["direct"] == 141000
+    assert old["overhead"] == 28200
+    assert old["fuel"] == 3000
+    assert old["total_cost"] == 172200
+    assert old["price"] == 229600
+    assert old["profit"] == 57400
+    assert new["labor"] == 49920
+    assert new["drive_labor"] == 8320
+    assert new["materials"] == 90100
+    assert new["direct"] == 148340
+    assert new["overhead"] == 29668
+    assert new["fuel"] == 3200
+    assert new["total_cost"] == 181208
+    assert new["price"] == 241611
+    assert new["profit"] == 60403
+    assert wa_old["labor"] == 23764
+    assert wa_old["drive_labor"] == 2971
+    assert wa_old["overhead"] == 7747
+    assert wa_old["total_cost"] == 47982
+    assert wa_old["price"] == 63976
+    assert wa_old["profit"] == 15994
+    assert wa_new["labor"] == 24364
+    assert wa_new["drive_labor"] == 3046
+    assert wa_new["overhead"] == 7882
+    assert wa_new["total_cost"] == 48792
+    assert wa_new["price"] == 65056
+    assert wa_new["profit"] == 16264
+    assert helper_2026 == 2141
+    assert helper_2027 == 2216
+    assert price3 == 236488
+    return {
+        "raise": usd(raise_c),
+        "raise percent": "{:.1f} percent".format(raise_c / old["price"] * 100),
+        "honor-old profit": usd(honor),
+        "honor-old margin": "{:.1f} percent".format(honor / old["price"] * 100),
+        "3 percent raise price": usd(price3),
+        "3 percent raise profit": usd(profit3),
+        "3 percent raise margin": "{:.1f} percent".format(profit3 / price3 * 100),
+        "helper loaded 2026": usd(helper_2026),
+        "helper loaded 2027": usd(helper_2027),
+        "helper loaded increase": usd(helper_2027 - helper_2026),
+        "combined rate 2026": usd(helper_2026 + cents(38)),
+        "combined rate 2027": usd(helper_2027 + cents(38.75)),
+        "washington raise": usd(wa_new["price"] - wa_old["price"]),
+        "washington honor-old profit": usd(wa_honor),
+        "washington honor-old margin": "{:.1f} percent".format(wa_honor / wa_old["price"] * 100),
+    }
+
+
+DERIVED[RATES] = rates_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1712,6 +1820,7 @@ POSTS = [
     PLOW,
     BURST,
     WALK,
+    RATES,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1743,6 +1852,7 @@ STALE_EXEMPT = {
     PLOW: _MATERIAL_MARKUP_FIELD,
     BURST: _MATERIAL_MARKUP_FIELD,
     WALK: _MATERIAL_MARKUP_FIELD,
+    RATES: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

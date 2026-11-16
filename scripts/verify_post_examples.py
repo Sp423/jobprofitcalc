@@ -1526,6 +1526,64 @@ def walk_derived():
 DERIVED[WALK] = walk_derived
 
 
+# ---- how-to-price-furnace-repair.html -------------------------------------
+# Fuel stays outside the overhead base. Overhead is 20% of labor + drive labor + materials.
+# The dispatch/service call fee is quoted as a separate line and is not in the calculator.
+NOHEAT = "how-to-price-furnace-repair.html"
+NOHEAT_NIGHT = dict(hours=1.5, workers=1, rate=72, materials=42, overhead=20,
+                    drive=0.5, fuel=12, margin=25)
+NOHEAT_RETURN = dict(hours=1.0, workers=1, rate=48, materials=185, overhead=20,
+                     drive=0.5, fuel=12, margin=25)
+NOHEAT_FEE = 22500  # assumed $225.00 dispatch fee, outside the calculator
+
+
+@example(NOHEAT, "Example 1, after-hours igniter on the truck", **NOHEAT_NIGHT)
+def _(r):
+    out = std_lines(r)
+    out["material markup"] = usd(0)
+    out["margin earned"] = "{:.2f}%".format(r["margin_pct"])
+    return out
+
+
+@example(NOHEAT, "Example 2, daytime return for a control board", **NOHEAT_RETURN)
+def _(r):
+    out = std_lines(r)
+    out["material markup"] = usd(0)
+    out["margin earned"] = "{:.2f}%".format(r["margin_pct"])
+    return out
+
+
+def noheat_derived():
+    night = price_job(**NOHEAT_NIGHT)
+    ret = price_job(**NOHEAT_RETURN)
+    assert night["labor"] == 10800
+    assert night["drive_labor"] == 3600
+    assert night["materials"] == 4200
+    assert night["direct"] == 18600
+    assert night["overhead"] == 3720
+    assert night["fuel"] == 1200
+    assert night["total_cost"] == 23520
+    assert night["price"] == 31360
+    assert night["profit"] == 7840
+    assert ret["labor"] == 4800
+    assert ret["drive_labor"] == 2400
+    assert ret["materials"] == 18500
+    assert ret["direct"] == 25700
+    assert ret["overhead"] == 5140
+    assert ret["fuel"] == 1200
+    assert ret["total_cost"] == 32040
+    assert ret["price"] == 42720
+    assert ret["profit"] == 10680
+    return {
+        "dispatch fee": usd(NOHEAT_FEE),
+        "quoted total": usd(night["price"] + NOHEAT_FEE),
+        "margin earned": "{:.2f}%".format(night["margin_pct"]),
+    }
+
+
+DERIVED[NOHEAT] = noheat_derived
+
+
 # ---- snow-removal-contract-vs-per-push.html -------------------------------
 SNOW = "snow-removal-contract-vs-per-push.html"
 SNOW_BASE = dict(hours=1, workers=1, rate=38, materials=20, overhead=20, drive=0.25, fuel=18, margin=25)
@@ -1712,6 +1770,7 @@ POSTS = [
     PLOW,
     BURST,
     WALK,
+    NOHEAT,
 ]
 STALE_EVERYWHERE = [
     "SE + State Tax", "SE Tax (on costs)", "State Tax (on costs)", "SE Tax Rate",
@@ -1743,6 +1802,7 @@ STALE_EXEMPT = {
     PLOW: _MATERIAL_MARKUP_FIELD,
     BURST: _MATERIAL_MARKUP_FIELD,
     WALK: _MATERIAL_MARKUP_FIELD,
+    NOHEAT: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }
 # Old example figures that must be gone after the rerun.

@@ -1447,6 +1447,75 @@ def tarp_derived():
 DERIVED[TARP] = tarp_derived
 
 
+# ---- how-to-price-ice-dam-removal.html ------------------------------------
+# Fuel stays outside the overhead base. Overhead is 20% of labor + drive labor + materials.
+ICE = "how-to-price-ice-dam-removal.html"
+ICE_COMBINED = dict(hours=3.0, workers=2, rate=48, materials=620, overhead=20,
+                    drive=0.5, fuel=12, margin=25)
+ICE_SNOW = dict(hours=1.0, workers=2, rate=48, materials=0, overhead=20,
+                drive=0, fuel=0, margin=25)
+ICE_STEAM = dict(hours=2.0, workers=2, rate=48, materials=620, overhead=20,
+                 drive=0.5, fuel=12, margin=25)
+
+
+@example(ICE, "Daytime visit, snow first then steam, combined", **ICE_COMBINED)
+def _(r):
+    return std_lines(r)
+
+
+@example(ICE, "Roof snow line", **ICE_SNOW)
+def _(r):
+    return std_lines(r)
+
+
+@example(ICE, "Ice dam steam line", **ICE_STEAM)
+def _(r):
+    return std_lines(r)
+
+
+def ice_derived():
+    combined = price_job(**ICE_COMBINED)
+    snow = price_job(**ICE_SNOW)
+    steam = price_job(**ICE_STEAM)
+    assert combined["labor"] == 28800
+    assert combined["drive_labor"] == 4800
+    assert combined["materials"] == 62000
+    assert combined["direct"] == 95600
+    assert combined["overhead"] == 19120
+    assert combined["fuel"] == 1200
+    assert combined["total_cost"] == 115920
+    assert combined["price"] == 154560
+    assert combined["profit"] == 38640
+    assert snow["labor"] == 9600
+    assert snow["direct"] == 9600
+    assert snow["overhead"] == 1920
+    assert snow["total_cost"] == 11520
+    assert snow["price"] == 15360
+    assert snow["profit"] == 3840
+    assert steam["labor"] == 19200
+    assert steam["drive_labor"] == 4800
+    assert steam["materials"] == 62000
+    assert steam["direct"] == 86000
+    assert steam["overhead"] == 17200
+    assert steam["fuel"] == 1200
+    assert steam["total_cost"] == 104400
+    assert steam["price"] == 139200
+    assert steam["profit"] == 34800
+    assert snow["price"] + steam["price"] == combined["price"]
+    assert snow["profit"] + steam["profit"] == combined["profit"]
+    return {
+        "ticket total": usd(snow["price"] + steam["price"]),
+        "line profits add back": usd(snow["profit"] + steam["profit"]),
+        "ice dam guys 3-hour minimum": usd(cents(875 * 3)),
+        "short eave reuses steam cost": usd(steam["total_cost"]),
+        "short eave reuses steam price": usd(steam["price"]),
+        "short eave reuses steam profit": usd(steam["profit"]),
+    }
+
+
+DERIVED[ICE] = ice_derived
+
+
 # ---- how-to-price-sidewalk-snow-removal.html ------------------------------
 # Fuel stays outside the overhead base. Overhead is a percent of labor + drive labor + materials.
 WALK = "how-to-price-sidewalk-snow-removal.html"
@@ -1765,6 +1834,7 @@ POSTS = [
     PLOW,
     BURST,
     TARP,
+    ICE,
     WALK,
 ]
 STALE_EVERYWHERE = [
@@ -1797,6 +1867,7 @@ STALE_EXEMPT = {
     PLOW: _MATERIAL_MARKUP_FIELD,
     BURST: _MATERIAL_MARKUP_FIELD,
     TARP: _MATERIAL_MARKUP_FIELD,
+    ICE: _MATERIAL_MARKUP_FIELD,
     WALK: _MATERIAL_MARKUP_FIELD,
     SNOW: _MATERIAL_MARKUP_FIELD,
 }

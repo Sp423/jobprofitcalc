@@ -13,7 +13,7 @@ card_file: "/images/how-to-price-ice-dam-removal.jpg"
 card_dimensions: "1280x640"
 card_class: "post-thumb"
 card_scene: "Illustrated two-person crew steaming an ice dam on a snow-covered residential eave, a steamer parked on the driveway, no readable text, no logos."
-card_alt: "A gloved hand holds a steam wand against a thick ice dam at the eave of a snow-covered shingled roof, with steam rising and icicles hanging from the gutter."
+card_alt: "A contractor in a hi-vis vest stands on a ladder at a house eave, steaming an ice dam off a snowy shingled roof while icicles hang from the gutter."
 internal_links:
   - "/calculator"
   - "/blog/burdened-labor-rate-for-contractors.html"
